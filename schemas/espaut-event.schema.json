@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cepraea:esp-aut-git-001:espaut-event:0.1.0",
+  "title": "ESP-AUT — Registro de evento",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "occurred_at",
+    "actor"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^EVT-[0-9a-f]{12}$"
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^TASK-[0-9a-f]{12}$"
+    },
+    "execution_id": {
+      "type": "string"
+    },
+    "object_reference": {
+      "type": "string"
+    },
+    "old_state": {
+      "type": "string"
+    },
+    "new_state": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^EVD-[0-9a-f]{12}$"
+    },
+    "detail": {
+      "type": "string"
+    }
+  }
+}

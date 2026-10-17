@@ -1,0 +1,697 @@
+{
+  "schema_version": "1.0.0",
+  "source_root": "/home/davis/cepraea-docs/docs/reconciliação",
+  "files": [
+    {
+      "relative_path": "# Autoavaliação – CEPRAEA.md",
+      "size_bytes": 13562,
+      "sha256": "33dc7ec5d927e97a00f7d57c2fa3153f16f6789ddf5b7f352102ce66a00981fb",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "00 — ÍNDICE MESTRE — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 6824,
+      "sha256": "954d2e23b51fd5e2130b162829838c758a0ff92e542704b130bc129858423599",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "00-README.md",
+      "size_bytes": 4106,
+      "sha256": "af0a5a5d8e5a97ad4ee77c917bac50c0b338a5a370d20cfaa1add362a68a7866",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "00-manifesto-fontes.template.yaml",
+      "size_bytes": 2145,
+      "sha256": "df46407aaf5fd5c73b16a8e3c6f84cb1f727c6b545438c0316a40f5a12c1e239",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "0000-adopt-madr-and-architecture-fitness-functions.md",
+      "size_bytes": 4494,
+      "sha256": "5a60db02f42c003ea969a55058e8cd82f189d09d60f0183395896e70ea2d6efe",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "001-CNFG-Ambiente-Desenvolvimento.md",
+      "size_bytes": 5098,
+      "sha256": "d55b1569c3614bbc7c35ee88fe53f987c56b0c8ced0de10a55ff97234c74a5b5",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "01 — CONTRATO DE PRODUTO E DOMÍNIO — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 13644,
+      "sha256": "add443f0b9477100ff0344c7fd6aa4de78b5b90c9fea6c44f34693cb373e5175",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "01-PROJECT-INSTRUCTIONS.md",
+      "size_bytes": 5163,
+      "sha256": "b55734fa0c8133fb82fb4aa4ce21a95406b92230830055fcb7b88b264f4431bd",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "01-registro-semantico.template.yaml",
+      "size_bytes": 1790,
+      "sha256": "4eedd9e55eade631cb4724f412c4cb4f04baafaea0c1c6c2b8e358e5dc8ab771",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "02 — ESPECIFICAÇÃO DE EXPERIÊNCIA E INTERAÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 13867,
+      "sha256": "6e336ae68f207b1cb81f08770e3e8f3ee6ce383103a0505b9e0072e202c8b624",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "02-PROJECT-CHARTER.md",
+      "size_bytes": 31503,
+      "sha256": "8e12d6d57f80c6c0ca41b6c54c976c13f3df021e5972693c828cbe38294afc9f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "02-modelo-conceitual.template.yaml",
+      "size_bytes": 1487,
+      "sha256": "00e9913cd613e5c8f2c80ab7afada5a93cfee9f602a77c57b6d2b1654719bcdc",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "03 — ARQUITETURA TÉCNICA E CONTRATOS DO FRONTEND — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 12377,
+      "sha256": "1322ec8aea1086029226e2aeba362582dbe2d5545f10296cd0748250f7916c3e",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "03-SHARED-UNDERSTANDING.md",
+      "size_bytes": 57272,
+      "sha256": "2dc2dd736d2a8c1c3f6284a3cfda027d7428a1961bfb34c3850a6c666ef30c83",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "03-modelo-logico.template.yaml",
+      "size_bytes": 1921,
+      "sha256": "46a7d0fc89ea69a8c082f05db58ad85572474c5463d5bc48672026f04cb1d234",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "04 — ROADMAP DE IMPLEMENTAÇÃO E GRAFO DE TAREFAS — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 9769,
+      "sha256": "8de09799b69e52384e0c414df2082a40b633e73850863529a65937014fad6979",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "04-REQUIREMENTS.md",
+      "size_bytes": 2901,
+      "sha256": "a38cc95293513f49758f73793cf6dda1c93fdfc243d492fb2b538a4ffe406d39",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "04-dicionario-dados.template.yaml",
+      "size_bytes": 1835,
+      "sha256": "51271507f7357d6c33b9d6bb074f90dc90e37ce07a0e1fb5ffaefbd430d282a0",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "04C-DICIONARIO-DE-DADOS.md",
+      "size_bytes": 23761,
+      "sha256": "59f72526ac06c88d26f2e95a9832efdfbb14c3a54100b54d98807f8be973b07e",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "05 — PADRÃO DE TAREFAS ATÔMICAS E CRITÉRIOS DE ACEITAÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 9672,
+      "sha256": "ff1f95a62f60a3e5663df74defdc243dc51f7da8a431c26466284037eb07c9b0",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "05-ARCHITECTURE-DRIVERS.md",
+      "size_bytes": 2354,
+      "sha256": "97f5af1ca75979e41e1edb62ae2ce0fa9f8bb64b57cf97791ab809d71fc3e8b5",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "05-matriz-rastreabilidade.template.yaml",
+      "size_bytes": 1416,
+      "sha256": "744500b2489736c89eb01ad52d51376b08ea22da5b6ba465babb2de668500ad2",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "05-schema-postgresql.md",
+      "size_bytes": 14898,
+      "sha256": "b6b097067dc9ca3a25c88ce1804db2f20ba0459b8101a1e3c99cbda1cec13664",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "05-schema-postgresql.sql",
+      "size_bytes": 14886,
+      "sha256": "681420a2576e102cb8b891e034528d24c7494d5938b554c2d0c47c30bc0bb750",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "06 — ESPECIFICAÇÃO DE TESTES E VERIFICAÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 12358,
+      "sha256": "8e29da97f39ed351e5389421ffc07052143085870d84f923a39b95d25351e2fa",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "06-ADR-TEMPLATE.md",
+      "size_bytes": 2470,
+      "sha256": "0c3e91b79398a57e5f411a312b6cab6c3e7fd09aea0dd3e4d061434ecc64f934",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "06-migrations-rollback.sql",
+      "size_bytes": 2371,
+      "sha256": "92068437a5f5315c5f50a871e9cc230bdb0594d11c5188049242fb2280e83760",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "06-migrations-rollback_",
+      "size_bytes": 2381,
+      "sha256": "0c23d7277687e0278df28b58b3f9aad7b6f0486fd5845c64033914afbf671a4d",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "06-requisitos-acesso.template.yaml",
+      "size_bytes": 1679,
+      "sha256": "929fd0cefbe1b2270d24808be5f4afffb1418f7d4f7fd6e9512b32169745875c",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "07 — PROTOCOLO DE EXECUÇÃO E REVIEW DOS AGENTES — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 4853,
+      "sha256": "64ed2507ed923d1bcbaa20e1d19fa4a55b3436eae96a1287ad3f4add4801cbb9",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "07-TRACEABILITY.md",
+      "size_bytes": 38144,
+      "sha256": "6fed8c11829a48a0d0f2b45ddfa29bfedbc02de245ff1f27fc5eed747aca178a",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "07-matriz-rbac-e-politicas-rls.md",
+      "size_bytes": 3998,
+      "sha256": "166f87ecb4f078ac3094a1cc5c319bc06c966029a210d7d8ad57326d92fca205",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "07-matriz-rbac-e-politicas-rls.sql",
+      "size_bytes": 3988,
+      "sha256": "30688dd84cf03652a3d896b5810f2995ced24df29f8dbcb49b67c0d8759dfa50",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "07-stop-gate.template.yaml",
+      "size_bytes": 2080,
+      "sha256": "3b1d1dd1811dbf871caa2bcacf3ff0b7827100b16636086a4b07e213c1e393ac",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "08 — CATÁLOGO DE REFERÊNCIAS E PROTOCOLO DE PESQUISA — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 4969,
+      "sha256": "d8ad8049c106416055e77555f4f6d616d480ef39b826d102e56360f20499481d",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "08-READINESS-AND-VALIDATION-GATES.md",
+      "size_bytes": 4157,
+      "sha256": "869a730a9d8f66e63d3644b5dfb131238433d66b776ff1d86b264579c2ec28e7",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "08-seeds-simulados.md",
+      "size_bytes": 3195,
+      "sha256": "aa2a11add1708cd450f113233cef2afd64911e036be52d94864102c6506fa10e",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "08-seeds-simulados.sql",
+      "size_bytes": 3186,
+      "sha256": "5d498edb496d8007651289db6e5b34e3f1b32fe37aef5a97cfc68b270a3e3d88",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "09 — ÍNDICE DE RUNBOOKS E ESTADO OPERACIONAL — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 3625,
+      "sha256": "57ce9dd3fc66e08615cfcf4076afec66542238a4f9f228d8ce36072d0de93090",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "09-CHAT-OPENING-PROMPTS.md",
+      "size_bytes": 11468,
+      "sha256": "f12cb9d37e004721748ef3615b11d0be3a05e8f9d4216b5969353f0b24b03c16",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "09-suite-testes-pgtap.sql",
+      "size_bytes": 3262,
+      "sha256": "70130236735d5c310bae8ac70718ce1406eee22796ef85a6de0a5ac353d25840",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "10 — CATÁLOGO CANÔNICO DE ARTEFATOS, PAPÉIS E ENFORCEMENT — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 101120,
+      "sha256": "75ee11233897bdbb2963bbaae8081c3b78b7c105de3a173bb2caed4745d6a132",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "10-VALIDATION-SCENARIOS.md",
+      "size_bytes": 1577,
+      "sha256": "0518d5f2fec38daf1155210d4f796689369caf3f1a9c51016cf684eba7dcf569",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "10-contratos-views-api.sql",
+      "size_bytes": 2291,
+      "sha256": "055675a4289405f6959b78b6559340a99760ff87e91056e3162c34e523302eb3",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "11 — ARQUITETURA DE AUDITORIA E ASSURANCE AGÊNTICO — IMPLANTAÇÃO E EXECUÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+      "size_bytes": 31558,
+      "sha256": "b0568856dcdccc3586ecbb3e4fc08bd3d7633495d4787a9aad9d0504d6f01c3a",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "11-ARCHITECTURE-OPTIONS.md",
+      "size_bytes": 1099,
+      "sha256": "b03053055159e593e6091a57ca186fa9fb2686a92b2f55222183081cdab72c33",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "11-relatorio-execucao-reconciliacao.md",
+      "size_bytes": 3384,
+      "sha256": "e011471c587fd84e52aacff60fde2ee8c8f6b9ff1cf6a7277f6672408fc3eb01",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "12-ARCHITECTURE.md",
+      "size_bytes": 2615,
+      "sha256": "7b99878afdf1556b83ce3906dffa8087f8ab0c768af8533e679e389a5ad4e023",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Alinhamento-de-IA.md",
+      "size_bytes": 823250,
+      "sha256": "2d5b45510e1b7166d070e69261db5e3ffef7f2ee64cfef4e8bf63661526713cf",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "BASE CEPRAEA BEACH PRO — CANÔNICA — v0.1.md",
+      "size_bytes": 90991,
+      "sha256": "ed3b4c1e2060cb63626eec043aa6fa9adf3b3b441b2189e92eebca89679a9929",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "BASE CEPRAEA BEACH PRO — v0.2 — Fundação e Acesso Multiagente — PROPOSTA.md",
+      "size_bytes": 141698,
+      "sha256": "bb0497d664d61d2f3b494f70a91aa262d83c9f2dc23764db94864fd9bdfb81d6",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "BancoCEPRAEA.md",
+      "size_bytes": 242908,
+      "sha256": "37c1b0f11bdd9a4eded49cd56531b2b42320db524f4244c034c6a1b74ba0aac8",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CATALOGO_DRIVE_AGENTES_2026-10-12.md",
+      "size_bytes": 477641,
+      "sha256": "149e54de1464e17c5ecb1584860a06980dce7c773d5a13c82ee99cb7906956a9",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA 2026.md",
+      "size_bytes": 1021,
+      "sha256": "f2115bf84e5678a1c6edfdf3889ab1c23bce1cb042cd626644643b9a98728847",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA ABRIL 2026.md",
+      "size_bytes": 80157,
+      "sha256": "6684df0280b71c69408f1f0dfc18f92bfb2ffc68c658feca9aa8085d6dcfe480",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA AGOSTO 2026.md",
+      "size_bytes": 608150,
+      "sha256": "9221ea0f1db50080867d9a8effb8adad4e7170863f805f3165def0cb37857756",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA BEACH PRO — Implantação da Arquitetura Formal de Verificação e Assurance.md",
+      "size_bytes": 29126,
+      "sha256": "3cbe162555fac7eeefb88c142793de9ee52d1d96a4fb84bb786b875cf35e60e2",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA BEACH PRO.md",
+      "size_bytes": 472230,
+      "sha256": "890486dd25421fb8ac5b762cd1dfbf5c6a584117b0a0c8be0d07fdb7093609f7",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA DATABASE.md",
+      "size_bytes": 1026910,
+      "sha256": "575c4e709206e5af18b71cd47345c101879be83008f0724fb87f7f312c86d971",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA JULHO 2026.pdf",
+      "size_bytes": 348423,
+      "sha256": "94f81b3a813bff05b216bbd5173d11f173f977613b8035b1d884af98779243c7",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA — Benchmark Visual UX_UI dos Dashboards.pptx",
+      "size_bytes": 6022584,
+      "sha256": "0160c8c90d35b7cb4fa3fb48b82936b67c5b9ac186ce5dea236338d878b21d6a",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA — Questionários de Competição — 4ª Etapa 23-08-2026.md",
+      "size_bytes": 27487,
+      "sha256": "df64c89676d2f67619a56b00b10e4cb8e301fbb16fe7c9f05c3dc6c581470ca6",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA — Roadmap de Implementação dos Dashboards.md",
+      "size_bytes": 259013,
+      "sha256": "d1230329fb0cf9c31719c4e4d2c846bfbde49aba9d163ead36f8ce1197ea110f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA — Wellness — Apps Script Mobile.txt",
+      "size_bytes": 11072,
+      "sha256": "f2bd2b2817f90d8df825f836fdcd3bc1c57ce0dde40ef8bed5ea165af977d5ab",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA — Wellness — Configuração e Respostas.md",
+      "size_bytes": 182118,
+      "sha256": "4a78d5c6c0b23285ffeb926938a050c4b2e97a5696389c15153c294b713be05c",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA-DB.md",
+      "size_bytes": 338170,
+      "sha256": "5a7c0355b44a89f714b9938015ca3f7304cc231063429bde2917ef016fb63dbb",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA-pdf.md",
+      "size_bytes": 13122,
+      "sha256": "211084924c9462e468b52e8d128e339db6f94ce286d0d4e172dd888d21a1880c",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA.pdf",
+      "size_bytes": 32820680,
+      "sha256": "5e7686ccb7da7706e92f9dc901d5216ef62909d73c2d7192dfdfeb8c534e342f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_.md",
+      "size_bytes": 449066,
+      "sha256": "cf6daf0a9ff4b2824c093fe3b4976e6e04efb0be7b9b005e07c20142437128f7",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "size_bytes": 237725,
+      "sha256": "5b4cf819f8bafb2203e2cb1a1b456213dea57eb750ce30e01557b1d17b10d7a9",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_BEACH_PRO_PRD_Candidato_Arquivo_Mestre_v0.1.md",
+      "size_bytes": 80643,
+      "sha256": "20110dff09e354c39ed56dce9497c20f50256f29b0fdc7e1177dad3b1d36e9a0",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_Beach_Pro_Relatorio_Executivo_Agosto_2026.pdf",
+      "size_bytes": 61992,
+      "sha256": "74678bb28bfd18f219ae36144f3b1eca1cff89d4f43b08ab872b88debeef3bcd",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_Preparacao_Competitiva_2026_CORRIGIDO.pdf",
+      "size_bytes": 360346,
+      "sha256": "568da27b21e94830475045d43d534fc48d946d9f6f5e66dfdaa5834f478c814c",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_Preparacao_Competitiva_2026_FINAL_ACESSIVEL.pdf",
+      "size_bytes": 363223,
+      "sha256": "eb41e01abc59a437487190fbbbb3d5abf435ca20783ebfac29da5d40a24a9948",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "CEPRAEA_Preparacao_Competitiva_Ago_Set_2026.pdf",
+      "size_bytes": 141367,
+      "sha256": "d72f97c64bdff72548edaf4d4c6fe6b6717f5e665223baed81b497fe2a0777b1",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Contêineres-de-desenvolvimento (3).json",
+      "size_bytes": 1191841,
+      "sha256": "000b3232a45a414ab0a6b9f248b075a33dfac5a67a4d4672896dbf5e889eb878",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Cópia de CEPRAEA — Wellness — Apps Script Mobile.txt",
+      "size_bytes": 11071,
+      "sha256": "4aeb114a39ece6c743c9a80c71220c86c35e8e217847c537de75e1dd8364475d",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DESC-CEPRAEA.md",
+      "size_bytes": 93115,
+      "sha256": "b30ddc65022db96a8bbcba613a3881af77e036dc150e2d527e8ed6bf8640dbf9",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DOC-002 — Guia do Modelo ANMS (Specification-Driven Development).md",
+      "size_bytes": 3634,
+      "sha256": "8cd41a7625bb5c49209acb23cd8262115d4bf8a7a96566b7b79ed30dc5fb0d10",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DOC-003 — Relatório de Pesquisa_ Padrões Sintáticos do EARS.md",
+      "size_bytes": 3007,
+      "sha256": "ff6826160ad03602105280a75e4ea45e9b5ec9b0433ca7d3a5b88bd6b1036998",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DOC-004 — Sessões Claude Code e Codex.md",
+      "size_bytes": 4663,
+      "sha256": "e8926ded8166dc3a37174471baee583a4b7b4c24c8e99c2256c0f712f660b8ca",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DOC-005 — Guia de Fontes e Introdução ao EARS.md",
+      "size_bytes": 7464,
+      "sha256": "23fbf43ae7d9c95dafe021e804a66b7a550247d5dc53b9ad59a8560bf98ad094",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "DOC-006 — Regras Operacionais Derivadas para Agentes.md",
+      "size_bytes": 4599,
+      "sha256": "e1f924356b3a9c48fc71dbc58b3c7c375fac066a53cefd0ba30e799219f362af",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Dicionário de Dados Canônico CEPRAEA.md",
+      "size_bytes": 172049,
+      "sha256": "71dff22693698648d29e67864a210901a328c7aa7131eb58dc82c06967b573e0",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "FLUXO COMPLETO DE DESENVOLVIMENTO — CEPRAEA BEACH PRO.md",
+      "size_bytes": 75389,
+      "sha256": "b766169213e7546c0d1f374b81177eea8e41d49484fc4c94e5230da8b0232866",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "GOV-901 — Diretrizes operacionais do Gemini Notebook — CANDIDATA v0.2",
+      "size_bytes": 13902,
+      "sha256": "c534b5f1bbfddd453dfb546b9950745b81e207b3746885fec980c2997ec27c23",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Glossário de Dados — CEPRAEA v0.1.md",
+      "size_bytes": 65027,
+      "sha256": "9b846237e20397a84c5eef2c7f5d1055b87419005eb1e068812eb33df5879637",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "HISTÓRICO-Chat-00-—-Intake-e-objetivos (1).json",
+      "size_bytes": 299226,
+      "sha256": "d9dc1ed974e2b8b6eda5457893e4b524726a204cec3074e428ee79dd70c574cd",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "HISTÓRICO-Chat-01-—-Elicitação.json",
+      "size_bytes": 103953,
+      "sha256": "716e4f3504c754e5f41d93911848fe3524a52758750302a1963a8b006ba4df72",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "HISTÓRICO-Chat-02-—-Auditoria-do-entendimento.json",
+      "size_bytes": 142316,
+      "sha256": "c83b9c08b2dffa7c4a1ea3f3711c1c638debc399e3baaa1fe72848a79ccf1180",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "HISTÓRICO-Chat-03-—-Modelagem-do-domínio.json",
+      "size_bytes": 97575,
+      "sha256": "7760a8e5ea3f9f36c2a257d5ba9923264611cc9a4d16b5d320c4694b9ed9a1c5",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "HISTÓRICO-Chat-04-—-Requisitos.json",
+      "size_bytes": 98396,
+      "sha256": "dce91a4970b02d7a9b637813ff7297dd153d89db823e2f52516c0acd79355451",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Implementação — Pesquisa de Treinos CEPRAEA 2026.md",
+      "size_bytes": 240394,
+      "sha256": "1f0ad6fcc66cf520ec01895f7f715659db2edce7573a69c61856ca98c6fbed59",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Manual Operacional — CEPRAEA Beach Pro.md",
+      "size_bytes": 58030,
+      "sha256": "87d6db54336d6e9f4751635431a3058fde4e70df41214d9a851d9eedd3576939",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "PRODUCT-DOMAIN-SPEC",
+      "size_bytes": 54652,
+      "sha256": "68e533ab2ffb904dee28fe81ce1dfbd040b979290b05df8759621d02bf4b6e8e",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "PRODUCT-QUALITY-GUARDRAILS.md",
+      "size_bytes": 12545,
+      "sha256": "b0c5b28a1e3667f66192db6b56202b3e63830774a88cc3e3c46a89a603c90d6f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "PROMPT_EVIDENCIAS_FONTES",
+      "size_bytes": 8365,
+      "sha256": "62f343f57fe3b9826d26a1103e6745676d406c3820fbaf4627f419dc8813a9e4",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Preparação competitiva CEPRAEA 2026 — Treinos e cenários até a Fase Final.md",
+      "size_bytes": 8039,
+      "sha256": "d281b792a9c32c7ed4bc4281ad836caf8faf88b8edc73795e5fbe9f73237dc8f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Preparação competitiva CEPRAEA 2026 — calendário e cenários — versão acessível.md",
+      "size_bytes": 7801,
+      "sha256": "eadaf3ac9a02f0f9059b82f538ba34d16b8595f11f6d7dfa0e3cf95c166a9485",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Preparação competitiva CEPRAEA 2026 — versão corrigida.md",
+      "size_bytes": 7296,
+      "sha256": "c7405c16e6fafd61d663e8cb7e94e165c2c5a5c49b034bec6ee52246e19aff8f",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Proposta de Requirements",
+      "size_bytes": 75468,
+      "sha256": "0fe32460898744520b8e455bd2e41aade6d5621ca835f93bd38409b42808e477",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "REGISTRO MESTRE DE ARTEFATOS E FUNCIONAMENTO — SISTEMA CEPRAEA.md",
+      "size_bytes": 120067,
+      "sha256": "f767b7a8af5db4c0e9903500be26856fc2a7b70003b1659de6800b03168469db",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Roteiro completo — Relatório curto e visual às atletas — CEPRAEA 2026.md",
+      "size_bytes": 303539,
+      "sha256": "4999e53f3461aa5fb8474678616e39ae52081ce891a9d90429a8b3661f351e12",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Roteiro relatório fase CEPRAEA.md",
+      "size_bytes": 12619,
+      "sha256": "0b6fc547b86b423103352ea9e69325d1ec3ada2181e52e90772aa346ce8ec534",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "SFA-20260906-001 — Auditoria de Fidelidade de Escopo — Execução Inicial.md",
+      "size_bytes": 14775,
+      "sha256": "f8b47e54048203f505f1ebb3cff54e10554b00de0f46234cd36831d1005761a5",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "SFA-20260906-001 — Inventário auditável das 71 fontes.md",
+      "size_bytes": 85945,
+      "sha256": "97e9e24f7e406f05ff0b884b248420f3e6f35eceedc940db6e99a7993de1580e",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "TRAINING_FLOW_CONTRACT.md",
+      "size_bytes": 44188,
+      "sha256": "d1419121b6cbf30c962cc93bccacc14a01bd759a68865553eb910750002813af",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "Verificar-afirmações-da-IA.json",
+      "size_bytes": 109121,
+      "sha256": "2f6eb1074e4dec7a7de82bf5b86f340f872f6232a6fe769b8d8d01332f825a43",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+      "size_bytes": 6422,
+      "sha256": "491d2defb50a33c6b247807b6538978ff1e669c6b2ab3ecc930497d6845d9e9b",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "[ATIVO] Constituição_do_Projeto.md",
+      "size_bytes": 42992,
+      "sha256": "8f214ce8b63a21df5abecc5616ac3af5bd55dfa85a4dc6b475f39b3ef94168f5",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "[ATIVO] Mapeamento Mestre de Fontes e Metadados CEPRAEA v1.0.md.md",
+      "size_bytes": 54755,
+      "sha256": "b06adcd807b268e1fa0cca658da665428956da3fd484db4dfdc77cc0e0e50b50",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "catalogo-regras-invariantes.md",
+      "size_bytes": 6350,
+      "sha256": "98b4b994a504ea605e6ddfc8a47b282e2b4742bc7c362f988075f5224860aad4",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "ferramentas-contexto-historico.json",
+      "size_bytes": 672569,
+      "sha256": "a34f0c7284a7e27bac5e0d3bc34aecdfaca8f07a84472d0b56eb212d240eac05",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "matriz-relacoes-cardinalidades.md",
+      "size_bytes": 5466,
+      "sha256": "8efb07ca658d08be499c96971fc33f3c6fd9ef1fe4b34d5ff833998f90a94ab8",
+      "read_status": "READABLE"
+    },
+    {
+      "relative_path": "mem0.md",
+      "size_bytes": 7934,
+      "sha256": "7f077823f1fd683221d87f058c81d590931484dcef403b868acc9bc998199513",
+      "read_status": "READABLE"
+    }
+  ],
+  "directory_errors": []
+}

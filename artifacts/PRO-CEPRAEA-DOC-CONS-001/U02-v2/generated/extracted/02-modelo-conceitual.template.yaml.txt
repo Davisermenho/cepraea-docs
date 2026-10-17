@@ -1,0 +1,62 @@
+schema_version: "1.1"
+document:
+  id: "CONCEPTUAL_MODEL"
+  artifact_kind: "CONCEPTUAL_MODEL"
+  title: "Modelo conceitual"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "SEMANTIC_REGISTRY"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+entities:
+  - id: "ENTITY_ID"
+    name: "NOME_DA_ENTIDADE"
+    concept_id: "CONCEPT_ID"
+    definition: "DEFINICAO_NO_CONTEXTO_DO_MODELO"
+    identity_rule: "REGRA_DE_IDENTIDADE"
+    temporality: "ATEMPORAL|INSTANTANEA|INTERVALO|VERSIONADA|EVENTO"
+    history_required: true
+    aggregate_root: false
+    rule_ids: []
+    evidence_ref_ids: []
+
+relationships:
+  - id: "RELATIONSHIP_ID"
+    name: "NOME_DA_RELACAO"
+    from_entity_id: "ENTITY_A"
+    to_entity_id: "ENTITY_B"
+    meaning: "SIGNIFICADO_DO_VINCULO"
+    cardinality:
+      from_to:
+        min: 1
+        max: "N"
+      to_from:
+        min: 1
+        max: 1
+    relationship_attributes: []
+    temporality: "TEMPORALIDADE"
+    exclusivity_rules: []
+    rule_ids: []
+    evidence_ref_ids: []
+
+domain_invariants:
+  - id: "INVARIANT_DOMAIN_001"
+    statement: "INVARIANTE"
+    affected_entity_ids: []
+    rule_ids: []
+    evidence_ref_ids: []
+
+coverage:
+  required_concept_ids: []
+  covered_concept_ids: []
+  excluded_concept_ids: []
+
+open_issues: []

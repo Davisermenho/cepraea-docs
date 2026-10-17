@@ -1,0 +1,69 @@
+schema_version: "1.1"
+document:
+  id: "LOGICAL_MODEL"
+  artifact_kind: "LOGICAL_MODEL"
+  title: "Modelo lógico relacional"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "CONCEPTUAL_MODEL"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+relations:
+  - id: "RELATION_ID"
+    logical_name: "NOME_LOGICO"
+    physical_name_candidate: "lower_snake_case"
+    conceptual_entity_ids: []
+    purpose: "FINALIDADE"
+    grain: "UMA_LINHA_REPRESENTA"
+    identity:
+      strategy: "NATURAL|SURROGATE|COMPOSITE"
+      attribute_ids: []
+    attributes:
+      - id: "ATTRIBUTE_ID"
+        logical_name: "NOME_LOGICO"
+        physical_name_candidate: "lower_snake_case"
+        semantic_type: "TIPO_SEMANTICO"
+        nullable: false
+        null_meaning: null
+        multivalued: false
+        derived: false
+        derivation_rule_id: null
+        default_semantics: null
+        domain_values: []
+        rule_ids: []
+        evidence_ref_ids: []
+    candidate_keys: []
+    unique_constraints: []
+    checks: []
+    history_strategy: "NONE|VALID_TIME|SYSTEM_TIME|BITEMPORAL|APPEND_ONLY|VERSIONED_ROW"
+    retention_rule_ids: []
+
+foreign_keys:
+  - id: "FK_ID"
+    from_relation_id: "RELATION_A"
+    from_attribute_ids: []
+    to_relation_id: "RELATION_B"
+    to_attribute_ids: []
+    required: true
+    on_delete_semantics: "RESTRICT|CASCADE|SET_NULL|NO_ACTION"
+    on_update_semantics: "RESTRICT|CASCADE|NO_ACTION"
+    relationship_id: "RELATIONSHIP_ID"
+    supporting_index_required: true
+    rule_ids: []
+
+normalization_decisions:
+  - id: "NORM_DECISION_001"
+    affected_relation_ids: []
+    decision: "DECISAO"
+    rationale: "JUSTIFICATIVA"
+    accepted_tradeoffs: []
+
+open_issues: []

@@ -26,9 +26,11 @@ from typing import Any, Iterable
 from xml.etree import ElementTree
 
 
-SCHEMA_VERSION = "1.0.0"
-EXTRACTION_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
+EXTRACTION_VERSION = "1.1.0"
 MAX_SEGMENT_CHARS = 12_000
+OFFSET_UNIT = "UNICODE_CODE_POINT"
+INTERVAL_CONVENTION = "HALF_OPEN_START_INCLUSIVE_END_EXCLUSIVE"
 
 TEXT_FORMATS = {
     "Markdown",
@@ -395,10 +397,14 @@ def line_column(starts: list[int], offset: int) -> tuple[int, int]:
 
 
 def split_span(text: str, start: int, end: int, maximum: int) -> list[tuple[int, int]]:
+    if maximum <= 0:
+        raise ValueError("maximum segment size must be positive")
+    if start < 0 or end < start or end > len(text):
+        raise ValueError(f"invalid span [{start}, {end}) for text length {len(text)}")
     spans: list[tuple[int, int]] = []
     cursor = start
     while end - cursor > maximum:
-        candidate = text.rfind("\n", cursor, cursor + maximum + 1)
+        candidate = text.rfind("\n", cursor, cursor + maximum)
         if candidate <= cursor:
             candidate = cursor + maximum
         else:
@@ -413,16 +419,17 @@ def split_span(text: str, start: int, end: int, maximum: int) -> list[tuple[int,
 def generic_spans(text: str) -> list[tuple[int, int, list[str]]]:
     if not text:
         return []
+    # Blank-line separators belong to the preceding block. The resulting raw
+    # blocks are therefore a complete, non-overlapping partition of the text.
     blocks: list[tuple[int, int]] = []
     cursor = 0
     for separator in re.finditer(r"\n[ \t]*\n+", text):
-        end = separator.start() + 1
-        if text[cursor:end].strip():
-            blocks.append((cursor, end))
-        cursor = separator.end()
-    if text[cursor:].strip():
+        end = separator.end()
+        blocks.append((cursor, end))
+        cursor = end
+    if cursor < len(text):
         blocks.append((cursor, len(text)))
-    if not blocks and text.strip():
+    if not blocks:
         blocks = [(0, len(text))]
     combined: list[tuple[int, int, list[str]]] = []
     current_start: int | None = None
@@ -443,33 +450,51 @@ def generic_spans(text: str) -> list[tuple[int, int, list[str]]]:
 
 
 def markdown_spans(text: str) -> list[tuple[int, int, list[str]]]:
-    starts = line_starts(text)
+    if not text:
+        return []
     lines = text.splitlines(keepends=True)
     headings: list[str] = []
-    sections: list[tuple[int, int, list[str]]] = []
-    section_start = 0
-    section_heading: list[str] = []
+    heading_records: list[tuple[int, list[str]]] = []
     offset = 0
-    saw_heading = False
+    fence_character: str | None = None
+    fence_length = 0
     for line in lines:
-        match = re.match(r"^[ \t]{0,3}(#{1,6})[ \t]+(.+?)[ \t]*#*[ \t]*(?:\n)?$", line)
+        content = line.rstrip("\r\n")
+        fence = re.match(r"^[ ]{0,3}(`{3,}|~{3,})(.*)$", content)
+        if fence:
+            marker = fence.group(1)
+            remainder = fence.group(2)
+            if fence_character is None:
+                fence_character = marker[0]
+                fence_length = len(marker)
+            elif marker[0] == fence_character and len(marker) >= fence_length and not remainder.strip():
+                fence_character = None
+                fence_length = 0
+            offset += len(line)
+            continue
+        match = None
+        if fence_character is None:
+            match = re.match(r"^[ \t]{0,3}(#{1,6})[ \t]+(.+?)[ \t]*#*[ \t]*$", content)
         if match:
-            if saw_heading and text[section_start:offset].strip():
-                sections.append((section_start, offset, section_heading))
             level = len(match.group(1))
             title = match.group(2).strip()
             headings = headings[: level - 1]
             while len(headings) < level - 1:
                 headings.append("")
             headings.append(title)
-            section_start = offset
-            section_heading = list(headings)
-            saw_heading = True
+            heading_records.append((offset, list(headings)))
         offset += len(line)
-    if text[section_start:].strip():
-        sections.append((section_start, len(text), section_heading))
-    if not sections:
+    if not heading_records:
         return generic_spans(text)
+
+    sections: list[tuple[int, int, list[str]]] = []
+    first_heading_offset = heading_records[0][0]
+    if first_heading_offset > 0:
+        sections.append((0, first_heading_offset, []))
+    for index, (start, heading_path) in enumerate(heading_records):
+        end = heading_records[index + 1][0] if index + 1 < len(heading_records) else len(text)
+        sections.append((start, end, heading_path))
+
     result: list[tuple[int, int, list[str]]] = []
     for start, end, heading in sections:
         for left, right in split_span(text, start, end, MAX_SEGMENT_CHARS):
@@ -481,9 +506,31 @@ def context_markers(text: str) -> list[str]:
     return sorted(name for name, pattern in CONTEXT_PATTERNS.items() if pattern.search(text))
 
 
+def segment_identifier(
+    extraction: dict[str, Any],
+    unit: dict[str, Any],
+    start: int,
+    end: int,
+    segment_text: str,
+) -> str:
+    identity = {
+        "source_id": extraction["source_id"],
+        "source_path": extraction["source_path"],
+        "source_sha256": extraction["source_sha256"],
+        "extraction_id": extraction["extraction_id"],
+        "unit_id": unit["unit_id"],
+        "unit_kind": unit["kind"],
+        "unit_ordinal": unit["ordinal"],
+        "unit_char_start": start,
+        "unit_char_end": end,
+        "text_sha256": sha256_text(segment_text),
+    }
+    stable = json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return "SEG-" + sha256_text(stable)
+
+
 def build_segments(extractions: list[dict[str, Any]]) -> list[dict[str, Any]]:
     segments: list[dict[str, Any]] = []
-    sequence = 0
     for extraction in extractions:
         for unit in extraction["units"]:
             text = unit["text"]
@@ -495,9 +542,6 @@ def build_segments(extractions: list[dict[str, Any]]) -> list[dict[str, Any]]:
             starts = line_starts(text)
             for start, end, heading_path in spans:
                 segment_text = text[start:end]
-                if not segment_text.strip():
-                    continue
-                sequence += 1
                 line_start, column_start = line_column(starts, start)
                 line_end, column_end = line_column(starts, max(start, end - 1))
                 location: dict[str, Any] = {
@@ -511,6 +555,8 @@ def build_segments(extractions: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     "column_end": column_end,
                     "unit_char_start": start,
                     "unit_char_end": end,
+                    "offset_unit": OFFSET_UNIT,
+                    "interval_convention": INTERVAL_CONVENTION,
                 }
                 if unit["kind"] == "page":
                     location["page"] = unit["ordinal"]
@@ -520,7 +566,7 @@ def build_segments(extractions: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 segments.append(
                     {
                         "schema_version": SCHEMA_VERSION,
-                        "segment_id": f"SEG-{sequence:08d}",
+                        "segment_id": segment_identifier(extraction, unit, start, end, segment_text),
                         "source_id": extraction["source_id"],
                         "source_path": extraction["source_path"],
                         "source_sha256": extraction["source_sha256"],
@@ -538,6 +584,146 @@ def build_segments(extractions: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     }
                 )
     return segments
+
+
+def validate_unit_partition(
+    unit: dict[str, Any],
+    segments: list[dict[str, Any]],
+    maximum: int = MAX_SEGMENT_CHARS,
+) -> dict[str, Any]:
+    """Validate a character-based, half-open, exact partition of one unit."""
+    text = unit["text"]
+    ordered = sorted(
+        segments,
+        key=lambda item: (
+            item.get("location", {}).get("unit_char_start", -1),
+            item.get("location", {}).get("unit_char_end", -1),
+            item.get("segment_id", ""),
+        ),
+    )
+    diagnostics: list[str] = []
+    ids = [item.get("segment_id") for item in ordered]
+    duplicate_ids = sorted(value for value, count in Counter(ids).items() if value is not None and count > 1)
+    if duplicate_ids:
+        diagnostics.append("DUPLICATE_SEGMENT_IDS")
+
+    if not text:
+        if ordered:
+            diagnostics.append("EMPTY_UNIT_HAS_SEGMENTS")
+        reconstructed = "".join(str(item.get("text", "")) for item in ordered)
+        return {
+            "status": "PASS" if not diagnostics and reconstructed == text else "FAIL",
+            "unit_id": unit["unit_id"],
+            "text_length_characters": 0,
+            "segment_count": len(ordered),
+            "first_interval_starts_at_zero": not ordered,
+            "adjacent_intervals": True,
+            "last_interval_ends_at_text_length": not ordered,
+            "exact_reconstruction": reconstructed == text,
+            "unique_segment_ids": not duplicate_ids,
+            "maximum_segment_chars_respected": True,
+            "offset_unit": OFFSET_UNIT,
+            "interval_convention": INTERVAL_CONVENTION,
+            "diagnostics": diagnostics,
+        }
+
+    if not ordered:
+        diagnostics.append("NONEMPTY_UNIT_WITHOUT_SEGMENTS")
+    intervals: list[tuple[int, int]] = []
+    conventions_valid = True
+    size_valid = True
+    for segment in ordered:
+        location = segment.get("location", {})
+        start = location.get("unit_char_start")
+        end = location.get("unit_char_end")
+        if not isinstance(start, int) or not isinstance(end, int) or not (0 <= start < end <= len(text)):
+            diagnostics.append("INVALID_INTERVAL")
+            continue
+        intervals.append((start, end))
+        conventions_valid = conventions_valid and location.get("offset_unit") == OFFSET_UNIT
+        conventions_valid = conventions_valid and location.get("interval_convention") == INTERVAL_CONVENTION
+        size_valid = size_valid and end - start <= maximum and len(segment.get("text", "")) <= maximum
+    first_zero = bool(intervals) and intervals[0][0] == 0
+    adjacent = len(intervals) == len(ordered) and all(
+        left[1] == right[0] for left, right in zip(intervals, intervals[1:])
+    )
+    last_at_end = bool(intervals) and intervals[-1][1] == len(text)
+    reconstructed = "".join(str(item.get("text", "")) for item in ordered)
+    exact = reconstructed == text
+    if not first_zero:
+        diagnostics.append("FIRST_INTERVAL_NOT_ZERO")
+    if not adjacent:
+        diagnostics.append("INTERVAL_GAP_OR_OVERLAP")
+    if not last_at_end:
+        diagnostics.append("LAST_INTERVAL_NOT_TEXT_LENGTH")
+    if not exact:
+        diagnostics.append("RECONSTRUCTION_MISMATCH")
+    if not conventions_valid:
+        diagnostics.append("OFFSET_CONVENTION_MISMATCH")
+    if not size_valid:
+        diagnostics.append("MAXIMUM_SEGMENT_CHARS_EXCEEDED")
+    return {
+        "status": "PASS" if not diagnostics else "FAIL",
+        "unit_id": unit["unit_id"],
+        "text_length_characters": len(text),
+        "segment_count": len(ordered),
+        "first_interval_starts_at_zero": first_zero,
+        "adjacent_intervals": adjacent,
+        "last_interval_ends_at_text_length": last_at_end,
+        "exact_reconstruction": exact,
+        "unique_segment_ids": not duplicate_ids,
+        "maximum_segment_chars_respected": size_valid,
+        "offset_unit": OFFSET_UNIT if conventions_valid else "INVALID_OR_MIXED",
+        "interval_convention": INTERVAL_CONVENTION if conventions_valid else "INVALID_OR_MIXED",
+        "diagnostics": diagnostics,
+    }
+
+
+def validate_all_partitions(
+    extractions: list[dict[str, Any]], segments: list[dict[str, Any]]
+) -> dict[str, Any]:
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for segment in segments:
+        key = (segment["extraction_id"], segment["location"]["unit_id"])
+        grouped.setdefault(key, []).append(segment)
+    results: list[dict[str, Any]] = []
+    expected_keys: set[tuple[str, str]] = set()
+    for extraction in extractions:
+        for unit in extraction["units"]:
+            key = (extraction["extraction_id"], unit["unit_id"])
+            expected_keys.add(key)
+            result = validate_unit_partition(unit, grouped.get(key, []))
+            results.append(
+                {
+                    "source_path": extraction["source_path"],
+                    "extraction_id": extraction["extraction_id"],
+                    **result,
+                }
+            )
+    orphan_keys = sorted(set(grouped) - expected_keys)
+    global_ids = [item["segment_id"] for item in segments]
+    duplicate_global_ids = sorted(value for value, count in Counter(global_ids).items() if count > 1)
+    failed = [item for item in results if item["status"] != "PASS"]
+    status = "PASS" if not failed and not orphan_keys and not duplicate_global_ids else "FAIL"
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "unit": "U02",
+        "status": status,
+        "offset_unit": OFFSET_UNIT,
+        "interval_convention": INTERVAL_CONVENTION,
+        "maximum_segment_chars": MAX_SEGMENT_CHARS,
+        "summary": {
+            "units_validated": len(results),
+            "nonempty_units": sum(item["text_length_characters"] > 0 for item in results),
+            "empty_units": sum(item["text_length_characters"] == 0 for item in results),
+            "segments_validated": len(segments),
+            "failed_units": len(failed),
+            "orphan_segment_groups": len(orphan_keys),
+            "duplicate_segment_ids": duplicate_global_ids,
+        },
+        "orphan_segment_groups": [list(item) for item in orphan_keys],
+        "results": results,
+    }
 
 
 def validate_segment(segment: dict[str, Any], extraction: dict[str, Any]) -> dict[str, Any]:
@@ -572,8 +758,12 @@ def validate_segment(segment: dict[str, Any], extraction: dict[str, Any]) -> dic
     else:
         start = location.get("unit_char_start")
         end = location.get("unit_char_end")
-        if not isinstance(start, int) or not isinstance(end, int) or unit["text"][start:end] != segment["text"]:
+        if location.get("offset_unit") != OFFSET_UNIT or location.get("interval_convention") != INTERVAL_CONVENTION:
+            diagnostics.append("OFFSET_CONVENTION_MISMATCH")
+        if not isinstance(start, int) or not isinstance(end, int) or not (0 <= start < end <= len(unit["text"])) or unit["text"][start:end] != segment["text"]:
             diagnostics.append("LOCATION_TEXT_MISMATCH")
+        elif segment["segment_id"] != segment_identifier(extraction, unit, start, end, segment["text"]):
+            diagnostics.append("SEGMENT_ID_MISMATCH")
     return {"valid": not diagnostics, "diagnostics": diagnostics}
 
 
@@ -686,9 +876,12 @@ def build_sqlite_index(
         )
         metadata = {
             "schema_version": SCHEMA_VERSION,
+            "extraction_version": EXTRACTION_VERSION,
             "inventoried_sources": str(inventoried_sources),
             "processed_sources": str(processed_sources),
             "absence_is_not_proof_of_absence": "true",
+            "offset_unit": OFFSET_UNIT,
+            "interval_convention": INTERVAL_CONVENTION,
         }
         connection.executemany("INSERT INTO metadata VALUES (?, ?)", sorted(metadata.items()))
         for segment in segments:
@@ -845,6 +1038,12 @@ def run_pipeline(manifest_path: Path, source_root: Path, output: Path) -> dict[s
         extractions.append(extracted)
 
     segments = build_segments(extractions)
+    partition_validation = validate_all_partitions(extractions, segments)
+    if partition_validation["status"] != "PASS":
+        raise ValueError(
+            "Segmentation partition validation failed: "
+            + json.dumps(partition_validation["summary"], ensure_ascii=False, sort_keys=True)
+        )
     segment_counts = Counter(segment["source_path"] for segment in segments)
     for extracted in extractions:
         extracted["segment_count"] = segment_counts[extracted["source_path"]]
@@ -874,7 +1073,10 @@ def run_pipeline(manifest_path: Path, source_root: Path, output: Path) -> dict[s
         "extractor_registry": EXTRACTORS,
         "segmentation": {
             "max_segment_chars": MAX_SEGMENT_CHARS,
-            "strategy": "Markdown heading sections; otherwise paragraph/block boundaries; hard split only above maximum.",
+            "strategy": "Integral character partition; Markdown heading sections outside fenced code; otherwise paragraph/block boundaries; hard split only above maximum.",
+            "offset_unit": OFFSET_UNIT,
+            "interval_convention": INTERVAL_CONVENTION,
+            "partition_validation": partition_validation["status"],
         },
         "retrieval": {
             "type": "SQLite FTS5 plus explicit reference expansion",
@@ -895,6 +1097,7 @@ def run_pipeline(manifest_path: Path, source_root: Path, output: Path) -> dict[s
         "extractions": extractions,
     }
     json_dump(output / "U02-extraction-manifest.json", extraction_manifest)
+    json_dump(output / "U02-segmentation-validation.json", partition_validation)
     json_dump(
         output / "U02-limitations.json",
         {"schema_version": SCHEMA_VERSION, "unit": "U02", "records": limitations},

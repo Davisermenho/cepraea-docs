@@ -1,0 +1,203 @@
+{
+  "accepted": 27,
+  "configuration": {
+    "finite_stop": true,
+    "max_automatic_attempts": 1
+  },
+  "diagnostics": [],
+  "original_output_sha256": "3ca7bba8c49980df294988e2dd3aab7546a9cc1183029df22ebfbe6dcc1bb76d",
+  "record_attempts": [
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "e67bab80a87faae79b0a9796f344e38e78eb5bb8f60ffbb1013163bb0f30b6e8",
+      "record_index": 0,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "10ac663b860890c038c533cf681cfc994f62a19c2388638c0717d9e1158fbc68",
+      "record_index": 1,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "6ff10cbcac4d25fe35650d5eee87140a53f8aee2c3ffbf0355f061e39b8e73d7",
+      "record_index": 2,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "e23371453d17264916d1e3f3275e75b5d9d7607b0c42307c75774a8d551b5c70",
+      "record_index": 3,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "254a36f3930703e6e391e959ede2dccc2e982cd20cae0ebeb1bda70dab90fc44",
+      "record_index": 4,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "24cc79d368c5cbcdcd6199b58c5c0b58905fbac003532869030f807086c6d5e3",
+      "record_index": 5,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "51e035a8a65a0d08db0958304b3f9a4475a5f4f5629394c22c2f4e73c55c8553",
+      "record_index": 6,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "7cfd360228c43cfde446642807a8708c460dae8fd2c7ae62b2f5753475109137",
+      "record_index": 7,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "c110acb5b04411b1cc1575ec18a6102af4e71b6529d60cda5dc831a910fa285c",
+      "record_index": 8,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "c8fd3ec041a6bdaacff4033ee74236994cf1f3520068be317facd1acd665febb",
+      "record_index": 9,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "2726e3c31c37e9a26158df2048a59ed1bee2ac0a47e66e7f695f027bd6275427",
+      "record_index": 10,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "292b27d5cc87e810055e7ca9550c27eebb09ba9ef4f79396a8515d9d97f85320",
+      "record_index": 11,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "1ed145566c45b2faddbe036b579b06d83860f1092685ec75ed808038a0986544",
+      "record_index": 12,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "2f78b7314c5317e09a393df6e8dd3f3a3295fa07c9a938d84837f3faba18a418",
+      "record_index": 13,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "436df9554df111f9674f7ccef8c9816b2b963a2ea8163944a5a3d4b05fdead65",
+      "record_index": 14,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "163306761214fc808f7412645b2749256d087419b0dfd76a530ef0ba3adbf414",
+      "record_index": 15,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "93d61081ad1f962cd0c603612d7900de7503ef6c15d836b3e11604ad917d7d48",
+      "record_index": 16,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "8d21f050ab9780092def13c042ccc5cbc2d74733a7b5f520adec140400b42f4d",
+      "record_index": 17,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "a3e7a14f676c8393ae1ee59152e6d953f73d4eb408a7a1b89394028cd741fc2d",
+      "record_index": 18,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "2ae6918c4f34f25719df9486dab117a68d07e1b34bf37375730beba2dc33a9df",
+      "record_index": 19,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "5d6a8607af95057ba8ff4bc1fdb9034e5a15cd08b1b226bbebf926e2147a7122",
+      "record_index": 20,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "64bb862ab52eb6e434ac10398f7cc2de120dc36b5e30d55df21432719f56f8a2",
+      "record_index": 21,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "1e4a4380d08e61a7f7955cbadd266a208c0d237a15200cba0fda37e26eee5238",
+      "record_index": 22,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "91856ecdac4975f92987ac35a45e63cf09e27ae500a41c8d4d66498227d664c9",
+      "record_index": 23,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "f55fb656da0990c66723a7c890a0fbb586e8ec592668eeb49d8c82cfd0bb7182",
+      "record_index": 24,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "0ffa745331d9a917bd14079ecd969b79057fd8e94994bd8714ea9290f49e9838",
+      "record_index": 25,
+      "status": "PASS"
+    },
+    {
+      "attempt": 0,
+      "error_codes": [],
+      "input_sha256": "66749b2572bd37b602ea7e55ddff420b7213f31fe051fe3fd6eef3ebcf52f115",
+      "record_index": 26,
+      "status": "PASS"
+    }
+  ],
+  "rejected": 0,
+  "schema_version": "1.0.0",
+  "unit": "U03"
+}

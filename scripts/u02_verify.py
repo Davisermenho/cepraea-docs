@@ -10,7 +10,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from u02_extract import sha256_file, validate_segment
+from u02_extract import validate_all_partitions, sha256_file, validate_segment
 
 
 def load_json(path: Path):
@@ -63,6 +63,14 @@ def verify(u01_path: Path, u02_path: Path, source_root: Path) -> dict:
     if invalid_segments:
         errors.append(f"INVALID_SEGMENTS:{len(invalid_segments)}")
 
+    partition_validation = validate_all_partitions(list(extractions.values()), segments)
+    if partition_validation["status"] != "PASS":
+        errors.append("SEGMENTATION_PARTITION_FAILED")
+    persisted_partition_path = output_root / "U02-segmentation-validation.json"
+    persisted_partition = load_json(persisted_partition_path) if persisted_partition_path.is_file() else None
+    if persisted_partition != partition_validation:
+        errors.append("SEGMENTATION_VALIDATION_RECORD_MISMATCH")
+
     resolved_bad_targets = [
         item["reference_id"]
         for item in references
@@ -102,6 +110,9 @@ def verify(u01_path: Path, u02_path: Path, source_root: Path) -> dict:
             "segments_validated": len(segments),
             "invalid_segments": invalid_segments[:20],
             "duplicate_segment_ids": duplicate_ids,
+            "segmentation_partition": partition_validation["summary"],
+            "offset_unit": partition_validation["offset_unit"],
+            "interval_convention": partition_validation["interval_convention"],
             "references_validated": len(references),
             "sqlite_segment_rows": indexed_segments,
             "sqlite_fts_rows": fts_segments,

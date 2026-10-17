@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U03",
+  "defined_before_execution": true,
+  "recovery": {
+    "max_automatic_attempts": 1,
+    "rule": "Somente uma correção explicitamente fornecida pode ser tentada; nenhum valor ausente é inventado."
+  },
+  "tests": [
+    {
+      "id": "T04",
+      "name": "Preservação do corpus real",
+      "input": "Manifesto U01 aprovado e diretório original após a U03",
+      "expected": {"status": "PASS", "changed": 0, "missing": 0, "unexpected": 0}
+    },
+    {
+      "id": "T05",
+      "name": "Evidência válida",
+      "input": "Registro com fonte, hash, extração, localização e trecho exatos",
+      "expected": {"accepted": true, "evidence_match": "EXACT"}
+    },
+    {
+      "id": "T06",
+      "name": "Evidência inválida",
+      "input": "Registro cujo trecho literal foi adulterado",
+      "expected": {"accepted": false, "error_code": "EVIDENCE_MISMATCH"}
+    },
+    {
+      "id": "T08",
+      "name": "Autoridade",
+      "input": "Arquivo rotulado [ATIVO], sem referência de aprovação verificável",
+      "expected": {"automatic_approval": false, "epistemic_type": "PROPOSTA"}
+    },
+    {
+      "id": "T09",
+      "name": "Contradição",
+      "input": "Duas afirmações controladas incompatíveis, sem decisão autorizada",
+      "expected": {"relation": "CONTRADIÇÃO", "resolution": "ENCAMINHADA_DECISÃO_HUMANA"}
+    },
+    {
+      "id": "T10",
+      "name": "Rastreabilidade",
+      "input": "Conjunto aceito da execução real",
+      "expected": {"all_accepted_traceable": true, "missing_references": 0}
+    },
+    {
+      "id": "T13",
+      "name": "Reexecução",
+      "input": "Mesmos blueprints, manifesto e segmentos executados duas vezes",
+      "expected": {"logical_outputs_equivalent": true, "duplicate_claim_ids": []}
+    },
+    {
+      "id": "T14",
+      "name": "Interrupção",
+      "input": "Saída parcial simulada seguida de reexecução integral",
+      "expected": {"partial_pass_forbidden": true, "full_rerun_complete": true}
+    },
+    {
+      "id": "T15",
+      "name": "Contrato estruturado e recuperação controlada",
+      "input": "Válido; JSON inválido; campo ausente; enum inválido; referência inexistente; corrigido; persistentemente inválido",
+      "expected": {
+        "valid_accepted": true,
+        "invalid_rejected_with_diagnostics": true,
+        "originals_preserved": true,
+        "corrected_revalidated": true,
+        "persistent_invalid_excluded": true,
+        "independent_valid_not_reprocessed": true,
+        "max_automatic_attempts": 1,
+        "finite_stop_respected": true
+      }
+    },
+    {
+      "id": "T16",
+      "name": "Normalização",
+      "input": "Correspondência exata; diferença apenas de Unicode/espaço; mudança semântica por negação",
+      "expected": {"exact": "EXACT", "format_only": "NORMALIZED", "semantic_change": "REJECTED"}
+    },
+    {
+      "id": "T17",
+      "name": "Contexto",
+      "input": "Conclusão com condição, exceção, dependência e limitação de cobertura",
+      "expected": {"dimensions_distinct": true, "absence_is_not_nonexistence": true, "scope_limited": true}
+    },
+    {
+      "id": "T18",
+      "name": "Agrupamento de divergências",
+      "input": "Dois conflitos da mesma questão e um conflito independente",
+      "expected": {"groups": 2, "evidence_preserved": true, "automatic_resolution": false}
+    }
+  ]
+}

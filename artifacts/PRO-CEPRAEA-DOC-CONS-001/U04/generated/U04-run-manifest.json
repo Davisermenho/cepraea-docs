@@ -1,0 +1,17 @@
+{
+  "candidate_status": "CANDIDATO_NAO_APROVADO",
+  "files": {
+    "ENT-06A-governanca-autoridade.candidato.md": "2e4e2f28944b636ef76266ecf18142dbcc42de9c81681aef86c90d2caed6234c",
+    "ENT-06B-requisitos-produto-d5.candidato.md": "0e01bdace853ed296b75a6165285b70d969103121a61096a744d6bf1c65af99b",
+    "ENT-06C-arquitetura-estado-tecnico.candidato.md": "6d12aebc402598f8c1a0230c8bc40ed5600b6155236ea3a0d1da975a210d0d8b",
+    "ENT-07-mapa-origem-destino.json": "95869761ceafd393b34b3c77aab6b42c44d2687a1b78c2e6fae3a366fadace60",
+    "ENT-07-mapa-origem-destino.md": "92f7971636895d689fd0d904c370e1e2b993513748e4e62a430c204ddb650c06",
+    "ENT-08-pendencias-revisao.json": "293c672c1a74374b6ea02f7f6e0e2272199592cefb059c8691227a34bd9a6ad7",
+    "ENT-08-pendencias-revisao.md": "4d910b75a504ebf5e8aadf35197c54e85536f1c70ddd64d95b379e98a7e9c383",
+    "approval-registry.json": "e93bf59d0b8ca497fe913249d7efd9aca09f170c271feff2c3a6170adedf84f8"
+  },
+  "publication_authorized": false,
+  "schema_version": "1.0.0",
+  "status": "COMPLETE",
+  "unit": "U04"
+}

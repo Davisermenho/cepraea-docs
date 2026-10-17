@@ -6,8 +6,10 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import re
 import tempfile
 import zipfile
+from collections import Counter
 from pathlib import Path
 from typing import Any, Callable
 
@@ -126,6 +128,7 @@ def logical_hashes(output: Path) -> dict[str, str]:
     selected = [
         "U02-extraction-manifest.json",
         "U02-limitations.json",
+        "U02-segmentation-validation.json",
         "U02-segments.jsonl",
         "U02-references.jsonl",
         "U02-format-summary.csv",
@@ -134,6 +137,119 @@ def logical_hashes(output: Path) -> dict[str, str]:
     for path in sorted((output / "extracted").rglob("*.txt")):
         result[path.relative_to(output).as_posix()] = U02.sha256_file(path)
     return result
+
+
+def segments_for_text(root: Path, relative: str, text: str, number: int = 1) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    path = write_text_file(root, relative, text)
+    extraction = U02.extract_source(path, source_record(path, root, "Markdown", number))
+    return extraction, U02.build_segments([extraction])
+
+
+def independent_partition_status(text: str, segments: list[dict[str, Any]]) -> str:
+    ordered = sorted(segments, key=lambda item: item["location"]["unit_char_start"])
+    ids = [item["segment_id"] for item in ordered]
+    if not text:
+        valid = not ordered
+    else:
+        intervals = [
+            (item["location"]["unit_char_start"], item["location"]["unit_char_end"])
+            for item in ordered
+        ]
+        valid = bool(ordered)
+        valid = valid and intervals[0][0] == 0
+        valid = valid and all(left[1] == right[0] for left, right in zip(intervals, intervals[1:]))
+        valid = valid and intervals[-1][1] == len(text)
+        valid = valid and "".join(item["text"] for item in ordered) == text
+        valid = valid and all(end > start for start, end in intervals)
+        valid = valid and all(len(item["text"]) <= U02.MAX_SEGMENT_CHARS for item in ordered)
+    valid = valid and not [value for value, count in Counter(ids).items() if count > 1]
+    return "PASS" if valid else "FAIL"
+
+
+def run_partition_case(plan: dict[str, Any], test_id: str) -> dict[str, Any]:
+    spec = definition(plan, test_id)
+    text = spec["input"].get("text")
+    if text is None:
+        text = "x" * spec["input"]["long_prefix_chars"] + spec["input"]["suffix"]
+    with tempfile.TemporaryDirectory(prefix=f"u02-{test_id.lower()}-") as temp:
+        extraction, segments = segments_for_text(Path(temp), spec["input"]["path"], text)
+        actual = {
+            "partition_status": independent_partition_status(extraction["units"][0]["text"], segments),
+            "segment_count": len(segments),
+        }
+        if "heading_paths" in spec["expected"]:
+            actual["heading_paths"] = [item["heading_path"] for item in segments]
+        if "maximum_segment_chars" in spec["expected"]:
+            actual["maximum_segment_chars"] = max((len(item["text"]) for item in segments), default=0)
+    return test_result(spec, actual)
+
+
+def run_t27(plan: dict[str, Any]) -> dict[str, Any]:
+    spec = definition(plan, "T27")
+    statuses = []
+    counts = []
+    observed_maximum = 0
+    with tempfile.TemporaryDirectory(prefix="u02-t27-") as temp:
+        root = Path(temp)
+        for number, length in enumerate(spec["input"]["lengths"], start=1):
+            extraction, segments = segments_for_text(root, f"{spec['input']['path_prefix']}-{length}.md", "x" * length, number)
+            statuses.append(independent_partition_status(extraction["units"][0]["text"], segments))
+            counts.append(len(segments))
+            observed_maximum = max(observed_maximum, *(len(item["text"]) for item in segments))
+    actual = {
+        "partition_status": "PASS" if all(item == "PASS" for item in statuses) else "FAIL",
+        "segment_counts": counts,
+        "maximum_segment_chars": observed_maximum,
+    }
+    return test_result(spec, actual)
+
+
+def run_t28(plan: dict[str, Any]) -> dict[str, Any]:
+    spec = definition(plan, "T28")
+    with tempfile.TemporaryDirectory(prefix="u02-t28-") as temp:
+        root = Path(temp)
+        extraction, first = segments_for_text(root, spec["input"]["path"], spec["input"]["text"])
+        _, second = segments_for_text(root, spec["input"]["path"], spec["input"]["text"])
+        actual = {
+            "partition_status": independent_partition_status(extraction["units"][0]["text"], first),
+            "identical_records": first == second,
+            "identical_ids": [item["segment_id"] for item in first] == [item["segment_id"] for item in second],
+        }
+    return test_result(spec, actual)
+
+
+def run_t29(plan: dict[str, Any]) -> dict[str, Any]:
+    spec = definition(plan, "T29")
+    with tempfile.TemporaryDirectory(prefix="u02-t29-") as temp:
+        root = Path(temp)
+        stable_path = write_text_file(root, spec["input"]["stable_path"], spec["input"]["stable_text"])
+        inserted_path = write_text_file(root, spec["input"]["inserted_path"], spec["input"]["inserted_text"])
+        stable_extraction = U02.extract_source(stable_path, source_record(stable_path, root, "Markdown", 2))
+        inserted_extraction = U02.extract_source(inserted_path, source_record(inserted_path, root, "Markdown", 1))
+        alone = U02.build_segments([stable_extraction])
+        after_insertion = [item for item in U02.build_segments([inserted_extraction, stable_extraction]) if item["source_path"] == spec["input"]["stable_path"]]
+        ids = [item["segment_id"] for item in alone]
+        actual = {
+            "partition_status": independent_partition_status(stable_extraction["units"][0]["text"], alone),
+            "stable_source_ids_unchanged": ids == [item["segment_id"] for item in after_insertion],
+            "deterministic_id_format": bool(ids)
+            and all(re.fullmatch(r"SEG-[0-9a-f]{64}", value) for value in ids),
+        }
+    return test_result(spec, actual)
+
+
+def run_t30(plan: dict[str, Any]) -> dict[str, Any]:
+    spec = definition(plan, "T30")
+    with tempfile.TemporaryDirectory(prefix="u02-t30-") as temp:
+        extraction, segments = segments_for_text(Path(temp), spec["input"]["path"], spec["input"]["text"])
+        locations = [item["location"] for item in segments]
+        actual = {
+            "partition_status": independent_partition_status(extraction["units"][0]["text"], segments),
+            "offset_unit": locations[0].get("offset_unit") if locations else None,
+            "half_open_intervals": bool(locations) and all(item.get("interval_convention") == "HALF_OPEN_START_INCLUSIVE_END_EXCLUSIVE" for item in locations),
+            "character_and_byte_lengths_differ": len(spec["input"]["text"]) != len(spec["input"]["text"].encode("utf-8")),
+        }
+    return test_result(spec, actual)
 
 
 def run_t05(plan: dict[str, Any]) -> dict[str, Any]:
@@ -320,6 +436,17 @@ def main() -> int:
         run_t14,
         run_t17,
         run_t19,
+        lambda plan: run_partition_case(plan, "T20"),
+        lambda plan: run_partition_case(plan, "T21"),
+        lambda plan: run_partition_case(plan, "T22"),
+        lambda plan: run_partition_case(plan, "T23"),
+        lambda plan: run_partition_case(plan, "T24"),
+        lambda plan: run_partition_case(plan, "T25"),
+        lambda plan: run_partition_case(plan, "T26"),
+        run_t27,
+        run_t28,
+        run_t29,
+        run_t30,
     ]
     results = [runner(plan) for runner in runners]
     report = {

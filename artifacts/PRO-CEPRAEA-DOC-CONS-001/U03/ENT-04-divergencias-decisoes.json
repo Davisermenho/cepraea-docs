@@ -1,0 +1,179 @@
+{
+  "divergence_groups": [
+    {
+      "affected_acceptance": "Não promover documentos candidatos ou metadados conflitantes como autoridade vigente.",
+      "automatic_resolution": false,
+      "claim_ids": [
+        "CLM-U03-0003",
+        "CLM-U03-0004",
+        "CLM-U03-0005",
+        "CLM-U03-0006",
+        "CLM-U03-0007"
+      ],
+      "decision_question": "Quais versões e status destes artefatos foram efetivamente aprovados, e qual ato verificável estabelece sua vigência e precedência?",
+      "divergence_id": "DVG-U03-001",
+      "priority": "DECISÃO_HUMANA",
+      "relation_ids": [
+        "REL-U03-0002",
+        "REL-U03-0003"
+      ],
+      "status": "ENCAMINHADA_DECISÃO_HUMANA",
+      "title": "Vigência da Constituição e do Current State Index"
+    },
+    {
+      "affected_acceptance": "Não afirmar implementação, teste, publicação ou operação sem prova proporcional.",
+      "automatic_resolution": false,
+      "claim_ids": [
+        "CLM-U03-0009",
+        "CLM-U03-0010",
+        "CLM-U03-0011",
+        "CLM-U03-0012",
+        "CLM-U03-0013"
+      ],
+      "decision_question": "Qual ambiente, commit, projeto Supabase e conjunto de evidências observáveis sustentam o estado atual, e qual declaração deve constar no documento candidato?",
+      "divergence_id": "DVG-U03-002",
+      "priority": "DECISÃO_HUMANA",
+      "relation_ids": [
+        "REL-U03-0004",
+        "REL-U03-0005"
+      ],
+      "status": "ENCAMINHADA_VERIFICAÇÃO_E_DECISÃO_HUMANA",
+      "title": "Estado real de implementação e infraestrutura"
+    },
+    {
+      "affected_acceptance": "Documento candidato deve apresentar alternativas e lacunas sem eleger arquitetura por inferência.",
+      "automatic_resolution": false,
+      "claim_ids": [
+        "CLM-U03-0018",
+        "CLM-U03-0019",
+        "CLM-U03-0020",
+        "CLM-U03-0021"
+      ],
+      "decision_question": "Qual stack é aprovada e quais decisões de offline, autenticação, notificações e implantação ficam abertas?",
+      "divergence_id": "DVG-U03-003",
+      "priority": "DECISÃO_HUMANA",
+      "relation_ids": [
+        "REL-U03-0008"
+      ],
+      "status": "ENCAMINHADA_DECISÃO_HUMANA",
+      "title": "Escolha da stack e capacidades técnicas abertas"
+    },
+    {
+      "affected_acceptance": "Até autenticação, registrar transcrições e propostas; não promover a decisão humana verificada.",
+      "automatic_resolution": false,
+      "claim_ids": [
+        "CLM-U03-0014",
+        "CLM-U03-0015",
+        "CLM-U03-0016",
+        "CLM-U03-0017"
+      ],
+      "decision_question": "As fontes primárias de B-01 e B-02 podem ser preservadas e autenticadas, confirmando também o limite entre D-5 normal e eventos pós-confirmação?",
+      "divergence_id": "DVG-U03-004",
+      "priority": "DECISÃO_HUMANA",
+      "relation_ids": [
+        "REL-U03-0006",
+        "REL-U03-0007"
+      ],
+      "status": "ENCAMINHADA_AUTENTICAÇÃO",
+      "title": "Autenticidade e escopo de B-01/B-02"
+    }
+  ],
+  "relations": [
+    {
+      "claim_ids": [
+        "CLM-U03-0001",
+        "CLM-U03-0002"
+      ],
+      "rationale": "Atribuição de autoridade humana e limite dos agentes compõem a mesma regra de governança.",
+      "relation_id": "REL-U03-0001",
+      "type": "COMPLEMENTARIDADE"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0004",
+        "CLM-U03-0005"
+      ],
+      "rationale": "O metadado RASCUNHO é incompatível com a pretensão de vigência soberana sem ato externo que resolva o status.",
+      "relation_id": "REL-U03-0002",
+      "type": "CONTRADIÇÃO"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0006",
+        "CLM-U03-0007"
+      ],
+      "rationale": "O mesmo File ID aparece como RASCUNHO no cabeçalho e ATIVO no catálogo incorporado.",
+      "relation_id": "REL-U03-0003",
+      "type": "CONTRADIÇÃO"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0009",
+        "CLM-U03-0010",
+        "CLM-U03-0011"
+      ],
+      "rationale": "O estado de produto não implementado conflita materialmente com relatos de publicação, teste e prontidão, até verificação de escopo e ambiente.",
+      "relation_id": "REL-U03-0004",
+      "type": "CONTRADIÇÃO"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0010",
+        "CLM-U03-0011",
+        "CLM-U03-0012",
+        "CLM-U03-0013"
+      ],
+      "rationale": "Relatos de execução não vieram acompanhados, no escopo selecionado, de prova técnica suficiente; isso não prova inexistência da execução.",
+      "relation_id": "REL-U03-0005",
+      "type": "AUSÊNCIA_DE_EVIDÊNCIA"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0014",
+        "CLM-U03-0017"
+      ],
+      "rationale": "Regra do checkpoint normal e exceção pós-confirmação são condições distintas do mesmo fluxo.",
+      "relation_id": "REL-U03-0006",
+      "type": "COMPLEMENTARIDADE"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0015",
+        "CLM-U03-0016"
+      ],
+      "rationale": "As duas aprovações são transcritas, mas a autenticidade das fontes primárias não foi verificada no corpus U02.",
+      "relation_id": "REL-U03-0007",
+      "type": "RELAÇÃO_NÃO_DETERMINADA"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0018",
+        "CLM-U03-0019",
+        "CLM-U03-0021"
+      ],
+      "rationale": "Há stacks concorrentes e nenhuma pode ser promovida como escolha final com a sustentação recuperada.",
+      "relation_id": "REL-U03-0008",
+      "type": "CONTRADIÇÃO"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0022",
+        "CLM-U03-0023",
+        "CLM-U03-0008"
+      ],
+      "rationale": "Base PROPOSED, separação epistemológica e PRD sem autorização convergem para impedir promoção automática.",
+      "relation_id": "REL-U03-0009",
+      "type": "COMPLEMENTARIDADE"
+    },
+    {
+      "claim_ids": [
+        "CLM-U03-0002",
+        "CLM-U03-0023"
+      ],
+      "rationale": "Ambas expressam, em formulações diferentes, que interpretação ou referência não equivale a decisão autorizada.",
+      "relation_id": "REL-U03-0010",
+      "type": "IGUALDADE"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

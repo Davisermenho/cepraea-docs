@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "a3_granted": false,
+    "approval_registry_errors": [],
+    "candidate_documents": 3,
+    "candidate_guard_errors": [],
+    "corpus_changed": [],
+    "corpus_files_checked": 115,
+    "corpus_missing": [],
+    "corpus_unexpected": [],
+    "deliverables": [
+      "ENT-06A-governanca-autoridade.candidato.md",
+      "ENT-06B-requisitos-produto-d5.candidato.md",
+      "ENT-06C-arquitetura-estado-tecnico.candidato.md",
+      "ENT-07-mapa-origem-destino.json",
+      "ENT-07-mapa-origem-destino.md",
+      "ENT-08-pendencias-revisao.json",
+      "ENT-08-pendencias-revisao.md",
+      "approval-registry.json"
+    ],
+    "duplicate_normative_texts": [],
+    "duplicate_statement_ids": [],
+    "hash_mismatches": [],
+    "missing_basis_references": [],
+    "pending_items": 5,
+    "publication_authorized": false,
+    "statements": 14,
+    "statements_without_basis": [],
+    "technical_evidence_sha256": "c4fabb2927fbfab71ceed3a4bcfe4a4514fca4de347fa86f60b708740bd3829f"
+  },
+  "errors": [],
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "unit": "U04"
+}

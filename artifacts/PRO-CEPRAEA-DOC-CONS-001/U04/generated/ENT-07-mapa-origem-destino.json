@@ -1,0 +1,153 @@
+{
+  "publication_authorized": false,
+  "schema_version": "1.0.0",
+  "source_inputs": {
+    "decision_record": {
+      "path": "artifacts/PRO-CEPRAEA-DOC-CONS-001/U04/input/DECISOES-RESPONSAVEL-2026-10-17.md",
+      "sha256": "6755b853b12649a4f57bef8248341e12e1eef130729c31731679d554dd679e45"
+    },
+    "decision_registry": {
+      "path": "artifacts/PRO-CEPRAEA-DOC-CONS-001/U04/input/decision-registry.json",
+      "sha256": "e8f7a22bad7630c126d7f35529143c3d2bac5d0bd54267a2418c5fbd8a97d1a3"
+    },
+    "technical_inspection": {
+      "path": "artifacts/PRO-CEPRAEA-DOC-CONS-001/U04/input/technical-inspection.json",
+      "sha256": "c4fabb2927fbfab71ceed3a4bcfe4a4514fca4de347fa86f60b708740bd3829f"
+    },
+    "u03_claims": {
+      "path": "artifacts/PRO-CEPRAEA-DOC-CONS-001/U03-v2/ENT-03-registro-evidencias-afirmacoes.jsonl",
+      "sha256": "fc29b447f31e314158188d56de3f2c995bab8b73e1d1db28123334af01d9d05c"
+    }
+  },
+  "statements": [
+    {
+      "basis_references": [
+        "DEC-U04-001",
+        "CLM-U03-0002",
+        "CLM-U03-0023"
+      ],
+      "destination": "governanca",
+      "statement_id": "STM-U04-001",
+      "text": "Nenhum rótulo ou nome de arquivo confere aprovação."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-001",
+        "CLM-U03-0004",
+        "CLM-U03-0006"
+      ],
+      "destination": "governanca",
+      "statement_id": "STM-U04-002",
+      "text": "A precedência da Constituição somente nasce após aprovação formal da versão exata."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-001"
+      ],
+      "destination": "governanca",
+      "statement_id": "STM-U04-003",
+      "text": "O registro único exige identificador, versão, SHA-256, responsável e data de vigência."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-002",
+        "CLM-U03-0014"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-004",
+      "text": "Em D-5, cancelamento automático aplica-se somente a sessão PUBLICADO nas condições do checkpoint."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-002"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-005",
+      "text": "Cancelamento é terminal e a identidade da sessão não pode ser reutilizada."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-002",
+        "CLM-U03-0017"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-006",
+      "text": "Depois de CONFIRMADO, perda de quórum não cancela automaticamente; decide o treinador."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-007",
+      "text": "O produto é mobile-first e distribuído como PWA."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-008",
+      "text": "Treinador e atleta exigem autenticação e permissões adequadas."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-009",
+      "text": "R$ 50 mensais é referência sujeita a verificação de viabilidade."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003",
+        "CLM-U03-0020"
+      ],
+      "destination": "produto",
+      "statement_id": "STM-U04-010",
+      "text": "Operação conectada é a referência; offline completo e push dependem de necessidade demonstrada."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003",
+        "CLM-U03-0018",
+        "CLM-U03-0019",
+        "CLM-U03-0021"
+      ],
+      "destination": "tecnico",
+      "statement_id": "STM-U04-011",
+      "text": "A arquitetura definitiva permanece sem aprovação e deve considerar simplicidade, manutenção individual e reuso."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-004",
+        "CLM-U03-0010",
+        "CLM-U03-0011",
+        "CLM-U03-0012",
+        "CLM-U03-0013"
+      ],
+      "destination": "tecnico",
+      "statement_id": "STM-U04-012",
+      "text": "Estados técnicos distintos exigem evidência compatível e não são promovidos por declaração."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-003",
+        "OBS-U04-REPO-001"
+      ],
+      "destination": "tecnico",
+      "statement_id": "STM-U04-013",
+      "text": "React/Vite/PWA está observado no commit inspecionado, sem aprovação arquitetural nem prova de execução."
+    },
+    {
+      "basis_references": [
+        "DEC-U04-004",
+        "OBS-U04-SUPABASE-001"
+      ],
+      "destination": "tecnico",
+      "statement_id": "STM-U04-014",
+      "text": "O projeto Supabase existe e está INACTIVE; esquema, migrações e prontidão não foram verificados."
+    }
+  ],
+  "unit": "U04"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U03",
+  "tests": [
+    {"id": "T01", "status": "NAO_APLICAVEL_U03", "reason": "Inventário foi concluído e preservado pela U01; a U03 consumiu o corpus inventariado."},
+    {"id": "T02", "status": "NAO_APLICAVEL_U03", "reason": "Integridade do inventário pertence à U01; hashes de fontes usadas foram novamente verificados por T10 e pela validação final."},
+    {"id": "T03", "status": "NAO_APLICAVEL_U03", "reason": "Detecção binária de duplicatas pertence à U01."},
+    {"id": "T04", "status": "PASS", "reason": "115 de 115 arquivos permaneceram inalterados tanto no ciclo U03 quanto contra o baseline aprovado da U01."},
+    {"id": "T05", "status": "PASS", "reason": "Caso controlado aceitou evidência exata; 27 registros reais foram revalidados contra fonte, hash, extração e localização."},
+    {"id": "T06", "status": "PASS", "reason": "Trecho adulterado foi rejeitado com EVIDENCE_MISMATCH."},
+    {"id": "T07", "status": "HERDADO_U02", "reason": "A U02 registrou 20 extrações parciais sem falso PASS integral; a U03 preservou a cobertura e não reclassificou extrações."},
+    {"id": "T08", "status": "PASS", "reason": "Rótulo [ATIVO] não gerou aprovação; nenhuma decisão humana não verificada foi aceita."},
+    {"id": "T09", "status": "PASS", "reason": "Conflitos permaneceram identificados e quatro grupos foram encaminhados sem resolução automática."},
+    {"id": "T10", "status": "PASS", "reason": "As 27 afirmações aceitas têm fonte, hash, extração, locator, localização e trecho verificados; zero referência ausente."},
+    {"id": "T11", "status": "PASS", "reason": "O mapa de consolidação declara publication_authorized=false e nenhum artefato da U04 foi criado."},
+    {"id": "T12", "status": "NAO_APLICAVEL_U03", "reason": "Nenhuma autorização de publicação foi fornecida e a U04 não foi executada."},
+    {"id": "T13", "status": "PASS", "reason": "Casos controlados e reexecução real produziram saídas logicamente equivalentes, sem IDs duplicados."},
+    {"id": "T14", "status": "PASS", "reason": "Caso controlado impediu PASS parcial e concluiu por reexecução integral."},
+    {"id": "T15", "status": "PASS", "reason": "Contrato, diagnósticos, preservação do original, correção dirigida e parada finita com máximo de uma tentativa foram verificados."},
+    {"id": "T16", "status": "PASS", "reason": "Correspondência exata, normalização apenas formal e rejeição de mudança semântica foram distinguidas."},
+    {"id": "T17", "status": "PASS_COM_LIMITACAO_EXPLICITA", "reason": "Coberturas documental, de recuperação e contextual foram separadas; dois trechos sem segment_id U02 receberam locators de linha verificados e a limitação foi preservada."},
+    {"id": "T18", "status": "PASS", "reason": "Conflitos dependentes foram agrupados e evidências individuais preservadas; nenhum grupo foi resolvido automaticamente."},
+    {"id": "T19", "status": "HERDADO_U02", "reason": "Extração por formato foi verificada na U02; a U03 não introduziu extratores."}
+  ],
+  "warning": "PASS de teste isolado não aprova a unidade; o veredito DONE-U03 é avaliado separadamente no relatório."
+}

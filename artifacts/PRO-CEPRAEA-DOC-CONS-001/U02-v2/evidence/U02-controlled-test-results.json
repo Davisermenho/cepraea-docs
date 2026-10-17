@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U02",
+  "plan": "tests/u02/test_cases.json",
+  "all_passed": true,
+  "results": [
+    {
+      "id": "T05",
+      "name": "Evidencia valida",
+      "status": "PASS",
+      "input": {
+        "path": "valid.md",
+        "text": "# Titulo\n\nTexto verificavel.\n"
+      },
+      "expected": {
+        "valid": true,
+        "diagnostics": []
+      },
+      "actual": {
+        "valid": true,
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "T06",
+      "name": "Evidencia invalida",
+      "status": "PASS",
+      "input": {
+        "path": "invalid.md",
+        "text": "# Titulo\n\nTexto original.\n",
+        "tamper": "Substituir o texto do segmento apos a extracao"
+      },
+      "expected": {
+        "valid": false,
+        "diagnostics": [
+          "SEGMENT_TEXT_SHA256_MISMATCH"
+        ]
+      },
+      "actual": {
+        "valid": false,
+        "diagnostics": [
+          "SEGMENT_TEXT_SHA256_MISMATCH"
+        ]
+      }
+    },
+    {
+      "id": "T07",
+      "name": "Extracao parcial",
+      "status": "PASS",
+      "input": {
+        "path": "malformed.json",
+        "text": "{\"ok\": true"
+      },
+      "expected": {
+        "status": "PARTIAL",
+        "raw_text_preserved": true,
+        "limitation_code": "JSON_SYNTAX_ERROR"
+      },
+      "actual": {
+        "status": "PARTIAL",
+        "raw_text_preserved": true,
+        "limitation_code": "JSON_SYNTAX_ERROR"
+      }
+    },
+    {
+      "id": "T08",
+      "name": "Autoridade",
+      "status": "PASS",
+      "input": {
+        "path": "[ATIVO] FINAL APROVADO.md",
+        "text": "# Documento\n"
+      },
+      "expected": {
+        "authority_status": "NOT_ASSESSED_U02"
+      },
+      "actual": {
+        "authority_status": "NOT_ASSESSED_U02"
+      }
+    },
+    {
+      "id": "T10",
+      "name": "Rastreabilidade",
+      "status": "PASS",
+      "input": {
+        "path": "trace.md",
+        "text": "# Secao\n\nConteudo rastreavel.\n"
+      },
+      "expected": {
+        "all_segments_traceable": true,
+        "required_fields_missing": []
+      },
+      "actual": {
+        "all_segments_traceable": true,
+        "required_fields_missing": []
+      }
+    },
+    {
+      "id": "T13",
+      "name": "Reexecucao",
+      "status": "PASS",
+      "input": {
+        "files": {
+          "a.md": "# A\n\nAlpha.\n",
+          "b.json": "{\"b\": 2}\n"
+        }
+      },
+      "expected": {
+        "logical_outputs_equivalent": true,
+        "duplicate_segment_ids": []
+      },
+      "actual": {
+        "logical_outputs_equivalent": true,
+        "duplicate_segment_ids": []
+      }
+    },
+    {
+      "id": "T14",
+      "name": "Interrupcao",
+      "status": "PASS",
+      "input": {
+        "files": {
+          "a.txt": "Alpha.\n"
+        },
+        "partial_state": "Indice SQLite ausente e JSONL de segmentos incompleto"
+      },
+      "expected": {
+        "rerun_complete": true,
+        "partial_record_retained": false
+      },
+      "actual": {
+        "rerun_complete": true,
+        "partial_record_retained": false
+      }
+    },
+    {
+      "id": "T17",
+      "name": "Segmentacao, recuperacao e contexto",
+      "status": "PASS",
+      "input": {
+        "files": {
+          "main.md": "# Politica\n\nO sistema funciona normalmente. Consulte [excecoes](exceptions.md).\n\n## Condicao\n\nAplica-se quando o modo esta ativo.\n",
+          "exceptions.md": "# Excecoes\n\nExceto quando houver manutencao.\n"
+        },
+        "query": "sistema funciona normalmente"
+      },
+      "expected": {
+        "source_locations_preserved": true,
+        "explicit_reference_target": "exceptions.md",
+        "related_exception_retrieved": true,
+        "absence_is_not_proof_of_absence": true,
+        "inventoried_sources": 2,
+        "processed_sources": 2
+      },
+      "actual": {
+        "source_locations_preserved": true,
+        "explicit_reference_target": "exceptions.md",
+        "related_exception_retrieved": true,
+        "absence_is_not_proof_of_absence": true,
+        "inventoried_sources": 2,
+        "processed_sources": 2
+      }
+    },
+    {
+      "id": "T19",
+      "name": "Extracao por formato",
+      "status": "PASS",
+      "input": {
+        "formats": [
+          "Markdown",
+          "Plain text",
+          "Plain text (detected)",
+          "SQL",
+          "JSON",
+          "YAML",
+          "PDF",
+          "PowerPoint Open XML"
+        ],
+        "known_markers": {
+          "Markdown": "MARKDOWN_CONTROL",
+          "Plain text": "TEXT_CONTROL",
+          "Plain text (detected)": "NOEXT_CONTROL",
+          "SQL": "SQL_CONTROL",
+          "JSON": "JSON_CONTROL",
+          "YAML": "YAML_CONTROL",
+          "PDF": "PDF_CONTROL",
+          "PowerPoint Open XML": "PPTX_CONTROL"
+        }
+      },
+      "expected": {
+        "all_formats_exercised": true,
+        "markers_recovered": true,
+        "locations_present": true,
+        "losses_or_limitations_explicit": true
+      },
+      "actual": {
+        "all_formats_exercised": true,
+        "markers_recovered": true,
+        "locations_present": true,
+        "losses_or_limitations_explicit": true
+      }
+    },
+    {
+      "id": "T20",
+      "name": "Particao Markdown com preambulo",
+      "status": "PASS",
+      "input": {
+        "path": "preambulo.md",
+        "text": "METADADO: RASCUNHO\n\n# Título\n\nConteúdo.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 2,
+        "heading_paths": [
+          [],
+          [
+            "Título"
+          ]
+        ]
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 2,
+        "heading_paths": [
+          [],
+          [
+            "Título"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "T21",
+      "name": "Particao Markdown sem titulo",
+      "status": "PASS",
+      "input": {
+        "path": "sem-titulo.md",
+        "text": "Texto sem título.\n\nSegundo bloco.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 1,
+        "heading_paths": [
+          []
+        ]
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 1,
+        "heading_paths": [
+          []
+        ]
+      }
+    },
+    {
+      "id": "T22",
+      "name": "Particao Markdown iniciado por titulo",
+      "status": "PASS",
+      "input": {
+        "path": "titulo-inicial.md",
+        "text": "# Título\n\nConteúdo.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 1,
+        "heading_paths": [
+          [
+            "Título"
+          ]
+        ]
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 1,
+        "heading_paths": [
+          [
+            "Título"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "T23",
+      "name": "Particao Markdown com multiplos titulos",
+      "status": "PASS",
+      "input": {
+        "path": "multiplos.md",
+        "text": "# A\nTexto A.\n## B\nTexto B.\n# C\nTexto C.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 3,
+        "heading_paths": [
+          [
+            "A"
+          ],
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 3,
+        "heading_paths": [
+          [
+            "A"
+          ],
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "T24",
+      "name": "Titulo apos bloco longo",
+      "status": "PASS",
+      "input": {
+        "path": "longo.md",
+        "long_prefix_chars": 12037,
+        "suffix": "\n# Título\nFim.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 3,
+        "maximum_segment_chars": 12000
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 3,
+        "maximum_segment_chars": 12000
+      }
+    },
+    {
+      "id": "T25",
+      "name": "Titulo aparente em bloco de codigo",
+      "status": "PASS",
+      "input": {
+        "path": "codigo.md",
+        "text": "Prefácio.\n```markdown\n# Não é título\n```\n# Título real\nConteúdo.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 2,
+        "heading_paths": [
+          [],
+          [
+            "Título real"
+          ]
+        ]
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 2,
+        "heading_paths": [
+          [],
+          [
+            "Título real"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "T26",
+      "name": "Entrada vazia",
+      "status": "PASS",
+      "input": {
+        "path": "vazio.md",
+        "text": ""
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_count": 0,
+        "heading_paths": []
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_count": 0,
+        "heading_paths": []
+      }
+    },
+    {
+      "id": "T27",
+      "name": "Limites de tamanho sem descarte",
+      "status": "PASS",
+      "input": {
+        "path_prefix": "limite",
+        "lengths": [
+          11999,
+          12000,
+          12001,
+          24000
+        ]
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "segment_counts": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "maximum_segment_chars": 12000
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "segment_counts": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "maximum_segment_chars": 12000
+      }
+    },
+    {
+      "id": "T28",
+      "name": "Reexecucao identica da segmentacao",
+      "status": "PASS",
+      "input": {
+        "path": "reexecucao.md",
+        "text": "Preâmbulo.\n\n# Título\nConteúdo.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "identical_records": true,
+        "identical_ids": true
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "identical_records": true,
+        "identical_ids": true
+      }
+    },
+    {
+      "id": "T29",
+      "name": "Identificador independente da ordem de outras fontes",
+      "status": "PASS",
+      "input": {
+        "stable_path": "b.md",
+        "stable_text": "# B\nConteúdo B.\n",
+        "inserted_path": "a.md",
+        "inserted_text": "# A\nConteúdo A.\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "stable_source_ids_unchanged": true,
+        "deterministic_id_format": true
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "stable_source_ids_unchanged": true,
+        "deterministic_id_format": true
+      }
+    },
+    {
+      "id": "T30",
+      "name": "Offsets em caracteres Unicode",
+      "status": "PASS",
+      "input": {
+        "path": "unicode.md",
+        "text": "á🙂\n# Título\nç\n"
+      },
+      "expected": {
+        "partition_status": "PASS",
+        "offset_unit": "UNICODE_CODE_POINT",
+        "half_open_intervals": true,
+        "character_and_byte_lengths_differ": true
+      },
+      "actual": {
+        "partition_status": "PASS",
+        "offset_unit": "UNICODE_CODE_POINT",
+        "half_open_intervals": true,
+        "character_and_byte_lengths_differ": true
+      }
+    }
+  ]
+}

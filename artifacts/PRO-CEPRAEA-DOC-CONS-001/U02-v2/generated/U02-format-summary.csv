@@ -1,0 +1,9 @@
+format,source_count,extractor_id
+JSON,8,python-json-raw-v1
+Markdown,79,python-text-markdown-v1
+PDF,6,poppler-pdftotext-layout-v1
+Plain text,2,python-text-v1
+Plain text (detected),5,python-text-v1
+PowerPoint Open XML,1,python-ooxml-pptx-v1
+SQL,6,python-text-sql-v1
+YAML,8,python-yaml-text-v1

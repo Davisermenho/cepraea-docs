@@ -1,0 +1,99 @@
+{
+  "passed": 6,
+  "results": [
+    {
+      "actual": {
+        "all_waiting_approval": true,
+        "precedence_inactive": true
+      },
+      "expected": {
+        "all_waiting_approval": true,
+        "precedence_inactive": true
+      },
+      "id": "T08",
+      "input": "Arquivos com rótulo [ATIVO], sem A3",
+      "name": "Autoridade",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "architecture_pending": true,
+        "target_verification_pending": true
+      },
+      "expected": {
+        "architecture_pending": true,
+        "target_verification_pending": true
+      },
+      "id": "T09",
+      "input": "Decisão A2 que mantém arquitetura e comprovação do alvo pendentes",
+      "name": "Contradição e decisão parcial",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "missing_basis": [],
+        "statements": 14,
+        "without_basis": []
+      },
+      "expected": {
+        "missing_basis": [],
+        "statements": 14,
+        "without_basis": []
+      },
+      "id": "T10",
+      "input": "Todas as afirmações normativas dos candidatos",
+      "name": "Rastreabilidade",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "all_candidate_only": true,
+        "publication_authorized": false
+      },
+      "expected": {
+        "all_candidate_only": true,
+        "publication_authorized": false
+      },
+      "id": "T11",
+      "input": "Candidatos U04 sem aprovação A3",
+      "name": "Publicação não autorizada",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "duplicate_statement_ids": [],
+        "existing_output_accepted_only_if_equivalent": true,
+        "outputs_equivalent": true
+      },
+      "expected": {
+        "duplicate_statement_ids": [],
+        "existing_output_accepted_only_if_equivalent": true,
+        "outputs_equivalent": true
+      },
+      "id": "T13",
+      "input": "Mesmas entradas executadas duas vezes",
+      "name": "Reexecução",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "clean_rerun_passes": true,
+        "complete_manifest_absent": true,
+        "interrupted_not_published": true
+      },
+      "expected": {
+        "clean_rerun_passes": true,
+        "complete_manifest_absent": true,
+        "interrupted_not_published": true
+      },
+      "id": "T14",
+      "input": "Interrupção simulada antes da publicação atômica",
+      "name": "Interrupção",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "total": 6,
+  "unit": "U04"
+}

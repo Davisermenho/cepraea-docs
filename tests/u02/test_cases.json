@@ -81,6 +81,72 @@
         }
       },
       "expected": {"all_formats_exercised": true, "markers_recovered": true, "locations_present": true, "losses_or_limitations_explicit": true}
+    },
+    {
+      "id": "T20",
+      "name": "Particao Markdown com preambulo",
+      "input": {"path": "preambulo.md", "text": "METADADO: RASCUNHO\n\n# Título\n\nConteúdo.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 2, "heading_paths": [[], ["Título"]]}
+    },
+    {
+      "id": "T21",
+      "name": "Particao Markdown sem titulo",
+      "input": {"path": "sem-titulo.md", "text": "Texto sem título.\n\nSegundo bloco.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 1, "heading_paths": [[]]}
+    },
+    {
+      "id": "T22",
+      "name": "Particao Markdown iniciado por titulo",
+      "input": {"path": "titulo-inicial.md", "text": "# Título\n\nConteúdo.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 1, "heading_paths": [["Título"]]}
+    },
+    {
+      "id": "T23",
+      "name": "Particao Markdown com multiplos titulos",
+      "input": {"path": "multiplos.md", "text": "# A\nTexto A.\n## B\nTexto B.\n# C\nTexto C.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 3, "heading_paths": [["A"], ["A", "B"], ["C"]]}
+    },
+    {
+      "id": "T24",
+      "name": "Titulo apos bloco longo",
+      "input": {"path": "longo.md", "long_prefix_chars": 12037, "suffix": "\n# Título\nFim.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 3, "maximum_segment_chars": 12000}
+    },
+    {
+      "id": "T25",
+      "name": "Titulo aparente em bloco de codigo",
+      "input": {"path": "codigo.md", "text": "Prefácio.\n```markdown\n# Não é título\n```\n# Título real\nConteúdo.\n"},
+      "expected": {"partition_status": "PASS", "segment_count": 2, "heading_paths": [[], ["Título real"]]}
+    },
+    {
+      "id": "T26",
+      "name": "Entrada vazia",
+      "input": {"path": "vazio.md", "text": ""},
+      "expected": {"partition_status": "PASS", "segment_count": 0, "heading_paths": []}
+    },
+    {
+      "id": "T27",
+      "name": "Limites de tamanho sem descarte",
+      "input": {"path_prefix": "limite", "lengths": [11999, 12000, 12001, 24000]},
+      "expected": {"partition_status": "PASS", "segment_counts": [1, 1, 2, 2], "maximum_segment_chars": 12000}
+    },
+    {
+      "id": "T28",
+      "name": "Reexecucao identica da segmentacao",
+      "input": {"path": "reexecucao.md", "text": "Preâmbulo.\n\n# Título\nConteúdo.\n"},
+      "expected": {"partition_status": "PASS", "identical_records": true, "identical_ids": true}
+    },
+    {
+      "id": "T29",
+      "name": "Identificador independente da ordem de outras fontes",
+      "input": {"stable_path": "b.md", "stable_text": "# B\nConteúdo B.\n", "inserted_path": "a.md", "inserted_text": "# A\nConteúdo A.\n"},
+      "expected": {"partition_status": "PASS", "stable_source_ids_unchanged": true, "deterministic_id_format": true}
+    },
+    {
+      "id": "T30",
+      "name": "Offsets em caracteres Unicode",
+      "input": {"path": "unicode.md", "text": "á🙂\n# Título\nç\n"},
+      "expected": {"partition_status": "PASS", "offset_unit": "UNICODE_CODE_POINT", "half_open_intervals": true, "character_and_byte_lengths_differ": true}
     }
   ]
 }

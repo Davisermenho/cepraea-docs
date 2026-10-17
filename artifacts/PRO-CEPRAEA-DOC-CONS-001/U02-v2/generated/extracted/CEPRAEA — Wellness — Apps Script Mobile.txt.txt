@@ -1,0 +1,192 @@
+/**
+ * CEPRAEA — Wellness Pré e Pós-Treino
+ * Cole este código em Extensões > Apps Script e execute setupCEPRAEAWellness().
+ */
+
+const CEPRAEA = {
+  sheetId: '1NtCXsBFll6PnPcUdWc4OuKRfByqsfzoq5JetzoOfJAo',
+  preTitle: 'CEPRAEA — Wellness Pré-Treino',
+  postTitle: 'CEPRAEA — Wellness Pós-Treino',
+  goal1: 'Qual é sua meta técnica individual para este treino?',
+  goal2: 'Qual é sua meta tática para este treino?',
+  goal3: 'Qual é sua meta física, mental ou comportamental para este treino?',
+  athlete: 'Atleta',
+  session: 'Sessão',
+  token: 'Código da resposta pré (não alterar)',
+  postGoal1: 'Meta técnica registrada no pré (não alterar)',
+  postGoal2: 'Meta tática registrada no pré (não alterar)',
+  postGoal3: 'Meta física, mental ou comportamental registrada no pré (não alterar)',
+  goalOptions: ['NÃO ALCANÇADA', 'PARCIALMENTE ALCANÇADA', 'ALCANÇADA', 'SUPERADA', 'NÃO SE APLICA — TREINO ALTERADO']
+};
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu('CEPRAEA Wellness')
+    .addItem('Configurar formulários', 'setupCEPRAEAWellness')
+    .addItem('Atualizar listas de atletas e sessões', 'atualizarListasDosFormularios')
+    .addToUi();
+}
+
+function setupCEPRAEAWellness() {
+  const ss = SpreadsheetApp.openById(CEPRAEA.sheetId);
+  const props = PropertiesService.getScriptProperties();
+  const athletes = getActiveValues_(ss, 'ATLETAS', 2, 4, 5);
+  const sessions = getActiveValues_(ss, 'SESSOES', 2, 7, 8);
+  if (!athletes.length || !sessions.length) throw new Error('Revise as abas ATLETAS e SESSOES: nenhuma opção ativa foi encontrada.');
+
+  let pre = props.getProperty('PRE_FORM_ID') ? FormApp.openById(props.getProperty('PRE_FORM_ID')) : createPreForm_(ss, athletes, sessions);
+  let post = props.getProperty('POST_FORM_ID') ? FormApp.openById(props.getProperty('POST_FORM_ID')) : createPostForm_(ss, athletes, sessions);
+
+  pre.setPublished(true).setAcceptingResponses(true);
+  post.setPublished(true).setAcceptingResponses(true);
+
+  props.setProperties({
+    PRE_FORM_ID: pre.getId(),
+    POST_FORM_ID: post.getId(),
+    RESPONSE_SHEET_ID: ss.getId()
+  });
+  writeConfig_(ss, 'PRE_FORM_ID', pre.getId());
+  writeConfig_(ss, 'PRE_EDIT_URL', pre.getEditUrl());
+  writeConfig_(ss, 'PRE_PUBLIC_URL', pre.getPublishedUrl());
+  writeConfig_(ss, 'POST_FORM_ID', post.getId());
+  writeConfig_(ss, 'POST_EDIT_URL', post.getEditUrl());
+  writeConfig_(ss, 'POST_PUBLIC_URL', post.getPublishedUrl());
+  writeConfig_(ss, 'RESPONSE_SHEET_ID', ss.getId());
+
+  ScriptApp.getProjectTriggers()
+    .filter(t => t.getHandlerFunction() === 'gerarLinkPos')
+    .forEach(t => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('gerarLinkPos').forForm(pre).onFormSubmit().create();
+
+  ensureLinksSheet_(ss);
+  atualizarListasDosFormularios();
+  ss.toast('Configuração concluída. Os links estão na aba CONFIG.');
+}
+
+function createPreForm_(ss, athletes, sessions) {
+  const form = FormApp.create(CEPRAEA.preTitle)
+    .setDescription('Monitoramento de bem-estar antes da sessão. Responda individualmente e com sinceridade. Escalas de 1 a 7: siga os rótulos de cada pergunta.')
+    .setConfirmationMessage('Resposta registrada. A comissão terá acesso ao link personalizado do questionário pós-treino na planilha restrita.')
+    .setCollectEmail(false)
+    .setProgressBar(true)
+    .setShuffleQuestions(false)
+    .setAcceptingResponses(true);
+  form.addListItem().setTitle(CEPRAEA.athlete).setChoiceValues(athletes).setRequired(true);
+  form.addListItem().setTitle(CEPRAEA.session).setChoiceValues(sessions).setRequired(true);
+  form.addPageBreakItem().setTitle('Estado de bem-estar antes da sessão');
+  addScale_(form, 'Qualidade do sono', 'Excelente', 'Muito ruim');
+  addScale_(form, 'Fadiga geral', 'Nenhuma', 'Extrema');
+  addScale_(form, 'Dor muscular', 'Nenhuma', 'Extrema');
+  addScale_(form, 'Estresse', 'Nenhum', 'Extremo');
+  addScale_(form, 'Humor e bem-estar', 'Muito bom', 'Muito ruim');
+  addScale_(form, 'Disposição para treinar', 'Muito disposta', 'Nada disposta');
+  form.addMultipleChoiceItem().setTitle('Há dor nova, lesão ou piora de uma condição existente?').setChoiceValues(['SIM', 'NÃO']).setRequired(true);
+  form.addParagraphTextItem().setTitle('Se respondeu SIM, informe a região e descreva brevemente.').setRequired(false);
+  form.addMultipleChoiceItem().setTitle('Apresenta sintomas de doença ou mal-estar?').setChoiceValues(['SIM', 'NÃO']).setRequired(true);
+  form.addMultipleChoiceItem().setTitle('Deseja contato reservado com a comissão ou equipe de saúde?').setChoiceValues(['SIM', 'NÃO']).setRequired(true);
+  form.addPageBreakItem().setTitle('Metas da sessão');
+  form.addParagraphTextItem().setTitle(CEPRAEA.goal1).setRequired(true);
+  form.addParagraphTextItem().setTitle(CEPRAEA.goal2).setRequired(true);
+  form.addParagraphTextItem().setTitle(CEPRAEA.goal3).setRequired(true);
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+  return form;
+}
+
+function createPostForm_(ss, athletes, sessions) {
+  const form = FormApp.create(CEPRAEA.postTitle)
+    .setDescription('Avaliação individual após a sessão. Quando possível, use o link personalizado gerado a partir do questionário pré-treino.')
+    .setConfirmationMessage('Avaliação pós-treino registrada. Obrigada.')
+    .setCollectEmail(false)
+    .setProgressBar(true)
+    .setShuffleQuestions(false)
+    .setAcceptingResponses(true);
+  form.addTextItem().setTitle(CEPRAEA.token).setRequired(true);
+  form.addListItem().setTitle(CEPRAEA.athlete).setChoiceValues(athletes).setRequired(true);
+  form.addListItem().setTitle(CEPRAEA.session).setChoiceValues(sessions).setRequired(true);
+  form.addPageBreakItem().setTitle('Avaliação das metas');
+  form.addParagraphTextItem().setTitle(CEPRAEA.postGoal1).setRequired(true);
+  form.addListItem().setTitle('Resultado da meta técnica').setChoiceValues(CEPRAEA.goalOptions).setRequired(true);
+  form.addParagraphTextItem().setTitle(CEPRAEA.postGoal2).setRequired(true);
+  form.addListItem().setTitle('Resultado da meta tática').setChoiceValues(CEPRAEA.goalOptions).setRequired(true);
+  form.addParagraphTextItem().setTitle(CEPRAEA.postGoal3).setRequired(true);
+  form.addListItem().setTitle('Resultado da meta física, mental ou comportamental').setChoiceValues(CEPRAEA.goalOptions).setRequired(true);
+  form.addPageBreakItem().setTitle('Carga e resposta após a sessão');
+  form.addScaleItem().setTitle('Percepção subjetiva de esforço da sessão (PSE)').setBounds(0, 10).setLabels('Repouso', 'Máximo').setRequired(true);
+  addScale_(form, 'Fadiga após a sessão', 'Nenhuma', 'Extrema');
+  addScale_(form, 'Dor ou desconforto após a sessão', 'Nenhum', 'Extremo');
+  form.addMultipleChoiceItem().setTitle('Surgiu dor nova durante ou após a sessão?').setChoiceValues(['SIM', 'NÃO']).setRequired(true);
+  form.addMultipleChoiceItem().setTitle('Participação na sessão').setChoiceValues(['COMPLETA', 'PARCIAL', 'NÃO PARTICIPOU']).setRequired(true);
+  form.addParagraphTextItem().setTitle('Observação adicional').setRequired(false);
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+  return form;
+}
+
+function addScale_(form, title, low, high) {
+  form.addScaleItem().setTitle(title).setBounds(1, 7).setLabels(low, high).setRequired(true);
+}
+
+function gerarLinkPos(e) {
+  const answers = {};
+  e.response.getItemResponses().forEach(r => answers[r.getItem().getTitle()] = String(r.getResponse() || ''));
+  const props = PropertiesService.getScriptProperties();
+  const post = FormApp.openById(props.getProperty('POST_FORM_ID'));
+  const token = Utilities.getUuid();
+  let response = post.createResponse();
+  response = addPrefill_(response, post, CEPRAEA.token, token, 'TEXT');
+  response = addPrefill_(response, post, CEPRAEA.athlete, answers[CEPRAEA.athlete], 'LIST');
+  response = addPrefill_(response, post, CEPRAEA.session, answers[CEPRAEA.session], 'LIST');
+  response = addPrefill_(response, post, CEPRAEA.postGoal1, answers[CEPRAEA.goal1], 'PARAGRAPH_TEXT');
+  response = addPrefill_(response, post, CEPRAEA.postGoal2, answers[CEPRAEA.goal2], 'PARAGRAPH_TEXT');
+  response = addPrefill_(response, post, CEPRAEA.postGoal3, answers[CEPRAEA.goal3], 'PARAGRAPH_TEXT');
+  const link = response.toPrefilledUrl();
+  const ss = SpreadsheetApp.openById(props.getProperty('RESPONSE_SHEET_ID'));
+  const sheet = ensureLinksSheet_(ss);
+  sheet.appendRow([token, e.response.getTimestamp(), answers[CEPRAEA.athlete], answers[CEPRAEA.session], answers[CEPRAEA.goal1], answers[CEPRAEA.goal2], answers[CEPRAEA.goal3], link, 'PENDENTE']);
+}
+
+function addPrefill_(response, form, title, value, type) {
+  const item = form.getItems().find(i => i.getTitle() === title);
+  if (!item) throw new Error('Item não encontrado no formulário pós: ' + title);
+  if (type === 'LIST') return response.withItemResponse(item.asListItem().createResponse(value));
+  if (type === 'PARAGRAPH_TEXT') return response.withItemResponse(item.asParagraphTextItem().createResponse(value));
+  return response.withItemResponse(item.asTextItem().createResponse(value));
+}
+
+function atualizarListasDosFormularios() {
+  const ss = SpreadsheetApp.openById(CEPRAEA.sheetId);
+  const props = PropertiesService.getScriptProperties();
+  if (!props.getProperty('PRE_FORM_ID') || !props.getProperty('POST_FORM_ID')) return;
+  const athletes = getActiveValues_(ss, 'ATLETAS', 2, 4, 5);
+  const sessions = getActiveValues_(ss, 'SESSOES', 2, 7, 8);
+  [FormApp.openById(props.getProperty('PRE_FORM_ID')), FormApp.openById(props.getProperty('POST_FORM_ID'))].forEach(form => {
+    form.getItems().filter(i => i.getType() === FormApp.ItemType.LIST).forEach(item => {
+      if (item.getTitle() === CEPRAEA.athlete) item.asListItem().setChoiceValues(athletes);
+      if (item.getTitle() === CEPRAEA.session) item.asListItem().setChoiceValues(sessions);
+    });
+  });
+}
+
+function getActiveValues_(ss, sheetName, startRow, valueCol, activeCol) {
+  const sheet = ss.getSheetByName(sheetName);
+  if (!sheet || sheet.getLastRow() < startRow) return [];
+  const data = sheet.getRange(startRow, valueCol, sheet.getLastRow() - startRow + 1, activeCol - valueCol + 1).getDisplayValues();
+  return data.filter(r => String(r[activeCol - valueCol]).toUpperCase() === 'SIM' && r[0]).map(r => r[0]);
+}
+
+function ensureLinksSheet_(ss) {
+  let sheet = ss.getSheetByName('LINKS_POS');
+  if (!sheet) sheet = ss.insertSheet('LINKS_POS');
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['TOKEN', 'DATA_HORA_PRE', 'ATLETA', 'SESSÃO', 'META_TÉCNICA', 'META_TÁTICA', 'META_FÍSICA_MENTAL_COMPORTAMENTAL', 'LINK_PÓS_PERSONALIZADO', 'STATUS_ENVIO']);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function writeConfig_(ss, key, value) {
+  const sheet = ss.getSheetByName('CONFIG');
+  const keys = sheet.getRange(1, 1, Math.max(sheet.getLastRow(), 1), 1).getDisplayValues().flat();
+  const idx = keys.indexOf(key);
+  if (idx >= 0) sheet.getRange(idx + 1, 2).setValue(value);
+  else sheet.appendRow([key, value, 'Preenchido automaticamente pelo Apps Script']);
+}

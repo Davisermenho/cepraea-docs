@@ -1,0 +1,673 @@
+{
+  "references": {
+    "new_count": 773,
+    "old_count": 774,
+    "semantic_key_multiplicity_decreases": [
+      {
+        "delta": -1,
+        "literal_target": "vscode-webview://04u882julpt1u3l45d7su85tqctfpja86kpbf8f8sbb6fs95183p/index.html?id=731e0e33-1dd5-4aee-991e-245ea33c5ef5\\&parentId=1\\&origin=f3a7d34a-fbb9-4024-bc89-dbf864b19a3c\\&swVersion=6\\&extensionId=Anthropic.claude-code\\&platform=electron\\&vscode-resource-base-authority=vscode-resource.vscode-cdn.net\\&parentOrigin=vscode-file%3A%2F%2Fvscode-app\\&remoteAuthority=wsl%2BUbuntu\\&session=62089341-c9bb-401d-a6e1-531b48af9ba7#",
+        "new_count": 1,
+        "old_count": 2,
+        "reference_type": "EXPLICIT_MARKDOWN_LINK",
+        "resolution_status": "UNRESOLVED",
+        "source_path": "Alinhamento-de-IA.md",
+        "target_path": "vscode-webview:/04u882julpt1u3l45d7su85tqctfpja86kpbf8f8sbb6fs95183p/index.html?id=731e0e33-1dd5-4aee-991e-245ea33c5ef5\\&parentId=1\\&origin=f3a7d34a-fbb9-4024-bc89-dbf864b19a3c\\&swVersion=6\\&extensionId=Anthropic.claude-code\\&platform=electron\\&vscode-resource-base-authority=vscode-resource.vscode-cdn.net\\&parentOrigin=vscode-file:/vscode-app\\&remoteAuthority=wsl+Ubuntu\\&session=62089341-c9bb-401d-a6e1-531b48af9ba7"
+      }
+    ],
+    "semantic_key_multiplicity_increases": []
+  },
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "u02": {
+    "extracted_content_hash_changes": [],
+    "logically_unchanged_segments_with_new_ids": 7314,
+    "new_extraction_version": "1.1.0",
+    "new_only_logical_segments": 74,
+    "new_partition_coverage": {
+      "details": [],
+      "failed_units": 0,
+      "gap_characters": 0,
+      "overlap_characters": 0,
+      "units": 175
+    },
+    "new_segment_count": 7388,
+    "old_extraction_version": "1.0.0",
+    "old_only_logical_segments": 95,
+    "old_partition_coverage": {
+      "details": [
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 125,
+          "overlap_characters": 0,
+          "source_path": "0000-adopt-madr-and-architecture-fitness-functions.md",
+          "text_length_characters": 4494,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1,
+          "overlap_characters": 0,
+          "source_path": "05-schema-postgresql.sql",
+          "text_length_characters": 14862,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1,
+          "overlap_characters": 0,
+          "source_path": "09-suite-testes-pgtap.sql",
+          "text_length_characters": 3234,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 91875,
+          "overlap_characters": 0,
+          "source_path": "10 — CATÁLOGO CANÔNICO DE ARTEFATOS, PAPÉIS E ENFORCEMENT — AESDS — CEPRAEA BEACH PRO.md",
+          "text_length_characters": 98167,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 449,
+          "overlap_characters": 0,
+          "source_path": "11 — ARQUITETURA DE AUDITORIA E ASSURANCE AGÊNTICO — IMPLANTAÇÃO E EXECUÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+          "text_length_characters": 30482,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 68,
+          "overlap_characters": 0,
+          "source_path": "Alinhamento-de-IA.md",
+          "text_length_characters": 793992,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 17,
+          "overlap_characters": 0,
+          "source_path": "BASE CEPRAEA BEACH PRO — v0.2 — Fundação e Acesso Multiagente — PROPOSTA.md",
+          "text_length_characters": 136955,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 214,
+          "overlap_characters": 0,
+          "source_path": "BancoCEPRAEA.md",
+          "text_length_characters": 240504,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 25,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA BEACH PRO.md",
+          "text_length_characters": 456320,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 117,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA — Roadmap de Implementação dos Dashboards.md",
+          "text_length_characters": 248282,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 205,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA-DB.md",
+          "text_length_characters": 324582,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 308,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA-pdf.md",
+          "text_length_characters": 12686,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 779,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+          "text_length_characters": 230829,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 905,
+          "overlap_characters": 0,
+          "source_path": "CEPRAEA_BEACH_PRO_PRD_Candidato_Arquivo_Mestre_v0.1.md",
+          "text_length_characters": 77251,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 56,
+          "overlap_characters": 0,
+          "source_path": "DOC-002 — Guia do Modelo ANMS (Specification-Driven Development).md",
+          "text_length_characters": 3558,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 106,
+          "overlap_characters": 0,
+          "source_path": "DOC-003 — Relatório de Pesquisa_ Padrões Sintáticos do EARS.md",
+          "text_length_characters": 2928,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 62,
+          "overlap_characters": 0,
+          "source_path": "DOC-004 — Sessões Claude Code e Codex.md",
+          "text_length_characters": 4555,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1188,
+          "overlap_characters": 0,
+          "source_path": "DOC-005 — Guia de Fontes e Introdução ao EARS.md",
+          "text_length_characters": 7273,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 25,
+          "overlap_characters": 0,
+          "source_path": "DOC-006 — Regras Operacionais Derivadas para Agentes.md",
+          "text_length_characters": 4484,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 557,
+          "overlap_characters": 0,
+          "source_path": "Dicionário de Dados Canônico CEPRAEA.md",
+          "text_length_characters": 165472,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1125,
+          "overlap_characters": 0,
+          "source_path": "FLUXO COMPLETO DE DESENVOLVIMENTO — CEPRAEA BEACH PRO.md",
+          "text_length_characters": 73329,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1,
+          "overlap_characters": 0,
+          "source_path": "GOV-901 — Diretrizes operacionais do Gemini Notebook — CANDIDATA v0.2",
+          "text_length_characters": 13462,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 73,
+          "overlap_characters": 0,
+          "source_path": "Manual Operacional — CEPRAEA Beach Pro.md",
+          "text_length_characters": 56239,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 4,
+          "overlap_characters": 0,
+          "source_path": "PRODUCT-DOMAIN-SPEC",
+          "text_length_characters": 52625,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 1036,
+          "overlap_characters": 0,
+          "source_path": "Preparação competitiva CEPRAEA 2026 — Treinos e cenários até a Fase Final.md",
+          "text_length_characters": 7851,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 43,
+          "overlap_characters": 0,
+          "source_path": "Preparação competitiva CEPRAEA 2026 — calendário e cenários — versão acessível.md",
+          "text_length_characters": 7622,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 43,
+          "overlap_characters": 0,
+          "source_path": "Preparação competitiva CEPRAEA 2026 — versão corrigida.md",
+          "text_length_characters": 7083,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 6,
+          "overlap_characters": 0,
+          "source_path": "Proposta de Requirements",
+          "text_length_characters": 72606,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 616,
+          "overlap_characters": 0,
+          "source_path": "REGISTRO MESTRE DE ARTEFATOS E FUNCIONAMENTO — SISTEMA CEPRAEA.md",
+          "text_length_characters": 115502,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 53,
+          "overlap_characters": 0,
+          "source_path": "Roteiro completo — Relatório curto e visual às atletas — CEPRAEA 2026.md",
+          "text_length_characters": 287485,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 230,
+          "overlap_characters": 0,
+          "source_path": "Roteiro relatório fase CEPRAEA.md",
+          "text_length_characters": 12175,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 420,
+          "overlap_characters": 0,
+          "source_path": "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+          "text_length_characters": 6269,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 439,
+          "overlap_characters": 0,
+          "source_path": "[ATIVO] Constituição_do_Projeto.md",
+          "text_length_characters": 41537,
+          "unit_id": "unit-1"
+        },
+        {
+          "exact_reconstruction": false,
+          "gap_characters": 489,
+          "overlap_characters": 0,
+          "source_path": "[ATIVO] Mapeamento Mestre de Fontes e Metadados CEPRAEA v1.0.md.md",
+          "text_length_characters": 53069,
+          "unit_id": "unit-1"
+        }
+      ],
+      "failed_units": 34,
+      "gap_characters": 101661,
+      "overlap_characters": 0,
+      "units": 175
+    },
+    "old_segment_count": 7409,
+    "source_count": 115,
+    "sources_with_segmentation_changes": [
+      "0000-adopt-madr-and-architecture-fitness-functions.md",
+      "001-CNFG-Ambiente-Desenvolvimento.md",
+      "05-schema-postgresql.md",
+      "05-schema-postgresql.sql",
+      "09-suite-testes-pgtap.sql",
+      "10 — CATÁLOGO CANÔNICO DE ARTEFATOS, PAPÉIS E ENFORCEMENT — AESDS — CEPRAEA BEACH PRO.md",
+      "11 — ARQUITETURA DE AUDITORIA E ASSURANCE AGÊNTICO — IMPLANTAÇÃO E EXECUÇÃO — AESDS — CEPRAEA BEACH PRO.md",
+      "Alinhamento-de-IA.md",
+      "BASE CEPRAEA BEACH PRO — v0.2 — Fundação e Acesso Multiagente — PROPOSTA.md",
+      "BancoCEPRAEA.md",
+      "CEPRAEA BEACH PRO.md",
+      "CEPRAEA — Roadmap de Implementação dos Dashboards.md",
+      "CEPRAEA-DB.md",
+      "CEPRAEA-pdf.md",
+      "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "CEPRAEA_BEACH_PRO_PRD_Candidato_Arquivo_Mestre_v0.1.md",
+      "Contêineres-de-desenvolvimento (3).json",
+      "DOC-002 — Guia do Modelo ANMS (Specification-Driven Development).md",
+      "DOC-003 — Relatório de Pesquisa_ Padrões Sintáticos do EARS.md",
+      "DOC-004 — Sessões Claude Code e Codex.md",
+      "DOC-005 — Guia de Fontes e Introdução ao EARS.md",
+      "DOC-006 — Regras Operacionais Derivadas para Agentes.md",
+      "Dicionário de Dados Canônico CEPRAEA.md",
+      "FLUXO COMPLETO DE DESENVOLVIMENTO — CEPRAEA BEACH PRO.md",
+      "GOV-901 — Diretrizes operacionais do Gemini Notebook — CANDIDATA v0.2",
+      "Manual Operacional — CEPRAEA Beach Pro.md",
+      "PRODUCT-DOMAIN-SPEC",
+      "Preparação competitiva CEPRAEA 2026 — Treinos e cenários até a Fase Final.md",
+      "Preparação competitiva CEPRAEA 2026 — calendário e cenários — versão acessível.md",
+      "Preparação competitiva CEPRAEA 2026 — versão corrigida.md",
+      "Proposta de Requirements",
+      "REGISTRO MESTRE DE ARTEFATOS E FUNCIONAMENTO — SISTEMA CEPRAEA.md",
+      "Roteiro completo — Relatório curto e visual às atletas — CEPRAEA 2026.md",
+      "Roteiro relatório fase CEPRAEA.md",
+      "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+      "[ATIVO] Constituição_do_Projeto.md",
+      "[ATIVO] Mapeamento Mestre de Fontes e Metadados CEPRAEA v1.0.md.md",
+      "ferramentas-contexto-historico.json"
+    ]
+  },
+  "u03": {
+    "affected_claim_count": 27,
+    "affected_claims": [
+      {
+        "claim_id": "CLM-U03-0001",
+        "new_extraction_id": "EXT-4dc74e37d45325b8d291",
+        "new_segment_id": "SEG-5d92427614a9d16611c6d2cad00e73a761c48f9aaa270f6d1c86883d5e2e5e62",
+        "old_extraction_id": "EXT-093018b2d1bb8623aa46",
+        "old_segment_id": "SEG-00000006",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0002",
+        "new_extraction_id": "EXT-4dc74e37d45325b8d291",
+        "new_segment_id": "SEG-5d92427614a9d16611c6d2cad00e73a761c48f9aaa270f6d1c86883d5e2e5e62",
+        "old_extraction_id": "EXT-093018b2d1bb8623aa46",
+        "old_segment_id": "SEG-00000006",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0003",
+        "new_extraction_id": "EXT-c8a9b6abbce798accc03",
+        "new_segment_id": "SEG-4e0157b69b213486bfc8ddebf39dbe26ffd5e36e5aec6754d9858da6408cea65",
+        "old_extraction_id": "EXT-1f3a42b1a0c9761d3190",
+        "old_segment_id": "SEG-00007145",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0004",
+        "new_extraction_id": "EXT-88b0eac60c62603a9cff",
+        "new_segment_id": "SEG-42b16ef87842d35ef34b23688833b41de054966aef84229bf0e9c9c08b5b7b12",
+        "old_extraction_id": "EXT-9241cd0e514956de810a",
+        "old_segment_id": "SEG-00007191",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0005",
+        "new_extraction_id": "EXT-88b0eac60c62603a9cff",
+        "new_segment_id": "SEG-da7545dbc3926d8cdc99c8c4ef0c566905dd8a8183d194d956d23e0310c3ce08",
+        "old_extraction_id": "EXT-9241cd0e514956de810a",
+        "old_segment_id": "SEG-00007151",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0006",
+        "new_extraction_id": "EXT-c8a9b6abbce798accc03",
+        "new_segment_id": "SEG-5a929e90e22228281f74ec4ec255b38723db58052ea94f3daafa6b4b63a7f685",
+        "old_extraction_id": "EXT-1f3a42b1a0c9761d3190",
+        "old_segment_id": null,
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED",
+          "PREVIOUS_LOCATOR_ONLY_NOW_SEGMENTED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0007",
+        "new_extraction_id": "EXT-c8a9b6abbce798accc03",
+        "new_segment_id": "SEG-2e2c74f2e3d9bb2f76d1e3c407cc2d755ab3e81c83260ab3367e5ae990e9d7ce",
+        "old_extraction_id": "EXT-1f3a42b1a0c9761d3190",
+        "old_segment_id": "SEG-00007146",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0008",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-35c56f75ae8cd2175ca99d8cf5e8ee4f2962bd91904f27197319acf7504c2315",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005551",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0009",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-c82402bdb39496098b4cf8a51525cf5838b39168619cfa6baa4bdb6337fc67d3",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": null,
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED",
+          "PREVIOUS_LOCATOR_ONLY_NOW_SEGMENTED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0010",
+        "new_extraction_id": "EXT-7d3833126d8dad1fcf01",
+        "new_segment_id": "SEG-cf1ace827a6b126493fa9a66ab893009212f0cf09c99ed757f6b37fdfea24320",
+        "old_extraction_id": "EXT-0b7465bb2a39c77454da",
+        "old_segment_id": "SEG-00000412",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0011",
+        "new_extraction_id": "EXT-7d3833126d8dad1fcf01",
+        "new_segment_id": "SEG-7e872676666d93380bc94eac652c62e4b24116b300bc120a61fecf9b39f4df64",
+        "old_extraction_id": "EXT-0b7465bb2a39c77454da",
+        "old_segment_id": "SEG-00000415",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0012",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-afa0fbbc1b7331ed5b7cc1149037c5b76cecb1852c52650b8a316ce7455a55db",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005668",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0013",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-bce61a6b750ceb61a8c634ad0bce4268799d31a3bdfb83cc832077e32c669d13",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005580",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0014",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-0b85864ae08cbfd56d200cf7b1873d460f5462ac58533a06b87afdd3f2821509",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005575",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0015",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7b6188924775d21c077dca33d81d003d0fe3a4f570cccdaf2f7079d59d041c01",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005672",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0016",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7b6188924775d21c077dca33d81d003d0fe3a4f570cccdaf2f7079d59d041c01",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005672",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0017",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7b6188924775d21c077dca33d81d003d0fe3a4f570cccdaf2f7079d59d041c01",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005672",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0018",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7f4d57edca94ebb86e4df7f3d10e2e1a0ae2e77484448e3e47fb367955fec70e",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005640",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0019",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7f4d57edca94ebb86e4df7f3d10e2e1a0ae2e77484448e3e47fb367955fec70e",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005640",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0020",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7f4d57edca94ebb86e4df7f3d10e2e1a0ae2e77484448e3e47fb367955fec70e",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005640",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0021",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-e29d75266d3a34180d31c9ca0b54dc6b814e738695d11bc445aaa5af95060c2c",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005651",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0022",
+        "new_extraction_id": "EXT-34e1aad68ee5baf82b77",
+        "new_segment_id": "SEG-b66afc9344b4bfa20f75130c1164408b635965bc106c82b9d90a77fe37adeeb9",
+        "old_extraction_id": "EXT-ae830f6286920cd5a496",
+        "old_segment_id": "SEG-00001028",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0023",
+        "new_extraction_id": "EXT-34e1aad68ee5baf82b77",
+        "new_segment_id": "SEG-b66afc9344b4bfa20f75130c1164408b635965bc106c82b9d90a77fe37adeeb9",
+        "old_extraction_id": "EXT-ae830f6286920cd5a496",
+        "old_segment_id": "SEG-00001028",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0024",
+        "new_extraction_id": "EXT-d63da7c7fd2b63a24b54",
+        "new_segment_id": "SEG-4c095d5c5131f37d6e7471a1d31bfb1b1a378eb0a601e17781818de7a9b85af3",
+        "old_extraction_id": "EXT-32bf794ba62370c930f2",
+        "old_segment_id": "SEG-00000168",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0025",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-77c1f03c5f60db9e933472cf62cb40dc43b401c4835bb0afe5916f20428ee7a1",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005554",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0026",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-7bfa12da061f3032be6f580548d56df6da583a15e2ce2e71cb2c6ee73e6abee4",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005671",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      },
+      {
+        "claim_id": "CLM-U03-0027",
+        "new_extraction_id": "EXT-7ee85ed4d88578d5a156",
+        "new_segment_id": "SEG-35c56f75ae8cd2175ca99d8cf5e8ee4f2962bd91904f27197319acf7504c2315",
+        "old_extraction_id": "EXT-7ca2fbad9be61d9cc131",
+        "old_segment_id": "SEG-00005551",
+        "reasons": [
+          "EXTRACTION_VERSION_REFERENCE_CHANGED",
+          "SEGMENT_REFERENCE_CHANGED"
+        ]
+      }
+    ],
+    "claim_id_set_changes": [],
+    "locator_only_resolved_claim_ids": [
+      "CLM-U03-0006",
+      "CLM-U03-0009"
+    ],
+    "new_claim_count": 27,
+    "new_locators_without_segment": 0,
+    "new_run_status": "PASS",
+    "old_claim_count": 27,
+    "stale_old_segment_ids_reused_by_claims": []
+  }
+}

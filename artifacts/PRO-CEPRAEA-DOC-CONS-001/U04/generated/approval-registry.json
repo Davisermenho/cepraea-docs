@@ -1,0 +1,27 @@
+{
+  "entries": [
+    {
+      "approval_status": "AGUARDANDO_APROVACAO",
+      "approved_by": null,
+      "document_id": "CONSTITUICAO_DO_PROJETO",
+      "effective_date": null,
+      "normative_precedence_active": false,
+      "path": "[ATIVO] Constituição_do_Projeto.md",
+      "sha256": "8f214ce8b63a21df5abecc5616ac3af5bd55dfa85a4dc6b475f39b3ef94168f5",
+      "version": "v4.0.0"
+    },
+    {
+      "approval_status": "AGUARDANDO_APROVACAO",
+      "approved_by": null,
+      "document_id": "CURRENT_STATE_INDEX",
+      "effective_date": null,
+      "normative_precedence_active": false,
+      "path": "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+      "sha256": "491d2defb50a33c6b247807b6538978ff1e669c6b2ab3ecc930497d6845d9e9b",
+      "version": "v1.0.0"
+    }
+  ],
+  "generated_from": "DEC-U04-001",
+  "registry_type": "REGISTRO_UNICO_DE_APROVACAO",
+  "schema_version": "1.0.0"
+}

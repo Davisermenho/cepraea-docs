@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "accepted_claims": 27,
+    "automatic_resolutions": [],
+    "deliverables": {
+      "ENT-03-registro-evidencias-afirmacoes.jsonl": "fc29b447f31e314158188d56de3f2c995bab8b73e1d1db28123334af01d9d05c",
+      "ENT-03-registro-evidencias-afirmacoes.md": "ea24383d7e986116d5e5e32cebf6f1ab84e886274780e0230bf91f3f095b2a7c",
+      "ENT-04-divergencias-decisoes.json": "059acad66a692658778754040aa5efa410e5a6fd2f5a572b5ba2c0e6dab05386",
+      "ENT-04-divergencias-decisoes.md": "7ea4a3f1398d5815a79435cd5e746536312915a9320cf2c413f8242406607123",
+      "ENT-05-mapa-consolidacao.json": "d9bb7e6754db01ece68f470fe150871f28dedb189ba421483b0cdfee6c29fc4e",
+      "ENT-05-mapa-consolidacao.md": "28baf113878b1bd5cbc5bfe66194cc00fd862292f9797336b2addc166d488108"
+    },
+    "divergence_groups": 4,
+    "duplicate_claim_ids": [],
+    "locators_without_u02_segment": 0,
+    "mapped_claims": 27,
+    "original_records": 27,
+    "production_recovery_limit": 1,
+    "publication_authorized": false,
+    "real_reexecution_equivalent": true,
+    "rejected_claims": 0,
+    "relation_diagnostics": [],
+    "relations": 10,
+    "unhandled_divergence_groups": [],
+    "unverified_human_decisions_accepted": [],
+    "validation_diagnostics": []
+  },
+  "errors": [],
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "unit": "U03"
+}

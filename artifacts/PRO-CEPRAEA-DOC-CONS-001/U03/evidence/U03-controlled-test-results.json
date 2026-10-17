@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "tests": [
+    {
+      "actual": {
+        "accepted": true,
+        "evidence_match": "EXACT"
+      },
+      "expected": {
+        "accepted": true,
+        "evidence_match": "EXACT"
+      },
+      "id": "T05",
+      "input": "Registro com fonte, hash, extração, localização e trecho exatos",
+      "name": "Evidência válida",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "accepted": false,
+        "error_code": "EVIDENCE_MISMATCH"
+      },
+      "expected": {
+        "accepted": false,
+        "error_code": "EVIDENCE_MISMATCH"
+      },
+      "id": "T06",
+      "input": "Registro cujo trecho literal foi adulterado",
+      "name": "Evidência inválida",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "automatic_approval": false,
+        "epistemic_type": "PROPOSTA"
+      },
+      "expected": {
+        "automatic_approval": false,
+        "epistemic_type": "PROPOSTA"
+      },
+      "id": "T08",
+      "input": "Arquivo rotulado [ATIVO], sem referência de aprovação verificável",
+      "name": "Autoridade",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "relation": "CONTRADIÇÃO",
+        "resolution": "ENCAMINHADA_DECISÃO_HUMANA"
+      },
+      "expected": {
+        "relation": "CONTRADIÇÃO",
+        "resolution": "ENCAMINHADA_DECISÃO_HUMANA"
+      },
+      "id": "T09",
+      "input": "Duas afirmações controladas incompatíveis, sem decisão autorizada",
+      "name": "Contradição",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "all_accepted_traceable": true,
+        "missing_references": 0
+      },
+      "expected": {
+        "all_accepted_traceable": true,
+        "missing_references": 0
+      },
+      "id": "T10",
+      "input": "Conjunto aceito da execução real",
+      "name": "Rastreabilidade",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "duplicate_claim_ids": [],
+        "logical_outputs_equivalent": true
+      },
+      "expected": {
+        "duplicate_claim_ids": [],
+        "logical_outputs_equivalent": true
+      },
+      "id": "T13",
+      "input": "Mesmos blueprints, manifesto e segmentos executados duas vezes",
+      "name": "Reexecução",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "full_rerun_complete": true,
+        "partial_pass_forbidden": true
+      },
+      "expected": {
+        "full_rerun_complete": true,
+        "partial_pass_forbidden": true
+      },
+      "id": "T14",
+      "input": "Saída parcial simulada seguida de reexecução integral",
+      "name": "Interrupção",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "corrected_revalidated": true,
+        "finite_stop_respected": true,
+        "independent_valid_not_reprocessed": true,
+        "invalid_rejected_with_diagnostics": true,
+        "max_automatic_attempts": 1,
+        "originals_preserved": true,
+        "persistent_invalid_excluded": true,
+        "valid_accepted": true
+      },
+      "expected": {
+        "corrected_revalidated": true,
+        "finite_stop_respected": true,
+        "independent_valid_not_reprocessed": true,
+        "invalid_rejected_with_diagnostics": true,
+        "max_automatic_attempts": 1,
+        "originals_preserved": true,
+        "persistent_invalid_excluded": true,
+        "valid_accepted": true
+      },
+      "id": "T15",
+      "input": "Válido; JSON inválido; campo ausente; enum inválido; referência inexistente; corrigido; persistentemente inválido",
+      "name": "Contrato estruturado e recuperação controlada",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "exact": "EXACT",
+        "format_only": "NORMALIZED",
+        "semantic_change": "REJECTED"
+      },
+      "expected": {
+        "exact": "EXACT",
+        "format_only": "NORMALIZED",
+        "semantic_change": "REJECTED"
+      },
+      "id": "T16",
+      "input": "Correspondência exata; diferença apenas de Unicode/espaço; mudança semântica por negação",
+      "name": "Normalização",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "absence_is_not_nonexistence": true,
+        "dimensions_distinct": true,
+        "scope_limited": true
+      },
+      "expected": {
+        "absence_is_not_nonexistence": true,
+        "dimensions_distinct": true,
+        "scope_limited": true
+      },
+      "id": "T17",
+      "input": "Conclusão com condição, exceção, dependência e limitação de cobertura",
+      "name": "Contexto",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "automatic_resolution": false,
+        "evidence_preserved": true,
+        "groups": 2
+      },
+      "expected": {
+        "automatic_resolution": false,
+        "evidence_preserved": true,
+        "groups": 2
+      },
+      "id": "T18",
+      "input": "Dois conflitos da mesma questão e um conflito independente",
+      "name": "Agrupamento de divergências",
+      "status": "PASS"
+    }
+  ],
+  "unit": "U03"
+}

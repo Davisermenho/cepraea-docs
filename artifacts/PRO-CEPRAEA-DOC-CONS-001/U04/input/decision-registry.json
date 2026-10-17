@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "approval_level": "A2",
+  "authority_role": "RESPONSAVEL_PELO_PROJETO",
+  "authority_identity": "NAO_INFORMADA_NO_REGISTRO",
+  "capture_method": "DIRECT_USER_MESSAGE_CURRENT_SESSION",
+  "recorded_date": "2026-10-17",
+  "record_path": "input/DECISOES-RESPONSAVEL-2026-10-17.md",
+  "record_sha256": "6755b853b12649a4f57bef8248341e12e1eef130729c31731679d554dd679e45",
+  "publication_authorized": false,
+  "decisions": [
+    {"decision_id": "DEC-U04-001", "subject": "autoridade_e_vigencia_documental", "status": "AUTORIZADA", "section": "DECISÃO 1 — Autoridade e vigência documental"},
+    {"decision_id": "DEC-U04-002", "subject": "regras_de_cancelamento_d5", "status": "AUTORIZADA", "section": "DECISÃO 2 — Regras de cancelamento D-5"},
+    {"decision_id": "DEC-U04-003", "subject": "requisitos_e_arquitetura_do_produto", "status": "AUTORIZADA_COM_ESCOLHA_ARQUITETURAL_PENDENTE", "section": "DECISÃO 3 — Requisitos e arquitetura do produto"},
+    {"decision_id": "DEC-U04-004", "subject": "verificacao_da_implementacao_e_infraestrutura", "status": "AUTORIZADA_COM_VERIFICACAO_DO_ALVO_PENDENTE", "section": "DECISÃO 4 — Verificação da implementação e infraestrutura"},
+    {"decision_id": "DEC-U04-005", "subject": "correcao_da_segmentacao_documental", "status": "AUTORIZADA_E_EXECUTADA_EM_U02_V2_U03_V2", "section": "DECISÃO 5 — Correção da segmentação documental"}
+  ],
+  "scope_limits": {
+    "a3_granted": false,
+    "production_changes_authorized": false,
+    "definitive_architecture_authorized": false,
+    "new_services_authorized": false
+  }
+}

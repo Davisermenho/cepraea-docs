@@ -1,0 +1,94 @@
+{
+  "description": "Test vectors for the generic state machine engine",
+  "tests": [
+    {
+      "id": "T01",
+      "title": "Valid transition produces correct target state",
+      "initial_state": "A",
+      "event": "go",
+      "expected_state": "B",
+      "expected_error": false
+    },
+    {
+      "id": "T02",
+      "title": "Undefined transition raises TransitionError",
+      "initial_state": "A",
+      "event": "invalid",
+      "expected_state": null,
+      "expected_error": true
+    },
+    {
+      "id": "T03",
+      "title": "Guard returning True allows transition",
+      "initial_state": "A",
+      "event": "guarded_go",
+      "context": {"allow": true},
+      "expected_state": "B",
+      "expected_error": false
+    },
+    {
+      "id": "T04",
+      "title": "Guard returning False blocks transition",
+      "initial_state": "A",
+      "event": "guarded_go",
+      "context": {"allow": false},
+      "expected_state": null,
+      "expected_error": true
+    },
+    {
+      "id": "T05",
+      "title": "Chain of transitions A -> B -> C",
+      "initial_state": "A",
+      "events": ["go", "advance"],
+      "expected_state": "C",
+      "expected_error": false
+    },
+    {
+      "id": "T06",
+      "title": "Transition from terminal state raises error",
+      "initial_state": "C",
+      "event": "go",
+      "expected_state": null,
+      "expected_error": true
+    },
+    {
+      "id": "T07",
+      "title": "valid_events returns correct list for state A",
+      "initial_state": "A",
+      "check": "valid_events",
+      "expected_events": ["go", "guarded_go"]
+    },
+    {
+      "id": "T08",
+      "title": "valid_events returns empty for terminal state C",
+      "initial_state": "C",
+      "check": "valid_events",
+      "expected_events": []
+    },
+    {
+      "id": "T09",
+      "title": "can_transition returns True for valid event",
+      "initial_state": "A",
+      "event": "go",
+      "check": "can_transition",
+      "expected": true
+    },
+    {
+      "id": "T10",
+      "title": "can_transition returns False for blocked guard",
+      "initial_state": "A",
+      "event": "guarded_go",
+      "context": {"allow": false},
+      "check": "can_transition",
+      "expected": false
+    },
+    {
+      "id": "T11",
+      "title": "on_transition callback is invoked on success",
+      "initial_state": "A",
+      "event": "go",
+      "check": "callback_invoked",
+      "expected": true
+    }
+  ]
+}

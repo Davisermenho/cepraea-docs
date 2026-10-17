@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "condition": "Identificar e aprovar formalmente versão e SHA-256; preencher responsável e data de vigência.",
+      "pending_id": "PEND-U04-001",
+      "required_authority": "RESPONSAVEL_PELO_PROJETO",
+      "status": "PENDENTE_DECISAO_HUMANA",
+      "subject": "Aprovação das versões documentais"
+    },
+    {
+      "condition": "Comparar custo operacional verificável e aderência; selecionar explicitamente uma arquitetura.",
+      "pending_id": "PEND-U04-002",
+      "required_authority": "RESPONSAVEL_PELO_PROJETO",
+      "status": "PENDENTE_DECISAO_HUMANA",
+      "subject": "Arquitetura definitiva"
+    },
+    {
+      "condition": "Obter custos atuais dos componentes e demonstrar cenário dentro ou fora da referência de R$ 50/mês.",
+      "pending_id": "PEND-U04-003",
+      "required_authority": "RESPONSAVEL_PELO_PROJETO",
+      "status": "PENDENTE_VERIFICACAO",
+      "subject": "Viabilidade do orçamento"
+    },
+    {
+      "condition": "Disponibilizar alvo ativo e verificar commit, esquema, migrações, testes e comportamento no alvo sem inferência.",
+      "pending_id": "PEND-U04-004",
+      "required_authority": "EVIDENCIA_TECNICA_E_RESPONSAVEL",
+      "status": "PENDENTE_VERIFICACAO",
+      "subject": "Implementação e infraestrutura alvo"
+    },
+    {
+      "condition": "Aprovar os hashes exatos dos candidatos após U05.",
+      "pending_id": "PEND-U04-005",
+      "required_authority": "RESPONSAVEL_PELO_PROJETO",
+      "status": "PENDENTE_DECISAO_HUMANA",
+      "subject": "Publicação oficial A3"
+    }
+  ],
+  "publication_authorized": false,
+  "schema_version": "1.0.0"
+}

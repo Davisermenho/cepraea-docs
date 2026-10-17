@@ -1,0 +1,38 @@
+{
+  "contextual_sufficiency": {
+    "PARCIAL": 7,
+    "SUFICIENTE_NO_ESCOPO": 20
+  },
+  "corpus_document_coverage": {
+    "u02_sources_processed": 115,
+    "u02_status_counts": {
+      "COMPLETE": 95,
+      "PARTIAL": 20
+    }
+  },
+  "limitations": [
+    "A seleção é dirigida aos documentos candidatos e divergências materiais identificadas; não afirma exaustividade semântica do corpus.",
+    "Ausência em busca ou seleção não demonstra inexistência no corpus.",
+    "B-01 e B-02 foram encontradas como transcrições no PRD; as fontes primárias referenciadas não foram autenticadas no corpus processado.",
+    "Estado de runtime, Supabase, deploy e código externo ao corpus não foi observado nesta U03."
+  ],
+  "retrieval_coverage": {
+    "claims": 27,
+    "line_locators_used": 27,
+    "locator_only_claim_ids": [],
+    "locators_without_u02_segment": 0,
+    "source_paths": [
+      "00 — ÍNDICE MESTRE — AESDS — CEPRAEA BEACH PRO.md",
+      "04-REQUIREMENTS.md",
+      "11-relatorio-execucao-reconciliacao.md",
+      "BASE CEPRAEA BEACH PRO — CANÔNICA — v0.1.md",
+      "CEPRAEA_BEACH_PRO_PRD_Candidato_Arquivo_Mestre_v0.1.md",
+      "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+      "[ATIVO] Constituição_do_Projeto.md"
+    ],
+    "sources_selected": 7,
+    "u02_segments_used": 20
+  },
+  "schema_version": "1.0.0",
+  "unit": "U03"
+}

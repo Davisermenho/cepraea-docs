@@ -1,0 +1,264 @@
+=== SLIDE 1 ===
+CEPRAEA — Benchmark Visual UX/UI dos Dashboards
+15 screenshots reais de produtos esportivos + especificação objetiva do Design System CEPRAEA.
+Meta: reduzir neon, eliminar aparência de template/IA e criar uma linguagem própria, premium e funcional para ATLETA e TREINADOR.
+REFERÊNCIAS: Nike Run Club · WHOOP · Strava · TrainingPeaks · Garmin Connect · Kitman Labs · Apple HIG
+=== SLIDE 2 ===
+Como o benchmark será usado
+1. SCREENSHOT REAL — evidência visual do produto de referência.
+2. ADOTAR — princípio que resolve um problema real do CEPRAEA.
+3. ADAPTAR — usar a lógica, mas com identidade, dados e fluxos próprios.
+4. EVITAR — padrão que criaria ruído, excesso de neon, template genérico ou cópia.
+5. SAÍDA — Design System CEPRAEA com regras de cor, tipografia, iconografia, navegação, cards, densidade e hierarquia.
+=== SLIDE 3 ===
+01 — Nike Run Club · ação principal e hierarquia
+ADOTAR
+Uma ação principal dominante e leitura imediata.
+ADAPTAR
+O “Start a Run” vira “Você vai?” no próximo treino. Data, hora e resposta devem dominar a primeira dobra.
+EVITAR
+Feed social, desafios e navegação concorrendo com a decisão operacional.
+Fonte visual: asquared.uk — Nike Run Club App UX analysis
+=== SLIDE 4 ===
+02 — Nike Run Club · conquistas e resumo de atividade
+ADOTAR
+Números fortes, marcos e recompensa visual discreta.
+ADAPTAR
+Usar em resultados de competição, títulos e evolução coletiva — não como jogo de pontos.
+EVITAR
+Medalhas e gamificação dominando a Home diária.
+Fonte visual: Cult of Mac — Nike Run Club review
+=== SLIDE 5 ===
+03 — WHOOP · Home “at a glance”
+ADOTAR
+Poucos indicadores essenciais e leitura em segundos.
+ADAPTAR
+Para o treinador: respostas, composição e alertas. Para a atleta: próximo treino e pendências.
+EVITAR
+Replicar biometria e wellness individual na Home da atleta.
+Fonte visual: Bless This Stuff — WHOOP 5 interface
+=== SLIDE 6 ===
+04 — WHOOP · scores e semântica de estado
+ADOTAR
+Cor ligada a significado e tendência, não decoração.
+ADAPTAR
+SIM=verde; TALVEZ=âmbar; NÃO=coral; SEM RESPOSTA=neutro. Índice CEPRAEA só no treinador.
+EVITAR
+Anéis, gauges e verde neon em todos os cards.
+Fonte visual: Digital Trends — WHOOP app screenshots
+=== SLIDE 7 ===
+05 — WHOOP · timeline e atividades do dia
+ADOTAR
+Timeline curta que explica “o que vem agora”.
+ADAPTAR
+Agenda CEPRAEA com treino, competição, resposta e local em uma linha consistente.
+EVITAR
+Mais de uma ação primária por bloco.
+Fonte visual: Prevention — WHOOP app activity view
+=== SLIDE 8 ===
+06 — Strava · dark mode e contraste esportivo
+ADOTAR
+Contraste, números fortes e conteúdo esportivo sem glow.
+ADAPTAR
+Datas, horários e status CEPRAEA com tipografia de alto impacto.
+EVITAR
+Mapas, segmentos e feed social quando não ajudam a decisão.
+Fonte visual: PhoneArena — Strava dark mode
+=== SLIDE 9 ===
+07 — Strava · atividade, histórico e progressão
+ADOTAR
+Listas de atividade com metadados consistentes e drill-down claro.
+ADAPTAR
+Treinos/competições por data, local, status e resposta individual.
+EVITAR
+Transformar o app em rede social ou ranking público entre atletas.
+Fonte visual: Cycling Weekly / Future — Strava activity interface
+=== SLIDE 10 ===
+08 — TrainingPeaks · calendário como eixo operacional
+ADOTAR
+Calendário e treino como eixo central do produto.
+ADAPTAR
+Evento CEPRAEA deve unir treino/competição, resposta e detalhe técnico sem depender da planilha mensal.
+EVITAR
+Densidade analítica de treinador na Home da atleta.
+Fonte visual: TrainingPeaks Help Center — Peak Performances (Mobile)
+=== SLIDE 11 ===
+09 — TrainingPeaks · Athlete Home e insights
+ADOTAR
+Home adaptada às prioridades do usuário e leitura resumida antes do detalhe.
+ADAPTAR
+Atleta: treino, resposta, competição. Treinador: composição, alertas, qualidade.
+EVITAR
+Uma Home “one size fits all” idêntica para os dois perfis.
+Fonte visual: TrainingPeaks Help Center — Athlete Home Performance Insights
+=== SLIDE 12 ===
+10 — TrainingPeaks · alertas do treinador
+ADOTAR
+Alertas precisam levar diretamente à ação.
+ADAPTAR
+Sem resposta, evento inconsistente, resultado incompleto e falha de sincronização entram na Central do treinador.
+EVITAR
+Alertas decorativos, genéricos ou sem caminho de resolução.
+Fonte visual: TrainingPeaks Help Center — Coach Home alerts
+=== SLIDE 13 ===
+11 — Garmin Connect · “At a Glance” modular
+ADOTAR
+Módulos pequenos para leitura rápida.
+ADAPTAR
+No treinador: respostas, composição, temporada e alertas. No atleta: agenda e status, sem grade de métricas.
+EVITAR
+Widgetização excessiva sem prioridade clara.
+Fonte visual: Garmin — Connect product imagery
+=== SLIDE 14 ===
+12 — Garmin Connect · “In Focus” e priorização
+ADOTAR
+Separar atividade do dia de conteúdo “em foco”.
+ADAPTAR
+Hero = próximo treino. Secundário = próxima competição/alertas.
+EVITAR
+Colocar tudo com o mesmo peso visual.
+Fonte visual: Garmin — Connect product imagery
+=== SLIDE 15 ===
+13 — Garmin Connect · densidade operacional
+ADOTAR
+Densidade maior apenas para quem precisa operar e decidir.
+ADAPTAR
+Central do treinador pode ter 4–6 módulos, desde que cada um represente uma decisão real.
+EVITAR
+Aplicar a mesma densidade à atleta.
+Fonte visual: Live for the Outdoors — Garmin Connect app
+=== SLIDE 16 ===
+14 — Kitman Labs · Athlete Home e tarefas
+ADOTAR
+Pendências e formulários como tarefas explícitas.
+ADAPTAR
+Questionários, confirmações e convocações aparecem como ação com contexto, não apenas badge.
+EVITAR
+Home baseada em notificações sem prioridade.
+Fonte visual: AppAdvice / App Store — Kitman Labs Athlete
+=== SLIDE 17 ===
+15 — Kitman Labs · visão integrada de performance
+ADOTAR
+Integração de contexto esportivo, disponibilidade, wellness e operação para o treinador.
+ADAPTAR
+Dados sensíveis entram apenas em visão autorizada e quando ajudam uma decisão.
+EVITAR
+Misturar dados médicos/wellness no painel individual da atleta por padrão.
+Fonte visual: Kitman Labs — Holistic Athlete Wellness
+=== SLIDE 18 ===
+Síntese — direção visual CEPRAEA
+DIREÇÃO ESCOLHIDA — EDITORIAL PERFORMANCE SYSTEM
+• Nike Run Club → ação dominante e hierarquia.
+• WHOOP → semântica de estado e leitura “at a glance”.
+• Strava → listas esportivas, histórico e contraste.
+• TrainingPeaks → separação clara entre atleta e treinador.
+• Garmin → modularidade apenas onde a densidade ajuda a decisão.
+• Kitman Labs → operação profissional e dados de equipe.
+NÃO LEVAR PARA O CEPRAEA
+Glow/neon constante · grade de cards genéricos · ícones stock · excesso de gauges · home igual para todos · fotografia de atleta como decoração fixa.
+=== SLIDE 19 ===
+Guardrails de UX mobile — Apple HIG
+• Respeitar safe areas e barras do sistema.
+• Touch target mínimo: 44 × 44 pt.
+• Tab bar = apenas destinos de nível superior, sempre com label.
+• Atleta: 3 destinos fixos — Início · Agenda · Perfil.
+• Treinador: 4 destinos fixos — Central · Treino · Equipe · Mais.
+• Uma ação primária por contexto; ações secundárias não competem em cor/tamanho.
+• Navegação deve preservar estado e permitir voltar sem perda de resposta.
+• Estados Loading / Empty / Error / Offline fazem parte do design, não são exceção.
+Fonte: developer.apple.com/design/human-interface-guidelines — Layout, Tab Bars e Controls
+=== SLIDE 20 ===
+Design System CEPRAEA — fundações visuais
+TONALIDADE
+Dark premium esportivo. Preto/plum, não “gaming”. Sem glow permanente.
+PALETA
+BG #0B0910 · Surface 1 #131117 · Surface 2 #19161D · Border #302A35
+Text 1 #F5F3F6 · Text 2 #A49DA9 · CEPRAEA Lime #A8D34B
+SIM #A8D34B · TALVEZ #D6B84E · NÃO #D96868 · Sem resposta #8D8793
+TIPOGRAFIA
+UI: Inter. Datas/horários/números de impacto: Barlow Condensed SemiBold.
+Escala: 12 / 14 / 16 / 20 / 28 / 44. Sem caixa alta em blocos longos.
+FORMA
+Grid 8 pt · margem mobile 16 pt · seção 24 pt · card radius 18 pt · borda 1 px · sombra mínima.
+=== SLIDE 21 ===
+Dashboard final — ATLETA
+PRINCÍPIO
+A atleta abre o app para saber: quando, onde, preciso responder e o que vem depois.
+HOME — ORDEM FIXA
+1. Header compacto: marca + nome, sem foto obrigatória.
+2. Hero “Próximo treino”: data, hora, local e status atual.
+3. Segmented control: SIM · TALVEZ · NÃO. Este é o único CTA primário da Home.
+4. Próxima competição em faixa única, não card pesado.
+5. “Sua agenda”: 3 próximos eventos em lista.
+6. Bottom nav: Início · Agenda · Perfil.
+REGRAS
+Sem métricas de performance na Home · sem respostas de outras atletas · sem wellness sensível · sem mais de 3 cards principais · imagem esportiva opcional e editorial, nunca necessária para compreender o estado.
+=== SLIDE 22 ===
+Dashboard final — TREINADOR
+PRINCÍPIO
+Central de decisão. Toda métrica deve responder: quem vai, qual composição, o que exige ação e o que vem depois.
+HOME — ORDEM FIXA
+1. Próximo treino: data, hora e local.
+2. Respostas inline: SIM · TALVEZ · NÃO · SEM RESPOSTA, com contagem e %.
+3. Composição confirmada: Goleiras · Defesa · Ataque.
+4. Próxima competição + Resultados da temporada.
+5. Alertas / Qualidade dos dados com ação direta.
+6. Bottom nav: Central · Treino · Equipe · Mais.
+REGRAS
+Máximo de 6 módulos na Home · sem gráfico se o número resolve · drill-down para lista nominal · qualidade dos dados é operacional · desktop pode virar duas colunas; mobile mantém uma ordem linear.
+=== SLIDE 23 ===
+Componentes, ícones e microinterações
+ICONOGRAFIA PRÓPRIA
+24×24 · stroke 1,75 px · terminais arredondados · linguagem geométrica CEPRAEA.
+Criar pictogramas próprios para: handebol de praia, quadra/areia, goleira, defesa, ataque, treino, competição, disponibilidade e qualidade de dados.
+Proibido usar “dumbbell” genérico como símbolo universal de treino.
+COMPONENTES
+Segmented control de disponibilidade · Event Row · Status Chip · Metric Strip · Alert Row · Bottom Sheet de confirmação · Empty/Error/Offline state.
+INTERAÇÃO
+Tap feedback 150–180 ms · transição 180–220 ms · sem pulsos/glow · mudança de SIM/TALVEZ/NÃO confirma visualmente e permite desfazer por alguns segundos.
+ANTI-GENÉRICO
+Nenhum card existe só para “encher dashboard”. Nenhum ícone sem função semântica. Nenhuma ilustração esportiva deve substituir informação.
+=== SLIDE 24 ===
+Especificação visual — Home da ATLETA
+CEPRAEA     Bom dia, Paola
+PRÓXIMO TREINO
+25 AGO   20:00–21:30
+Copacabana • Posto 4
+[ SIM ]  TALVEZ  NÃO
+Próxima competição · International Challenge
+SUA AGENDA
+27 AGO  Treino  Confirmada
+29 AGO  Treino  Responder
+30 AGO  Treino  Responder
+Início           Agenda           Perfil
+HIERARQUIA
+1º resposta ao próximo treino
+2º próxima competição
+3º agenda curta
+DENSIDADE
+Uma coluna · 3 blocos principais · sem métricas de performance na Home.
+VISUAL
+Verde só em ação/status. Imagem esportiva, se usada, fica tonalizada e não rouba legibilidade.
+COMPORTAMENTO
+Tocar SIM/TALVEZ/NÃO salva imediatamente, confirma o novo estado e oferece “Desfazer” por alguns segundos.
+=== SLIDE 25 ===
+Especificação visual — Central do TREINADOR
+CEPRAEA     Central do treinador
+PRÓXIMO TREINO
+25 AGO · 20:00–21:30
+Copacabana • Posto 4
+SIM 7    TALVEZ 2    NÃO 3    SEM RESPOSTA 7
+GOLEIRAS 1    DEFESA 1    ATAQUE 5
+Próxima competição  |  Temporada
+Alertas / Qualidade dos dados
+Central      Treino      Equipe      Mais
+HIERARQUIA
+1º próximo treino
+2º respostas + composição
+3º competição, temporada e alertas
+DENSIDADE
+Mais alta que a atleta, porém no máximo 6 módulos. Números antes de gráficos.
+DRILL-DOWN
+Tocar em “SIM 7” abre lista nominal. Tocar em “Goleiras 1” filtra composição. Tocar em alerta abre a ação de correção.
+RESPONSIVO
+Mobile = fluxo linear. Desktop = duas colunas, mantendo mesma prioridade.

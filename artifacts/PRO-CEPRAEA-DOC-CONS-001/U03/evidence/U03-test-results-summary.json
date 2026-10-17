@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U03",
+  "controlled_suite": {
+    "status": "PASS",
+    "tests": ["T05", "T06", "T08", "T09", "T10", "T13", "T14", "T15", "T16", "T17", "T18"],
+    "evidence": "U03-controlled-test-results.json"
+  },
+  "real_execution": {
+    "status": "PASS",
+    "claims_accepted": 27,
+    "claims_rejected": 0,
+    "relations": 10,
+    "divergence_groups": 4,
+    "automatic_resolutions": 0,
+    "real_reexecution_equivalent": true,
+    "preserved_original_files": 115,
+    "changed_original_files": 0,
+    "evidence": ["U03-final-validation.json", "T04-corpus-real.json", "T04-vs-U01-approved.json"]
+  },
+  "unit_verdict": "DONE-U03_SATISFEITO_COM_RESSALVAS_E_ENCAMINHAMENTOS",
+  "isolated_pass_is_not_unit_approval": true
+}

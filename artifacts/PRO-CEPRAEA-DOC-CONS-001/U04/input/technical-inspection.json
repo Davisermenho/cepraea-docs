@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "inspection_date": "2026-10-17",
+  "mode": "READ_ONLY",
+  "repository": {
+    "url": "https://github.com/Davisermenho/CEPRAEA",
+    "default_branch": "main",
+    "commit_sha": "73462b6098dc89bc00fa55bea5f6f26980889173",
+    "commit_date": "2026-06-01T14:21:17Z",
+    "visibility": "public",
+    "observed_files": [
+      {"path": "package.json", "git_blob_sha": "b2b252f3b072ede5d65473721b397a9c84280737"},
+      {"path": "vite.config.ts", "git_blob_sha": "036da644a2f049c8d6e08ee51de469fd25c4ee6b"},
+      {"path": "vercel.json", "git_blob_sha": "766b7ad2e42ef248ae338762801d8043382d4673"},
+      {"path": "supabase/config.toml", "git_blob_sha": "5babf3cf8b37d614f83d025c1f0c687a0b280a81"}
+    ],
+    "observations": [
+      "package.json identifica React 19, TypeScript, Vite, Supabase JS, Vitest e Playwright.",
+      "vite.config.ts configura vite-plugin-pwa e manifesto de instalação móvel.",
+      "vercel.json existe e contém configuração de hospedagem, mas sua presença não comprova implantação.",
+      "supabase/config.toml configura ambiente local; não comprova correspondência integral com o alvo remoto."
+    ],
+    "technical_state": "VALIDADO_ESTATICAMENTE",
+    "state_scope": "Somente existência e conteúdo dos arquivos explicitamente observados no commit; não abrange execução, testes ou implantação."
+  },
+  "supabase": {
+    "project_ref": "fcnyjmrknqaomamdzabt",
+    "project_name": "CEPRAEA",
+    "region": "us-east-1",
+    "status": "INACTIVE",
+    "database_version_reported": "17.6.1.111",
+    "edge_functions_observed": [],
+    "database_introspection": "NOT_VERIFIED_CONNECTION_TIMEOUT",
+    "migrations_introspection": "NOT_VERIFIED_CONNECTION_TIMEOUT",
+    "advisor_results": "NOT_CONCLUSIVE_WHILE_DATABASE_INACTIVE",
+    "mutations_performed": false,
+    "technical_state": "GERADO",
+    "state_scope": "A existência e os metadados do projeto foram observados; implantação do esquema, funcionamento e prontidão não foram verificados."
+  },
+  "limitations": [
+    "O repositório foi inspecionado remotamente e não foi executado localmente nesta atividade.",
+    "O banco do projeto Supabase não respondeu à introspecção por estar inativo ou indisponível.",
+    "Nenhuma configuração de produção, dado, migração ou serviço foi alterado."
+  ]
+}

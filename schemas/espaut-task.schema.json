@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cepraea:esp-aut-git-001:espaut-task:0.1.0",
+  "title": "ESP-AUT — Registro de tarefa",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "repository_id",
+    "title",
+    "objective",
+    "acceptance_criteria",
+    "authorized_scope",
+    "state",
+    "branch_name",
+    "pr_number",
+    "base_commit_sha",
+    "created_at",
+    "closed_at",
+    "sessions",
+    "commit_shas"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^TASK-[0-9a-f]{12}$"
+    },
+    "repository_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "authorized_scope": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "REGISTRADA",
+        "PREPARADA",
+        "EM_EXECUCAO",
+        "PRESERVACAO_PENDENTE",
+        "EM_REVISAO",
+        "EM_CORRECAO",
+        "AGUARDANDO_DECISAO",
+        "APTA_PARA_INTEGRACAO",
+        "INTEGRADA",
+        "ENCERRADA_SEM_MERGE",
+        "BLOQUEADA",
+        "INTERROMPIDA"
+      ]
+    },
+    "branch_name": {
+      "type": ["string", "null"]
+    },
+    "pr_number": {
+      "type": ["integer", "null"]
+    },
+    "base_commit_sha": {
+      "type": ["string", "null"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "closed_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "sessions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "commit_shas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  }
+}

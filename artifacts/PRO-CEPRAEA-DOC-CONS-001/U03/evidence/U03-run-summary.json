@@ -1,0 +1,22 @@
+{
+  "automatic_resolutions": 0,
+  "claims_accepted": 27,
+  "claims_prepared": 27,
+  "claims_rejected": 0,
+  "divergence_groups": 4,
+  "locators_without_u02_segment": 2,
+  "output_hashes": {
+    "ENT-03-registro-evidencias-afirmacoes.jsonl": "1b4a14be24777175ea92897228b9d983f151ea2e929879f855d42c733f35a54e",
+    "ENT-03-registro-evidencias-afirmacoes.md": "56413ab1b41f6d78eed87ad6a3cc758c8c18c1db3d838c6fb91fa8de37b10730",
+    "ENT-04-divergencias-decisoes.json": "059acad66a692658778754040aa5efa410e5a6fd2f5a572b5ba2c0e6dab05386",
+    "ENT-04-divergencias-decisoes.md": "7ea4a3f1398d5815a79435cd5e746536312915a9320cf2c413f8242406607123",
+    "ENT-05-mapa-consolidacao.json": "d9bb7e6754db01ece68f470fe150871f28dedb189ba421483b0cdfee6c29fc4e",
+    "ENT-05-mapa-consolidacao.md": "28baf113878b1bd5cbc5bfe66194cc00fd862292f9797336b2addc166d488108"
+  },
+  "pending_human_groups": 4,
+  "recovery_max_attempts": 1,
+  "relations": 10,
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "unit": "U03"
+}
