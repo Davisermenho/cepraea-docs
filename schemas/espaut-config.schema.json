@@ -83,6 +83,10 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "ai_sharing_authorized": {
+      "type": "boolean",
+      "description": "Explicit permission to transmit authorized work to a connected external AI assistant; default false"
     }
   }
 }

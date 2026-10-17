@@ -177,6 +177,8 @@ def apply_agent_correction(
     scope = task.get("authorized_scope") or config.get("eligible_patterns") or []
     if not scope:
         return {"status": "blocked", "reason": "authorized file scope is required"}
+    if not config.get("ai_enabled", False) or not config.get("ai_sharing_authorized", False):
+        return {"status": "blocked", "reason": "external AI execution and disclosure require explicit opt-in"}
     if current_branch(cwd) in (None, "main", "master"):
         return {"status": "blocked", "reason": "cannot correct on protected/default branch"}
     if task.get("branch_name") and current_branch(cwd) != task["branch_name"]:

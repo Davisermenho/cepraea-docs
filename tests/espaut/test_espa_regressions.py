@@ -202,6 +202,7 @@ class Contracts(unittest.TestCase):
         from espaut.correction import apply_agent_correction
         with tempfile.TemporaryDirectory() as d:
             store=init_store(Path(d))
+            write_json(store/"config.json",{"ai_enabled":True,"ai_sharing_authorized":True})
             task={"task_id":"T1","authorized_scope":["src/*.py"]}
             source={"description":"fix bug","classification":"MUDANCA_REQUERIDA"}
             with patch("espaut.git_ops.current_branch",return_value="feature/a"),patch("espaut.git_ops.worktree_status",return_value=[]):
@@ -213,7 +214,7 @@ class Contracts(unittest.TestCase):
         from espaut.correction import apply_agent_correction
         with tempfile.TemporaryDirectory() as d:
             store=init_store(Path(d))
-            write_json(store/"config.json",{"correction_test_command":[sys.executable,"-B","-c","print(1)"]})
+            write_json(store/"config.json",{"ai_enabled":True,"ai_sharing_authorized":True,"correction_test_command":[sys.executable,"-B","-c","print(1)"]})
             task={"task_id":"T1","authorized_scope":["src/*.py"]}
             source={"description":"fix bug","classification":"MUDANCA_REQUERIDA"}
             with patch("espaut.git_ops.current_branch",return_value="feature/a"),patch("espaut.git_ops.worktree_status",side_effect=[[],[{"path":"src/a.py"}]]),patch("shutil.which",return_value="/usr/bin/codex"),patch("subprocess.run",side_effect=[cp(0),cp(0)]):
@@ -258,6 +259,7 @@ class Contracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             store=init_store(Path(d))
             task={"task_id":"T1","authorized_scope":["src/*.py"]}
+            write_json(store/"config.json",{"ai_enabled":True,"ai_sharing_authorized":True})
             marker="ghp_" + ("A" * 40)
             src={"description":"token="+marker, "classification":"MUDANCA_REQUERIDA"}
             with patch("espaut.git_ops.current_branch",return_value="feature/fix"),patch("espaut.git_ops.worktree_status",return_value=[]),patch("subprocess.run") as agent:
@@ -296,6 +298,20 @@ class Contracts(unittest.TestCase):
             self.assertEqual(check_c2_sync(task)["status"],"FAIL")
         with patch("espaut.governance.head_sha",return_value="abc"),patch("espaut.pullrequest.query_pr_state",side_effect=RuntimeError("network")):
             self.assertEqual(check_c2_sync(task)["status"],"FAIL")
+
+    def test_ai_disabled_and_sharing_not_authorized_block_before_agent(self):
+        from espaut.correction import apply_agent_correction
+        with tempfile.TemporaryDirectory() as d:
+            store=init_store(Path(d))
+            task={"task_id":"T1","authorized_scope":["src/*.py"]}
+            pendency={"description":"fix bug","classification":"MUDANCA_REQUERIDA"}
+            for cfg in ({}, {"ai_enabled":True}, {"ai_sharing_authorized":True}):
+                write_json(store/"config.json",cfg)
+                with self.subTest(config=cfg), patch("subprocess.run") as runner:
+                    out=apply_agent_correction(store,task,pendency,"codex",cwd=d)
+                    self.assertEqual(out["status"],"blocked")
+                    self.assertIn("opt-in",out["reason"])
+                    runner.assert_not_called()
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
