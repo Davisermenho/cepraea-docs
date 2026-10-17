@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "defined_before_execution": true,
+  "unit": "U01",
+  "tests": [
+    {
+      "id": "T01",
+      "name": "Inventario",
+      "input": {
+        "controlled_files": {
+          "alpha.txt": "alpha\n",
+          "nested/beta.bin": "000102"
+        }
+      },
+      "expected": {
+        "file_count": 2,
+        "relative_paths": ["alpha.txt", "nested/beta.bin"],
+        "read_error_count": 0
+      }
+    },
+    {
+      "id": "T02",
+      "name": "Integridade",
+      "input": {
+        "relative_path": "known.bin",
+        "bytes_utf8": "abc"
+      },
+      "expected": {
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+      }
+    },
+    {
+      "id": "T03",
+      "name": "Duplicatas",
+      "input": {
+        "controlled_files": {
+          "dup-a.bin": "01020304",
+          "nested/dup-b.bin": "01020304",
+          "unique.bin": "01020305"
+        }
+      },
+      "expected": {
+        "duplicate_group_count": 1,
+        "duplicate_paths": ["dup-a.bin", "nested/dup-b.bin"]
+      }
+    },
+    {
+      "id": "T04",
+      "name": "Preservacao",
+      "input": {
+        "controlled_files": {
+          "original.txt": "conteudo imutavel\n",
+          "nested/original.bin": "deadbeef"
+        },
+        "operation": "Executar inventario entre snapshots SHA-256 anterior e posterior"
+      },
+      "expected": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "unchanged_count": 2
+      }
+    },
+    {
+      "id": "T13",
+      "name": "Reexecucao",
+      "input": {
+        "controlled_files": {
+          "alpha.md": "# Alpha\n",
+          "nested/beta.json": "{\"beta\": true}\n"
+        },
+        "operation": "Gerar os quatro arquivos ENT-01/ENT-02 duas vezes com entradas imutaveis"
+      },
+      "expected": {
+        "content_equivalent": true,
+        "output_file_count_first": 4,
+        "output_file_count_second": 4,
+        "unexpected_additional_files": []
+      }
+    },
+    {
+      "id": "T14",
+      "name": "Interrupcao",
+      "input": {
+        "controlled_files": {
+          "alpha.txt": "alpha\n",
+          "nested/beta.txt": "beta\n"
+        },
+        "partial_state": "ENT-01-manifesto-corpus.json sintaticamente incompleto",
+        "operation": "Refazer a geracao completa sobre a saida parcial"
+      },
+      "expected": {
+        "manifest_valid_json": true,
+        "manifest_file_count": 2,
+        "complete_output_file_count": 4,
+        "partial_content_retained": false
+      }
+    }
+  ]
+}

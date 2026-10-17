@@ -1,0 +1,890 @@
+# CEPRAEA BEACH PRO — Elicitação de Produto e Regras do Domínio
+
+## Informações do documento
+
+| Campo | Valor |
+| --- | --- |
+| Nome | CEPRAEA BEACH PRO — Elicitação de Produto e Regras do Domínio |
+| ID | `1X683QQ9cCEQJwebYW3U394OZEvLXFfBWjZQlNZQ-58c` |
+| Status | Consolidado — nenhuma decisão de produto conhecida permanece aberta |
+| Versão | 2.10 — nome canônico e governança de lacunas posteriores |
+| Data da consolidação | 02/09/2026 |
+| Responsável | Davi Sermenho |
+| Fonte histórica | `Historico.json` |
+| Validação explícita posterior | Gestão mensal e auditável da agenda, sessões possíveis em feriados oficiais aplicáveis à cidade do Rio de Janeiro, D-5 exato, quórum operacional, ocorrências positivas e negativas, cancelamento terminal, remarcação, tratamento por exceção, retificação de presença e participação e aceitação consciente dos riscos do piloto |
+
+## Finalidade e autoridade
+
+Este documento consolida a intenção de produto expressa durante a elicitação Q-001 a Q-013.
+
+O arquivo `Historico.json` permanece como registro histórico. Ele contém respostas originais, reformulações, propostas da IA, correções e versões substituídas. Não é uma especificação final e não cria decisões por si só.
+
+Foi aplicada a seguinte precedência:
+
+1. correção explícita posterior de Davi;
+2. afirmação explícita de Davi;
+3. proposta da IA posteriormente reutilizada ou aceita por Davi;
+4. proposta ou inferência da IA ainda não validada;
+5. formulação anterior comprovadamente substituída.
+
+| Estado | Significado |
+| --- | --- |
+| `DECIDED` | Intenção ou regra fechada por evidência suficiente. |
+| `OPEN` | Decisão material ainda não fechada; não pode ser inventada. |
+| `FUTURE` | Capacidade desejada para o produto completo, fora da primeira entrega vigente. |
+| `SUPERSEDED` | Formulação histórica substituída por correção posterior. |
+
+Este documento registra e consolida minhas respostas à elicitação do produto. Ele descreve necessidades, decisões de produto e regras do domínio, mas não define arquitetura técnica nem autoriza automaticamente implementação, migração, deploy, credenciais ou tratamento de dados sensíveis.
+
+## Glossário normativo
+
+Este glossário é a fonte canônica dos termos de produto e domínio usados neste documento e no contrato derivado. As demais seções detalham regras, estados e exemplos sem redefinir estes conceitos. Um termo não listado mantém seu sentido comum e não adquire significado técnico por inferência.
+
+| Termo | Significado neste documento | Não implica |
+| --- | --- | --- |
+| `Agenda Esportiva` | Agrupamento conceitual que uso para reunir as regras relacionadas aos compromissos e ao ciclo das sessões de treino. | Não implica módulo, serviço, schema, Bounded Context, tabela, ownership ou fronteira arquitetural. |
+| `Participação Esportiva` | Agrupamento conceitual que uso para reunir disponibilidade, ocorrências pós-fechamento, presença e participação, preservando a diferença entre esses fatos. | Não implica módulo, serviço, schema, Bounded Context, tabela, ownership ou fronteira arquitetural. |
+| `Sessão de treino` | Compromisso esportivo com data, horário, local e ciclo próprio de planejamento, publicação, confirmação, cancelamento e realização. | Não implica que publicação seja confirmação nem que condição de quórum seja estado da sessão. |
+| `Declaração` | Informação fornecida por uma atleta sobre aquilo que ela sabe ou pretende antes da sessão. | Não implica fato ocorrido, presença, participação ou decisão do treinador. |
+| `Fato` | Informação sobre algo efetivamente ocorrido ou reconhecido pela autoridade definida no fluxo. | Não implica inferência automática a partir de declaração, ausência de resposta, Wellness, timestamp ou interação. |
+| `Disponibilidade` | Declaração anterior à sessão sobre a possibilidade ou intenção de a atleta participar. | Não implica presença, participação nem confirmação da sessão. |
+| `Ocorrência pós-fechamento` | Novo fato registrado depois de D-5 que complementa a declaração original e altera a composição atual quando aplicável. | Não implica edição retroativa da disponibilidade nem reativação de sessão cancelada. |
+| `Presença` | Fato consolidado sobre a atleta ter comparecido ou não à sessão. | Não implica quanto ela treinou nem pode ser inferida da disponibilidade. |
+| `Participação` | Fato consolidado sobre a atleta ter realizado integralmente, parcialmente ou nenhuma parte da sessão. | Não implica presença física; `NÃO PARTICIPOU` também é compatível com `AUSENTE`. |
+| `Perfil esportivo` | Conjunto permitido de posição principal obrigatória e posição secundária opcional de uma atleta, organizado por `Fase → Sistema → Posição`. | Não implica alocação simultânea em mais de uma vaga nem posição efetiva imutável em todas as sessões. |
+| `Alocação da sessão` | Distribuição contextual de atletas distintas nas vagas de Ataque e Defesa usada para verificar a executabilidade do treino. | Não implica alteração do perfil esportivo nem permite dupla contagem da mesma atleta. |
+| `Quórum operacional` | Existência de uma alocação válida com quatro atletas no Ataque, quatro na Defesa, oito atletas distintas e ao menos uma Goleira na Defesa. | Não implica confirmação antecipada, decisão humana ou simples contagem bruta de pessoas. |
+| `Projeção de quórum` | Resultado calculado a partir de declarações, ocorrências e perfis esportivos para mostrar composição e déficit. | Não é fonte de verdade dos dados utilizados, estado da sessão ou decisão humana. |
+| `Estado da sessão` | Estado corrente do ciclo da sessão: `PLANEJADO`, `PUBLICADO`, `CONFIRMADO`, `CANCELADO` ou `REALIZADO`. | Não inclui condições ou projeções como `QUÓRUM_GARANTIDO` e `QUÓRUM_COMPROMETIDO`. |
+| `Condição` | Situação calculada ou observada que influencia o fluxo sem substituir o estado da sessão. | Não implica estado adicional da máquina de estados nem persistência técnica específica. |
+| `D-5` | Instante exato correspondente a `início_da_sessão − 120 horas`, quando termina a disponibilidade ordinária e ocorre a resolução automática da sessão publicada. | Não significa véspera, cinco dias civis nem horário fixo independente do início da sessão. |
+| `Feriado aplicável no Rio de Janeiro` | Feriado nacional ou feriado oficial estadual ou municipal cujo âmbito seja aplicável à cidade do Rio de Janeiro. Na proposta mensal, gera uma sessão possível entre 07h30 e 09h00 ou ajusta para esse horário a sugestão recorrente que coincidir com a mesma data. | Não inclui ponto facultativo, feriado exclusivamente bancário nem data comemorativa que não seja também feriado oficial aplicável. Não implica publicação automática nem duas sessões sugeridas para a mesma recorrência na mesma data. |
+| `Fluxo normal` | Caminho de uma sessão publicada com D-5 futuro, da coleta de disponibilidade até a resolução automática em D-5, sem ação administrativa semanal minha. | Não inclui criação tardia, remarcação nem decisão posterior sobre quórum comprometido. |
+| `Confirmação excepcional` | Minha decisão explícita de confirmar uma nova sessão criada quando seu D-5 já transcorreu. | Não implica execução retroativa do checkpoint D-5 nem confirmação automática baseada em quórum. |
+| `Remarcação` | Operação que cancela a sessão original com motivo `REMARCADO` e cria outra sessão sem transportar disponibilidades. | Não implica edição da data ou do horário da sessão original nem reativação dessa sessão. |
+| `Cancelamento terminal` | Encerramento definitivo do ciclo da sessão cancelada, que permanece no histórico. | Não permite reativação, novas ocorrências ou retorno a estado ativo. |
+| `Retificação auditável` | Correção feita por mim, como treinador/administrador, que preserva valor anterior, novo valor, motivo, autor e data/hora. | Não implica sobrescrita, apagamento do fato original ou autoridade da atleta para corrigir fato consolidado. |
+
+---
+
+## Horizontes do produto
+
+### Visão completa
+
+O CEPRAEA BEACH PRO deve ser o ponto único, confiável e acionável para a operação esportiva cotidiana do CEPRAEA.
+
+O produto deve reduzir a dependência de planilhas, WhatsApp, arquivos dispersos e conferências manuais. Deve organizar a rotina, preservar fatos diferentes sem misturá-los, antecipar problemas operacionais e devolver meu tempo ao trabalho esportivo.
+
+O objetivo não é apenas digitalizar a gestão atual. É reduzir a burocracia que hoje depende de mim, aumentar a autonomia das atletas e me permitir concentrar atenção em planejar, analisar, ensinar, avaliar e treinar.
+
+### Primeira entrega operacional
+
+`STATUS: RASCUNHO`
+
+Na primeira entrega, quero resolver o fluxo formado pelo elenco atual, pela `Agenda Esportiva` e pela `Participação Esportiva`. Esses agrupamentos organizam as regras desta elicitação conforme o glossário e não representam estruturas de implementação.
+
+Ela abrange obrigatoriamente:
+
+- elenco atual e papéis de treinador e atleta;
+- proposta, revisão e publicação da agenda de treinos;
+- sessões de treino, seu ciclo operacional e remarcação auditável;
+- solicitação e declaração de disponibilidade com estados semanticamente distintos;
+- ocorrências negativas e positivas depois do fechamento;
+- cálculo e projeção operacional de quórum;
+- resolução automática em D-5 para todas as sessões publicadas no fluxo normal;
+- decisão do treinador entre manter ou cancelar quando uma sessão confirmada perder quórum;
+- apuração, consolidação e retificação auditável de presença e participação;
+- próxima ação e visão operacional para treinador e atleta;
+- histórico das sessões, declarações, fatos e decisões humanas.
+
+Disponibilidade, ocorrência pós-fechamento, presença e participação são informações diferentes e possuem ciclos próprios. Disponibilidade não se transforma em presença. Ausência de resposta não é indisponibilidade. Ausência de apuração não é ausência.
+
+O estado programado da sessão deve permanecer separado das declarações e dos fatos individuais das atletas. Quórum, déficit e próxima ação são cálculos operacionais e não devem substituir nem reescrever os dados que lhes deram origem.
+
+### Capacidades desejadas fora da primeira entrega
+
+`Status: FUTURE`
+
+As capacidades abaixo fazem parte da visão, mas não pertencem à primeira entrega delimitada nesta elicitação:
+
+- Wellness Pré e Pós-Treino;
+- planejamento de exercícios e de temporada;
+- biblioteca de exercícios;
+- publicação de conteúdo técnico e tático;
+- vídeos, cortes e associação entre vídeo e eventos;
+- scouts, relatórios e análise de desempenho;
+- avaliações e feedbacks individuais;
+- histórico de adversários e preparação de jogos;
+- organização de materiais e responsabilidades logísticas;
+- registros auxiliares de competições, resultados e classificações;
+- controles financeiros simples ligados à rotina da equipe.
+
+Essas capacidades não estão rejeitadas. Exigem descoberta, decisão de escopo e planejamento próprios.
+
+Gamificação, rankings, pontuações de disciplina, geração automática de materiais públicos e automação de substituições não são requisitos fechados.
+
+---
+
+## Q-001 — Que situação concreta fez você decidir que este produto deveria existir?
+
+`STATUS: RASCUNHO`
+
+Há cerca de dois anos, eu uso planilhas para gerenciar o CEPRAEA. No início, elas resolviam uma necessidade imediata. Com o crescimento das demandas, passaram a exigir um trabalho manual que consome meu tempo e prejudica diretamente o projeto esportivo.
+
+Todos os meses, preciso cruzar calendários, identificar os dias de treino, conferir feriados, adaptar horários e manter controles para treinos, competições, resultados, classificações e outras informações da equipe.
+
+Esse trabalho retira tempo daquilo que deveria receber minha atenção como treinador. Quanto mais tempo gasto organizando planilhas, cobrando respostas e procurando informações, menos tempo tenho para planejar treinamentos, estudar aspectos técnicos e táticos, analisar jogos, assistir a vídeos, fazer anotações e preparar conteúdo para as atletas.
+
+O processo de disponibilidade também é desgastante. Atualizo a planilha, envio o link pelo WhatsApp e espero pelas respostas das 19 atletas. Muitas vezes preciso cobrar individualmente ou lembrar o grupo por vários dias.
+
+O WhatsApp não funciona como fonte confiável da operação. Comunicados e arquivos importantes se perdem. Quando o armazenamento do telefone fica cheio, posso deixar de abrir vídeos, PDFs, imagens e mensagens necessárias.
+
+A planilha permite apenas `SIM`, `NÃO` ou `TALVEZ`, sem contexto adequado. Mais grave: uma resposta pode ser alterada depois que o treino aconteceu. Isso impede distinguir o que foi declarado antes da sessão daquilo que efetivamente ocorreu.
+
+Também já precisei improvisar treinos porque só descobri na praia que atletas estavam retornando de lesão ou relatando dor. A organização de materiais pode falhar quando a pessoa responsável por bolas, coletes ou outro equipamento não comparece e a dependência não foi percebida.
+
+Já marquei treino noturno em um feriado, apesar da regra de que o treinamento em feriado deve ocorrer pela manhã. As atletas perceberam o erro, que afetou minha sensação de organização e credibilidade.
+
+A situação decisiva ocorreu em um treino tático. Eu precisava de uma composição com uma goleira, três defensoras e quatro atacantes. Organizei as informações, cobrei respostas e fui para a praia acreditando que executaria a atividade. Na hora de começar, descobri que não havia goleira.
+
+Ali ficou claro que eu não precisava apenas de uma planilha melhor. Precisava de uma solução capaz de representar a realidade esportiva, antecipar problemas e preservar um histórico confiável.
+
+---
+
+## Q-002 — Para quem o problema é mais importante?
+
+`STATUS: RASCUNHO`
+
+O beneficiário primário sou eu, como treinador do CEPRAEA.
+
+Concentro praticamente sozinho as responsabilidades esportivas e administrativas. Além de treinar, organizo calendários, controlo informações, acompanho disponibilidade, cobro respostas e resolvo problemas operacionais.
+
+A primeira situação que precisa melhorar é minha capacidade de administrar a equipe sem perder o tempo e a energia necessários para ser treinador. Preciso de uma visão clara e confiável do estado da equipe e do histórico relevante de cada atleta.
+
+As atletas também são beneficiárias diretas. Quando reduzo minha sobrecarga e trabalho com informações melhores, consigo preparar treinos de maior qualidade, analisar jogos, produzir avaliações mais consistentes e oferecer feedbacks mais úteis.
+
+O sistema não deve substituir minhas decisões. Deve retirar trabalho operacional, organizar informações e me permitir decidir melhor.
+
+---
+
+## Q-003 — Se o projeto funcionar muito bem, o que terá mudado no mundo real?
+
+`STATUS: RASCUNHO`
+
+Hoje, perco tempo e capacidade mental conectando informações espalhadas entre planilhas, WhatsApp, documentos e arquivos para descobrir o que está acontecendo e fazer a equipe funcionar.
+
+Com este produto, quero que a gestão aconteça de forma centralizada, organizada e automatizada no fluxo normal, mantendo claros os fatos que exigem decisão humana.
+
+Quero saber o que está programado, o que cada pessoa precisa informar, qual é o estado real das atividades, quais problemas exigem minha atenção e o que devo fazer em seguida.
+
+As atletas devem encontrar uma rotina simples e previsível. Eu devo receber informação operacional já interpretada, sem reconstruí-la manualmente.
+
+A transformação esperada é recuperar tempo, atenção e capacidade de análise para exercer melhor minha função e criar melhores condições de trabalho para a equipe.
+
+---
+
+## Q-004 — Qual seria uma evidência convincente de sucesso ou fracasso?
+
+`STATUS: RASCUNHO`
+
+O produto não terá sucesso apenas porque funciona tecnicamente. Precisa modificar minha rotina e a forma como as atletas interagem com a operação.
+
+### Evidências de sucesso
+
+- as atletas informam diretamente aquilo que depende delas;
+- disponibilidade, ocorrências e presença deixam de depender de cobranças e transcrição;
+- problemas previsíveis são identificados antes de comprometerem uma sessão;
+- o sistema diferencia declaração, planejamento, evidência e fato;
+- informações ficam acessíveis sem busca em múltiplas ferramentas;
+- ações cotidianas exigem poucos passos e funcionam bem no smartphone;
+- o sistema chama minha atenção principalmente nas exceções;
+- nenhuma sessão no fluxo semanal normal exige ação administrativa minha depois da publicação mensal e antes da resolução automática em D-5;
+- o histórico permanece confiável e com autoria rastreável;
+- percebo redução real do trabalho administrativo e mais tempo para o esporte;
+- as atletas entendem rapidamente o próximo compromisso e a próxima ação;
+- as atletas recebem estados simples sem interpretar a matemática do quórum.
+
+### Evidências de fracasso
+
+- eu continuar cobrando respostas e registrando informações pelas atletas como regra normal;
+- o WhatsApp continuar necessário para a operação cotidiana;
+- as atletas abandonarem o sistema por burocracia, lentidão ou falta de clareza;
+- tarefas simples exigirem mais trabalho do que nas ferramentas atuais;
+- alertas excessivos fizerem as pessoas ignorarem o canal;
+- os dados parecerem completos, mas não serem confiáveis;
+- disponibilidade e presença serem misturadas;
+- o passado ser alterado silenciosamente;
+- inferências automáticas serem apresentadas como decisões humanas;
+- alguma sessão no fluxo normal exigir confirmação, cancelamento, cálculo ou comunicação administrativa manual de minha parte;
+- eu continuar sem tempo para estudar, planejar, analisar e treinar.
+
+Vitórias, derrotas e títulos não são critérios diretos de sucesso do software. O produto pode melhorar as condições de trabalho, mas o resultado competitivo depende de muitos fatores.
+
+---
+
+## Q-005 — O que o produto deliberadamente não deve tentar resolver?
+
+`STATUS: RASCUNHO`
+
+O CEPRAEA BEACH PRO deve permanecer específico para a gestão e o trabalho esportivo do CEPRAEA no Handebol de Praia.
+
+Ele não deve se transformar em:
+
+- plataforma esportiva genérica;
+- produto para Handebol Indoor;
+- sistema de gestão de campeonatos, federações ou arbitragem;
+- rede social pública;
+- plataforma própria de streaming;
+- prontuário ou sistema de diagnóstico médico;
+- ferramenta de prescrição de tratamento, medicamentos ou dietas;
+- editor profissional de vídeo ou simulador tridimensional;
+- sistema contábil empresarial;
+- plataforma de recrutamento;
+- substituto do julgamento técnico, liderança ou relacionamento humano do treinador.
+
+O produto pode futuramente registrar dados de jogos, competições, vídeos, wellness ou taxas simples quando essas capacidades forem autorizadas e estiverem ligadas à rotina. Isso não autoriza assumir a operação completa desses domínios externos.
+
+O sistema pode calcular, organizar, alertar, sugerir e preparar evidências. Decisões esportivas e humanas permanecem sob minha autoridade.
+
+---
+
+## Q-006 — Quais restrições do projeto são realmente fixas?
+
+`STATUS: RASCUNHO para as restrições abaixo`
+
+### Desenvolvimento
+
+Eu sou o único responsável pelo desenvolvimento e não possuo experiência prévia com programação. O produto será construído com apoio intensivo de agentes de IA, principalmente Claude Code e Codex no VS Code.
+
+Para o desenvolvimento, o acesso aos modelos deve utilizar assinaturas mensais de custo previsível. Não posso depender de modelos de IA cobrados por consumo de tokens de API.
+
+Essa restrição não escolhe automaticamente a infraestrutura de execução nem o método de autenticação.
+
+### Orçamento
+
+O custo recorrente operacional deve permanecer em torno de R$ 50,00 mensais. Um custo próximo de R$ 200,00 mensais é incompatível com o projeto.
+
+Qualquer funcionalidade ou arquitetura que não caiba nesse limite precisa ser simplificada, substituída, adiada ou retirada.
+
+### Prazo e esforço da primeira entrega
+
+A primeira versão foi definida para entrega em uma semana, até 07 de setembro de 2026.
+
+Minha disponibilidade estimada para essa etapa é de seis horas por dia, aproximadamente 42 horas. O escopo precisa caber nesse limite.
+
+### Dispositivo e experiência
+
+O uso cotidiano ocorre predominantemente em smartphones. O produto deve ser mobile first, leve, legível e adequado a ações rápidas na praia, em treinos e competições.
+
+A primeira entrega não deve depender de publicação em lojas de aplicativos nativos.
+
+### Consequências, não decisões técnicas fechadas
+
+As restrições favorecem baixo custo, baixa manutenção, pouco suporte operacional e tolerância razoável a conectividade instável. Não fecham, por si só:
+
+- provedor de banco de dados ou hospedagem;
+- arquitetura serverless específica;
+- método de autenticação;
+- login social ou magic link;
+- estratégia offline;
+- tecnologia de notificações;
+- estrutura física de schemas, serviços, APIs ou módulos.
+
+Essas escolhas pertencem ao planejamento técnico posterior.
+
+---
+
+## Q-007 — PWA é uma decisão tomada?
+
+`STATUS: RASCUNHO`
+
+PWA é a forma de entrega definida para a primeira versão.
+
+Essa decisão atende ao orçamento reduzido, prazo curto, desenvolvimento solo, uso predominante de smartphones e distribuição simples sem depender das lojas Apple e Google.
+
+O produto deve ser concebido para uso móvel desde o início. Ser web não significa criar uma experiência de desktop e apenas reduzi-la.
+
+A decisão pode ser reavaliada futuramente se necessidades, orçamento e capacidade de manutenção mudarem e outra entrega resolver um problema real melhor.
+
+PWA, autenticação, funcionamento offline e sincronização são mecanismos técnicos. Essas escolhas não determinam, por si mesmas, como a arquitetura interna do produto será organizada.
+
+---
+
+## Q-008 — Quem precisa usar o produto no horizonte inicial?
+
+`STATUS: RASCUNHO`
+
+No horizonte inicial existem dois papéis autenticados:
+
+- `TREINADOR_ADMINISTRADOR`;
+- `ATLETA`.
+
+O elenco atual é formado por mim e por 19 atletas. Esse número descreve a equipe atual, mas não deve impedir mudanças legítimas no elenco.
+
+### Treinador/Administrador
+
+Meu papel possui autoridade para organizar a equipe, revisar e publicar a agenda, acompanhar disponibilidade, interpretar o quórum, registrar ocorrências quando necessário, apurar e retificar presença e participação e tomar decisões esportivas.
+
+### Atleta
+
+A atleta consulta, responde e interage. Informa disponibilidade, registra ocorrências, consulta a agenda e acompanha seus próprios dados e as informações coletivas necessárias.
+
+Uma atleta não pode alterar dados de outras atletas, administrar a equipe nem modificar fatos consolidados cuja autoridade pertence ao treinador.
+
+Informações individuais devem permanecer privadas. Cada atleta acessa seus próprios dados, avaliações e feedbacks quando essas capacidades forem disponibilizadas, sem acesso indiscriminado aos dados das demais.
+
+Outros perfis somente devem ser introduzidos quando existirem na operação real e suas responsabilidades forem definidas. A primeira entrega não cadastra nem representa participantes convidadas.
+
+---
+
+## Q-009 — Como medir a devolução real de tempo no MVP?
+
+`STATUS: RASCUNHO`
+
+A devolução do meu tempo continua sendo um objetivo central, mas não será validada no MVP por uma estimativa de horas administrativas. Ainda não existe uma baseline formal e confiável da carga atual.
+
+O critério principal será um comportamento operacional diretamente observável:
+
+**depois que eu revisar e publicar a agenda mensal, nenhuma sessão dentro do fluxo normal deve exigir uma ação administrativa minha até sua resolução automática em D-5.**
+
+O indicador principal é:
+
+```text
+Ações administrativas obrigatórias do treinador no fluxo semanal normal = 0
+```
+
+Para cada sessão publicada com D-5 ainda futuro, o sistema deve abrir e administrar a disponibilidade, receber respostas, acompanhar o quórum, considerar posições principais e secundárias, encerrar a janela exatamente em D-5, confirmar ou cancelar automaticamente, comunicar o resultado e preservar o histórico. A origem recorrente, manual ou excepcional da sessão não altera esse fluxo.
+
+Uma sessão criada quando seu D-5 já tiver passado não pode fingir que percorreu o fluxo normal. Nesse caso excepcional, o sistema informa que o prazo venceu e exige minha confirmação explícita antes de comunicar a sessão como confirmada às atletas.
+
+Minha intervenção é esperada somente quando uma sessão já confirmada sofrer uma exceção real que exija julgamento esportivo.
+
+### Indicadores observáveis
+
+- quantidade de sessões publicadas;
+- quantidade de sessões resolvidas automaticamente em D-5;
+- quantidade de sessões confirmadas automaticamente;
+- quantidade de sessões confirmadas excepcionalmente por mim;
+- quantidade de sessões canceladas automaticamente por `FALTA_DE_QUÓRUM`;
+- quantidade de sessões remarcadas;
+- quantidade de sessões que exigiram intervenção minha depois da confirmação;
+- quantidade de decisões `MANTER TREINO` e `CANCELAR TREINO` depois da confirmação;
+- quantidade de ações administrativas realizadas por mim no fluxo normal.
+
+O MVP cumpre esta parte da proposta quando a agenda é administrada por exceção, sem acompanhamento manual semanal.
+
+A redução de horas administrativas permanece como indicador futuro de impacto. Ela somente deve receber baseline e meta numérica depois que existirem dados reais de uso suficientes para uma medição confiável.
+
+Faixas numéricas registradas nas respostas históricas permanecem apenas como evidência anterior em `Historico.json`. Elas não constituem baseline, meta nem compromisso vigente deste documento.
+
+---
+
+## Q-010 — Qual fluxo precisa funcionar primeiro?
+
+`STATUS: RASCUNHO`
+
+Minha regra operacional é:
+
+**uma revisão mensal da agenda + zero ações semanais obrigatórias no fluxo normal + painel administrativo sempre disponível + intervenção apenas nas alterações e exceções reais.**
+
+O fluxo prioritário é:
+
+`agenda → publicação → disponibilidade → fechamento automático em D-5 → confirmação ou cancelamento por falta de quórum → ocorrência pós-fechamento → presença e participação factuais`
+
+### 1. Geração da agenda
+
+Eu não devo criar manualmente todos os treinos recorrentes.
+
+| Dia | Horário | Local |
+| --- | --- | --- |
+| Quinta-feira | 20h00–21h30 | Copacabana, Posto 4 |
+| Domingo | 07h30–09h00 | Copacabana, Posto 4 |
+| Sessão possível em feriado aplicável | 07h30–09h00 | Copacabana, Posto 4 |
+
+Os treinamentos podem ocorrer em qualquer dia da semana. A recorrência regular atual está concentrada em quintas-feiras e domingos, mas isso não limita a criação de sessões em segunda, terça, quarta, sexta ou sábado.
+
+Na recorrência regular de dias úteis, os treinos ocorrem depois das 20h e terminam até 22h. Além dos treinos normais, a proposta mensal inclui sessões possíveis nos feriados nacionais e nos feriados oficiais estaduais ou municipais aplicáveis à cidade do Rio de Janeiro, já sugeridas entre 07h30 e 09h00. Quando o feriado coincidir com uma recorrência normal, a proposta contém uma única sessão para a data, no horário de feriado. A identificação e o ajuste acontecem antes da minha revisão e da publicação.
+
+No início de cada mês, o sistema gera uma proposta pronta. Eu faço uma única revisão, corrijo as exceções e publico.
+
+O painel de administração da agenda permanece disponível para mim a qualquer momento, com as ações:
+
+```text
+CRIAR TREINO
+EDITAR PROPOSTA
+REMARCAR TREINO
+CANCELAR TREINO
+```
+
+Essa disponibilidade permanente não cria uma obrigação de revisão semanal. O painel existe para representar mudanças reais quando forem necessárias.
+
+Antes da publicação, uma sessão ainda planejada pode ser editada ou excluída da proposta. Depois da publicação, data e horário não são substituídos diretamente. Para alterá-los, uso `REMARCAR TREINO`, preservando a sessão original e criando um novo compromisso. Outras alterações e cancelamentos continuam auditáveis, com valores anteriores, novos valores, autoria e data/hora.
+
+### 2. Publicação
+
+Quando publico a agenda:
+
+- as sessões passam a integrar o calendário oficial;
+- as atletas recebem pendências de disponibilidade;
+- as sessões ficam disponíveis para meu planejamento;
+- data, horário, local e prazo ficam claros.
+
+Publicar significa intenção real de realizar a sessão, mas não significa que o quórum já foi garantido.
+
+A publicação não bloqueia a agenda. Eu continuo autorizado a criar, remarcar ou cancelar sessões; o sistema preserva a diferença entre a sessão originalmente publicada e cada decisão posterior.
+
+Quando uma nova sessão é publicada com D-5 ainda futuro, ela percorre o fluxo normal independentemente de ter sido gerada por recorrência ou criada por mim. Se eu criar uma sessão quando o D-5 já tiver passado, o sistema mostra que a automação ordinária não é mais possível e oferece somente `CONFIRMAR SESSÃO EXCEPCIONAL` ou `VOLTAR`. Minha confirmação coloca essa nova sessão diretamente em `CONFIRMADO` e comunica as atletas. Essa ação pertence a uma exceção criada por mim e não conta como administração semanal do fluxo normal.
+
+### 3. Disponibilidade
+
+Cada atleta registra:
+
+- `DISPONÍVEL`;
+- `INDISPONÍVEL`;
+- `TALVEZ`;
+- `NÃO RESPONDEU`, quando nenhuma declaração foi enviada.
+
+`NÃO RESPONDEU` nunca pode ser convertido automaticamente em `INDISPONÍVEL`.
+
+Na indisponibilidade, a atleta pode informar motivo curto. O motivo descreve a declaração; não constitui diagnóstico, julgamento ou presença factual.
+
+As respostas podem ser alteradas durante a janela ordinária. O prazo é D-5, definido como o instante exato correspondente a `início_da_sessão − 120 horas`.
+
+Somente `DISPONÍVEL` pode preencher uma vaga no cálculo do quórum. `TALVEZ` e `NÃO RESPONDEU` não contam como disponibilidade garantida no fechamento.
+
+Os dois estados permanecem distintos no histórico. `TALVEZ` não é reescrito como declaração negativa e `NÃO RESPONDEU` nunca é convertido em `INDISPONÍVEL` ou ausência. Lembretes e cobranças ordinárias são automáticos; não dependem de intervenção minha.
+
+### 4. Quórum
+
+O quórum operacional mínimo para confirmação de qualquer sessão publicada no fluxo normal exige uma alocação válida de oito atletas distintas:
+
+```text
+Defesa = 4 atletas
+Ataque = 4 atletas
+Total = 8 atletas distintas
+Goleira >= 1 entre as quatro atletas alocadas na Defesa
+```
+
+As posições principal e secundária do perfil esportivo são consideradas na busca por uma alocação válida.
+
+O cálculo deve:
+
+- usar o perfil esportivo permitido;
+- impedir que a mesma atleta ocupe simultaneamente uma vaga ofensiva e uma defensiva no mesmo cálculo;
+- identificar o déficit exato;
+- distinguir quantidade total de executabilidade tática;
+- recalcular quando houver mudança;
+- apresentar informação pronta para decisão.
+
+As regras de posições estão consolidadas na Q-011.
+
+### 5. Confirmação
+
+Quórum e confirmação não são sinônimos. Quórum é condição operacional; confirmação é compromisso de realização.
+
+No D-5:
+
+- quórum satisfeito produz confirmação automática;
+- quórum insuficiente produz `CANCELADO — FALTA_DE_QUÓRUM` automaticamente;
+- nenhum dos dois caminhos exige ação minha.
+
+Se o quórum for atingido antes, o sistema informa `QUÓRUM_GARANTIDO`, mas mantém a disponibilidade aberta e a sessão em `PUBLICADO` até D-5. Não existe confirmação antecipada no fluxo normal nem ação manual semanal para antecipá-la.
+
+Depois de confirmada, a sessão nunca é cancelada automaticamente por uma baixa posterior.
+
+Uma sessão cancelada, automaticamente em D-5 ou por minha decisão posterior, é terminal. Ela não recebe novas ocorrências, não volta a um estado ativo e não é reativada quando surgirem novas disponibilidades. Se, depois do cancelamento, eu decidir realizar outro treino, crio uma nova sessão.
+
+### 6. Ocorrência pós-fechamento
+
+Depois de D-5, a atleta não altera retroativamente sua declaração. Em uma sessão confirmada, registra uma nova ocorrência por uma de duas ações simples:
+
+```text
+NÃO PODEREI COMPARECER
+AGORA POSSO PARTICIPAR
+```
+
+A ocorrência:
+
+- preserva a declaração original;
+- registra autoria e data/hora;
+- pode possuir motivo curto quando informar que não poderá comparecer;
+- retira a atleta do quórum atual quando ela não poderá comparecer;
+- inclui imediatamente no quórum atual uma atleta que agora pode participar;
+- provoca recálculo da composição;
+- não cancela automaticamente a sessão.
+
+Eu posso registrar a ocorrência pela atleta quando receber informação confiável. O histórico deve mostrar a autoria real.
+
+Se uma nova disponibilidade restaurar o quórum, a sessão permanece `CONFIRMADO` e qualquer alerta pendente é encerrado automaticamente. Não existe uma nova confirmação, porque o compromisso nunca foi cancelado.
+
+Se uma ocorrência negativa quebrar o quórum, o sistema utiliza uma única condição, `QUÓRUM_COMPROMETIDO`, e me apresenta o déficit exato. A ausência de uma Goleira ou de outra capacidade obrigatória aparece como diagnóstico, não como outro estado.
+
+Eu decido somente entre:
+
+```text
+MANTER TREINO
+CANCELAR TREINO
+```
+
+`MANTER TREINO` registra que assumi a solução esportiva sem exigir que eu explique como vou adaptar, remanejar ou recompor a atividade. `CANCELAR TREINO` registra minha decisão, autoria e data/hora e comunica as atletas. O sistema não cadastra, consulta nem registra participantes convidadas.
+
+### 7. Remarcação
+
+Quando eu remarco uma sessão publicada ou confirmada, o sistema executa uma única operação visível para mim:
+
+1. cancela a sessão original com o motivo `REMARCADO`;
+2. preserva seu estado, suas declarações e seu histórico;
+3. cria uma nova sessão sem transportar as disponibilidades anteriores;
+4. calcula um novo D-5.
+
+Se o novo D-5 estiver no futuro, a nova sessão entra em `PUBLICADO`, abre uma nova janela e solicita novas respostas. Se o prazo já tiver passado, aplico a confirmação excepcional descrita na Publicação. A sessão original permanece `CANCELADO` e nunca é reativada.
+
+### 8. Presença e participação factuais
+
+`Disponibilidade ≠ Presença ≠ Participação`
+
+- disponibilidade representa o que foi declarado antes;
+- presença representa se a atleta compareceu;
+- participação representa quanto da sessão a atleta realizou: integralmente, parcialmente ou nenhuma parte.
+
+`NÃO PARTICIPOU` significa que a atleta não realizou nenhuma parte da sessão, independentemente de ter comparecido. A Presença preserva essa diferença: `PRESENTE + NÃO PARTICIPOU` significa que a atleta compareceu, mas não treinou; `AUSENTE + NÃO PARTICIPOU` significa que ela não compareceu e, consequentemente, não participou.
+
+Wellness, timestamps e interações podem futuramente fornecer evidências, mas não determinam presença. Wellness está fora da primeira entrega vigente.
+
+No piloto, a presença possui apuração própria. O sistema pode preparar uma lista provisória com as evidências disponíveis, mas a autoridade final é o treinador.
+
+Ao término, reviso as exceções e consolido. A presença consolidada representa o fato registrado oficialmente para a sessão e não pode ser sobrescrita silenciosamente.
+
+Para que eu não precise combinar estados manualmente nem possa registrar fatos contraditórios, a apuração deve me apresentar quatro resultados factuais:
+
+- presente com participação completa;
+- presente com participação parcial;
+- presente sem participação;
+- ausente.
+
+Quando eu registrar `AUSENTE`, o sistema consolida conjuntamente `Presença = AUSENTE` e `Participação = NÃO PARTICIPOU`. Isso não é uma inferência automática baseada em Wellness, timestamps ou interações; é a consequência determinística da minha própria consolidação factual como treinador/administrador.
+
+As combinações válidas são:
+
+| Presença | Participação | Significado |
+| --- | --- | --- |
+| `PRESENTE` | `COMPLETA` | Compareceu e realizou integralmente a sessão. |
+| `PRESENTE` | `PARCIAL` | Compareceu e realizou parte da sessão. |
+| `PRESENTE` | `NÃO PARTICIPOU` | Compareceu, mas não realizou nenhuma parte da sessão. |
+| `AUSENTE` | `NÃO PARTICIPOU` | Não compareceu e não realizou a sessão. |
+| `NÃO APURADO` | `NÃO APURADA` | Os fatos ainda não foram consolidados. |
+
+São inválidas `AUSENTE + COMPLETA`, `AUSENTE + PARCIAL`, presença `NÃO APURADO` com participação factual e, depois da consolidação definitiva, presença factual com participação `NÃO APURADA`.
+
+Se eu identificar posteriormente um erro de Presença ou Participação, posso corrigi-lo somente no papel de treinador/administrador, por meio de uma retificação auditável. Cada retificação preserva obrigatoriamente:
+
+- valor anterior;
+- novo valor;
+- motivo da correção;
+- autor da retificação;
+- data e hora da alteração.
+
+O valor anterior permanece no histórico. A leitura corrente passa a considerar o novo valor sem apagar o registro originalmente consolidado. Atletas não possuem autoridade para alterar nem retificar Presença ou Participação consolidadas.
+
+Uma retificação não pode produzir uma combinação inválida. Quando corrigir apenas um dos fatos deixaria Presença e Participação contraditórias, os dois valores devem ser corrigidos conjuntamente na mesma operação, com o mesmo motivo, autor e data/hora.
+
+Exemplo:
+
+```text
+Presença original = AUSENTE
+Participação original = NÃO PARTICIPOU
+Nova presença = PRESENTE
+Nova participação = COMPLETA
+Motivo = erro de consolidação
+Retificado por = TREINADOR_ADMINISTRADOR
+Data/hora = ...
+```
+
+Portanto, Presença e Participação consolidadas não podem ser corrigidas por sobrescrita; somente por retificação auditável realizada pelo treinador/administrador.
+
+### 9. Histórico operacional e feedback coletivo
+
+Uma sessão cancelada não desaparece. O histórico distingue:
+
+- sessão programada;
+- sessão originalmente publicada e posteriormente alterada;
+- sessão confirmada;
+- sessão realizada;
+- sessão cancelada automaticamente por falta de quórum;
+- sessão cancelada por `REMARCADO` e a nova sessão criada em seu lugar;
+- sessão previamente confirmada e posteriormente cancelada por decisão minha.
+
+O produto deve permitir acompanhar, por mês, ciclo ou temporada, quantos treinos foram previstos, confirmados, realizados e cancelados, inclusive o total cancelado por falta de quórum.
+
+Esses dados funcionam como feedback coletivo, sem ranking constrangedor, culpabilização individual ou punição automática. O objetivo é tornar visível o efeito da disponibilidade coletiva sobre a continuidade dos treinamentos.
+
+### Cenários fechados
+
+| Cenário | Presença | Participação | Observação |
+| --- | --- | --- | --- |
+| Treinou e esqueceu Wellness Pós | `PRESENTE` | `COMPLETA` | Formulário não apaga o treino. |
+| Compareceu, sentiu dor e não treinou | `PRESENTE` | `NÃO PARTICIPOU` | Não compõe o quórum tático real. |
+| Não compareceu | `AUSENTE` | `NÃO PARTICIPOU` | Presença e participação são consolidadas conjuntamente. |
+| Treinou, mas o celular falhou | `PRESENTE` | `COMPLETA` | Falha técnica não produz ausência. |
+| Não houve apuração | `NÃO APURADO` | `NÃO APURADA` | Não vira presença ou ausência. |
+
+---
+
+## Q-011 — Como funcionam as funções esportivas para calcular quórum?
+
+`STATUS: RASCUNHO`
+
+O modelo segue `Fase → Sistema → Posição`.
+
+### Ataque — 3x1
+
+- Central;
+- Pivô;
+- Lateral Esquerda;
+- Lateral Direita.
+
+### Ataque — 4x0
+
+- Lateral Esquerda;
+- Lateral Direita;
+- Central Esquerda;
+- Central Direita.
+
+### Defesa — 3:0
+
+- Defensora Base;
+- Defensora Solta;
+- Defensora Cobertura;
+- Goleira.
+
+### Defesa — 2:1
+
+- Defensora Avançada;
+- Defensora Solta;
+- Defensora Cobertura;
+- Goleira.
+
+### Capacidades e alocação
+
+Na primeira entrega, cada atleta possui no perfil esportivo:
+
+- uma posição principal obrigatória;
+- uma posição secundária opcional.
+
+Cada posição é identificada dentro da estrutura `Fase → Sistema → Posição`. A alocação utilizada numa sessão continua contextual.
+
+A atleta não escolhe posição ao declarar disponibilidade. O sistema utiliza o perfil para preparar a alocação padrão.
+
+A autoridade para cadastrar a posição principal, cadastrar a posição secundária e remanejar numa sessão é minha.
+
+No fechamento de D-5, o sistema pode usar posições principais e secundárias para encontrar automaticamente uma composição operacional válida. A posição principal é a preferência de alocação; a secundária pode ser utilizada quando necessária para satisfazer o quórum sem solicitar uma ação semanal.
+
+Depois que uma sessão já estiver confirmada, qualquer remanejamento para resolver perda posterior de quórum volta a depender da minha decisão.
+
+### Proibição de dupla contagem
+
+Uma pessoa física ocupa uma única vaga no cálculo operacional da sessão. Uma atleta capaz de atuar em duas posições não pode ser contada nas duas ao mesmo tempo.
+
+Mesmo sendo fases diferentes, a mesma atleta não pode ocupar simultaneamente uma vaga de Ataque e uma vaga de Defesa para produzir o mínimo de oito atletas.
+
+### Mínimos
+
+O mínimo operacional é:
+
+```text
+Defesa = 4
+Ataque = 4
+Atletas distintas = 8
+Goleira >= 1 dentro da alocação defensiva
+```
+
+Esse é o piso para confirmação automática, não o teto da sessão.
+
+A taxonomia detalhada continua disponível para planejamento e diagnóstico. O fechamento automático usa o quórum operacional acima e não pode produzir oito vagas a partir de menos de oito pessoas.
+
+Participantes convidadas não fazem parte do produto nem do cálculo de quórum. Quando uma sessão confirmada perde quórum, o sistema registra somente minha decisão de manter ou cancelar o treino, sem perguntar como resolvi a exceção.
+
+---
+
+## Q-012 — O que acontece quando termina o prazo?
+
+`STATUS: RASCUNHO`
+
+O prazo ordinário é cinco dias exatos antes de qualquer treino:
+
+```text
+D-5 = início_da_sessão − 120 horas
+```
+
+Essa decisão substitui o fechamento na véspera.
+
+| Sessão | Início | Encerramento D-5 |
+| --- | --- | --- |
+| Quinta-feira regular | quinta-feira, 20h00 | sábado anterior, 20h00 |
+| Domingo regular | domingo, 07h30 | terça-feira anterior, 07h30 |
+| Sessão possível em feriado aplicável | dia do evento, 07h30 | cinco dias antes, 07h30 |
+
+### Antes de D-5
+
+- a sessão já foi publicada;
+- data, horário, local e prazo estão visíveis;
+- atletas podem declarar ou alterar disponibilidade;
+- o sistema acompanha o quórum;
+- uma composição já suficiente produz `QUÓRUM_GARANTIDO`, sem fechar ou confirmar antecipadamente a sessão;
+- nenhuma ação minha é exigida.
+
+Capacidades futuras de conteúdo podem ser disponibilizadas antes da confirmação. O acesso não deve depender da véspera, mas conteúdo e vídeo estão fora da primeira entrega.
+
+### D-5 com quórum satisfeito
+
+O sistema encerra a janela, preserva declarações, registra a composição, confirma a sessão, comunica as atletas e substitui alterações ordinárias por ocorrências pós-fechamento.
+
+### D-5 com quórum insuficiente
+
+O sistema encerra a janela e aplica automaticamente:
+
+```text
+CANCELADO — FALTA_DE_QUÓRUM
+```
+
+O motivo é preservado, as atletas são comunicadas e a sessão continua visível no histórico. Como a sessão nunca chegou a ser confirmada, esse resultado não exige decisão esportiva semanal minha.
+
+Esse cancelamento é terminal. A sessão não recebe novas ocorrências nem pode ser reativada. Uma atividade posterior exige uma nova sessão.
+
+Esse cancelamento determinístico é diferente do cancelamento de uma sessão previamente confirmada. Nesse segundo caso, uma ocorrência posterior criou uma exceção real e somente minha decisão pode produzir `CANCELADO`.
+
+### Estados e condições
+
+O ciclo da sessão deve permanecer separado da condição de quórum.
+
+As mudanças para `CONFIRMADO`, `CANCELADO` e `REALIZADO` fazem parte do ciclo da sessão. As declarações de disponibilidade, ocorrências, presença e participação fornecem informações para o cálculo operacional, mas não alteram diretamente esse ciclo.
+
+Estados da sessão incluem `PLANEJADO`, `PUBLICADO`, `CONFIRMADO`, `CANCELADO` e `REALIZADO`.
+
+Condições, motivos ou projeções incluem `DISPONIBILIDADE_ABERTA`, `QUÓRUM_EM_FORMAÇÃO`, `QUÓRUM_GARANTIDO`, `FALTA_DE_QUÓRUM` e `QUÓRUM_COMPROMETIDO`. Ausência de uma capacidade obrigatória, como Goleira, é um diagnóstico associado ao quórum e não um estado separado.
+
+Para as atletas, a apresentação deve ser simples: programado, confirmado, cancelado por falta de quórum, cancelado por decisão posterior ou realizado. A matemática detalhada pertence à gestão esportiva.
+
+---
+
+## Q-013 — Como funciona uma ocorrência pós-fechamento?
+
+`STATUS: RASCUNHO`
+
+Com D-5, uma ocorrência pode acontecer vários dias antes da atividade. O termo correto é `OCORRÊNCIA_PÓS_FECHAMENTO`.
+
+Se uma atleta declarou `DISPONÍVEL` e depois recebeu um plantão inesperado, o histórico preserva:
+
+```text
+Disponibilidade original = DISPONÍVEL
+Ocorrência posterior = não poderá comparecer
+```
+
+O segundo fato complementa o primeiro; não o substitui.
+
+### Registro
+
+Depois de D-5, os controles ordinários não ficam disponíveis. Em uma sessão confirmada, a atleta informa que não poderá comparecer ou que agora pode participar. Pode acrescentar motivo curto à ocorrência negativa e não precisa classificar tecnicamente o evento.
+
+Eu posso registrar quando a atleta estiver sem bateria, sem internet, dirigindo ou impossibilitada de acessar. O histórico registra atleta afetada, autoria real, motivo, data/hora e origem quando relevante.
+
+### Efeito operacional
+
+Quando a atleta não poderá participar, deixa imediatamente de contar no quórum atual. Quando passa a poder participar, entra imediatamente no cálculo atual. O sistema identifica se a composição permanece válida e apresenta o déficit exato quando necessário.
+
+Existe uma única condição pós-confirmação: `QUÓRUM_COMPROMETIDO`. Quantidade, margem restante e capacidade perdida aparecem no diagnóstico; a ausência de uma Goleira é mostrada diretamente, sem criar outra condição.
+
+### Sessão confirmada
+
+Uma sessão confirmada nunca é cancelada automaticamente.
+
+Uma baixa pode produzir `QUÓRUM_COMPROMETIDO`, mas a sessão continua confirmada até que eu escolha `MANTER TREINO` ou `CANCELAR TREINO`. Uma nova disponibilidade pode restaurar automaticamente o quórum e encerrar o alerta enquanto a sessão continuar confirmada.
+
+Mudanças relevantes são comunicadas sem expor matemática interna ou dados individuais desnecessários.
+
+### Problema depois da chegada
+
+Se a atleta compareceu e depois ficou impossibilitada de treinar, não se torna ausente:
+
+```text
+Presença = PRESENTE
+Participação = NÃO PARTICIPOU ou PARCIAL
+```
+
+Ela deixa de compor o quórum tático real, mas sua presença permanece registrada.
+
+---
+
+## Hipóteses aceitas como risco do piloto
+
+`STATUS: RASCUNHO`
+
+Aceito conscientemente que três resultados ainda dependem de validação empírica:
+
+- as atletas utilizarem diretamente o produto com fricção suficientemente baixa para reduzir minha intermediação;
+- a primeira entrega ser tecnicamente realizável dentro das aproximadamente 42 horas disponíveis;
+- a operação por exceção produzir redução material das minhas horas administrativas.
+
+Essas hipóteses não podem ser comprovadas antes do uso real e não devem ser apresentadas como fatos. Eu as aceito como riscos da primeira entrega, mitigados pelo escopo obrigatório reduzido, pelas ações móveis simples, pela retirada de participantes convidadas e de classificações desnecessárias e pela medição no piloto.
+
+Se a adoção direta não ocorrer, o produto não terá alcançado a autonomia pretendida e o fluxo deverá ser revisto. Se o esforço exceder as 42 horas, capacidades não essenciais permanecem adiadas sem retirar o núcleo obrigatório. Se a redução de horas não ocorrer, o indicador operacional continuará mensurável, mas a relação causal entre automação e devolução de tempo deverá ser reavaliada.
+
+---
+
+## Formulações históricas substituídas
+
+| ID | Formulação substituída | Decisão vigente |
+| --- | --- | --- |
+| `SUPERSEDED-001` | Fechamento às 20h da véspera, 24 horas antes ou em horário genérico de D-5. | D-5 é exatamente `início_da_sessão − 120 horas`. |
+| `SUPERSEDED-002` | Wellness Pré + Pós determina presença. | Wellness é evidência; treinador consolida presença e participação. |
+| `SUPERSEDED-003` | Eu crio todos os treinos. | Sistema gera proposta mensal; eu reviso por exceção. |
+| `SUPERSEDED-004` | O mínimo operacional é `1G + 3D + 4A`. | O mínimo é oito atletas distintas: quatro no Ataque e quatro na Defesa, com pelo menos uma Goleira dentro da alocação defensiva. |
+| `SUPERSEDED-005` | Atacante, Defensora e Goleira bastam como modelo. | Taxonomia é `Fase → Sistema → Posição`. |
+| `SUPERSEDED-006` | Resposta antecipada pode ser presença factual. | Disponibilidade, presença e participação são fatos diferentes. |
+| `SUPERSEDED-007` | Número bruto de baixas ou uma classificação separada de falha crítica define a condição pós-confirmação. | Existe somente `QUÓRUM_COMPROMETIDO`; quantidade, margem e capacidades ausentes aparecem no diagnóstico. |
+| `SUPERSEDED-008` | Produto completo e MVP possuem o mesmo escopo. | A primeira entrega segue o escopo delimitado nesta elicitação; as demais capacidades são futuras. |
+| `SUPERSEDED-009` | Quórum garantido antes de D-5 permite confirmação antecipada manual. | Antes de D-5, o sistema apenas informa `QUÓRUM_GARANTIDO`; a confirmação automática ocorre no fechamento. |
+| `SUPERSEDED-010` | Quórum insuficiente em D-5 produz `AGUARDANDO_DECISÃO_DO_TREINADOR`. | Em D-5, produz `CANCELADO — FALTA_DE_QUÓRUM` automaticamente; o treinador só decide quando uma sessão já confirmada perde quórum. |
+| `SUPERSEDED-011` | Apenas a quinta-feira recorrente recebe ajuste automático quando coincide com feriado. | A proposta mensal inclui sessões possíveis nos feriados nacionais e oficiais aplicáveis à cidade do Rio de Janeiro, sugeridas entre 07h30 e 09h00. |
+| `SUPERSEDED-012` | Faixas estimadas de horas administrativas são o principal critério de sucesso do MVP. | O critério principal é `ações administrativas obrigatórias do treinador no fluxo semanal normal = 0`; horas economizadas serão indicador futuro após baseline real. |
+| `SUPERSEDED-013` | Apenas a Presença consolidada possuía mecanismo fechado para correção de erro factual. | Presença e Participação não são sobrescritas; somente o treinador/administrador pode retificá-las com valor anterior, novo valor, motivo, autoria e data/hora. |
+| `SUPERSEDED-014` | Participante convidada precisava ser cadastrada com posição válida para contar no quórum. | Participantes convidadas não fazem parte do produto; diante de quórum comprometido, eu apenas mantenho ou cancelo o treino. |
+| `SUPERSEDED-015` | Data ou horário de sessão publicada podiam ser substituídos por edição. | `REMARCAR TREINO` cancela a sessão original e cria uma nova, sem transportar disponibilidades. |
+
+---
+
+## Decisões de produto abertas conhecidas
+
+NONE
+
+Nenhuma questão material de produto atualmente conhecida
+permanece aberta neste escopo.
+
+Isso não impede que uma fase posterior revele nova ambiguidade,
+contradição ou política de produto ausente.
+
+Quando uma lacuna posterior não puder ser resolvida sem criar
+nova intenção ou regra de produto, ela deve retornar à elicitação
+e à autoridade humana, em vez de ser preenchida por inferência.
+
+`OPEN-001` foi fechado: a proposta mensal inclui os treinos normais e também sessões possíveis nos feriados nacionais e nos feriados oficiais aplicáveis à cidade do Rio de Janeiro, sempre com sugestão de 07h30–09h00 e sujeitas à minha revisão antes da publicação.
+
+As decisões de produto atualmente identificadas ao longo de Q-001 a Q-013 e nas correções posteriores estão fechadas. Lacunas técnicas eventualmente identificadas no planejamento devem ser registradas como decisões técnicas ainda necessárias, sem reabrir como dúvida de produto aquilo que já foi decidido.
+
+## Contrato derivado do fluxo
+
+Os diagramas Mermaid, contratos dos estados, transições e fluxo operacional estão consolidados em [`TRAINING_FLOW_CONTRACT.md`](TRAINING_FLOW_CONTRACT.md).
+
+Esse artefato deriva as decisões Q-010 a Q-013 e explicita seus estados, condições, transições e invariantes. Ele não define arquitetura física nem autoriza implementação.
+
+## Critério para a próxima etapa
+
+Este documento e seu contrato derivado estão aptos a orientar a modelagem do domínio, desde que:
+
+1. a separação entre visão completa e primeira entrega seja refletida nos artefatos derivados;
+2. nenhuma capacidade futura seja tratada como requisito implícito da primeira entrega;
+3. disponibilidade, ocorrência, presença, participação, agenda e projeções permaneçam conceitualmente distintas;
+4. as hipóteses aceitas como risco permaneçam identificadas e sejam validadas no piloto;
+5. a modelagem preserve como questão não resolvida aquilo que não puder definir sem inventar política de produto.
+
+A elicitação está encerrada no escopo identificado. A próxima etapa é a modelagem do domínio. Requirements somente poderá começar após a conclusão dessa modelagem e a aprovação final do Gate B; decisões técnicas seguem as fases posteriores autorizadas pelo processo.

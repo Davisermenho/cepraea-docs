@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U02",
+  "records": [
+    {
+      "source_id": "SRC-U01-0004",
+      "source_path": "00-manifesto-fontes.template.yaml",
+      "extraction_id": "EXT-ca8f3d6097ae4afebcd1",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0009",
+      "source_path": "01-registro-semantico.template.yaml",
+      "extraction_id": "EXT-3a139e7222bba2c2fd6c",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0012",
+      "source_path": "02-modelo-conceitual.template.yaml",
+      "extraction_id": "EXT-2a2ca79ce0e2779b7850",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0015",
+      "source_path": "03-modelo-logico.template.yaml",
+      "extraction_id": "EXT-3f660a9cdec6fdc68c0a",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0018",
+      "source_path": "04-dicionario-dados.template.yaml",
+      "extraction_id": "EXT-5f9594dbf5cf8b49d406",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0022",
+      "source_path": "05-matriz-rastreabilidade.template.yaml",
+      "extraction_id": "EXT-d38043e43a88f19378c6",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0029",
+      "source_path": "06-requisitos-acesso.template.yaml",
+      "extraction_id": "EXT-8538045f065b4db664a4",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0034",
+      "source_path": "07-stop-gate.template.yaml",
+      "extraction_id": "EXT-f805b9eecac11eb62742",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "YAML_STRUCTURE_NOT_PARSED",
+          "detail": "UTF-8 content and line locations preserved; YAML mapping/sequence tree was not parsed because no YAML dependency is available.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0060",
+      "source_path": "CEPRAEA JULHO 2026.pdf",
+      "extraction_id": "EXT-68f02f18d8aebf19772a",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0061",
+      "source_path": "CEPRAEA — Benchmark Visual UX_UI dos Dashboards.pptx",
+      "extraction_id": "EXT-c8d08167a662d2bbb36c",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PPTX_VISUAL_CONTENT_NOT_INTERPRETED",
+          "detail": "Recovered OOXML text for slides/notes; 15 media assets plus layout, animation, chart and visual meaning were not interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0068",
+      "source_path": "CEPRAEA.pdf",
+      "extraction_id": "EXT-93207c80f8a6b4ac51c3",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        },
+        {
+          "code": "PDF_PAGES_WITHOUT_TEXT",
+          "detail": "No text layer recovered for pages: 1, 2, 3, 4",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0072",
+      "source_path": "CEPRAEA_Beach_Pro_Relatorio_Executivo_Agosto_2026.pdf",
+      "extraction_id": "EXT-1301b08753211de3b05b",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0073",
+      "source_path": "CEPRAEA_Preparacao_Competitiva_2026_CORRIGIDO.pdf",
+      "extraction_id": "EXT-db9347bdd4c65d212ab8",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0074",
+      "source_path": "CEPRAEA_Preparacao_Competitiva_2026_FINAL_ACESSIVEL.pdf",
+      "extraction_id": "EXT-a4ae5cec91ad4d94f8b5",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0075",
+      "source_path": "CEPRAEA_Preparacao_Competitiva_Ago_Set_2026.pdf",
+      "extraction_id": "EXT-b82fdd2d9186138e8091",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "PDF_TEXT_LAYER_ONLY",
+          "detail": "Text layer and page breaks were extracted; images, drawing semantics and exact visual layout were not OCRed or interpreted.",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0076",
+      "source_path": "Contêineres-de-desenvolvimento (3).json",
+      "extraction_id": "EXT-2c76d1e81b98f0686888",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "JSON_SYNTAX_ERROR",
+          "detail": "Raw UTF-8 text preserved; structured JSON parsing failed at line 39, column 1935: Expecting ',' delimiter",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0088",
+      "source_path": "HISTÓRICO-Chat-00-—-Intake-e-objetivos (1).json",
+      "extraction_id": "EXT-429b17fdf66b95281a22",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "JSON_SYNTAX_ERROR",
+          "detail": "Raw UTF-8 text preserved; structured JSON parsing failed at line 114, column 3748: Expecting ',' delimiter",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0089",
+      "source_path": "HISTÓRICO-Chat-01-—-Elicitação.json",
+      "extraction_id": "EXT-317534a40d01e2819135",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "JSON_SYNTAX_ERROR",
+          "detail": "Raw UTF-8 text preserved; structured JSON parsing failed at line 689, column 12595: Expecting ',' delimiter",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0092",
+      "source_path": "HISTÓRICO-Chat-04-—-Requisitos.json",
+      "extraction_id": "EXT-f22f2bb93b7011d3ea58",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "JSON_SYNTAX_ERROR",
+          "detail": "Raw UTF-8 text preserved; structured JSON parsing failed at line 15, column 1386: Expecting ',' delimiter",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-U01-0108",
+      "source_path": "Verificar-afirmações-da-IA.json",
+      "extraction_id": "EXT-592a2ed468736a331712",
+      "status": "PARTIAL",
+      "limitations": [
+        {
+          "code": "JSON_SYNTAX_ERROR",
+          "detail": "Raw UTF-8 text preserved; structured JSON parsing failed at line 39, column 2556: Expecting ',' delimiter",
+          "blocking": false
+        }
+      ]
+    }
+  ]
+}

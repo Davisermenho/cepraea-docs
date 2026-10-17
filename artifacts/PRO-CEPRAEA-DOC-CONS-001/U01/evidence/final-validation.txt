@@ -1,0 +1,9 @@
+FINAL VALIDATION PASS
+manifest_snapshot_records=115
+manifest_csv_records=115
+source_index_records=115
+applicable_tests_passed=6
+read_errors=0
+format_errors=5
+pending_formats=0
+duplicate_groups=0

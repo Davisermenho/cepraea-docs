@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U01",
+  "assessment": [
+    {"id": "T01", "status": "PASS", "reason": "Inventário é operação central da U01; executado em conjunto controlado."},
+    {"id": "T02", "status": "PASS", "reason": "SHA-256 é operação central da U01; executado contra digest conhecido."},
+    {"id": "T03", "status": "PASS", "reason": "Detecção de duplicatas é operação central da U01; executada em conjunto controlado."},
+    {"id": "T04", "status": "PASS", "reason": "Preservação é obrigatória na U01; executada no conjunto controlado e no corpus real."},
+    {"id": "T05", "status": "NAO_APLICAVEL", "reason": "Evidências semânticas não são produzidas na U01."},
+    {"id": "T06", "status": "NAO_APLICAVEL", "reason": "Validação de evidências semânticas pertence a unidades posteriores."},
+    {"id": "T07", "status": "NAO_APLICAVEL", "reason": "Extração de conteúdo não foi iniciada na U01."},
+    {"id": "T08", "status": "NAO_APLICAVEL", "reason": "A U01 fixa autoridade como não avaliada e não executa classificação de autoridade."},
+    {"id": "T09", "status": "NAO_APLICAVEL", "reason": "Reconciliação de contradições pertence à U03."},
+    {"id": "T10", "status": "NAO_APLICAVEL", "reason": "Afirmações normativas não são produzidas na U01."},
+    {"id": "T11", "status": "NAO_APLICAVEL", "reason": "Publicação não integra a U01."},
+    {"id": "T12", "status": "NAO_APLICAVEL", "reason": "Publicação não integra a U01."},
+    {"id": "T13", "status": "PASS", "reason": "Reexecução aplica-se às saídas determinísticas da U01; executada em conjunto controlado."},
+    {"id": "T14", "status": "PASS", "reason": "A U01 pode ser refeita após saída parcial; executado cenário controlado de manifesto interrompido."},
+    {"id": "T15", "status": "NAO_APLICAVEL", "reason": "Contrato de afirmações e recuperação controlada não é usado na U01."},
+    {"id": "T16", "status": "NAO_APLICAVEL", "reason": "Normalização textual não é usada na U01."},
+    {"id": "T17", "status": "NAO_APLICAVEL", "reason": "Segmentação, recuperação e contexto pertencem à U02 e posteriores."},
+    {"id": "T18", "status": "NAO_APLICAVEL", "reason": "Agrupamento de divergências pertence à U03."},
+    {"id": "T19", "status": "NAO_APLICAVEL", "reason": "Extração por formato pertence à U02; a U01 somente identifica e valida estruturas leves."}
+  ]
+}

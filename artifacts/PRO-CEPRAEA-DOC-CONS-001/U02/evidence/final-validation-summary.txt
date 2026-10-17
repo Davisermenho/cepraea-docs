@@ -1,0 +1,11 @@
+DONE-U02 FINAL VALIDATION PASS
+final_input=U01-approved-manifest
+sources=115/115
+extracted_text_files=115
+segments=7409
+references=774
+complete=95
+partial_with_limitations=20
+failed=0
+controlled_tests_passed=9
+preservation=115 unchanged

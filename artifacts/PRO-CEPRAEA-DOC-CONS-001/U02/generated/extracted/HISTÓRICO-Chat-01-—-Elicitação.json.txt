@@ -1,0 +1,763 @@
+[
+  {
+    "id": "c8d7926a-3281-4495-8f36-fc204346cd25",
+    "ids": [
+      "c8d7926a-3281-4495-8f36-fc204346cd25"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "nn| # Chat 01 — Elicitação                                                                                                                                                       |n| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |n|                                                                                                                                                                              |n| ## Prompt                                                                                                                                                                    |n|                                                                                                                                                                              |n| Nesta conversa você é o elicitador do projeto.                                                                                                                               |n|                                                                                                                                                                              |n| Seu objetivo é aumentar o entendimento compartilhado do domínio e do problema, não produzir soluções.                                                                        |n|                                                                                                                                                                              |n| Trabalhe sobre o PROJECT-CHARTER e o SHARED-UNDERSTANDING existentes.                                                                                                        |n|                                                                                                                                                                              |n| Para cada tema relevante:                                                                                                                                                    |n|                                                                                                                                                                              |n| 1. identifique a intenção;                                                                                                                                                   |n| 2. explore atores, fluxos, regras, exceções e restrições;                                                                                                                    |n| 3. detecte ambiguidades;                                                                                                                                                     |n| 4. diferencie fatos, decisões, hipóteses e inferências;                                                                                                                      |n| 5. faça perguntas priorizadas por impacto;                                                                                                                                   |n| 6. antes de consolidar algo importante, apresente sua interpretação para confirmação;                                                                                        |n| 7. não converta diretamente minhas frases em requisitos;                                                                                                                     |n| 8. não proponha arquitetura durante esta fase.                                                                                                                               |n|                                                                                                                                                                              |n| Dê atenção especial a condições de operação, falhas, concorrência, conectividade, responsabilidades humanas, regras oficiais do esporte, exceções e situações irreversíveis. |n|                                                                                                                                                                              |n| Periodicamente execute uma análise de lacunas:                                                                                                                               |n| - o que sabemos;                                                                                                                                                             |n| - o que achamos que sabemos;                                                                                                                                                 |n| - o que não sabemos;                                                                                                                                                         |n| - quais desconhecidos têm maior impacto.                                                                                                                                     |n|                                                                                                                                                                              |n| Quando houver saturação parcial, execute o Gate de Prontidão do Entendimento.                                                                                                |"
+      }
+    ],
+    "created_at": "2026-09-01 09:14:54",
+    "updated_at": 1788264950.683951
+  },
+  {
+    "id": "20045bc1-28e7-4a5c-b78c-c39fbfe2dcbc",
+    "ids": [
+      "1a9c0468-51a0-4d4c-9e35-7ce71fa44174",
+      "36e5d414-50cd-423f-b1cc-c021e1833d0d",
+      "305d4695-8c8e-4d50-8201-0ab97f955b98",
+      "c6d8a0c9-d749-4d70-bd91-fb77d3b8ba79",
+      "37a44a72-1247-47ae-818b-f6e78b3c5ff2",
+      "92be6fd5-add8-4652-85d4-42a77f06670d",
+      "b15f4e6b-af4c-4c18-9b48-9e3f5dd2898c",
+      "5ae9bd24-ab6e-4b03-9aa0-3311ca0004a1",
+      "7ad2f229-b391-47de-b0d7-43026b03c53a",
+      "d64ff07d-749f-44d9-8a83-9acf2416becd",
+      "6dbf3872-ed9e-4320-bf46-05f7c660fbaf",
+      "f4ab3205-31dd-403f-98d8-d8e01a8b5a9c",
+      "612fa2d6-8df6-4491-8f9b-5b5f69ee9687",
+      "a3deadac-c4f5-4488-aa95-a76ca76a54bb",
+      "f9b74e2b-19a7-4cc1-95b5-07e5fe91143b",
+      "20045bc1-28e7-4a5c-b78c-c39fbfe2dcbc"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Vou conduzir esta conversa estritamente como elicitação: consolidarei apenas o que estiver confirmado, manterei hipóteses e ambiguidades visíveis e evitarei qualquer proposta de arquitetura ou tecnologia. Primeiro vou checar o ponto de partida canônico e, a partir dele, atacar as lacunas de maior impacto."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Entendido. Nesta conversa vou operar **somente na fase de elicitação**. Não vou converter automaticamente suas respostas em requisitos nem propor arquitetura, stack, banco, framework ou componentes. O protocolo canônico exige justamente separar fatos, hipóteses, interpretações e ambiguidades, obter confirmação antes da consolidação e priorizar perguntas pelo valor de informação. nn### Entendimento atualnnHá uma limitação importante no ponto de partida: os artefatos canônicos que tenho disponíveis estão **estruturalmente preparados, mas ainda sem conteúdo de domínio confirmado**. O `PROJECT-CHARTER` identifica o projeto como **Beach Handball PWA** e status **“Em descoberta”**, porém problema, objetivos, stakeholders, escopo, restrições, hipóteses e demais campos continuam `[A confirmar]`. nnO `SHARED-UNDERSTANDING` também ainda não registra atores, conceitos, regras, fluxos, fatos ou decisões substantivas confirmadas. Portanto, não vou preencher essas lacunas usando conhecimento geral sobre beach handball nem inferências silenciosas. nn**Fato confirmado pelos artefatos:** existe um projeto denominado *Beach Handball PWA* em descoberta.nn**Declaração atual do usuário:** nesta conversa devemos aumentar o entendimento do domínio e do problema, com atenção especial a operação, falhas, concorrência, conectividade, responsabilidades humanas, regras oficiais, exceções e irreversibilidade.nn**Minha interpretação — ainda não um fato:** o melhor ponto de entrada não é catalogar telas ou funcionalidades, mas reconstruir um **episódio operacional real**. Isso tende a revelar simultaneamente atores, objetivos, fluxo, autoridade, regras e consequências das falhas.nn### Análise de lacunas inicialnn**Sabemos:** praticamente apenas a identidade do projeto e o protocolo de descoberta.nn**Achamos que sabemos:** nada de domínio que eu considere seguro consolidar neste momento.nn**Não sabemos:** quem usa o produto, em qual situação, qual problema ocorre hoje, qual informação é considerada oficial, quem possui autoridade sobre ela, quais ações podem ser corrigidas e quais se tornam irreversíveis.nn**Desconhecido de maior impacto:** o **fluxo operacional central** e a distribuição de **responsabilidade/autoridade humana**. Sem isso, explorar offline, concorrência, permissões ou regras específicas seria prematuro.nnO próprio modelo de entendimento exige explorar ator, objetivo, pré-condições, fluxo normal, exceções, “o que não pode falhar” e consequência da falha antes do gate para requisitos. nn### Questões de maior valor — rodada 1nnQuero começar com apenas **duas questões**, porque suas respostas provavelmente abrirão várias ramificações relevantes:nn**Q-001 — Episódio que o produto precisa melhorar — impacto: muito alto**nnConte-me um **caso concreto**, de preferência como acontece hoje, começando antes de uma partida e terminando quando o resultado daquela partida já não precisa mais ser manipulado:nn- quem participa;n- o que cada pessoa faz;n- quais informações precisam ser registradas ou consultadas;n- onde hoje surgem dificuldade, atraso, erro, retrabalho ou risco;n- e o que acontece quando algo dá errado.nnNão precisa organizar em requisitos nem usar linguagem técnica; prefiro a narrativa operacional como ela realmente acontece.nn**Por que isso importa:** a resposta pode alterar nossa compreensão do problema, dos atores, da fronteira do produto e do fluxo crítico ao mesmo tempo.nn**Q-002 — Autoridade sobre o estado da partida — impacto: muito alto**nnDurante esse processo, **quem tem autoridade para dizer que placar, eventos e resultado de uma partida estão corretos?** E essa autoridade muda ao longo do ciclo — por exemplo, durante o jogo, imediatamente depois e depois de alguma aprovação/homologação?nnSe houver mais de uma pessoa envolvida, descreva também o que acontece quando elas discordam.nn**Por que isso importa:** essa resposta revela responsabilidades humanas, conflitos, correções e possíveis pontos de irreversibilidade. Assumir a autoridade errada poderia distorcer grande parte do entendimento posterior.nnNão consolidarei suas próximas respostas diretamente no `SHARED-UNDERSTANDING`: primeiro apresentarei minha interpretação, ambiguidades e eventuais conflitos para sua confirmação."
+      }
+    ],
+    "created_at": "2026-09-01 09:15:12",
+    "updated_at": 1788264950.071772
+  },
+  {
+    "id": "a9d851a2-7067-4433-9536-20f91ef149c1",
+    "ids": [
+      "a9d851a2-7067-4433-9536-20f91ef149c1"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Retorno ao Chat 01 exclusivamente por duas lacunas identificadas ndurante a formalização de Requirements. n nNão reinicie a elicitação. nNão reabra decisões já fechadas. nNão produza Requirements. nNão proponha arquitetura ou implementação. n nESTADO n nGATE-B-FINAL = APPROVED n nA fase 04 — Requirements está em andamento, mas a proposta ainda nnão foi canonicalizada e Gate C não foi executado. n nO Chat 04 identificou duas lacunas que não podem ser preenchidas npor inferência porque exigem regra observável de produto. n nOBJETIVO n nResolver exclusivamente: n nREQ-ELIC-001 — política mínima de lembretes automáticos; nREQ-ELIC-002 — comportamento mínimo diante de conectividade nindisponível ou instável. n nFaça uma pergunta por vez. nApresente minha resposta de volta para confirmação antes de nconsiderá-la decidida. n nNão escolha tecnologia. n n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ n nREQ-ELIC-001 — LEMBRETES AUTOMÁTICOS n nJá está decidido que: n n“Lembretes e cobranças ordinárias são automáticos; nnão dependem de intervenção do treinador.” n nA lacuna é exclusivamente a política mínima observável. n nPrecisamos decidir, sem escolher canal ou tecnologia: n n- quem recebe lembrete; n- em qual condição; n- se existe um ou mais lembretes; n- em que momento relativo a D-5; n- quando os lembretes deixam de ocorrer. n nEvite começar sugerindo uma solução como se fosse decisão minha. nSe apresentar alternativas, deixe explícitos os trade-offs. n nA regra deve evitar simultaneamente: n n- necessidade de cobrança manual pelo treinador; n- excesso de alertas; n- mensagens para atleta que já respondeu. n n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ n nREQ-ELIC-002 — CONECTIVIDADE INSTÁVEL n nJá está decidido que o contexto real possui conectividade móvel ninstável. n nAinda NÃO está decidido: n n- offline; n- sincronização; n- cache; n- fila local; n- mecanismo técnico equivalente. n nA pergunta de produto é somente: n nQuando a conexão estiver indisponível ou degradada, quais resultados nobserváveis da primeira entrega são obrigatórios? n nExplore separadamente pelo menos: n n- consultar agenda já conhecida; n- consultar estado/próxima ação já conhecidos; n- registrar ou alterar disponibilidade; n- registrar ocorrência pós-D-5; n- ações administrativas do treinador; n- o que pode aguardar reconexão; n- como o usuário deve perceber que algo ainda não foi efetivamente n  concluído. n nNão transforme essas perguntas em arquitetura. n nSAÍDA n nPara cada decisão confirmada, produza: n nID nDecisão humana nMotivo nRegra de produto resultante nExceções nItens afetados nOrigem nStatus n nAo final produza somente uma proposta mínima de propagação para: n n- PRODUCT-DOMAIN-SPEC.md; n- 03-SHARED-UNDERSTANDING.md; n- 07-TRACEABILITY.md; nnsomente onde realmente necessário. n nNão altere 04-REQUIREMENTS.md neste Chat. n nNão execute Gate B novamente. nNão execute Gate C. nNão produza Drivers."
+      }
+    ],
+    "created_at": "2026-09-03 05:09:16",
+    "updated_at": 1788422987.238111
+  },
+  {
+    "id": "0e06ab6d-9135-4571-a65f-d4bb8a0a5652",
+    "ids": [
+      "8244e4b1-cf82-4411-bcbb-96b513714c82",
+      "d54cec26-f5a3-49b3-b35b-1d11a51ef4b9",
+      "437d02d9-76e2-473b-ba6a-9632bdb14ee3",
+      "f542edef-5c12-4d80-9d71-45a234cb774b",
+      "30614082-4445-4d5a-9bbc-e829bb330439",
+      "3cb67e26-4eca-426e-9043-f61d43534c4e",
+      "1f59df1a-8282-4876-9b53-4e91d8781065",
+      "071acd4e-6146-4420-955f-3357fcd70c27",
+      "a418784e-ba77-4578-8326-eb0b36be6553",
+      "0609211d-e1d4-448a-918f-a1911678e27a",
+      "27d8b101-cde7-4460-901d-959bdc4827a0",
+      "e95c00d9-08e5-4081-8b3d-bfacb662d15a",
+      "0c4a8d6a-928a-401d-bf13-ae2757e3cbef",
+      "461fe149-d84d-4bba-a7d8-1ba1f0ebaa9f",
+      "c943781d-1e14-4883-b5c2-d6c1780d6c6e",
+      "b18ebd05-9b7d-4ecb-963a-28d5c3d02c30",
+      "0e06ab6d-9135-4571-a65f-d4bb8a0a5652"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Entendido. Vou tratar somente `REQ-ELIC-001` primeiro, uma decisão por vez, e não considerarei sua resposta consolidada antes de devolvê-la para confirmação.nnO estado canônico já estabelece que `DISPONÍVEL`, `INDISPONÍVEL`, `TALVEZ` e `NÃO RESPONDEU` são situações distintas; `TALVEZ` é uma declaração efetiva, enquanto `NÃO RESPONDEU` é ausência de declaração. Também está fechado que lembretes/cobranças ordinárias são automáticos. O que não está definido é quem continua elegível a recebê-los. nn### REQ-ELIC-001 — Pergunta 1: destinatário e condiçãonnDurante a janela anterior a D-5, **quem deve continuar recebendo lembretes de disponibilidade?**nnHá pelo menos duas interpretações relevantes:nn- **Somente atletas em `NÃO RESPONDEU`.**  n  Trade-off: minimiza alertas e considera qualquer resposta, inclusive `TALVEZ`, suficiente para encerrar a cobrança; porém uma atleta que permanece indecisa não recebe estímulo automático para definir sua situação.nn- **Atletas em `NÃO RESPONDEU` e `TALVEZ`.**  n  Trade-off: aumenta a chance de chegar a D-5 com respostas conclusivas, mas continua enviando lembrete a alguém que tecnicamente já respondeu e aumenta o risco de excesso de alertas.nnQual dessas políticas representa o comportamento que você quer — ou existe uma terceira regra?"
+      }
+    ],
+    "created_at": "2026-09-03 05:09:41",
+    "updated_at": 1788422987.133763
+  },
+  {
+    "id": "d07eeb76-b529-4602-979d-90973c6cb771",
+    "ids": [
+      "d07eeb76-b529-4602-979d-90973c6cb771"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Confirmo que `TALVEZ` deve ser removido como opção de declaração. A atleta deve responder somente `DISPONÍVEL` ou `INDISPONÍVEL`, permanecendo em `NÃO RESPONDEU` enquanto não escolher uma delas. &#x20;rnrnrnrnEnviar o único lembrete automático de disponibilidade, somente às atletas em `NÃO RESPONDEU`. &#x20;rnrn> **Às 19h do segundo dia civil anterior ao D-5.**rnrn| SessãoFechamento em D-5LembreteTempo até o fechamento |                      |                       |          |rn| ----------------------------------------------------- | -------------------- | --------------------- | -------- |rn| Quinta às 20h                                         | sábado anterior, 20h | quinta anterior, 19h  | 49 horas |rn| Domingo às 7h30                                       | terça anterior, 7h30 | domingo anterior, 19h | 36h30    |rnrnrnrnAssim, o fluxo fica:rnrn1. A publicação da agenda comunica inicialmente a pendência.rn2. A atleta pode responder desde a publicação.rn3. Se ainda estiver em `NÃO RESPONDEU`, recebe **um único lembrete entre aproximadamente 36 e 49 horas antes do D-5**.rn4. Em D-5, o sistema encerra as respostas ordinárias.rn5. O sistema confirma ou cancela o treino imediatamente.rn6. Todas as atletas recebem imediatamente o resultado.rnrnA notificação de confirmação ou cancelamento em D-5 é fundamental: é ela que informa que a atleta já pode organizar definitivamente sua agenda para os cinco dias seguintes.rnrnMensagem do lembrete:rnrn> **Disponibilidade pendente**rn> Treino quinta, 12/09, às 20h. Responda até sábado, 07/09, às 20h: disponível ou indisponível.rnrnMensagem no fechamento:rnrn> **Treino confirmado**rn> Treino quinta, 12/09, às 20h, confirmado.rnrnou:rnrn> **Treino cancelado**rn> O treino de quinta, 12/09, às 20h, foi cancelado por falta de quórum."
+      }
+    ],
+    "created_at": "2026-09-03 06:40:57",
+    "updated_at": 1788428494.185489
+  },
+  {
+    "id": "924333d8-1365-4c00-90e9-c0fe6bb9b42a",
+    "ids": [
+      "f30171ac-c1d0-4249-8c55-0f62b4bd2de6",
+      "a1e430ce-7950-4b97-b6f4-8fc6dfed5fe2",
+      "5e5fbf06-79a3-411b-8a17-aa7ec510c135",
+      "05589937-4b48-470d-bfa7-26746d132ae4",
+      "924333d8-1365-4c00-90e9-c0fe6bb9b42a"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Sua resposta fecha a política de lembrete, mas também introduz uma **mudança explícita em uma decisão canônica anterior**: `TALVEZ` deixa de existir. Vou tratar isso como impacto controlado, não como simples detalhe editorial, e não vou consolidar nada até você confirmar minha interpretação."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Minha interpretação para confirmaçãonnSua resposta produz **duas alterações de produto relacionadas**, sendo que a primeira substitui explicitamente uma decisão canônica anterior.nn**1. Disponibilidade passa a ser binária.** A atleta pode declarar somente `DISPONÍVEL` ou `INDISPONÍVEL`. Enquanto não escolher uma delas, permanece em `NÃO RESPONDEU`. Portanto, `TALVEZ` deixa de existir como declaração válida na primeira entrega.nnIsso contradiz deliberadamente o estado canônico atual, que ainda registra `TALVEZ` como declaração distinta tanto no contrato do fluxo quanto no entendimento compartilhado.   Pela sua decisão atual, esses trechos deverão ser tratados como **substituídos**, não reinterpretados silenciosamente.nn**2. Política mínima de lembrete automático.**nn- A publicação da agenda comunica inicialmente a pendência de disponibilidade.n- A atleta pode responder desde a publicação.n- Existe **exatamente um lembrete automático ordinário por sessão**.n- Ele é enviado **somente** às atletas que ainda estiverem em `NÃO RESPONDEU`.n- O instante é **19h do segundo dia civil anterior ao D-5**.n- Quem já respondeu `DISPONÍVEL` ou `INDISPONÍVEL` não recebe esse lembrete.n- Não existem outros lembretes ordinários antes do fechamento.n- Em D-5, a janela encerra e os lembretes cessam.n- A sessão é imediatamente confirmada ou cancelada segundo as regras já fechadas.n- **Todas as atletas** recebem imediatamente o resultado de D-5, independentemente da resposta individual que tenham dado.nnA comunicação do resultado em D-5 já é coerente com o contrato vigente, que prevê comunicação obrigatória tanto na confirmação quanto no cancelamento automático; sua resposta agora explicita também sua finalidade de produto: permitir que a atleta organize definitivamente os cinco dias seguintes. nnAs mensagens que você forneceu interpreto como **conteúdo observável de referência**, não como decisão sobre canal ou tecnologia.nn### Impacto identificadonnA remoção de `TALVEZ` afeta pelo menos a definição de Disponibilidade, `RULE-005`, responsabilidades da atleta e partes do fluxo que hoje preservam ou mencionam `TALVEZ`. O estado atual diz expressamente que somente `DISPONÍVEL` conta para quórum e que `TALVEZ` e `NÃO RESPONDEU` não contam; com sua mudança, a menção a `TALVEZ` deixa de ser necessária. nnAinda **não considero nada disso decidido nesta rodada**.nn**Você confirma que esta interpretação — incluindo a remoção de `TALVEZ` como substituição explícita da regra canônica anterior e a política de exatamente um lembrete às 19h do segundo dia civil anterior ao D-5 — representa integralmente sua decisão para `REQ-ELIC-001`?**"
+      }
+    ],
+    "created_at": "2026-09-03 06:41:21",
+    "updated_at": 1788428490.788196
+  },
+  {
+    "id": "a0262ab4-3d7d-48c3-b9a7-5d404585d92e",
+    "ids": [
+      "a0262ab4-3d7d-48c3-b9a7-5d404585d92e"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "`TALVEZ` é removido como opção de declaração. Antes de D-5, a atleta pode declarar e alterar somente `DISPONÍVEL` ou `INDISPONÍVEL`. Enquanto não declarar uma dessas opções, permanece em `NÃO RESPONDEU`. Somente `DISPONÍVEL` conta no cálculo do quórum.nnPara cada atleta e sessão publicada no fluxo ordinário, o sistema envia no máximo um lembrete automático de disponibilidade. O lembrete é enviado somente se, às 19h do segundo dia civil anterior ao D-5, no fuso da sessão — atualmente `America/Sao_Paulo` — a atleta ainda estiver em `NÃO RESPONDEU`.nnQualquer declaração enviada antes do disparo encerra a elegibilidade ao lembrete. Cancelamento da sessão ou chegada de D-5 também elimina qualquer lembrete pendente.nnQuando uma sessão for publicada no instante ou depois do horário previsto para o lembrete, mas antes de D-5, a comunicação da publicação substitui o lembrete, informa o prazo exato e solicita `DISPONÍVEL` ou `INDISPONÍVEL`. Nenhum outro lembrete é enviado antes do fechamento.nnA pendência permanece visível dentro do aplicativo. O sistema envia uma notificação ao dispositivo quando a atleta tiver autorizado esse canal. Comunicações simultâneas são agrupadas, sem duplicação ordinária por WhatsApp, e-mail ou SMS.nnEm D-5, o sistema encerra as declarações ordinárias, calcula o quórum e confirma ou cancela a sessão. Nesse instante, gera, registra e disponibiliza a comunicação do resultado para todas as atletas e tenta entregá-la pelo canal autorizado."
+      }
+    ],
+    "created_at": "2026-09-03 07:13:34",
+    "updated_at": 1788430437.126363
+  },
+  {
+    "id": "1f699cb8-4e83-4509-a49c-9742597e7e44",
+    "ids": [
+      "3af34b43-9fdd-4b0f-8f20-b611e13fb356",
+      "ccfa5671-a00b-4021-b0f6-5ac3cf3a3592",
+      "1f699cb8-4e83-4509-a49c-9742597e7e44"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Confirmado. `REQ-ELIC-001` está decidido.nn### DEC-018 — Disponibilidade binária e lembrete automático úniconn**Decisão humana**  n`TALVEZ` é removido da primeira entrega. Antes de D-5, a atleta pode declarar e alterar somente `DISPONÍVEL` ou `INDISPONÍVEL`; enquanto não declarar nenhuma delas, permanece em `NÃO RESPONDEU`. Somente `DISPONÍVEL` conta para quórum.nnPara cada atleta e sessão publicada no fluxo ordinário, existe no máximo um lembrete automático de disponibilidade, enviado somente se a atleta continuar em `NÃO RESPONDEU` às **19h do segundo dia civil anterior ao D-5**, no fuso da sessão — atualmente `America/Sao_Paulo`.nn**Motivo**  nEliminar cobrança manual do treinador sem produzir excesso de alertas nem lembrar atletas que já responderam.nn**Regra de produto resultante**n- publicação comunica inicialmente a pendência e o prazo;n- declaração anterior ao instante do lembrete elimina a elegibilidade;n- cancelamento da sessão ou chegada de D-5 elimina qualquer lembrete pendente;n- se a sessão for publicada no instante ou depois do horário previsto para o lembrete, mas antes de D-5, a própria comunicação de publicação substitui o lembrete;n- não existe segundo lembrete ordinário;n- a pendência permanece visível no produto;n- quando autorizado pela atleta, o produto tenta entregar a comunicação também por notificação no dispositivo;n- comunicações simultâneas são agrupadas, sem duplicação ordinária por WhatsApp, e-mail ou SMS;n- em D-5, todas as atletas recebem a comunicação do resultado da sessão, além de ela ser registrada e disponibilizada no produto.nn**Exceções**n- publicação tardia antes de D-5 substitui o lembrete;n- sessão cancelada não gera lembrete posterior;n- ausência de autorização para notificação no dispositivo não elimina a disponibilidade da comunicação dentro do produto.nn**Itens afetados**  nDefinição de Disponibilidade; regras que hoje mencionam `TALVEZ`; fluxo de declaração; política de comunicação da publicação, lembrete e resolução em D-5. O entendimento canônico atual ainda contém `TALVEZ`, portanto esta decisão o substitui explicitamente. nn**Origem**  n`REQ-ELIC-001` — decisão explícita do usuário em 2026-09-03.nn**Status**  n`CONFIRMADO — aguardando propagação canônica ao fim desta rodada`.nn---nn## REQ-ELIC-002 — Pergunta 1: agenda já conhecidannAgora somente conectividade, começando pela primeira leitura.nnSe a conexão estiver indisponível ou degradada, **é obrigatório na primeira entrega que a atleta e o treinador consigam continuar consultando as sessões da agenda que o produto já havia mostrado anteriormente naquele dispositivo?**nnA distinção importante é entre:nn- **Sim:** a agenda já conhecida continua consultável, mesmo que possa estar desatualizada em relação a alterações feitas enquanto não há conexão.n- **Não:** sem conexão suficiente, o produto pode impedir a consulta e informar que precisa reconectar.nnQual comportamento você decide?"
+      }
+    ],
+    "created_at": "2026-09-03 07:13:44",
+    "updated_at": 1788430753.025313
+  },
+  {
+    "id": "6e95eb76-dfb2-4f2f-96c8-af8ce277205d",
+    "ids": [
+      "6e95eb76-dfb2-4f2f-96c8-af8ce277205d"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "DECIDO: SIM.rnrnQuando a conexão estiver indisponível ou degradada, atleta erntreinador devem continuar conseguindo consultar, naquele dispositivo,rnas sessões da agenda que o produto já havia disponibilizadornanteriormente.rnrnEntretanto, essa informação deve ser apresentada explicitamenterncomo a última informação conhecida pelo dispositivo, e não comorngarantia de que representa o estado mais recente existente nornsistema.rnrnRegras:rnrn1. A ausência de conexão não deve impedir a consulta da agendarn   anteriormente conhecida naquele dispositivo.rnrn2. Enquanto não for possível verificar atualizações, o produto devern   deixar perceptível que a informação pode estar desatualizada.rnrn3. O usuário deve conseguir distinguir:rn   - informação atualmente verificada;rn   - última informação conhecida ainda não revalidada.rnrn4. Quando útil para essa distinção, o produto deve informar quandorn   os dados foram atualizados/verificados pela última vez.rnrn5. A consulta offline não pode transformar estado antigo em fatorn   atual. Por exemplo, uma sessão anteriormente CONFIRMADO pode terrn   sido posteriormente remarcada ou cancelada em outro dispositivo.rnrn6. Quando a conexão retornar, o produto deve buscar reconciliar arn   visualização com o estado vigente antes de continuar apresentandorn   a informação anterior como atual.rnrn7. Se aquele dispositivo nunca recebeu determinada sessão ou períodorn   da agenda, não existe obrigação de disponibilizar offline aquilorn   que nunca foi conhecido por ele.rnrnEsta decisão define somente o comportamento observável de consulta.rnrnEla NÃO decide ainda:rnrn- tecnologia de armazenamento local;rn- cache;rn- banco local;rn- service worker;rn- estratégia de sincronização;rn- resolução técnica de conflitos;rn- prazo de retenção dos dados locais.rnrnEsses mecanismos continuam para fases técnicas posteriores.rnrnTambém NÃO estou decidindo nesta resposta o comportamento offlinernde escrita, incluindo:rnrn- declarar disponibilidade;rn- alterar disponibilidade;rn- registrar ocorrência pós-D-5;rn- publicar, cancelar ou remarcar sessão;rn- consolidar ou retificar presença/participação.rnrnQuero decidir essas operações separadamente nas próximas perguntasrnde REQ-ELIC-002."
+      }
+    ],
+    "created_at": "2026-09-03 10:33:52",
+    "updated_at": 1788442449.443444
+  },
+  {
+    "id": "14d56b7d-e5e2-461c-9e2b-668c6b680e24",
+    "ids": [
+      "b2eb7794-f2da-4c47-acc7-210f4248c886",
+      "14d56b7d-e5e2-461c-9e2b-668c6b680e24"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Minha interpretação para confirmação — REQ-ELIC-002 / consulta da agendannEntendo sua decisão assim:nn**Quando a conexão estiver indisponível ou degradada, a primeira entrega deve continuar permitindo, naquele dispositivo, a consulta das sessões da agenda que já tenham sido disponibilizadas anteriormente a ele.**nnEssa consulta tem uma condição semântica obrigatória: a informação não pode ser apresentada como necessariamente atual. O produto deve distinguir entre:nn- **informação atualmente verificada**; en- **última informação conhecida pelo dispositivo, ainda não revalidada**.nnQuando contribuir para essa distinção, deve ser visível também quando a informação foi verificada ou atualizada pela última vez.nnO dado anteriormente conhecido não adquire autoridade por estar disponível localmente. Assim, uma sessão vista como `CONFIRMADO` pode já ter sido cancelada, remarcada ou alterada em outro contexto; durante a ausência de conexão, o produto deve tornar perceptível essa possibilidade.nnQuando a conexão retornar, o comportamento obrigatório é tentar revalidar/reconciliar a visualização com o estado vigente antes de continuar apresentando o dado anterior como atual.nnNão existe obrigação de disponibilizar sem conexão uma sessão ou período que aquele dispositivo **nunca recebeu anteriormente**.nn### Limite desta decisãonnInterpreto também que esta decisão define exclusivamente o **resultado observável da leitura da agenda**. Ela não escolhe armazenamento local, cache, banco local, service worker, sincronização, retenção ou resolução técnica de conflitos.nnE ela **não autoriza ainda nenhuma escrita sem conectividade**: disponibilidade, ocorrência pós-D-5, ações administrativas, presença ou participação continuam deliberadamente abertas nesta rodada.nnIsso é consistente com o contexto canônico já registrado: conectividade móvel instável é fato do ambiente, enquanto a estratégia técnica de offline/sincronização permanece explicitamente não decidida.  nn**Você confirma que esta interpretação representa integralmente sua decisão sobre a consulta da agenda já conhecida?**"
+      }
+    ],
+    "created_at": "2026-09-03 10:33:59",
+    "updated_at": 1788442447.141924
+  },
+  {
+    "id": "33158475-689c-41cc-a7ba-0f1c61da007d",
+    "ids": [
+      "33158475-689c-41cc-a7ba-0f1c61da007d"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Confirmo integralmente essa interpretação.rnrnREQ-ELIC-002 — Consulta da agenda já conhecidarn= CONFIRMADO nesta parte.rnrnFica decidido que:rnrn- atleta e treinador devem conseguir consultar, sem conexão suficiente,rn  as sessões que aquele dispositivo já conhecia anteriormente;rn- essa informação deve ser semanticamente distinguida de informaçãorn  atualmente verificada;rn- o produto deve tornar perceptível quando estiver apresentando arn  última informação conhecida ainda não revalidada;rn- quando contribuir para essa compreensão, deve informar quando osrn  dados foram verificados/atualizados pela última vez;rn- informação disponível localmente não adquire autoridade de estadorn  atual apenas por continuar acessível;rn- quando a conectividade retornar, o produto deve tentar revalidar ern  reconciliar a leitura com o estado vigente;rn- não existe obrigação offline sobre conteúdo que aquele dispositivorn  nunca tenha recebido.rnrnEsta decisão trata exclusivamente de LEITURA da agenda.rnrnEla não decide:rnrn- armazenamento local;rn- cache;rn- banco local;rn- service worker;rn- mecanismo de sincronização;rn- retenção local;rn- resolução técnica de conflitos.rnrnTambém não autoriza ainda escrita sem conectividade.rnrnContinuam abertas, para perguntas separadas de REQ-ELIC-002:rnrn- declarar/alterar disponibilidade;rn- registrar ocorrência pós-D-5;rn- ações administrativas do treinador;rn- presença e participação;rn- comportamento de operações iniciadas sem conexão ou durante perdarn  de conexão.rnrnPode prosseguir para a próxima pergunta de REQ-ELIC-002."
+      }
+    ],
+    "created_at": "2026-09-03 10:37:04",
+    "updated_at": 1788442675.649453
+  },
+  {
+    "id": "f692db7b-b333-42cc-ab0b-ce76337a29df",
+    "ids": [
+      "69983177-e106-4477-862a-ed4046189a66",
+      "f692db7b-b333-42cc-ab0b-ce76337a29df"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### DEC-019 — Consulta da agenda já conhecida sem conectividadenn**ID**  n`DEC-019`nn**Decisão humana**  nAtleta e treinador devem conseguir consultar, naquele dispositivo, as sessões da agenda já anteriormente conhecidas mesmo sem conectividade suficiente. Essas informações devem ser explicitamente distinguíveis de dados atualmente verificados.nn**Motivo**  nA conectividade móvel instável faz parte do contexto real de uso, mas informação antiga não pode ser apresentada como se tivesse autoridade de estado atual. nn**Regra de produto resultante**  n- agenda anteriormente conhecida continua consultável;n- dado não revalidado deve ser perceptível como “última informação conhecida”;n- quando útil, o produto informa a última verificação/atualização;n- dado antigo não se torna fato atual por continuar disponível;n- ao retornar a conectividade, o produto tenta revalidar/reconciliar a leitura;n- não há obrigação de disponibilizar sem conexão conteúdo nunca recebido naquele dispositivo.nn**Exceções**  nNenhuma obrigação de leitura offline para sessões ou períodos nunca anteriormente disponibilizados ao dispositivo.nn**Itens afetados**  nConsulta da agenda; percepção de atualidade dos dados; comportamento após retorno da conectividade.nn**Origem**  n`REQ-ELIC-002` — decisão explícita do usuário em 2026-09-03.nn**Status**  n`CONFIRMADO — aguardando propagação canônica ao fim da rodada`.nn---nn## REQ-ELIC-002 — Próxima pergunta: estado e próxima ação já conhecidosnnO escopo vigente prevê que atleta e treinador consigam consultar **estado do compromisso e próxima ação**. nnQuando não houver conectividade suficiente, **o mesmo princípio decidido para a agenda deve valer também para o estado e a próxima ação que aquele dispositivo já conhecia?**nnPor exemplo, o dispositivo havia mostrado:nn- sessão `PUBLICADO`;n- “Responder disponibilidade até sábado, 20h”;n- ou sessão `CONFIRMADO`.nnSem conexão, ele poderia continuar mostrando isso explicitamente como **último estado/próxima ação conhecidos, ainda não revalidados**, mesmo sabendo que uma alteração pode ter ocorrido em outro lugar.nnVocê decide **SIM**, aplicando a mesma semântica de informação não verificada, ou quer uma regra diferente para estado/próxima ação?"
+      }
+    ],
+    "created_at": "2026-09-03 10:37:34",
+    "updated_at": 1788442668.584621
+  },
+  {
+    "id": "94d86fbc-bb9c-408e-8107-8cb7bb1225c7",
+    "ids": [
+      "94d86fbc-bb9c-408e-8107-8cb7bb1225c7"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "```textnDECIDO: SIM, aplicando o mesmo princípio de informação nãonrevalidada, com uma proteção semântica adicional para a próxima ação.nnQuando não houver conectividade suficiente:nn1. O estado da sessão anteriormente conhecido naquele dispositivon   deve continuar consultável.nn2. Esse estado deve ser explicitamente distinguido de um estadon   atualmente verificado.nn3. A próxima ação anteriormente conhecida também pode continuarn   visível, mas deve ser apresentada como a última próxima açãon   conhecida, ainda não revalidada.nn4. O produto NÃO deve apresentar uma próxima ação não revalidadan   como se fosse uma instrução certamente vigente.nn5. Quando o próprio dispositivo puder determinar, sem consultarn   informação externa, que a ação conhecida perdeu validade temporal,n   ele não deve continuar apresentando-a como ação executável atual.nn   Exemplo:n   se a última ação conhecida eran   “Responder disponibilidade até sábado, 20h”n   e esse prazo já passou, o produto deve deixar perceptível quen   aquela ação conhecida expirou e que o estado atual precisa sern   revalidado.nn6. Mesmo antes do prazo conhecido expirar, deve permanecer perceptíveln   que uma alteração ocorrida em outro contexto pode ter tornado on   estado ou a ação desatualizados.nn7. Ao retornar a conectividade, o produto deve tentar revalidar on   estado e a próxima ação antes de voltar a apresentá-los como atuais.nn8. Se aquele dispositivo nunca recebeu determinado estado ou próximan   ação, não existe obrigação de inventá-los ou disponibilizá-losn   sem conexão.nnExemplos sem conectividade:nn- `CONFIRMADO`n  → pode aparecer como último estado conhecido, não revalidado.nn- `Responder disponibilidade até sábado, 20h`n  → pode aparecer como última ação conhecida antes desse prazo,n    explicitamente não revalidada.nn- depois de sábado, 20hn  → não deve continuar aparecendo como uma ação atualmente válida;n    deve indicar que o prazo conhecido expirou e que o estado atualn    ainda precisa ser revalidado.nnEsta decisão NÃO autoriza executar a próxima ação sem conectividade.nnEla define somente a leitura e a interpretação segura de:nn- estado já conhecido;n- próxima ação já conhecida.nnContinuam deliberadamente abertas as decisões sobre escrita semnconectividade, incluindo disponibilidade, ocorrência pós-D-5,nações administrativas, presença e participação.nnTambém não escolho nesta decisão:nn- cache;n- armazenamento local;n- sincronização;n- banco local;n- service worker;n- resolução técnica de conflitos;n- mecanismo de detecção de conectividade.n```"
+      }
+    ],
+    "created_at": "2026-09-03 12:34:19",
+    "updated_at": 1788449676.804727
+  },
+  {
+    "id": "4b3059d5-41e6-49c0-99a5-36e45003bdc2",
+    "ids": [
+      "f54133a5-1667-4cb7-8bac-ee00a942365b",
+      "4b3059d5-41e6-49c0-99a5-36e45003bdc2"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Minha interpretação para confirmação — REQ-ELIC-002 / estado e próxima ação já conhecidosnnEntendo sua decisão assim:nn**Estado da sessão já conhecido** e **próxima ação já conhecida** continuam consultáveis sem conectividade suficiente, desde que sejam apresentados como informações **não revalidadas**.nnHá uma proteção adicional para a próxima ação: ela não pode ser apresentada apenas como “desatualizada possivelmente”; o produto também deve impedir que uma ação cujo prazo conhecido já expirou continue parecendo executável.nnPortanto:nn- um estado como `CONFIRMADO` pode continuar visível como **último estado conhecido, não revalidado**;n- uma ação como `Responder disponibilidade até sábado, 20h` pode continuar visível antes desse prazo como **última próxima ação conhecida, não revalidada**;n- mesmo antes do prazo, deve ser perceptível que uma mudança ocorrida em outro contexto pode tê-la invalidado;n- depois do prazo conhecido, essa ação não pode continuar sendo apresentada como vigente ou executável;n- nesse caso, o produto deve indicar que **o prazo conhecido expirou e o estado atual ainda precisa ser revalidado**;n- ao retornar a conectividade, estado e próxima ação devem ser revalidados antes de voltarem a ser apresentados como atuais;n- o produto não inventa estado ou próxima ação que aquele dispositivo nunca tenha recebido.nnInterpreto também uma distinção importante:nn**“o dispositivo consegue determinar que o prazo conhecido expirou” não significa que ele determine qual é o novo estado da sessão.** Ele pode concluir apenas que a antiga ação temporalmente não é mais válida; `CONFIRMADO`, `CANCELADO` ou qualquer próxima ação posterior continuam dependendo de revalidação.nnEsta decisão permanece exclusivamente de **leitura e interpretação segura**. Ela não autoriza execução sem conectividade e não escolhe mecanismo técnico de armazenamento, sincronização ou detecção de conexão.nn**Você confirma integralmente essa interpretação para esta parte de `REQ-ELIC-002`?**"
+      }
+    ],
+    "created_at": "2026-09-03 12:34:30",
+    "updated_at": 1788449676.668377
+  },
+  {
+    "id": "2798807e-8ba2-4b92-a8a2-406f34c86095",
+    "ids": [
+      "2798807e-8ba2-4b92-a8a2-406f34c86095"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Confirmo integralmente esta interpretação.rnrnREQ-ELIC-002 — Estado e próxima ação já conhecidosrn= CONFIRMADO nesta parte.rnrnFica decidido que:rnrn- o estado da sessão anteriormente conhecido pode continuarrn  consultável sem conectividade suficiente, desde que sejarn  apresentado como não revalidado;rnrn- a próxima ação anteriormente conhecida também pode continuarrn  consultável como informação não revalidada;rnrn- uma próxima ação não revalidada não pode ser apresentada comorn  instrução certamente vigente;rnrn- se o próprio dispositivo puder determinar, apenas a partir dasrn  informações temporais já conhecidas, que o prazo daquela açãorn  expirou, deve deixar de apresentá-la como ação executável atual;rnrn- reconhecer que a ação expirou NÃO autoriza inferir qual é o novorn  estado da sessão nem qual passou a ser a nova próxima ação;rnrn- após a expiração conhecida, o produto deve informar que a açãorn  anterior perdeu validade temporal e que o estado atual aindarn  precisa ser revalidado;rnrn- mesmo antes da expiração, deve ser perceptível que alteraçõesrn  ocorridas em outro contexto podem ter tornado o estado ou a açãorn  desatualizados;rnrn- quando a conectividade retornar, estado e próxima ação devem serrn  revalidados/reconciliados antes de voltarem a ser apresentadosrn  como atuais;rnrn- o produto não deve inventar estado ou próxima ação que aquelern  dispositivo nunca tenha recebido.rnrnEsta decisão permanece exclusivamente no domínio de LEITURA ernINTERPRETAÇÃO SEGURA.rnrnEla não autoriza execução ou escrita sem conectividade e não decidernarmazenamento local, cache, sincronização, reconciliação técnica ourndetecção de conectividade.rnrnPode consolidar esta parte de REQ-ELIC-002 e prosseguir para arnpróxima pergunta."
+      }
+    ],
+    "created_at": "2026-09-03 13:20:36",
+    "updated_at": 1788452449.454485
+  },
+  {
+    "id": "d89d1fbd-fe6e-4c57-8e8d-103b2387d5c7",
+    "ids": [
+      "7ea2438e-0a9e-444e-94c6-8194e30a8792",
+      "d89d1fbd-fe6e-4c57-8e8d-103b2387d5c7"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### DEC-020 — Estado e próxima ação já conhecidos sem conectividadenn**ID**  n`DEC-020`nn**Decisão humana**  nSem conectividade suficiente, o estado da sessão e a próxima ação anteriormente conhecidos naquele dispositivo podem continuar consultáveis, desde que sejam apresentados como **não revalidados**.nnA próxima ação possui proteção semântica adicional: ela não pode ser apresentada como instrução certamente vigente e, se o próprio dispositivo puder concluir apenas pelos dados temporais já conhecidos que o prazo expirou, deve deixar de apresentá-la como ação executável atual.nn**Motivo**  nPreservar utilidade em conectividade instável sem transformar informação antiga em estado atual nem induzir o usuário a executar uma ação possivelmente inválida.nn**Regra de produto resultante**n- estado conhecido continua consultável como último estado conhecido, não revalidado;n- próxima ação conhecida continua consultável como última próxima ação conhecida, não revalidada;n- mesmo antes do prazo conhecido expirar, deve ser perceptível que outra alteração pode tê-la tornado desatualizada;n- quando o prazo conhecido expirar, a ação deixa de parecer executável;n- a expiração permite concluir apenas que a ação anterior perdeu validade temporal;n- a expiração **não** permite inferir novo estado nem nova próxima ação;n- após a expiração, o produto informa que o estado atual precisa ser revalidado;n- ao retornar a conectividade, estado e próxima ação devem ser revalidados/reconciliados antes de voltarem a ser apresentados como atuais;n- não existe obrigação de inventar estado ou próxima ação nunca recebidos naquele dispositivo.nn**Exceções**  nNenhuma autorização de execução decorre da mera disponibilidade da informação local.nn**Itens afetados**  nConsulta do estado da sessão; consulta da próxima ação; percepção de atualidade; tratamento visual/semântico de prazo expirado; comportamento após retorno da conectividade.nn**Origem**  n`REQ-ELIC-002` — decisão explícita do usuário em 2026-09-03.nn**Status**  n`CONFIRMADO — aguardando propagação canônica ao fim da rodada`.nnO entendimento canônico já prevê “estado simples do compromisso e próxima ação” para atleta e treinador; esta decisão acrescenta apenas o comportamento observável quando esses dados não podem ser revalidados. nn### REQ-ELIC-002 — Próxima pergunta: declarar ou alterar disponibilidadennAgora entramos na primeira **escrita**.nnQuando a atleta estiver sem conectividade suficiente e tentar declarar ou alterar sua disponibilidade antes de D-5, qual resultado observável você exige na primeira entrega?nnA decisão central é entre dois comportamentos de produto:nn- **A ação não é concluída sem conexão suficiente.** O produto informa claramente que a alteração ainda não foi registrada e exige nova tentativa quando houver conectividade.n- **A atleta pode concluir a ação naquele momento, mesmo sem conexão suficiente**, ficando claramente indicado que o registro ainda não foi efetivamente confirmado pelo sistema e pode depender de reconexão posterior.nnO segundo comportamento é mais resiliente para a atleta, mas cria uma questão de produto relevante: o que acontece se D-5 chegar antes de essa alteração ser efetivamente reconhecida pelo estado vigente.nn**Qual desses comportamentos você decide para declaração/alteração de disponibilidade?**"
+      }
+    ],
+    "created_at": "2026-09-03 13:20:40",
+    "updated_at": 1788452449.184479
+  },
+  {
+    "id": "5194c867-2b3b-421e-80f4-2fa421463f6c",
+    "ids": [
+      "5194c867-2b3b-421e-80f4-2fa421463f6c"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "DECIDO uma terceira formulação.rnrnQuando a atleta estiver antes de D-5 e sem conectividade suficiente,rno produto pode permitir que ela registre naquele dispositivo suarnintenção de declarar ou alterar a disponibilidade.rnrnEntretanto, essa ação NÃO é considerada uma declaração efetivamenternregistrada enquanto não houver confirmação pelo estado vigente dornsistema.rnrnPortanto, devem existir semanticamente três situações distintas:rnrn1. declaração confirmada pelo sistema;rn2. ação local pendente de confirmação;rn3. ausência de declaração confirmada.rnrnA ação local pendente:rnrn- deve ser claramente apresentada como ainda não registrada;rn- não pode ser apresentada à atleta como operação concluída;rn- não conta para o cálculo do quórum;rn- não transforma `NÃO RESPONDEU` em `DISPONÍVEL` ou `INDISPONÍVEL`rn  no estado vigente enquanto não houver confirmação;rn- deve poder ser reconhecida pelo usuário como algo que ainda dependern  de conclusão posterior.rnrnSe a conectividade retornar antes de D-5, o produto deve tentarrnconcluir a operação e somente após confirmação apresentá-la comorndeclaração registrada.rnrnSe D-5 for alcançado antes de a operação pendente ser confirmada:rnrn- ela NÃO deve alterar retroativamente a resolução realizada em D-5;rn- ela NÃO deve ser contada como disponibilidade existente no fechamento;rn- a atleta deve conseguir perceber que sua tentativa não foi registradarn  a tempo;rn- o produto não deve fingir que a declaração foi aceita antes do prazo.rnrnA resolução em D-5 utiliza somente declarações efetivamente reconhecidasrnpelo estado vigente até aquele instante.rnrnEsta decisão preserva:rnrnD-5 = fronteira temporal operacionalrnrnernrnação local pendente ≠ declaração confirmada.rnrnNão estou decidindo nesta resposta:rnrn- armazenamento local;rn- fila técnica;rn- mecanismo de retry;rn- sincronização;rn- service worker;rn- banco local;rn- protocolo de conflito;rn- confiança no relógio do dispositivo;rn- implementação da confirmação.rnrnEsses mecanismos permanecem para fases técnicas posteriores.rnrnTambém não estou decidindo ainda o comportamento offline de:rnrn- ocorrência pós-D-5;rn- publicação/remarcação/cancelamento;rn- presença;rn- participação;rn- retificação."
+      }
+    ],
+    "created_at": "2026-09-03 13:22:50",
+    "updated_at": 1788452583.804157
+  },
+  {
+    "id": "29fb3959-8784-4ca7-8c9a-977bb2975941",
+    "ids": [
+      "05b9e0f8-f064-487d-a83d-d014da4c37b5",
+      "29fb3959-8784-4ca7-8c9a-977bb2975941"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Minha interpretação para confirmação — REQ-ELIC-002 / disponibilidade sem conectividadennEntendo sua decisão como uma separação entre **estado da declaração** e **estado da tentativa de operação**.nnA `ação local pendente de confirmação` **não é uma terceira opção de disponibilidade**. As únicas declarações continuam sendo `DISPONÍVEL` e `INDISPONÍVEL`; `NÃO RESPONDEU` continua significando ausência de declaração confirmada.nnAssim, antes de D-5 podem coexistir semanticamente:nn- **declaração confirmada pelo sistema** — `DISPONÍVEL` ou `INDISPONÍVEL`;n- **ação local pendente** — intenção ainda não reconhecida pelo estado vigente;n- **ausência de declaração confirmada** — inclusive quando existe uma tentativa local pendente que ainda não foi aceita.nnA tentativa pendente deve permanecer claramente marcada como **não concluída** e:nn- não conta para quórum;n- não altera o estado vigente da declaração;n- não pode produzir aparência de sucesso;n- pode ser concluída posteriormente se a conectividade retornar antes de D-5 e houver confirmação;n- somente depois dessa confirmação passa a valer como declaração registrada.nn### Fronteira de D-5nnInterpreto D-5 como uma fronteira forte de autoridade temporal, coerente com a regra canônica vigente de fechamento exato em `início_da_sessão − 120 horas`. nnSe D-5 ocorrer enquanto a tentativa ainda estiver pendente:nn- a resolução considera exclusivamente declarações efetivamente reconhecidas até aquele instante;n- a tentativa pendente não participa do quórum;n- não pode ser confirmada depois como se tivesse sido aceita antes de D-5;n- não pode alterar retroativamente confirmação ou cancelamento já produzidos;n- a atleta deve conseguir perceber que sua tentativa **não foi registrada a tempo**.nnTambém interpreto que sua decisão **não define ainda o destino técnico ou funcional posterior dessa tentativa pendente depois de D-5** — por exemplo, descartá-la, preservá-la apenas como evidência da tentativa ou oferecer alguma ação pós-fechamento. Isso não deve ser inferido desta decisão e pode ser tratado quando discutirmos ocorrência pós-D-5.nnNenhum mecanismo técnico de armazenamento, retry, sincronização, relógio ou conflito está sendo decidido.nn**Você confirma integralmente essa interpretação, especialmente que “ação local pendente” é estado da operação e não um novo valor de disponibilidade?**"
+      }
+    ],
+    "created_at": "2026-09-03 13:22:55",
+    "updated_at": 1788452583.469064
+  },
+  {
+    "id": "665c2c48-3b8e-47bf-b9d1-9842324baf84",
+    "ids": [
+      "665c2c48-3b8e-47bf-b9d1-9842324baf84"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Confirmo integralmente esta interpretação.rnrnREQ-ELIC-002 — Disponibilidade sem conectividadern= CONFIRMADO nesta parte.rnrnEm especial, fica explicitamente decidido que:rnrn`AÇÃO LOCAL PENDENTE` é estado da tentativa/operação e NÃO é umrnnovo valor de Disponibilidade.rnrnOs únicos valores de declaração da primeira entrega permanecem:rnrn- `DISPONÍVEL`;rn- `INDISPONÍVEL`.rnrnEnquanto nenhuma dessas declarações tiver sido efetivamenternconfirmada pelo estado vigente do sistema, a atleta permanece,rnpara fins operacionais e de quórum, em:rnrn`NÃO RESPONDEU`.rnrnAssim, pode existir simultaneamente:rnrnDisponibilidade vigente:rn`NÃO RESPONDEU`rnrnernrnEstado da tentativa:rn`PENDENTE DE CONFIRMAÇÃO`rnrnsem que a tentativa pendente:rnrn- conte para o quórum;rn- altere a declaração vigente;rn- seja apresentada como operação concluída;rn- seja considerada recebida antes de D-5.rnrnSe houver confirmação antes de D-5, a tentativa passa a produzirrna declaração correspondente:rnrn`DISPONÍVEL` ou `INDISPONÍVEL`.rnrnSe D-5 ocorrer antes dessa confirmação:rnrn- a resolução utiliza somente declarações confirmadas até aquelern  instante;rn- a tentativa pendente não participa do quórum;rn- não pode posteriormente ser reconhecida como se tivesse sidorn  aceita antes de D-5;rn- não pode alterar retroativamente o resultado produzido em D-5;rn- a atleta deve perceber que sua tentativa não foi registrada a tempo.rnrnConfirmo também que esta decisão NÃO determina ainda o destinornposterior da tentativa que permaneceu pendente quando D-5 ocorreu.rnrnNão está decidido nesta parte se ela será:rnrn- descartada;rn- preservada apenas como evidência da tentativa;rn- convertida ou apresentada como possível ação pós-fechamento;rn- tratada de alguma outra forma.rnrnEsse comportamento deve ser decidido separadamente, especialmenternna discussão sobre ocorrência pós-D-5.rnrnTambém permanecem não decididos os mecanismos técnicos de:rnrn- armazenamento;rn- retry;rn- sincronização;rn- relógio;rn- resolução de conflito;rn- confirmação técnica da operação.rnrnPode consolidar esta parte e prosseguir para a próxima pergunta dernREQ-ELIC-002."
+      }
+    ],
+    "created_at": "2026-09-03 14:13:22",
+    "updated_at": 1788455623.953527
+  },
+  {
+    "id": "54a90b03-9a22-4928-8e62-cc41ae4c3dad",
+    "ids": [
+      "89d016dd-3199-4276-badf-ece53d0b9ffd",
+      "54a90b03-9a22-4928-8e62-cc41ae4c3dad"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### DEC-021 — Disponibilidade sem conectividadenn**ID**  n`DEC-021`nn**Decisão humana**  nAntes de D-5, sem conectividade suficiente, a atleta pode registrar naquele dispositivo uma intenção de declarar ou alterar disponibilidade. Essa tentativa permanece semanticamente como `AÇÃO LOCAL PENDENTE DE CONFIRMAÇÃO` até ser reconhecida pelo estado vigente do sistema.nn`AÇÃO LOCAL PENDENTE` é estado da **operação**, não um valor de Disponibilidade.nnOs únicos valores de declaração da primeira entrega são:nn- `DISPONÍVEL`;n- `INDISPONÍVEL`.nnEnquanto nenhuma dessas declarações estiver confirmada, a atleta permanece operacionalmente em `NÃO RESPONDEU`, mesmo que exista uma tentativa pendente.nn**Motivo**  nPermitir que a atleta expresse sua intenção durante uma falha de conectividade sem criar a falsa percepção de que a declaração foi registrada, nem comprometer a autoridade temporal de D-5 e do cálculo de quórum.nn**Regra de produto resultante**n- tentativa pendente deve ser claramente apresentada como não concluída;n- tentativa pendente não altera a declaração vigente;n- tentativa pendente não conta para o quórum;n- `NÃO RESPONDEU` pode coexistir com `PENDENTE DE CONFIRMAÇÃO`;n- se a tentativa for confirmada antes de D-5, passa a produzir `DISPONÍVEL` ou `INDISPONÍVEL`;n- a resolução de D-5 considera somente declarações efetivamente confirmadas até aquele instante;n- se D-5 ocorrer primeiro, a tentativa pendente não participa do fechamento;n- confirmação posterior não pode fazê-la parecer recebida antes de D-5;n- confirmação posterior não pode alterar retroativamente o resultado produzido em D-5;n- a atleta deve perceber que sua tentativa não foi registrada a tempo.nnA regra vigente já define D-5 como a fronteira que encerra a declaração ordinária e desloca mudanças posteriores para o fluxo de ocorrência pós-fechamento; esta decisão preserva essa separação. nn**Exceções / questão ainda aberta**  nNão foi decidido o destino de uma tentativa que permaneça pendente quando D-5 ocorre. Ela poderá ser descartada, preservada como evidência, relacionada a uma possível ação pós-fechamento ou receber outro tratamento — isso permanece aberto.nn**Itens afetados**  nDisponibilidade; `NÃO RESPONDEU`; cálculo de quórum; fronteira D-5; percepção de conclusão de operações; comportamento de tentativa de escrita sem conectividade.nn**Origem**  n`REQ-ELIC-002` — decisão explícita do usuário em 2026-09-03.nn**Status**  n`CONFIRMADO — aguardando propagação canônica ao fim da rodada`.nn---nn### REQ-ELIC-002 — Próxima pergunta: ocorrência pós-D-5 sem conectividadennO fluxo confirmado prevê, em uma sessão `CONFIRMADO`, duas ocorrências pós-fechamento:nn`NÃO PODEREI COMPARECER` e `AGORA POSSO PARTICIPAR`.nnQuando a atleta estiver **depois de D-5, em uma sessão que ela conhece como confirmada, mas sem conectividade suficiente**, qual comportamento observável você quer?nnA decisão principal é semelhante, mas o risco é diferente porque uma ocorrência negativa pode significar que o treinador precisa saber rapidamente que o quórum foi comprometido.nnVocê quer que a atleta possa registrar uma **ocorrência local pendente de confirmação**, claramente não concluída e sem efeito sobre o quórum vigente até ser confirmada, ou prefere que ocorrências pós-D-5 **não possam sequer ser registradas como pendentes** sem conectividade suficiente?"
+      }
+    ],
+    "created_at": "2026-09-03 14:13:31",
+    "updated_at": 1788455620.462782
+  },
+  {
+    "id": "18376446-c522-439a-8708-6904f2cc6903",
+    "ids": [
+      "18376446-c522-439a-8708-6904f2cc6903"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "DECIDO: a atleta pode registrar uma OCORRÊNCIA LOCAL PENDENTE DErnCONFIRMAÇÃO.rnrnQuando estiver depois de D-5, em uma sessão que conhece comornCONFIRMADO, mas sem conectividade suficiente, a atleta pode registrarrnlocalmente sua intenção de:rnrn- `NÃO PODEREI COMPARECER`; ourn- `AGORA POSSO PARTICIPAR`.rnrnEntretanto, enquanto essa operação não tiver sido reconhecida pelornestado vigente do sistema, ela NÃO constitui uma ocorrênciarnefetivamente registrada.rnrnPortanto:rnrn1. `OCORRÊNCIA LOCAL PENDENTE` é estado da operação e NÃO um novorn   tipo de ocorrência do domínio.rnrn2. Enquanto permanecer pendente:rnrn   - não altera a composição vigente;rn   - não altera o cálculo/projeção de quórum;rn   - não produz `QUÓRUM_COMPROMETIDO`;rn   - não inclui ou remove a atleta da composição;rn   - não pode ser apresentada como comunicação já recebida pelorn     sistema ou pelo treinador.rnrn3. O produto deve tornar especialmente claro que uma ocorrênciarn   `NÃO PODEREI COMPARECER` ainda pendente NÃO significa que orn   treinador já tenha sido informado.rnrn4. A atleta deve conseguir distinguir claramente:rnrn   - ocorrência confirmada;rn   - tentativa pendente de confirmação;rn   - tentativa que não pôde mais ser aplicada.rnrn5. Quando a conectividade retornar, antes de confirmar a ocorrência,rn   o produto deve revalidar se a operação ainda é aplicável ao estadorn   vigente da sessão.rnrn6. Se continuar aplicável, somente após confirmação pelo estadorn   vigente ela passa a produzir os efeitos normais da ocorrênciarn   pós-D-5.rnrn7. O horário da tentativa local não deve fazer a ocorrência parecerrn   efetivamente registrada naquele horário.rnrn8. Uma confirmação posterior não pode reescrever retroativamente orn   estado operacional que existia enquanto a ocorrência ainda nãorn   havia sido reconhecida.rnrn9. Se, ao retornar a conectividade, a sessão tiver sido cancelada,rn   remarcada ou houver outra mudança que torne aquela ocorrênciarn   inaplicável, o produto não deve aplicá-la silenciosamente como sern   ainda fosse válida.rnrn   Nesse caso, deve informar à atleta que a tentativa não pôde serrn   confirmada no contexto atual.rnrn10. A mera existência da tentativa local também não autoriza orn    sistema a inferir que o treinador tomou conhecimento dela.rnrnEsta decisão NÃO determina ainda:rnrn- mecanismo de armazenamento local;rn- fila ou retry;rn- sincronização;rn- protocolo técnico de conflitos;rn- canal alternativo de contingência;rn- WhatsApp, SMS, e-mail ou outra comunicação externa;rn- quanto tempo uma tentativa pendente deve permanecer preservada.rnrnTambém não estou decidindo nesta resposta se uma ocorrência negativarnpendente deve acionar alguma orientação especial de contingência pararna atleta quando não puder ser entregue.rnrnSe isso for necessário como regra de produto, quero tratá-lo comornpergunta separada."
+      }
+    ],
+    "created_at": "2026-09-03 14:15:11",
+    "updated_at": 1788455724.312692
+  },
+  {
+    "id": "86521fd5-8e66-4ccb-829c-7a532b54b7b6",
+    "ids": [
+      "8c368f8e-8c3c-4a12-b1cf-d8a55855e11c",
+      "86521fd5-8e66-4ccb-829c-7a532b54b7b6"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Minha interpretação para confirmação — REQ-ELIC-002 / ocorrência pós-D-5 sem conectividadennEntendo sua decisão como a criação de um estado de **tentativa de operação**, não de um novo conceito de domínio.nnDepois de D-5, em uma sessão que o dispositivo conhece como `CONFIRMADO`, a atleta pode registrar localmente uma intenção de:nn- `NÃO PODEREI COMPARECER`; oun- `AGORA POSSO PARTICIPAR`.nnEnquanto essa tentativa não for reconhecida pelo estado vigente do sistema, ela permanece `OCORRÊNCIA LOCAL PENDENTE DE CONFIRMAÇÃO`.nnIsso significa que, durante a pendência:nn- não existe ocorrência efetivamente registrada;n- a composição vigente não muda;n- o quórum não muda;n- `QUÓRUM_COMPROMETIDO` não pode surgir por causa dessa tentativa;n- a atleta não é incluída nem removida da composição;n- não se pode afirmar que o treinador ou o sistema receberam a informação;n- o horário da tentativa local não pode ser apresentado como horário efetivo de registro da ocorrência.nnEssa distinção preserva a regra canônica atual segundo a qual uma ocorrência pós-D-5 efetivamente registrada altera a composição corrente e recalcula o quórum; a tentativa pendente ainda não alcançou esse status. nn### Quando a conectividade retornarnnInterpreto que o produto deve primeiro verificar se a operação ainda faz sentido diante do estado vigente.nnSe continuar aplicável:nn- somente após confirmação ela se torna uma ocorrência efetivamente registrada;n- a partir daí passam a valer os efeitos normais já decididos para `NÃO PODEREI COMPARECER` ou `AGORA POSSO PARTICIPAR`.nnSe tiver se tornado inaplicável — por exemplo, porque a sessão foi cancelada, remarcada ou sofreu mudança incompatível —:nn- a tentativa não pode ser aplicada silenciosamente;n- deve passar a ser perceptível como **tentativa que não pôde mais ser aplicada**;n- a atleta deve ser informada de que ela não foi confirmada naquele contexto.nnUma confirmação posterior também não pode produzir a ficção de que a ocorrência já existia enquanto estava pendente, nem reescrever retroativamente o estado operacional daquele período.nn### Distinções que ficam explicitamente preservadasnnA atleta deve conseguir distinguir:nn1. **ocorrência confirmada**;n2. **tentativa pendente de confirmação**;n3. **tentativa que não pôde mais ser aplicada**.nnE `OCORRÊNCIA LOCAL PENDENTE` continua sendo estado da operação, não um terceiro tipo de ocorrência de `Participação Esportiva`.nn### Questão ainda abertannInterpreto também que permanece deliberadamente **não decidido** se uma tentativa pendente de `NÃO PODEREI COMPARECER` deve gerar alguma orientação especial de contingência para a atleta enquanto o produto não consegue entregá-la ao treinador.nnNenhum mecanismo técnico de armazenamento, retry, sincronização, conflito ou canal alternativo é decidido aqui.nn**Você confirma integralmente esta interpretação para esta parte de `REQ-ELIC-002`?**"
+      }
+    ],
+    "created_at": "2026-09-03 14:15:14",
+    "updated_at": 1788455723.472485
+  },
+  {
+    "id": "fd4b9a6c-5e0b-4582-8f2c-1686c6be9831",
+    "ids": [
+      "fd4b9a6c-5e0b-4582-8f2c-1686c6be9831"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "AUDITORIA DE REDUNDÂNCIA DA ELICITAÇÃOrnrnNão faça uma nova pergunta nesta resposta.rnrnAntes de continuar REQ-ELIC-002, audite todas as perguntas que vocêrnpretende fazer sobre o restante desse tópico.rnrnPara cada possível pergunta:rnrn1. formule qual decisão ela tentaria obter;rn2. procure primeiro nos artefatos canônicos vigentes;rn3. procure decisões DECIDED relacionadas;rn4. procure decisões SUPERSEDED para não reutilizá-las;rn5. procure OPEN/FUTURE existentes;rn6. considere também as decisões explicitamente confirmadas nestarn   conversa;rn7. determine se ainda existe informação materialmente ausente.rnrnClassifique cada candidato como:rnrnALREADY_DECIDEDrnPARTIALLY_DECIDEDrnOPEN_PRODUCT_DECISIONrnTECHNICAL_LATER_PHASErnDUPLICATE_QUESTIONrnNOT_FOUNDrnrnPara ALREADY_DECIDED e DUPLICATE_QUESTION:rnnão formule pergunta ao usuário.rnrnPara TECHNICAL_LATER_PHASE:rnnão formule pergunta nesta fase.rnrnPara OPEN_PRODUCT_DECISION:rndemonstre primeiro qual informação falta e por que ela é necessáriarnpara a fase atual.rnrnSAÍDArnrn| Candidato | Status | Evidência | Fonte | Perguntar agora? | Motivo |rnrnAo final informe:rnrnNEXT_ELICITATION_QUESTION = <uma pergunta ou NONE>rnrnNão prossiga além disso."
+      }
+    ],
+    "created_at": "2026-09-03 14:26:15",
+    "updated_at": 1788456499.54516
+  },
+  {
+    "id": "2e6c0389-40dc-445c-94e1-4b47d0061b66",
+    "ids": [
+      "268a6651-01ab-4fa6-aaa0-0cac72e0ce51",
+      "f1486dee-72ed-40c6-abd7-8dc3a604f6ed",
+      "3d1a02e7-5e05-4e53-ae72-6635d83606ea",
+      "4734259d-5a37-428a-9888-5c9694827e1a",
+      "d364f343-0275-4024-bcef-dd2870918acb",
+      "2e6c0389-40dc-445c-94e1-4b47d0061b66"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Vou auditar o restante de `REQ-ELIC-002` contra o estado canônico e contra as decisões já confirmadas nesta conversa, sem abrir novas decisões durante a auditoria. O objetivo aqui é eliminar perguntas redundantes e separar claramente o que é produto ainda aberto do que pertence a fase técnica posterior."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Auditoria concluída sem abrir nenhuma nova decisão. Considerei como autoridade: artefatos canônicos vigentes, `DECIDED`, `SUPERSEDED`, `OPEN/FUTURE` e, acima deles, as decisões explícitas desta conversa. O estado canônico anterior deliberadamente deixava a estratégia concreta de conectividade/offline/sincronização aberta; portanto, as novas regras observáveis desta conversa são lacunas legítimas devolvidas pela fase de Requirements, e não reabertura do Gate B.  nn| Candidato | Status | Evidência | Fonte | Perguntar agora? | Motivo |n|---|---|---|---|---|---|n| Consultar agenda já conhecida sem conexão | `ALREADY_DECIDED` | `DEC-019`: conteúdo anteriormente recebido continua consultável como última informação conhecida não revalidada; conteúdo nunca recebido não é obrigatório | Decisão confirmada nesta conversa; contexto `CONST-010`  | **Não** | Política observável já fechada |n| Distinguir informação verificada de informação local não revalidada | `ALREADY_DECIDED` | `DEC-019`: dado local não adquire autoridade de estado atual; revalidação ao retornar conectividade | Decisão confirmada nesta conversa | **Não** | Já é uma propriedade explícita da leitura |n| Consultar estado da sessão já conhecido | `ALREADY_DECIDED` | `DEC-020`: último estado conhecido pode permanecer visível como não revalidado | Decisão confirmada nesta conversa | **Não** | Fechado |n| Consultar próxima ação já conhecida | `ALREADY_DECIDED` | `DEC-020`: pode permanecer visível como não revalidada; não pode parecer certamente vigente | Decisão confirmada nesta conversa | **Não** | Fechado |n| Próxima ação cujo prazo localmente conhecido expirou | `ALREADY_DECIDED` | `DEC-020`: deixa de ser ação executável; expiração não permite inferir novo estado ou nova ação | Decisão confirmada nesta conversa | **Não** | Fechado e sem inferência indevida |n| Declarar/alterar disponibilidade sem conectividade | `ALREADY_DECIDED` | `DEC-021`: pode existir `AÇÃO LOCAL PENDENTE`; não altera declaração vigente nem quórum até confirmação | Decisão confirmada nesta conversa; D-5 e autoridade da declaração já eram `DECIDED`  | **Não** | Resultado observável já definido |n| Considerar tentativa pendente de disponibilidade como terceiro valor de disponibilidade | `DUPLICATE_QUESTION` | Foi explicitamente rejeitado: tentativa é estado da operação; valores são apenas `DISPONÍVEL`/`INDISPONÍVEL`, com `NÃO RESPONDEU` enquanto não houver declaração confirmada | Decisões desta conversa | **Não** | Perguntar novamente reabriria decisão fechada |n| Usar tentativa pendente no quórum em D-5 | `ALREADY_DECIDED` | `DEC-021`: somente declaração confirmada até D-5 participa; pendência não retroage | Decisão desta conversa; contrato canônico já define D-5 como fechamento e quórum a partir das declarações válidas  | **Não** | Fechado |n| Destino **posterior** de uma tentativa de disponibilidade ainda pendente quando D-5 ocorre | `OPEN_PRODUCT_DECISION` | O usuário deixou explicitamente abertas as possibilidades de descartar, preservar como evidência, apresentar como possível ação pós-fechamento ou outro tratamento | Decisão desta conversa; o domínio vigente distingue disponibilidade anterior de ocorrência pós-fechamento  | **Sim, depois da pendência atual** | Falta comportamento observável após a fronteira D-5. Sem decisão, Requirements teria de inventar o que o usuário vê e o que acontece com a tentativa |n| Registrar `NÃO PODEREI COMPARECER` / `AGORA POSSO PARTICIPAR` sem conectividade | `PARTIALLY_DECIDED` | O usuário decidiu permitir `OCORRÊNCIA LOCAL PENDENTE`, sem efeito até confirmação, com revalidação de aplicabilidade; eu devolvi a interpretação, mas a confirmação exigida pelo protocolo ainda não ocorreu | Decisão desta conversa; efeitos normais da ocorrência estão fechados no domínio  | **Sim — apenas confirmação, não nova elicitação** | Falta somente concluir o handshake de confirmação já iniciado |n| Transformar `OCORRÊNCIA LOCAL PENDENTE` em novo tipo de ocorrência do domínio | `DUPLICATE_QUESTION` | Explicitamente negado pelo usuário; é estado da operação | Decisão desta conversa | **Não** | Já decidido |n| Efeito de ocorrência ainda pendente sobre composição, quórum ou `QUÓRUM_COMPROMETIDO` | `DUPLICATE_QUESTION` | Decisão proposta diz explicitamente: nenhum efeito enquanto não confirmada | Decisão desta conversa | **Não** | Já coberto |n| Aplicabilidade de ocorrência pendente após cancelamento/remarcação ou mudança de estado | `PARTIALLY_DECIDED` | Decisão proposta exige revalidar e não aplicar silenciosamente quando o contexto mudou | Decisão desta conversa; `CANCELADO` é terminal e remarcação cria outra sessão  | **Não agora** | Incluído na confirmação pendente da ocorrência; não requer pergunta adicional |n| Orientação de contingência quando `NÃO PODEREI COMPARECER` permanece sem conseguir chegar ao treinador | `OPEN_PRODUCT_DECISION` | O próprio usuário deixou explicitamente aberta a existência de orientação especial de contingência | Decisão desta conversa; ocorrência negativa normalmente altera composição e pode gerar `QUÓRUM_COMPROMETIDO`  | **Sim, posteriormente** | É comportamento de produto, não mecanismo técnico: sem decisão não sabemos se basta mostrar “não entregue” ou se o produto deve instruir alguma contingência |n| Canal alternativo concreto dessa contingência — WhatsApp/SMS/e-mail etc. | `TECHNICAL_LATER_PHASE` | Tecnologia/estratégia física de comunicação permanece explicitamente aberta; `OPEN-TECH-005` | Rastreabilidade canônica  | **Não** | A fase atual pode decidir se deve existir contingência, mas não escolher seu mecanismo |n| Treinador registrar ocorrência em nome da atleta sem conectividade | `OPEN_PRODUCT_DECISION` | Está decidido que treinador pode registrar ocorrência em nome da atleta e deve preservar autoria real; nada decide se essa operação administrativa pode ficar localmente pendente sem conexão | Contrato canônico  | **Sim, posteriormente** | A regra dada à atleta não pode ser estendida silenciosamente a outro ator com autoridade diferente |n| Criar/editar proposta de sessão sem conectividade | `OPEN_PRODUCT_DECISION` | Ações são autorizadas ao treinador, mas o efeito sem conectividade não está especificado | Produto/contrato: painel permite criar/editar; autoridade definida   | **Sim, se necessário para primeira entrega** | Falta decidir se há ação pendente, bloqueio ou outro resultado observável. Não é resolvido pela escolha técnica de sync |n| Publicar agenda sem conectividade | `OPEN_PRODUCT_DECISION` | Publicação torna sessões oficiais e comunica pendências; não existe política de conclusão sem conectividade | Produto/contrato   | **Sim** | Publicação altera o estado oficial e gera efeitos para atletas; é material saber se uma tentativa sem confirmação pode parecer publicada |n| Cancelar sessão sem conectividade | `OPEN_PRODUCT_DECISION` | Cancelamento é autorizado, auditável e terminal, mas comportamento offline não foi decidido | `DEC-012`; contrato de comunicação e autoridade  | **Sim** | Operação de alto impacto e terminalidade; não pode ser inferida a partir das regras da atleta |n| Remarcar sessão sem conectividade | `OPEN_PRODUCT_DECISION` | Remarcação cancela original e cria outra sem transportar disponibilidades; não há política offline | `DEC-013`; `SUPERSEDED-015` impede voltar à antiga edição direta  | **Sim** | Produz múltiplos efeitos oficiais e comunicação; ausência de regra observável é material |n| `CONFIRMAR SESSÃO EXCEPCIONAL` sem conectividade | `OPEN_PRODUCT_DECISION` | A confirmação explícita do treinador é `DECIDED`; comportamento sem confirmação do estado vigente não é | `DEC-014`; fluxo `FLW-013`  | **Sim** | Não se pode presumir confirmação de compromisso enquanto o sistema vigente não a reconheceu |n| `MANTER TREINO` / `CANCELAR TREINO` diante de `QUÓRUM_COMPROMETIDO` sem conectividade | `OPEN_PRODUCT_DECISION` | As duas decisões humanas são fechadas, mas não há regra para tentativa sem conectividade | `DEC-015`; `FLW-008`  | **Sim** | São decisões esportivas explícitas e uma delas pode produzir cancelamento terminal |n| Registrar sessão como `REALIZADO` sem conectividade | `OPEN_PRODUCT_DECISION` | O fluxo prevê transição de sessão confirmada para realizada; nada define sua semântica quando a escrita não pode ser confirmada | `FLW-009`  | **Sim, potencialmente agrupável com ações administrativas** | É escrita de estado oficial; não deve ser presumida concluída por analogia |n| Consolidar presença e participação sem conectividade | `OPEN_PRODUCT_DECISION` | Autoridade, combinações válidas e consolidação pelo treinador estão fechadas; resultado sem conectividade não | Primeira entrega inclui consolidação; `FLW-010`   | **Sim** | O uso ocorre na praia e estes são fatos oficiais; Requirements precisa saber se pode haver consolidação local pendente ou se é necessário esperar conexão |n| Retificar presença/participação sem conectividade | `OPEN_PRODUCT_DECISION` | Retificação auditável é `DECIDED`, inclusive preservação do valor anterior; comportamento offline não foi definido | `DEC-007`; `FLW-011`; `SUPERSEDED-013` impede voltar a correção não auditável   | **Sim** | Corrige fato já oficial e exige cadeia de auditoria; merece decisão explícita, não extrapolação |n| Perguntar genericamente “o que acontece se qualquer escrita perder conexão no meio?” | `DUPLICATE_QUESTION` | Disponibilidade e ocorrência já possuem semântica específica; demais classes precisam ser auditadas conforme sua autoridade e efeitos | Decisões desta conversa + contrato de autorizações  | **Não** | Uma regra universal poderia apagar diferenças materiais entre declaração da atleta, cancelamento terminal e retificação factual |n| Como o usuário percebe que uma operação ainda não terminou | `PARTIALLY_DECIDED` | Para disponibilidade e ocorrência, ficou explicitamente exigido distinguir pendente de confirmado/falhado; não há autorização para generalizar automaticamente a todas as ações do treinador | Decisões desta conversa | **Não como pergunta genérica** | Deve acompanhar cada classe de escrita ainda aberta |n| Cache, banco local, fila, retry, service worker, armazenamento e retenção | `TECHNICAL_LATER_PHASE` | Foram reiteradamente excluídos das decisões atuais; a base canônica também mantém offline/sync concreto aberto | `OPEN-TECH-004`; Q-006/Q-007   | **Não** | Mecanismos técnicos |n| Protocolo de sincronização e resolução técnica de conflitos | `TECHNICAL_LATER_PHASE` | Explicitamente excluído pelo usuário e por `OPEN-TECH-004` | Rastreabilidade canônica  | **Não** | Deve satisfazer depois as regras observáveis, não defini-las |n| Detecção técnica de conectividade | `TECHNICAL_LATER_PHASE` | Explicitamente excluída | Decisões desta conversa / `OPEN-TECH-004` | **Não** | Mecanismo |n| Confiança no relógio do dispositivo / mecanismo técnico de D-5 | `TECHNICAL_LATER_PHASE` | D-5 é regra de produto; confiança/coordenação de relógios não foi autorizada como regra nesta elicitação | D-5 é `DECIDED`; mecanismo não está definido  | **Não** | Questão técnica posterior |n| Garantia/reprocessamento/idempotência de operações após reconexão | `TECHNICAL_LATER_PHASE` | A rastreabilidade já preserva `INF-TECH-001` para idempotência/reprocessamento e `OPEN-TECH-004` para sync concreto | `07-TRACEABILITY`  | **Não** | Não deve ser promovido a regra de produto nesta fase |n| Reabrir regras antigas de `TALVEZ`, edição direta de data/hora, reativação de cancelada ou correção não auditável | `DUPLICATE_QUESTION` | `TALVEZ` foi removido nesta conversa; as demais formulações estão explicitamente `SUPERSEDED` | Decisão atual + `SUPERSEDED-013/015` e cancelamento terminal  | **Não** | Reutilizaria formulação já substituída |nn### Resultado da auditoriannHá **informação material ainda ausente**, mas o espaço de elicitação é menor do que parecia. Não devem existir novas perguntas sobre leitura de agenda, estado/próxima ação, disponibilidade pendente, efeito de pendência no quórum, nem mecanismos técnicos.nnOs pontos de produto ainda legítimos concentram-se em: destino da tentativa de disponibilidade após D-5; fechamento da decisão de ocorrência pendente; eventual contingência para ocorrência negativa; e comportamento observável das escritas de autoridade do treinador — especialmente publicação/cancelamento/remarcação, decisões pós-confirmação, consolidação e retificação. As regras canônicas definem **quem pode fazer essas ações e seus efeitos quando concluídas**, mas não definem se ou como podem permanecer pendentes quando a conectividade falha. nn`NEXT_ELICITATION_QUESTION = "Você confirma integralmente a interpretação já apresentada para REQ-ELIC-002 — ocorrência pós-D-5 sem conectividade?"`"
+      }
+    ],
+    "created_at": "2026-09-03 14:27:30",
+    "updated_at": 1788456494.057895
+  },
+  {
+    "id": "37678a19-7375-4a59-af7a-ab3b3c458523",
+    "ids": [
+      "37678a19-7375-4a59-af7a-ab3b3c458523"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "AUDITORIA DE NECESSIDADE DE ELICITAÇÃOrnrnNão faça nenhuma nova pergunta ao usuário.rnrnA auditoria anterior mostrou várias informações ainda nãornespecificadas. Agora determine quais delas REALMENTE precisam serrndecididas nesta rodada para fechar GAP-REQ-002 e permitir quernRequirements posteriormente seja submetido ao Gate C.rnrnIMPORTANTErnrn“Não está especificado” NÃO significa automaticamentern“precisa de decisão humana agora”.rnrnPara cada item atualmente classificado como OPEN_PRODUCT_DECISION,rnexecute esta árvore:rnrn1. A ausência dessa decisão impede um requisito crítico de serrn   verificável agora?rnrn   Se NÃO:rn   → DEFER_WITHOUT_BLOCKING.rnrn2. A decisão é necessária para definir resultado observável dern   produto, ou pertence legitimamente a Requirements/Drivers/ADR?rnrn   Se posterior:rn   → DEFER_TO_<FASE>.rnrn3. O comportamento pode ser coberto por uma regra transversal járn   confirmada ou por uma única nova regra transversal, sem apagarrn   diferenças relevantes do domínio?rnrn   Se SIM:rn   → GENERALIZABLE.rn   Não crie uma pergunta individual ainda.rnrn4. Somente se:rn   - for necessária para a fase atual;rn   - não puder ser derivada;rn   - não puder ser legitimamente adiada;rn   - e exigir intenção humana;rnrn   classifique:rn   → HUMAN_DECISION_REQUIRED_NOW.rnrnAUDITE ESPECIALMENTErnrnAs escritas do treinador listadas individualmente:rnrn- criar/editar proposta;rn- publicar;rn- cancelar;rn- remarcar;rn- confirmar sessão excepcional;rn- MANTER TREINO;rn- CANCELAR TREINO;rn- REALIZADO;rn- consolidar presença/participação;rn- retificar.rnrnTeste se existe uma regra transversal possível:rnrn“uma modificação de estado oficial não é considerada concluídarnenquanto o estado vigente do sistema não a confirmar”.rnrnAvalie até onde essa regra consegue reduzir a elicitação SEM apagarrnas diferenças materiais de:rnrn- operação terminal;rn- remarcação;rn- autoria;rn- auditoria;rn- efeitos sobre terceiros;rn- decisões esportivas do treinador.rnrnNão adote a regra por inferência.rnApenas determine se ela permitiria substituir várias perguntas porrnuma única decisão humana mais abstrata.rnrnSAÍDArnrn| Item | Necessário agora? | Generalizável? | Fase correta | Bloqueia Requirements? | Bloqueia Gate C? | Precisa humano agora? | Motivo |rnrnDepois:rnrnQUESTIONS_REQUIRED_NOW = <número>rnrne liste SOMENTE os IDs/conceitos que realmente exigem minharndecisão nesta rodada.rnrnNão formule as perguntas ainda.rnNão avance na elicitação."
+      }
+    ],
+    "created_at": "2026-09-03 14:35:08",
+    "updated_at": 1788457018.868454
+  },
+  {
+    "id": "ebd86dcd-4b68-4793-86e6-00ab85880868",
+    "ids": [
+      "141c74d9-b9ee-44ed-a755-eb5b7e2a98c7",
+      "6196483f-4054-4dc9-80e7-f891cc94dac3",
+      "f265ba3d-13a4-4f69-a518-56cbdede385f",
+      "47fb9730-0a7f-4c5c-89df-0b39d01a4790",
+      "6b83bac4-21b0-4810-bcc4-5aa32425b478",
+      "a56e19c6-7489-4560-bf71-de0442274d3a",
+      "ebd86dcd-4b68-4793-86e6-00ab85880868"
+    ],
+    "chatGroupId": "6a96c1bd-0c50-83e9-98d4-fdc6969e98e7",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A distinção central é: para fechar `GAP-REQ-002`, precisamos de comportamento observável suficiente para tornar os requisitos verificáveis — não de uma política completa de sincronização. A auditoria abaixo testa justamente esse limite e se uma única decisão transversal pode substituir a bateria de perguntas sobre cada escrita do treinador."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A auditoria indica que o espaço de decisão humana pode ser reduzido drasticamente. Para Gate C, o critério relevante é que requisitos críticos tenham origem e sejam verificáveis, que NFRs importantes sejam mensuráveis e que soluções técnicas prematuras não sejam embutidas. Não é necessário decidir toda política de armazenamento/sincronização nem todos os comportamentos opcionais de contingência. nnTambém há base para evitar elicitação operação por operação: a primeira entrega inclui publicação, remarcação, decisões pós-confirmação, consolidação e retificação, mas suas semânticas **quando efetivamente concluídas** já estão decididas. Cancelamento é terminal, remarcação é uma operação própria, retificação preserva autoria/histórico etc.  A conectividade concreta e sincronização continuam deliberadamente abertas para fases posteriores. nn| Item | Necessário agora? | Generalizável? | Fase correta | Bloqueia Requirements? | Bloqueia Gate C? | Precisa humano agora? | Motivo |n|---|---|---|---|---|---|---|---|n| Destino posterior da tentativa de disponibilidade que estava pendente quando D-5 ocorreu | **Não** | Não necessário | `DEFER_WITHOUT_BLOCKING` | Não | Não | Não | `DEC-021` já torna o requisito crítico verificável: não conta em D-5, não retroage e a atleta percebe que não foi registrada a tempo. Descartar, preservar ou reutilizar depois não é necessário para validar essa propriedade. |n| Orientação especial de contingência para `NÃO PODEREI COMPARECER` ainda não entregue | **Não** | Não | `DEFER_WITHOUT_BLOCKING` | Não | Não | Não | A regra já proposta exige deixar claro que treinador ainda não foi informado. Um canal/orientação adicional pode agregar valor, mas não é necessário para tornar o comportamento mínimo verificável. |n| Canal de contingência — WhatsApp/SMS/e-mail etc. | Não | — | `DEFER_TO_DRIVERS/ADR` | Não | Não | Não | É mecanismo físico de comunicação, já coerente com `OPEN-TECH-005`; não deve ser escolhido nesta rodada. |n| Destino técnico/tempo de retenção de tentativas pendentes | Não | — | `DEFER_TO_DRIVERS/ADR` | Não | Não | Não | Armazenamento, retry, retenção e sincronização são mecanismos posteriores. |n| Treinador registrar ocorrência em nome da atleta | **Sim, apenas quanto à semântica de conclusão** | **Sim** | Coberto pela decisão transversal candidata | Não individualmente | Não individualmente | **Não individualmente** | Autoridade e autoria real já estão decididas. Falta somente a regra comum sobre quando uma escrita passa a valer durante falha de conectividade. |n| Criar sessão / editar proposta `PLANEJADO` | **Não** | Parcialmente | `DEFER_WITHOUT_BLOCKING` | Não | Não | Não | É parte da primeira entrega, mas não existe necessidade confirmada de garantir edição de proposta sem conexão. A ausência dessa garantia não torna um requisito crítico atual não verificável. |n| Publicar agenda | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Publicação cria estado oficial e efeitos para terceiros. O requisito precisa conseguir distinguir tentativa de publicação de publicação efetivamente reconhecida. Não é necessário perguntar separadamente se uma regra transversal resolver isso. |n| Cancelar sessão | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Terminalidade já é `DECIDED`; a regra transversal pode determinar que ela só passa a valer após confirmação, sem reabrir a terminalidade. |n| Remarcar sessão | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | A semântica específica já está fechada: cancelar original + criar outra. A transversal pode apenas dizer quando essa operação é reconhecida como concluída, sem alterar seus efeitos. |n| `CONFIRMAR SESSÃO EXCEPCIONAL` | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | A autoridade humana e o efeito estão fechados; falta apenas evitar que uma tentativa não confirmada pareça compromisso oficial. |n| `MANTER TREINO` | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | É decisão esportiva humana já definida. A transversal pode preservar que uma tentativa não confirmada ainda não é uma decisão recebida pelo estado vigente. |n| `CANCELAR TREINO` pós-confirmação | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Mesma razão, acrescida da terminalidade já decidida. Não exige política offline própria. |n| Registrar sessão como `REALIZADO` | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Altera estado oficial, mas seus efeitos de domínio já estão definidos. |n| Consolidar presença/participação | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Produz fatos oficiais da primeira entrega. Não é necessário decidir mecanismo offline; é necessário apenas não apresentar fato como consolidado antes da confirmação. |n| Retificar presença/participação | **Sim, quanto à conclusão segura** | **Sim** | Decisão transversal candidata | Sim, coletivamente | Sim, coletivamente | Não individualmente | Autoria, motivo, valores anterior/novo e não sobrescrita já estão `DECIDED`. A transversal pode preservar que o fato corrente só muda quando a retificação é confirmada. |n| Resolver tecnicamente conflitos entre duas escritas após reconexão | Não | — | `DEFER_TO_DRIVERS/ADR` | Não | Não | Não | É protocolo técnico; Requirements pode estabelecer invariantes observáveis sem escolher estratégia de conflito. |n| Garantir fila/retry/idempotência | Não | — | `DEFER_TO_REQUIREMENTS/DRIVERS` conforme significância | Não nesta elicitação | Não por si só | Não | A rastreabilidade já preserva reprocessamento/idempotência como candidato técnico, não regra de produto.  |n| **Regra transversal candidata: “uma modificação de estado oficial não é considerada concluída enquanto o estado vigente do sistema não a confirmar”** | **Sim** | **Sim — é justamente o ponto de generalização** | **Elicitação nesta rodada** | **Sim** | **Sim** | **Sim** | É a única lacuna substantiva restante capaz de impedir a formulação de um comportamento mínimo verificável para as escritas oficiais do treinador sem inventar política operação por operação. |nn### Limite seguro da generalizaçãonnA regra transversal candidata **consegue substituir as perguntas individuais** sobre publicação, cancelamento, remarcação, confirmação excepcional, decisões pós-confirmação, `REALIZADO`, consolidação e retificação, porque ela trataria somente da **autoridade e conclusão da escrita sob conectividade insuficiente**.nnEla não apagaria as diferenças já decididas:nn- cancelamento continuaria terminal;n- remarcação continuaria cancelando a original e criando outra;n- autoria e auditoria continuariam obrigatórias onde já são;n- efeitos sobre terceiros continuariam pertencendo às operações específicas;n- `MANTER TREINO`/`CANCELAR TREINO` continuariam decisões humanas;n- retificação continuaria sem sobrescrita.nnOu seja: a regra transversal não substituiria as regras específicas; apenas definiria **quando seus efeitos podem ser considerados efetivamente ocorridos**.nnHá, porém, um limite importante: a frase proposta **não precisa decidir que todas essas operações devem funcionar offline**. Ela pode servir como requisito mínimo de segurança sem escolher entre “bloquear a ação” e “aceitar uma tentativa local pendente”. O comportamento crítico verificável é que uma escrita não confirmada **não pareça concluída nem produza, como estado vigente, os efeitos oficiais da operação**. Decidir quais dessas ações merecem capacidade local pendente pode ser legitimamente adiado, desde que Requirements não prometa essa capacidade por inferência.nn### Sobre a ocorrência pós-D-5nnExiste ainda uma **confirmação processual pendente**, porque você já tomou a decisão sobre `OCORRÊNCIA LOCAL PENDENTE` e eu devolvi a interpretação, mas a confirmação final foi interrompida pelas auditorias. Isso **não é uma nova decisão substantiva** e por isso não entra em `QUESTIONS_REQUIRED_NOW`.nn**QUESTIONS_REQUIRED_NOW = 1**nnSomente o seguinte conceito exige nova decisão humana substantiva nesta rodada:nn- `REQ-ELIC-002-TRANSVERSAL — Semântica de conclusão de modificações do estado oficial sob conectividade insuficiente`"
+      }
+    ],
+    "created_at": "2026-09-03 14:36:30",
+    "updated_at": 1788457016.022615
+  }
+]

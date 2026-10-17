@@ -1,0 +1,29 @@
+--- "artifacts/PRO-CEPRAEA-DOC-CONS-001/U02/generated/extracted/[ATIVO] 20-CURRENT-STATE-INDEX.md.txt"	2026-10-16 23:45:33.715927902 -0300
++++ "docs/reconcilia\303\247\303\243o/[ATIVO] 20-CURRENT-STATE-INDEX.md"	2026-10-16 23:47:23.141429641 -0300
+@@ -1,3 +1,26 @@
++---
++id_fonte: "FONTE-003"
++titulo "Fundamentos de Behaviour-Driven Development"
++FILE_ID: 1OsZpqYak84xuvdNUo4FaIi_9n8tVjBlLxCSQeHbo4Fg
++STATUS: RASCUNHO
++VERSAO: v1.0.0
++DOMINIO_PROPRIETARIO: davisermenho@handballtrack.app
++CATEGORIA: Governança
++SUBCATEGORIA: Taxonomia e Metadados
++DATA_HOMOLOGACAO: 2026-10-12
++AUTORIDADE: Davi Sermenho
++ESCOPO: Mapeamento biunívoco entre ID_FONTE (NotebookLM), TÍTULO_CANÔNICO e nome físico no Google Drive
++---
++
++[FONTE-003] - Fundamentos de Behaviour-Driven Development
++
++
++
++
++
++
++
++
+ **[METADADOS_SISTEMA]**
+ STATUS: RASCUNHO
+ FILE_ID: 1i9XtjdPMGJhYSbV6Al5QdzV1iWRMNJ9c58zZXUK-z8g

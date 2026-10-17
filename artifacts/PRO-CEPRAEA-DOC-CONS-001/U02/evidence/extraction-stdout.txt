@@ -1,0 +1,10 @@
+U02 EXTRACTION COMPLETE
+inventoried_sources=115
+processed_sources=115
+complete_sources=95
+partial_sources=20
+failed_sources=0
+segment_count=7409
+reference_count=774
+sources_with_limitations=20
+formats={"JSON": 8, "Markdown": 79, "PDF": 6, "Plain text": 2, "Plain text (detected)": 5, "PowerPoint Open XML": 1, "SQL": 6, "YAML": 8}

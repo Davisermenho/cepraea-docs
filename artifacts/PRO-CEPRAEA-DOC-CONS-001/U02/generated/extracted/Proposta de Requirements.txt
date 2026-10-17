@@ -1,0 +1,1656 @@
+---
+
+[BLOCO DE METADADOS]
+**Estado do artefato:** `PROPOSTO — AGUARDA APROVAÇÃO HUMANA`
+**Não canônico:** sim
+**Gate C:** não executado
+**Drivers / Options / ADRs / Architecture:** não produzidos
+**Versão:** 0.1
+**Atualizado_em:** 2026-10-09
+**Atualizado_por:** Davi Sermenho
+
+---
+
+# CEPRAEA BEACH PRO — Fase 04 — REQUIREMENTS
+
+## 0. Convenções de proveniência
+
+Para esta proposta:
+
+* `DECIDED→REQ`: a obrigação substantiva já está decidida no produto; apenas sua formalização como requisito é derivada.
+* `DECIDED+DERIVED→REQ`: a decisão substantiva vem do produto e o contrato lógico canônico fornece detalhamento verificável.
+* `CONST→CON`: restrição explicitamente confirmada.
+* os IDs `FR-*`, `NFR-*` e `CON-*`, títulos e agrupamentos são organização editorial `INF`; **não criam decisão nova**.
+* `P0 — primeira entrega obrigatória` significa somente que o item deriva do escopo `DECIDED` declarado obrigatório ou de regra normativa indispensável a esse escopo; não constitui um ranking de prioridade inventado.
+
+A primeira entrega inclui obrigatoriamente elenco, agenda, disponibilidade, quórum, D-5, ocorrências, exceções, presença/participação, próxima ação e histórico; `FUTURE-001..011` permanece fora dela.
+
+---
+
+# 1. Catálogo proposto de FR
+
+## FR-001 — Papéis e autoridades do horizonte inicial
+
+**ID:** `FR-001`
+**Tipo:** FR
+**Título:** Distinguir usuários e respeitar suas autoridades lógicas.
+
+**Formulação normativa:**
+O produto DEVE operar com os papéis `TREINADOR_ADMINISTRADOR` e `ATLETA`, associando cada ação do fluxo à autoridade definida para seu ator, sem permitir que uma atleta execute operações cuja autoridade pertence ao treinador/administrador.
+
+**Origem canônica:** Q-008; DEC-004; RULE-023/024; ACT-001/002; contrato de autorizações lógicas.
+**Objetivo relacionado:** OBJ-003, OBJ-004, OBJ-005.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** RULE-023, RULE-024, DEC-003.
+**Fluxo relacionado:** FLOW-001, FLOW-002.
+
+**Critério de aceitação:**
+Dada uma atleta autenticada, quando ela tenta publicar, cancelar, remarcar, consolidar ou retificar fatos, então a operação não é autorizada; dadas ações sobre sua própria disponibilidade ou ocorrência permitida, então elas são autorizadas. Dado o treinador/administrador, então as operações sob sua autoridade ficam disponíveis.
+
+**Cenários positivos:** atleta registra sua disponibilidade; treinador consolida presença.
+**Cenários negativos:** atleta tenta retificar presença; atleta tenta alterar dados de outra atleta.
+**Exceções:** treinador pode registrar ocorrência recebida em nome da atleta, preservando autoria real.
+**Prioridade:** P0 — primeira entrega obrigatória.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+**Observações:** não define método de autenticação; `OPEN-TECH-003` permanece aberto.
+
+---
+
+## FR-002 — Elenco e perfil esportivo
+
+**ID:** `FR-002`
+**Tipo:** FR
+**Título:** Representar elenco e perfil esportivo utilizável no quórum.
+
+**Formulação normativa:**
+O produto DEVE representar o elenco vigente sem limitar o tamanho da equipe ao número atual de 19 atletas e DEVE permitir ao treinador/administrador definir para cada atleta uma posição principal obrigatória e uma posição secundária opcional segundo `Fase → Sistema → Posição`.
+
+**Origem canônica:** Q-008; Q-011; CONCEPT-008; RULE-007/008.
+**Objetivo relacionado:** OBJ-002, OBJ-005.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** Perfil esportivo; Alocação da sessão; RULE-007/008.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Dada uma atleta do elenco, o treinador consegue manter exatamente uma posição principal e zero ou uma secundária válida; uma alteração do tamanho do elenco não é impedida por um limite fixo de 19.
+
+**Cenários positivos:** atleta com principal e secundária é considerada nas duas capacidades possíveis para encontrar uma alocação.
+**Cenários negativos:** atleta é configurada com duas posições principais; atleta ocupa duas vagas simultâneas no mesmo cálculo.
+**Exceções:** alocação efetiva da sessão é contextual e não altera seu perfil.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+**Observações:** não define modelo físico de dados.
+
+---
+
+## FR-003 — Proposta mensal da agenda
+
+**ID:** `FR-003`
+**Tipo:** FR
+**Título:** Gerar proposta mensal pronta para revisão.
+
+**Formulação normativa:**
+O produto DEVE gerar uma proposta mensal em `PLANEJADO` contendo as recorrências normais vigentes e sessões possíveis nos feriados nacionais e feriados oficiais estaduais ou municipais aplicáveis à cidade do Rio de Janeiro.
+
+Na recorrência atual, DEVE considerar:
+
+* quinta-feira, 20h00–21h30, Copacabana/Posto 4;
+* domingo, 07h30–09h00, Copacabana/Posto 4;
+* feriado aplicável: sugestão entre 07h30–09h00.
+
+Quando feriado aplicável coincidir com recorrência normal, DEVE existir uma única sugestão para a data, no horário de feriado.
+
+**Origem canônica:** Q-010; DEC-008/017; RULE-020/021; FACT-004/005; FLW-001.
+**Objetivo relacionado:** OBJ-001, OBJ-002.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Agenda Esportiva; Feriado aplicável.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Para um mês de teste contendo recorrências e um feriado aplicável, a proposta gerada contém todas as sessões esperadas e não contém duplicata quando feriado e recorrência coincidem.
+
+**Cenários positivos:** feriado em dia sem recorrência gera sessão possível; feriado no domingo ajusta a única sugestão da data.
+**Cenários negativos:** ponto facultativo isolado gera sessão; mesma data possui sessão recorrente e outra de feriado.
+**Exceções:** toda sugestão permanece sujeita à revisão humana antes da publicação.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+**Observações:** fonte/provedor de calendário de feriados permanece decisão técnica futura.
+
+---
+
+## FR-004 — Revisar, criar e excluir sessões planejadas
+
+**ID:** `FR-004`
+**Tipo:** FR
+**Título:** Administrar proposta antes da publicação.
+
+**Formulação normativa:**
+O treinador/administrador DEVE poder revisar a proposta mensal, editar sessões `PLANEJADO`, excluir sessões ainda não publicadas e criar novas sessões em qualquer dia da semana.
+
+**Origem canônica:** Q-010; RULE-020/026; TR-SES-001; operações sem novo estado.
+**Objetivo relacionado:** OBJ-001, OBJ-002.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Sessão de treino; `PLANEJADO`.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Dada uma sessão ainda `PLANEJADO`, o treinador consegue alterá-la ou excluí-la; dada uma nova data válida, consegue criar uma sessão planejada com data, horário e local.
+
+**Cenários positivos:** correção de exceção mensal; criação de treino numa terça-feira.
+**Cenários negativos:** exclusão de sessão já publicada é tratada como simples exclusão sem histórico.
+**Exceções:** após publicação passam a valer as regras auditáveis de cancelamento/remarcação.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-005 — Publicar sessão e abrir disponibilidade
+
+**ID:** `FR-005`
+**Tipo:** FR
+**Título:** Publicar compromisso oficial.
+
+**Formulação normativa:**
+Ao publicar uma sessão com D-5 futuro, o produto DEVE:
+
+1. mudar seu ciclo para `PUBLICADO`;
+2. tornar data, horário, local e D-5 disponíveis;
+3. abrir a disponibilidade ordinária;
+4. comunicar às atletas a pendência de disponibilidade.
+
+Publicação NÃO DEVE ser tratada como confirmação.
+
+**Origem canônica:** Q-010/Q-012; RULE-011; TR-SES-002; contrato de comunicação.
+**Objetivo relacionado:** OBJ-002, OBJ-004.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** Estado da sessão; Disponibilidade; D-5.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Após publicação com D-5 futuro, a sessão está `PUBLICADO`, a janela está aberta e a atleta possui pendência de resposta; não está `CONFIRMADO`.
+
+**Cenários positivos:** agenda mensal revisada é publicada.
+**Cenários negativos:** publicação confirma antecipadamente o treino.
+**Exceções:** sessão criada com D-5 já passado segue FR-009.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-006 — Alteração auditável após publicação
+
+**ID:** `FR-006`
+**Tipo:** FR
+**Título:** Preservar alterações posteriores à publicação.
+
+**Formulação normativa:**
+Alterações permitidas em sessão já publicada DEVEM preservar valores anteriores, valores novos, autoria e data/hora. Data ou horário NÃO DEVEM ser substituídos diretamente.
+
+**Origem canônica:** Q-010; RULE-022; contrato dos estados/operações.
+**Objetivo relacionado:** OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Sessão publicada; histórico auditável.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Dada uma alteração permitida depois da publicação, é possível reconstruir valor anterior e atual, ator e instante; tentativa de alterar data/hora diretamente não conclui a operação como simples edição.
+
+**Cenários positivos:** alteração auditável de campo permitido.
+**Cenários negativos:** novo valor sobrescreve o anterior sem histórico.
+**Exceções:** data/horário são tratados por remarcação.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-007 — Remarcar sessão
+
+**ID:** `FR-007`
+**Tipo:** FR
+**Título:** Remarcar preservando o compromisso original.
+
+**Formulação normativa:**
+Ao escolher `REMARCAR TREINO` para sessão `PUBLICADO` ou `CONFIRMADO`, o produto DEVE:
+
+1. cancelar a original com motivo `REMARCADO`;
+2. preservar integralmente seu histórico;
+3. criar outra sessão;
+4. não transportar disponibilidades;
+5. recalcular D-5;
+6. colocar a nova sessão em `PUBLICADO` quando o novo D-5 for futuro ou em `PLANEJADO` quando já tiver transcorrido;
+7. comunicar o cancelamento do compromisso original e, quando aplicável, solicitar nova disponibilidade.
+
+**Origem canônica:** DEC-013; RULE-022; TR-SES-012; FLW-014.
+**Objetivo relacionado:** OBJ-002, OBJ-003.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** Remarcação; Cancelamento terminal.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Após remarcação, existem duas sessões historicamente distinguíveis; a original está `CANCELADO/REMARCADO`; a nova não possui declarações transportadas.
+
+**Cenários positivos:** nova data com D-5 futuro abre nova disponibilidade.
+**Cenários negativos:** sessão original é reativada; respostas antigas aparecem na nova sessão.
+**Exceções:** novo D-5 transcorrido exige FR-009.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-008 — Cancelar sessão de forma terminal
+
+**ID:** `FR-008`
+**Tipo:** FR
+**Título:** Registrar cancelamento definitivo.
+
+**Formulação normativa:**
+Cancelamento autorizado de sessão `PUBLICADO` ou `CONFIRMADO` DEVE produzir `CANCELADO`, preservar motivo, autoria e data/hora e manter a sessão no histórico. Uma sessão `CANCELADO` NÃO DEVE ser reativada nem receber novas ocorrências.
+
+**Origem canônica:** DEC-012; RULE-028; TR-SES-005/009.
+**Objetivo relacionado:** OBJ-002, OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Cancelamento terminal.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Após cancelamento, tentativas de reativação ou de ocorrência pós-fechamento não retornam a sessão ao fluxo ativo.
+
+**Cenários positivos:** treinador cancela sessão confirmada por decisão posterior.
+**Cenários negativos:** nova disponibilidade reativa treino cancelado.
+**Exceções:** uma realização posterior exige criação de outra sessão.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-009 — Confirmar sessão excepcional criada após D-5
+
+**ID:** `FR-009`
+**Tipo:** FR
+**Título:** Tratar criação tardia sem simular D-5 retroativo.
+
+**Formulação normativa:**
+Quando uma nova sessão for criada depois de seu D-5, o produto NÃO DEVE executar retroativamente a resolução ordinária. DEVE oferecer ao treinador as ações `CONFIRMAR SESSÃO EXCEPCIONAL` e `VOLTAR`; somente a confirmação explícita pode produzir `CONFIRMADO`.
+
+**Origem canônica:** DEC-014; RULE-029; TR-SES-011; FLW-013.
+**Objetivo relacionado:** OBJ-002, OBJ-005.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Confirmação excepcional; D-5.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Sessão criada após D-5 permanece `PLANEJADO` até decisão explícita; `VOLTAR` não confirma; `CONFIRMAR SESSÃO EXCEPCIONAL` confirma e comunica as atletas.
+
+**Cenários positivos:** criação tardia confirmada conscientemente.
+**Cenários negativos:** sistema finge checkpoint D-5 ou confirma automaticamente pelo quórum.
+**Exceções:** não pertence ao fluxo normal nem conta como ação semanal normal de uma sessão publicada previamente.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-010 — Declarar disponibilidade
+
+**ID:** `FR-010`
+**Tipo:** FR
+**Título:** Registrar e alterar declaração ordinária antes de D-5.
+
+**Formulação normativa:**
+Antes de D-5, a atleta DEVE poder registrar e alterar sua própria declaração como `DISPONÍVEL` ou `INDISPONÍVEL`. A ausência de declaração confirmada DEVE permanecer `NÃO RESPONDEU`. `INDISPONÍVEL` PODE conter motivo curto. `TALVEZ` não existe na primeira versão (DEC-018).
+
+**Origem canônica:** Q-010; CONCEPT-003; RULE-002/005; contrato de disponibilidade; DEC-018.
+**Objetivo relacionado:** OBJ-002, OBJ-003, OBJ-004.
+**Atores relacionados:** ACT-002.
+**Regras/conceitos relacionados:** Disponibilidade.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Durante janela aberta, atleta altera sua própria resposta; sem resposta continua `NÃO RESPONDEU`; o produto nunca transforma automaticamente `NÃO RESPONDEU` em `INDISPONÍVEL`.
+
+**Cenários positivos:** `INDISPONÍVEL → DISPONÍVEL` antes de D-5.
+**Cenários negativos:** ausência de resposta vira declaração negativa; atleta altera resposta de outra atleta.
+**Exceções:** após D-5 mudanças usam ocorrência, não edição da declaração.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-011 — Projetar quórum operacional
+
+**ID:** `FR-011`
+**Tipo:** FR
+**Título:** Calcular composição e déficit sem substituir fatos de origem.
+
+**Formulação normativa:**
+Durante a janela e após mudanças relevantes, o produto DEVE calcular a projeção de quórum usando somente atletas atualmente elegíveis segundo as regras vigentes e buscando uma alocação que satisfaça simultaneamente:
+
+* 4 vagas de Ataque;
+* 4 vagas de Defesa;
+* 8 atletas distintas;
+* ao menos uma Goleira dentro da Defesa;
+* posições principal e secundária permitidas;
+* nenhuma dupla contagem.
+
+O treinador DEVE receber composição e déficit exato. Antes de D-5, composição suficiente PODE produzir `QUÓRUM_GARANTIDO`, mas NÃO DEVE confirmar a sessão nem fechar a janela.
+
+**Origem canônica:** Q-010/Q-011/Q-012; RULE-005–008/011; CONCEPT-007/008.
+**Objetivo relacionado:** OBJ-001, OBJ-002, OBJ-005.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Quórum operacional; Perfil esportivo; Alocação.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Com conjunto de teste de atletas e perfis, a projeção somente declara quórum quando encontra oito pessoas distintas numa composição válida; deficiência de goleira é apresentada como déficit, não como novo estado de sessão.
+
+**Cenários positivos:** secundária resolve déficit sem dupla contagem.
+**Cenários negativos:** sete pessoas produzem oito vagas; `NÃO RESPONDEU` é contabilizado como disponibilidade garantida.
+**Exceções:** pós-D-5, ocorrência pode alterar elegibilidade corrente conforme FR-013.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-012 — Resolver sessão exatamente em D-5
+
+**ID:** `FR-012`
+**Tipo:** FR
+**Título:** Executar resolução determinística do fluxo normal.
+
+**Formulação normativa:**
+No instante exato `início_da_sessão − 120 horas`, para toda sessão ainda `PUBLICADO`, o produto DEVE:
+
+1. encerrar a disponibilidade ordinária;
+2. preservar as declarações existentes;
+3. determinar uma composição conforme FR-011;
+4. produzir exatamente um resultado de ciclo:
+
+   * `CONFIRMADO`, se houver composição válida; ou
+   * `CANCELADO — FALTA_DE_QUÓRUM`, se não houver;
+5. preservar os dados necessários para histórico e métricas;
+6. comunicar o resultado.
+
+Nenhuma decisão semanal do treinador DEVE ser necessária nesse fluxo.
+
+**Origem canônica:** Q-009/Q-012; DEC-005/009; RULE-004/009/010; checkpoint D-5.
+**Objetivo relacionado:** OBJ-001, OBJ-002.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** D-5; Estado da sessão; Quórum.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Cenário com quórum válido em D-5 resulta em `CONFIRMADO`; cenário sem quórum resulta em `CANCELADO/FALTA_DE_QUÓRUM`; nenhum cenário normal exige decisão do treinador.
+
+**Cenários positivos:** confirmação automática; cancelamento automático por falta de quórum.
+**Cenários negativos:** confirmação antes de D-5; pedido de aprovação manual em D-5.
+**Exceções:** sessão criada após D-5 segue FR-009.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+**Observações:** não escolhe scheduler/job/cron. `INF-TECH-001` sobre idempotência/reprocessamento permanece não promovido.
+
+---
+
+## FR-013 — Registrar ocorrência pós-fechamento
+
+**ID:** `FR-013`
+**Tipo:** FR
+**Título:** Registrar mudança posterior sem reescrever a declaração.
+
+**Formulação normativa:**
+Em sessão `CONFIRMADO`, após D-5, atleta ou treinador autorizado DEVE poder registrar:
+
+* `NÃO PODEREI COMPARECER`; ou
+* `AGORA POSSO PARTICIPAR`.
+
+A ocorrência DEVE preservar a declaração anterior, atleta afetada, autor real e data/hora; `NÃO PODEREI COMPARECER` PODE incluir motivo curto.
+
+**Origem canônica:** Q-013; CONCEPT-006; RULE-012–014/017.
+**Objetivo relacionado:** OBJ-002, OBJ-003, OBJ-004.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** Ocorrência pós-fechamento.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Após uma ocorrência, a disponibilidade histórica permanece intacta e é possível distinguir atleta afetada e autor do registro.
+
+**Cenários positivos:** atleta disponível informa que não poderá ir; treinador registra mensagem recebida de atleta.
+**Cenários negativos:** ocorrência substitui `DISPONÍVEL` por `INDISPONÍVEL` retroativamente.
+**Exceções:** sessão `CANCELADO` não recebe ocorrência.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-014 — Recalcular exceção pós-confirmação
+
+**ID:** `FR-014`
+**Tipo:** FR
+**Título:** Tratar quórum atual sem cancelamento automático.
+
+**Formulação normativa:**
+Após uma ocorrência em sessão confirmada, o produto DEVE recalcular a composição corrente. Se a composição continuar válida, a sessão permanece `CONFIRMADO` e eventual alerta pendente é encerrado. Se ficar inválida, a sessão permanece `CONFIRMADO` e recebe exclusivamente a condição `QUÓRUM_COMPROMETIDO`, com déficit exato para o treinador.
+
+**Origem canônica:** DEC-006/011/015; RULE-013–016.
+**Objetivo relacionado:** OBJ-002, OBJ-005.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** `QUÓRUM_COMPROMETIDO`; condição ≠ estado.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Perda posterior de goleira torna a composição inválida, mas não altera o estado para `CANCELADO`; o treinador recebe diagnóstico de déficit.
+
+**Cenários positivos:** nova atleta restaura quórum e fecha alerta.
+**Cenários negativos:** baixa posterior cancela automaticamente o treino.
+**Exceções:** não cria condição especial específica para “falta de goleira”; isso é diagnóstico.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-015 — Decisão humana sobre quórum comprometido
+
+**ID:** `FR-015`
+**Tipo:** FR
+**Título:** Reservar a exceção esportiva ao treinador.
+
+**Formulação normativa:**
+Diante de `QUÓRUM_COMPROMETIDO`, o produto DEVE oferecer ao treinador somente:
+
+* `MANTER TREINO`; ou
+* `CANCELAR TREINO`.
+
+`MANTER TREINO` mantém `CONFIRMADO` e preserva decisão, autoria e data/hora. `CANCELAR TREINO` produz cancelamento terminal por decisão posterior, preserva motivo/autoria/data/hora e comunica as atletas.
+
+**Origem canônica:** DEC-003/006/015; RULE-015/016; TR-SES-008/009.
+**Objetivo relacionado:** OBJ-002, OBJ-005.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** autoridade humana.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+O sistema não resolve automaticamente a adaptação esportiva e não exige que o treinador descreva como irá recompor o treino.
+
+**Cenários positivos:** treinador mantém treino apesar do déficit; treinador cancela.
+**Cenários negativos:** sistema escolhe substituições ou cancela sem autoridade humana.
+**Exceções:** automação determinística de D-5 não é decisão esportiva e permanece automática.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-016 — Registrar realização da sessão
+
+**ID:** `FR-016`
+**Tipo:** FR
+**Título:** Registrar o fato de que a sessão aconteceu.
+
+**Formulação normativa:**
+Uma sessão `CONFIRMADO` que efetivamente aconteceu DEVE poder ser registrada como `REALIZADO` sem que essa transição determine automaticamente presença ou participação individual.
+
+**Origem canônica:** Q-010; TR-SES-010; FLW-009; CONCEPT-002/004/005.
+**Objetivo relacionado:** OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Estado da sessão; Presença; Participação.
+**Fluxo relacionado:** FLOW-001, FLOW-002.
+
+**Critério de aceitação:**
+Após marcar sessão como realizada, atletas permanecem `NÃO APURADO/NÃO APURADA` até consolidação.
+
+**Cenários positivos:** treino aconteceu e ciclo passa a `REALIZADO`.
+**Cenários negativos:** realização transforma todas as atletas disponíveis em presentes.
+**Exceções:** nenhuma inferência a partir de interação, timestamp ou Wellness.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-017 — Consolidar presença e participação
+
+**ID:** `FR-017`
+**Tipo:** FR
+**Título:** Consolidar fatos individuais sem combinações contraditórias.
+
+**Formulação normativa:**
+Para sessão realizada, o treinador/administrador DEVE poder consolidar cada atleta por um dos quatro resultados factuais:
+
+1. `PRESENTE + COMPLETA`;
+2. `PRESENTE + PARCIAL`;
+3. `PRESENTE + NÃO PARTICIPOU`;
+4. `AUSENTE + NÃO PARTICIPOU`.
+
+Antes da consolidação, o par permitido é `NÃO APURADO + NÃO APURADA`.
+
+O produto NÃO DEVE aceitar combinações factuais incompatíveis.
+
+**Origem canônica:** Q-010; RULE-018/019; contrato dos fatos.
+**Objetivo relacionado:** OBJ-003, OBJ-005.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Presença; Participação.
+**Fluxo relacionado:** FLOW-002.
+
+**Critério de aceitação:**
+Selecionar “ausente” produz conjuntamente `AUSENTE + NÃO PARTICIPOU`; tentativa de registrar `AUSENTE + COMPLETA` é rejeitada.
+
+**Cenários positivos:** presente sem participação; ausente.
+**Cenários negativos:** ausência de apuração vira ausência automaticamente; atleta consolida o próprio fato.
+**Exceções:** um problema depois da chegada não transforma `PRESENTE` em `AUSENTE`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-018 — Retificar presença e participação
+
+**ID:** `FR-018`
+**Tipo:** FR
+**Título:** Corrigir fato consolidado sem sobrescrever o histórico.
+
+**Formulação normativa:**
+Somente o treinador/administrador DEVE poder corrigir presença ou participação consolidada por `RETIFICAÇÃO AUDITÁVEL`, preservando:
+
+* valor anterior;
+* novo valor;
+* motivo;
+* autor;
+* data/hora.
+
+Quando corrigir apenas um eixo produzir combinação inválida, presença e participação DEVEM ser retificadas conjuntamente na mesma operação.
+
+**Origem canônica:** DEC-007; RULE-030; CONCEPT-011; FLW-011.
+**Objetivo relacionado:** OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Retificação auditável.
+**Fluxo relacionado:** FLOW-002.
+
+**Critério de aceitação:**
+Após retificação, a leitura corrente mostra o novo fato e o histórico permite reconstruir o valor anterior e a correção.
+
+**Cenários positivos:** `AUSENTE/NÃO PARTICIPOU → PRESENTE/COMPLETA` por erro de consolidação.
+**Cenários negativos:** edição apaga o valor anterior.
+**Exceções:** nenhuma retificação pode terminar em combinação factual inválida.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-019 — Visão operacional e próxima ação
+
+**ID:** `FR-019`
+**Tipo:** FR
+**Título:** Mostrar estado operacional e próxima ação relevante.
+
+**Formulação normativa:**
+O produto DEVE fornecer ao treinador e à atleta uma visão operacional que apresente, para os compromissos relevantes, o estado atual e a próxima ação exigida pelo fluxo e pela autoridade do ator.
+
+Para a atleta, a leitura DEVE permanecer simples. Para o treinador, situações de quórum comprometido DEVEM apresentar diagnóstico suficiente para decisão.
+
+**Origem canônica:** escopo obrigatório da primeira entrega; Q-003/Q-004/Q-010; RULE-025.
+**Objetivo relacionado:** OBJ-001, OBJ-002, OBJ-004, OBJ-005.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** próxima ação; projeção; estado da sessão.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Atleta com disponibilidade pendente visualiza que precisa responder; atleta em sessão confirmada sem ação pendente não recebe uma decisão esportiva; treinador com `QUÓRUM_COMPROMETIDO` visualiza a decisão `MANTER/CANCELAR`.
+
+**Cenários positivos:** próxima ação coerente com papel e estado.
+**Cenários negativos:** atleta recebe ação administrativa do treinador; projeção vira fato.
+**Exceções:** prioridade global quando existem múltiplas pendências simultâneas permanece lacuna registrada abaixo.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-020 — Comunicar eventos operacionais obrigatórios
+
+**ID:** `FR-020`
+**Tipo:** FR
+**Título:** Comunicar mudanças relevantes sem escolher o canal técnico.
+
+**Formulação normativa:**
+O produto DEVE comunicar:
+
+* pendência de disponibilidade após publicação;
+* confirmação ou cancelamento por falta de quórum em D-5;
+* alteração operacional relevante depois da confirmação;
+* cancelamento posterior, distinguindo-o de falta de quórum em D-5;
+* remarcação e necessidade de nova disponibilidade quando aplicável.
+
+Para o treinador, `QUÓRUM_COMPROMETIDO` DEVE comunicar o déficit exato. Para atletas, a comunicação DEVE manter foco no estado do compromisso.
+
+**Política de lembrete (DEC-018):** O produto DEVE enviar no máximo um lembrete automático por atleta por sessão. O lembrete DEVE ocorrer às 19:00 do segundo dia civil anterior ao D-5 (`America/Sao_Paulo`) somente para atletas ainda em `NÃO RESPONDEU` naquele instante. A publicação substitui o lembrete quando ocorrer após esse instante e antes do D-5. Cancelamento da sessão ou chegada do D-5 eliminam lembrete pendente. Não há segundo lembrete ordinário. Quando notificação do dispositivo estiver autorizada, o produto DEVE tentar por ela; NÃO DEVE duplicar ordinariamente por WhatsApp/email/SMS. Em D-5, todos recebem comunicação do resultado.
+
+**Origem canônica:** contrato da comunicação; Q-009/Q-010; DEC-018.
+**Objetivo relacionado:** OBJ-001, OBJ-002, OBJ-004.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** estado/projeção; remarcação; cancelamento.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Cada um dos gatilhos acima gera informação destinada aos atores pertinentes sem exigir envio administrativo manual do treinador no fluxo normal.
+
+**Cenários positivos:** D-5 confirma e atletas recebem o resultado.
+**Cenários negativos:** cancelamento posterior é apresentado como `FALTA_DE_QUÓRUM` de D-5.
+**Exceções:** canal, tecnologia e estratégia física permanecem `OPEN-TECH-005`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-021 — Histórico operacional
+
+**ID:** `FR-021`
+**Tipo:** FR
+**Título:** Preservar histórico das sessões, declarações, fatos e decisões.
+
+**Formulação normativa:**
+O produto DEVE manter histórico capaz de distinguir, no mínimo:
+
+* sessão planejada;
+* sessão publicada e posteriormente alterada;
+* sessão confirmada;
+* sessão realizada;
+* cancelamento automático por `FALTA_DE_QUÓRUM`;
+* cancelamento por `REMARCADO` e sua nova sessão;
+* cancelamento posterior por decisão humana;
+* declarações de disponibilidade;
+* ocorrências pós-fechamento;
+* presença e participação consolidadas;
+* retificações;
+* decisões humanas relevantes.
+
+**Origem canônica:** Q-010; SUCCESS-004; contrato do histórico.
+**Objetivo relacionado:** OBJ-003.
+**Atores relacionados:** ACT-001; ACT-002 nos dados que lhe forem acessíveis.
+**Regras/conceitos relacionados:** histórico auditável; terminalidade; retificação.
+**Fluxo relacionado:** FLOW-001, FLOW-002.
+
+**Critério de aceitação:**
+Para cada cenário de alteração, é possível distinguir valor/origem anterior do estado ou fato corrente sem sobrescrita silenciosa.
+
+**Cenários positivos:** remarcação mantém original e nova sessão.
+**Cenários negativos:** sessão cancelada desaparece.
+**Exceções:** visibilidade individual continua sujeita a FR-001/NFR-003.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-022 — Métricas operacionais e feedback coletivo
+
+**ID:** `FR-022`
+**Tipo:** FR
+**Título:** Contabilizar o fluxo operacional da primeira entrega.
+
+**Formulação normativa:**
+O produto DEVE permitir distinguir e contar, por período aplicável:
+
+* sessões publicadas;
+* resolvidas automaticamente em D-5;
+* confirmadas automaticamente;
+* confirmadas excepcionalmente;
+* canceladas automaticamente por `FALTA_DE_QUÓRUM`;
+* remarcadas;
+* sessões que exigiram intervenção após confirmação;
+* decisões `MANTER TREINO` e `CANCELAR TREINO`;
+* sessões realizadas;
+* cancelamentos posteriores;
+* ações administrativas do treinador no fluxo normal.
+
+Deve ser possível acompanhar previstos, confirmados, realizados e cancelados e o total de cancelamentos por falta de quórum.
+
+**Origem canônica:** Q-009/Q-010; SUCCESS-001/002; contrato histórico/métricas.
+**Objetivo relacionado:** OBJ-001, OBJ-002, OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** feedback coletivo.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Um conjunto de sessões com resultados distintos produz contagens consistentes e permite calcular o número de ações administrativas obrigatórias do treinador no fluxo normal.
+
+**Cenários positivos:** relatório mensal mostra cancelamentos por falta de quórum.
+**Cenários negativos:** dados produzem ranking individual ou punição automática.
+**Exceções:** horas economizadas permanecem indicador futuro, sem baseline vigente.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## FR-023 — Consultar agenda previamente conhecida sem conectividade
+
+**ID:** `FR-023`
+**Tipo:** FR
+**Título:** Disponibilizar agenda local sem declarar currentness.
+
+**Formulação normativa:**
+O produto DEVE permitir consultar agenda previamente recebida e armazenada localmente quando a conexão estiver indisponível ou degradada. O conteúdo local NÃO DEVE ser apresentado como estado atual verificado. A distinção entre conteúdo local não revalidado e estado atual confirmado DEVE ser visível ao usuário. A revalidação e reconciliação DEVEM ocorrer quando a conexão retornar. Conteúdo nunca recebido NÃO DEVE existir como dado local.
+
+**Origem canônica:** DEC-019.
+**Objetivo relacionado:** OBJ-002, OBJ-004.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** disponibilidade offline; currentness; reconexão.
+**Fluxo relacionado:** transversal.
+
+**Critério de aceitação:**
+Sem conexão, o usuário visualiza agenda local com indicação explícita de que o conteúdo pode estar desatualizado; após reconexão, o produto revalida sem exigir ação manual.
+
+**Cenários positivos:** usuário consulta sessões do mês em zona sem sinal.
+**Cenários negativos:** produto exibe dados locais como "atualizados agora"; produto inventa sessão nunca recebida.
+**Exceções:** estratégia técnica de sincronização permanece `OPEN-TECH-004`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ` (DEC-019).
+**Status:** PROPOSTO.
+
+---
+
+## FR-024 — Consultar estado e próxima ação offline
+
+**ID:** `FR-024`
+**Tipo:** FR
+**Título:** Exibir estado previamente conhecido e ação applicável sem conectividade, com restrições de currentness.
+
+**Formulação normativa:**
+O produto DEVE permitir consultar estado de sessão e próxima ação operacional previamente conhecidos quando a conexão estiver indisponível. O estado e a ação NÃO DEVEM ser apresentados como seguramente atuais. Se dados temporais locais demonstrarem que a ação expirou (por exemplo, D-5 já ocorreu segundo horário local), a ação NÃO DEVE ser exibida como executável. Expiração local NÃO autoriza inferir novo estado nem nova ação. O produto NÃO DEVE inventar estado ou ação nunca recebidos. Reconexão DEVE exigir revalidação antes de atualizar estado oficial.
+
+**Origem canônica:** DEC-020.
+**Objetivo relacionado:** OBJ-002, OBJ-004.
+**Atores relacionados:** ACT-001, ACT-002.
+**Regras/conceitos relacionados:** estado da sessão; próxima ação; D-5; currentness offline.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Sem conexão, usuário vê estado com indicação de não verificado; se D-5 já passou segundo relógio local, a ação de disponibilidade não aparece como executável; após reconexão, estado é revalidado antes de qualquer confirmação.
+
+**Cenários positivos:** usuário verifica que sessão estava confirmada antes de perder sinal.
+**Cenários negativos:** produto exibe "CONFIRMADO" como estado atual sem conexão; produto cria novo estado sem nunca tê-lo recebido.
+**Exceções:** estratégia técnica de sincronização permanece `OPEN-TECH-004`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ` (DEC-020).
+**Status:** PROPOSTO.
+
+---
+
+## FR-025 — Registrar tentativa local de disponibilidade pendente de confirmação
+
+**ID:** `FR-025`
+**Tipo:** FR
+**Título:** Permitir intenção local de disponibilidade antes do D-5, sem alterar estado oficial.
+
+**Formulação normativa:**
+Antes do D-5, a atleta PODE registrar localmente intenção de `DISPONÍVEL` ou `INDISPONÍVEL`. Até que o sistema vigente confirme a operação, esse registro DEVE ser tratado como `AÇÃO LOCAL PENDENTE DE CONFIRMAÇÃO`. O produto NÃO DEVE apresentar essa tentativa como sucesso definitivo. A tentativa NÃO DEVE alterar a declaração vigente nem o quórum calculado. Somente `DISPONÍVEL` ou `INDISPONÍVEL` PODEM ser intenção local; nenhum outro estado PODE ser enviado. Se confirmada pelo sistema antes do D-5, a tentativa transforma-se em declaração ordinária (FR-010). Se o D-5 ocorrer antes da confirmação, a tentativa DEVE expirar sem alterar qualquer estado oficial ou quórum e DEVE permanecer registrada apenas como evidência histórica de uma tentativa não confirmada. A tentativa expirada NÃO DEVE ser convertida automaticamente em ocorrência pós-D-5 nem tratada retroativamente como declaração pré-D-5. Confirmação posterior ao D-5 NÃO PODE simular aceitação anterior nem reescrever o resultado de D-5. O instante da tentativa local NÃO equivale ao instante de aceitação pelo sistema.
+
+**Origem canônica:** DEC-021; DEC-021-SUBGAP-001 (HUMAN_EXPLICIT, 2026-09-05).
+**Objetivo relacionado:** OBJ-002, OBJ-004.
+**Atores relacionados:** ACT-002.
+**Regras/conceitos relacionados:** `AÇÃO LOCAL PENDENTE DE CONFIRMAÇÃO`; D-5; declaração de disponibilidade; DEC-021-SUBGAP-001.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Tentativa local não altera declaração atual nem quórum; o produto exibe claramente que a operação está pendente de confirmação; se D-5 ocorrer enquanto a tentativa está pendente, ela expira sem alterar estado oficial ou quórum, permanece somente como evidência histórica não confirmada e não é convertida automaticamente em declaração ou ocorrência pós-D-5; a declaração usada em D-5 é a última confirmada pelo sistema.
+
+**Cenários positivos:** atleta offline registra intenção e, ao reconectar antes de D-5, o sistema confirma e declara; D-5 ocorre com a tentativa ainda pendente e ela expira, permanecendo apenas como evidência histórica não confirmada.
+**Cenários negativos:** produto exibe "DISPONÍVEL" antes da confirmação; quórum inclui tentativa pendente; tentativa expirada é convertida automaticamente em ocorrência pós-D-5.
+**Exceções:** estratégia técnica permanece `OPEN-TECH-004`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ` (DEC-021; DEC-021-SUBGAP-001).
+**Status:** PROPOSTO.
+
+---
+
+# 2. Catálogo proposto de NFR
+
+## NFR-001 — Autonomia operacional do fluxo normal
+
+**ID:** `NFR-001`
+**Tipo:** NFR
+**Título:** Zero ações administrativas obrigatórias entre publicação e D-5.
+
+**Formulação normativa:**
+Para cada sessão que percorra o `Fluxo normal`, após a publicação mensal e antes de sua resolução em D-5, a quantidade de ações administrativas obrigatórias do treinador DEVE ser `0`.
+
+**Origem canônica:** Q-009; SUCCESS-001; OBJ-001/002.
+**Objetivo relacionado:** OBJ-001, OBJ-002.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** Fluxo normal; D-5.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Executar ponta a ponta uma sessão normal e contabilizar ações obrigatórias do treinador entre publicação e resolução; resultado esperado = `0`.
+
+**Cenários positivos:** atletas respondem, quórum é calculado, D-5 resolve e comunica sem intervenção.
+**Cenários negativos:** sistema solicita ao treinador calcular, confirmar ou cancelar no fluxo normal.
+**Exceções:** revisão/publicação mensal, criação tardia, remarcação e decisão pós-confirmação não pertencem a esse intervalo normal.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## NFR-002 — Integridade semântica do domínio
+
+**ID:** `NFR-002`
+**Tipo:** NFR
+**Título:** Preservar fatos, declarações, estados e projeções distintos.
+
+**Formulação normativa:**
+Em toda operação da primeira entrega, o produto DEVE preservar:
+
+* `Disponibilidade ≠ Presença ≠ Participação`;
+* declaração original ≠ ocorrência posterior ≠ fato consolidado;
+* perfil esportivo ≠ alocação contextual;
+* estado da sessão ≠ condição/projeção;
+* projeção ≠ fonte de verdade;
+* `NÃO RESPONDEU ≠ INDISPONÍVEL`;
+* `NÃO APURADO ≠ AUSENTE`.
+
+**Origem canônica:** glossário v2.10; RULE-001–003/027; invariantes do contrato.
+**Objetivo relacionado:** OBJ-003, OBJ-005.
+**Atores relacionados:** todos.
+**Regras/conceitos relacionados:** invariantes do domínio.
+**Fluxo relacionado:** FLOW-001, FLOW-002.
+
+**Critério de aceitação:**
+Testes de regressão demonstram que nenhuma operação transforma silenciosamente um conceito em outro e que projeções não alteram seus fatos de origem.
+
+**Cenários positivos:** ocorrência muda quórum atual preservando disponibilidade.
+**Cenários negativos:** `DISPONÍVEL` vira automaticamente `PRESENTE`.
+**Exceções:** nenhuma.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## NFR-003 — Privacidade e isolamento lógico dos dados individuais
+
+**ID:** `NFR-003`
+**Tipo:** NFR
+**Título:** Restringir informação individual à autoridade pertinente.
+
+**Formulação normativa:**
+Uma atleta NÃO DEVE ter acesso indiscriminado aos dados individuais das demais atletas nem poder alterá-los. Deve acessar seus próprios dados e somente informações coletivas necessárias ao fluxo.
+
+**Origem canônica:** Q-008; RULE-023/024; QA-003.
+**Objetivo relacionado:** OBJ-003, OBJ-004.
+**Atores relacionados:** ACT-002.
+**Regras/conceitos relacionados:** privacidade individual.
+**Fluxo relacionado:** transversal.
+
+**Critério de aceitação:**
+Testes com duas atletas demonstram que cada uma consulta seus dados permitidos, mas não consulta ou altera dados individuais protegidos da outra.
+
+**Cenários positivos:** atleta consulta própria declaração.
+**Cenários negativos:** atleta acessa histórico individual alheio sem necessidade coletiva.
+**Exceções:** informações coletivas necessárias podem ser exibidas conforme regras do produto.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ`.
+**Status:** PROPOSTO.
+**Observações:** não escolhe mecanismo de autenticação/autorização.
+
+---
+
+## NFR-004 — Auditabilidade e reconstrução histórica
+
+**ID:** `NFR-004`
+**Tipo:** NFR
+**Título:** Reconstruir mudanças sem sobrescrita silenciosa.
+
+**Formulação normativa:**
+Para operações auditáveis da primeira entrega, o histórico DEVE permitir reconstruir o valor ou estado anterior, o valor/estado corrente, a autoria e o instante da mudança quando esses elementos são exigidos pelo contrato.
+
+**Origem canônica:** SUCCESS-004; CONCEPT-011; RULE-022/030; contrato de histórico.
+**Objetivo relacionado:** OBJ-003.
+**Atores relacionados:** ACT-001.
+**Regras/conceitos relacionados:** remarcação, retificação, alterações publicadas.
+**Fluxo relacionado:** FLOW-001, FLOW-002.
+
+**Critério de aceitação:**
+Dada uma remarcação, alteração auditável ou retificação, um teste consegue reconstruir o antes e o depois e identificar responsável e instante.
+
+**Cenários positivos:** retificação conserva original.
+**Cenários negativos:** atualização substitui o registro sem evidência anterior.
+**Exceções:** exclusão de sessão ainda `PLANEJADO` antes da publicação não é cancelamento histórico publicado.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## NFR-005 — Clareza e não culpabilização da comunicação
+
+**ID:** `NFR-005`
+**Tipo:** NFR
+**Título:** Comunicar estado sem expor complexidade ou culpabilizar atletas.
+
+**Formulação normativa:**
+Comunicações destinadas às atletas DEVEM usar estados operacionais simples e NÃO DEVEM exigir interpretação da matemática do quórum, expor dados individuais desnecessários, criar ranking constrangedor, culpabilização individual ou punição automática.
+
+**Origem canônica:** Q-004/Q-010/Q-012; RULE-025; contrato da comunicação.
+**Objetivo relacionado:** OBJ-004, OBJ-005.
+**Atores relacionados:** ACT-002.
+**Regras/conceitos relacionados:** QA-008; feedback coletivo.
+**Fluxo relacionado:** FLOW-001.
+
+**Critério de aceitação:**
+Mensagens de confirmação, cancelamento, remarcação e alteração relevante podem ser compreendidas pelo estado do treino sem listar a matemática interna ou responsabilizar nominalmente atletas.
+
+**Cenários positivos:** “cancelado por falta de quórum”.
+**Cenários negativos:** ranking de quem mais causou cancelamentos.
+**Exceções:** treinador recebe déficit exato necessário à decisão.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED+DERIVED→REQ`.
+**Status:** PROPOSTO.
+
+---
+
+## NFR-006 — Confirmação de modificação de estado oficial
+
+**ID:** `NFR-006`
+**Tipo:** NFR
+**Título:** Nenhuma modificação de estado oficial é concluída sem confirmação do sistema.
+
+**Formulação normativa:**
+Para qualquer ação que pretenda modificar um estado oficial, a ação só DEVE ser considerada concluída quando o estado vigente do sistema confirmar a modificação. Até essa confirmação, a ação DEVE permanecer como tentativa/ação pendente, sem apresentar sucesso definitivo e sem alterar o estado oficial.
+
+**Origem canônica:** REQ-ELIC-002-TRANSVERSAL (HUMAN_EXPLICIT, 2026-09-04).
+**Objetivo relacionado:** OBJ-003, OBJ-005.
+**Atores relacionados:** todos.
+**Regras/conceitos relacionados:** `AÇÃO LOCAL PENDENTE DE CONFIRMAÇÃO`; estado oficial; FR-025.
+**Fluxo relacionado:** transversal.
+
+**Critério de aceitação:**
+Toda operação de modificação de estado oficial exibe estado intermediário (pendente) até receber confirmação do sistema; nenhuma operação pendente é exibida como concluída ou altera o estado oficial antes da confirmação.
+
+**Cenários positivos:** tentativa de disponibilidade permanece pendente e visível até confirmação.
+**Cenários negativos:** produto exibe “declaração registrada” antes da confirmação do sistema.
+**Exceções:** nenhuma.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→REQ` (REQ-ELIC-002-TRANSVERSAL).
+**Status:** PROPOSTO.
+
+---
+
+# 3. Catálogo proposto de CON
+
+As restrições abaixo derivam principalmente de Q-006/Q-007 e do escopo decidido. As fontes confirmam explicitamente que elas **não escolhem** banco, hosting, serverless, autenticação, offline, sincronização ou tecnologia de notificações.
+
+## CON-001 — Forma de entrega PWA
+
+**Formulação normativa:** a primeira versão DEVE ser entregue como PWA.
+**Origem:** DEC-001; CONST-006; Q-007.
+**Objetivo:** OBJ-001.
+**Atores:** ACT-001/002.
+**Fluxo:** transversal.
+**Critério de aceitação:** primeira entrega pode ser utilizada na forma PWA definida, sem depender de aplicativo nativo.
+**Cenário negativo:** primeira versão somente utilizável como aplicativo nativo publicado em loja.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+**Observação:** não determina arquitetura interna.
+
+## CON-002 — Mobile first
+
+**Formulação normativa:** a experiência primária da primeira entrega DEVE ser concebida para uso cotidiano em smartphones e NÃO DEVE depender de fluxo exclusivo de desktop.
+**Origem:** CONST-007; Q-006/Q-007; FACT-003.
+**Objetivo:** OBJ-004.
+**Critério de aceitação:** todos os fluxos P0 podem ser executados em smartphone sem depender de etapa exclusiva em desktop.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+**Observação:** critérios quantitativos de legibilidade/desempenho permanecem lacuna.
+
+## CON-003 — Independência de lojas nativas
+
+**Formulação normativa:** a primeira entrega NÃO DEVE depender de publicação nas lojas Apple ou Google para ser distribuída e utilizada.
+**Origem:** CONST-008; Q-006/Q-007.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** entrega operacional ocorre sem etapa obrigatória de aprovação/publicação em loja nativa.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+
+## CON-004 — Sustentabilidade de custo operacional
+
+**Formulação normativa:** a solução da primeira entrega DEVE ser compatível com custo recorrente operacional em torno de `R$ 50/mês`; uma solução cuja operação recorrente fique próxima de `R$ 200/mês` é incompatível com a restrição vigente.
+**Origem:** CONST-003; Q-006.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** a estimativa de custo recorrente da solução selecionada posteriormente demonstra compatibilidade com a faixa declarada e não depende de custo próximo ao patamar declarado incompatível.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+**Observação:** a fonte usa deliberadamente “em torno de” e “próximo de”; não inventei um hard cap intermediário.
+
+## CON-005 — Prazo da primeira entrega
+
+**Formulação normativa:** o escopo proposto para a primeira versão DEVE permanecer compatível com entrega até `07/09/2026`.
+**Origem:** CONST-004; Q-006.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** planejamento posterior não inclui como obrigatória capacidade cuja execução torne explicitamente incompatível a data decidida sem retorno à autoridade humana.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+
+## CON-006 — Limite aproximado de esforço
+
+**Formulação normativa:** a primeira entrega DEVE permanecer proporcional às aproximadamente `42 horas` disponíveis para a etapa.
+**Origem:** CONST-005/011; HYP-002.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** escopo implementável planejado não promove capacidades `FUTURE` ou outras capacidades não decididas para preencher o produto.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`, dependente de HYP-002 aceita como risco.
+**Status:** PROPOSTO.
+**Observação:** não transforma HYP-002 em fato de viabilidade; apenas preserva o limite de esforço decidido.
+
+## CON-007 — Desenvolvimento individual assistido por IA
+
+**Formulação normativa:** o processo de desenvolvimento da primeira entrega DEVE permanecer compatível com uma única pessoa responsável, sem experiência prévia de programação, utilizando apoio intensivo de agentes de IA.
+**Origem:** CONST-001/002; FACT-006.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** decisões posteriores que exijam equipe operacional adicional ou capacidade especializada permanente precisam ser consideradas incompatíveis ou devolvidas para decisão.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+
+## CON-008 — Previsibilidade de custo dos modelos usados no desenvolvimento
+
+**Formulação normativa:** o desenvolvimento NÃO DEVE depender de modelos de IA cujo acesso necessário ao processo esteja condicionado a cobrança variável por consumo de tokens de API; deve usar assinaturas mensais previsíveis conforme a restrição declarada.
+**Origem:** CONST-002; Q-006.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** o fluxo de desenvolvimento previsto não possui dependência obrigatória de API de IA cobrada por tokens.
+**Prioridade:** P0.
+**Proveniência:** `CONST→CON`.
+**Status:** PROPOSTO.
+**Observação:** não restringe serviços de execução do produto além do que a fonte decidiu.
+
+## CON-009 — Escopo funcional fechado da primeira entrega
+
+**Formulação normativa:** `FUTURE-001..011` NÃO DEVEM ser promovidos à primeira entrega sem nova decisão explícita. Também NÃO DEVEM ser introduzidos como requisitos vigentes gamificação, rankings, pontuação de disciplina, geração automática de materiais públicos ou automação de substituições.
+
+**Origem:** DEC-002; seção `FUTURE`; escopo obrigatório.
+**Objetivo:** OBJ-001.
+**Critério de aceitação:** catálogo da primeira entrega não contém essas capacidades como obrigação funcional.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→CON`.
+**Status:** PROPOSTO.
+
+## CON-010 — Participante convidada fora do produto
+
+**Formulação normativa:** a primeira entrega NÃO DEVE cadastrar, representar, consultar ou considerar participante convidada no cálculo de quórum.
+**Origem:** DEC-010; RULE-031; invariantes do contrato.
+**Objetivo:** OBJ-001, OBJ-002.
+**Critério de aceitação:** tentativa de satisfazer quórum com convidada não altera a projeção; o fluxo pós-confirmação continua `MANTER` ou `CANCELAR`.
+**Prioridade:** P0.
+**Proveniência:** `DECIDED→CON`.
+**Status:** PROPOSTO.
+
+---
+
+# 4. Matriz de rastreabilidade proposta
+
+## 4.1 OBJ → FR/NFR/CON
+
+| Objetivo                                       | Cobertura proposta                                                                                           |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| OBJ-001 — Devolver tempo e atenção             | FR-003, FR-004, FR-011, FR-012, FR-020, FR-022; NFR-001; CON-001/003/004/005/006/007/008/009                 |
+| OBJ-002 — Agenda por exceção e previsibilidade | FR-002–FR-015, FR-019/020/022/023/024/025; NFR-001; CON-010                                                  |
+| OBJ-003 — Informação e histórico confiáveis    | FR-001/006–FR-010/013/016–FR-018/021/022; NFR-002/003/004/006                                                |
+| OBJ-004 — Autonomia das atletas                | FR-001, FR-010, FR-013, FR-019/020/023/024/025; NFR-003/005/006; CON-002                                     |
+| OBJ-005 — Apoiar sem substituir treinador      | FR-001/002/009/011/014/015/017/019; NFR-002/005/006                                                          |
+
+## 4.2 Entendimento → Requirements
+
+| Origem canônica                        | Requisitos principais                                         |
+| -------------------------------------- | ------------------------------------------------------------- |
+| Q-006 / CONST-001..011                 | CON-002..008; lacunas de performance/conectividade/manutenção |
+| Q-007 / DEC-001                        | CON-001/002/003                                               |
+| Q-008 / ACT-001/002 / RULE-023/024/031 | FR-001/002; NFR-003; CON-010                                  |
+| Q-009 / SUCCESS-001/002                | FR-012/022; NFR-001                                           |
+| Q-010 / FLOW-001/002                   | FR-003–FR-010, FR-016–FR-022                                  |
+| Q-011 / RULE-006–008                   | FR-002/011                                                    |
+| Q-012 / RULE-004/009/010/011           | FR-005/011/012                                                |
+| Q-013 / RULE-012–017                   | FR-013/014/015                                                |
+| DEC-007 / RULE-030                     | FR-018; NFR-004                                               |
+| DEC-012/013/014/015                    | FR-007/008/009/014/015                                        |
+| RULE-001–003/027 + invariantes         | NFR-002                                                       |
+| DEC-018                                | FR-010 (formulação binária, sem TALVEZ); FR-020 (lembrete)    |
+| DEC-019                                | FR-023                                                        |
+| DEC-020                                | FR-024                                                        |
+| DEC-021                                | FR-025                                                        |
+| DEC-021-SUBGAP-001                     | FR-025                                                        |
+| REQ-ELIC-002-TRANSVERSAL               | NFR-006                                                       |
+
+## 4.3 Limite da cadeia nesta fase
+
+```text
+OBJ
+ ↓
+FACT / RULE / FLOW / CONST / HYP
+ ↓
+FR / NFR / CON
+```
+
+**A cadeia termina aqui.**
+
+Não é proposta nenhuma relação `FR/NFR/CON → DRV` nesta fase.
+
+---
+
+# 5. Lacunas encontradas
+
+## GAP-REQ-001 — Cadência de lembretes automáticos
+
+**Status: FECHADO (DEC-018, 2026-09-04).**
+
+**Confirmado:** lembretes/cobranças ordinárias devem deixar de depender da intervenção normal do treinador.
+
+**Resolução:** DEC-018 decide a política completa de lembrete ordinário: máximo um lembrete por atleta/sessão, às 19:00 do segundo dia civil anterior ao D-5 (`America/Sao_Paulo`) para atletas ainda `NÃO RESPONDEU`, sem segundo lembrete ordinário. A política foi incorporada a FR-020.
+
+**Residual técnico:** canal e tecnologia de notificação permanecem `OPEN-TECH-005` (não resolvidos nesta fase).
+
+**Impacto resolvido:** HYP-001 e OBJ-004 têm cobertura comportamental suficiente para esta fase.
+
+---
+
+## GAP-REQ-002 — Comportamento mínimo sob conectividade instável
+
+**Status: PARCIALMENTE FECHADO — porção semântica resolvida (DEC-019/020/021 e DEC-021-SUBGAP-001); porção técnica permanece `OPEN-TECH-004`.**
+
+**Confirmado:** o uso real inclui conectividade móvel instável e existe necessidade de tolerância razoável.
+
+**Resolução semântica:** DEC-019 decide que agenda previamente conhecida pode ser consultada sem conexão, com distinção explícita de currentness. DEC-020 decide que estado e próxima ação previamente conhecidos podem ser consultados offline, com restrições de currentness e expiração. DEC-021 decide que intenção local de disponibilidade pode ser registrada como `AÇÃO LOCAL PENDENTE DE CONFIRMAÇÃO`. DEC-021-SUBGAP-001 decide que, se D-5 ocorrer antes da confirmação, a tentativa expira sem alterar estado oficial ou quórum, permanece apenas como evidência histórica não confirmada e não é convertida automaticamente em ocorrência pós-D-5. Esses comportamentos estão formalizados em FR-023, FR-024 e FR-025.
+
+**Residual técnico:** estratégia de sincronização, cache offline, service worker, conflict resolution e mecanismo de revalidação permanecem `OPEN-TECH-004`.
+
+**Impacto:** decisões arquiteturais dependentes do comportamento semântico offline agora têm base; aspectos de implementação permanecem para fase técnica.
+
+---
+
+## GAP-REQ-003 — Critério mensurável de leveza/desempenho
+
+**Confirmado:** produto deve ser leve e adequado a smartphones novos e antigos dentro de limites razoáveis.
+
+**Lacuna:** não existe dispositivo de referência, tempo de resposta, tamanho máximo, condição de rede ou outra medida verificável.
+
+**Tratamento:** CON-002 preserva mobile-first; nenhum NFR numérico de desempenho foi inventado.
+
+---
+
+## GAP-REQ-004 — Critério mensurável de baixa fricção
+
+**Confirmado:** ações cotidianas devem exigir poucos passos e as atletas devem entender rapidamente a próxima ação.
+
+**Lacuna:** não existe número máximo de passos, tempo por tarefa ou taxa mínima de conclusão.
+
+**Tratamento:** FR-019 cobre a capacidade de próxima ação; um NFR quantitativo de usabilidade não foi criado.
+
+---
+
+## GAP-REQ-005 — Prioridade entre múltiplas “próximas ações”
+
+**Confirmado:** treinador e atleta precisam de próxima ação e visão operacional.
+
+**Lacuna:** quando o mesmo ator possui múltiplas sessões ou múltiplas pendências simultâneas, a regra para escolher ou ordenar a “próxima” ação não está completamente fechada.
+
+**Tratamento:** FR-019 exige coerência local com o fluxo, sem inventar algoritmo global de priorização.
+
+---
+
+## GAP-REQ-006 — Limiar exato de manutenção/operabilidade
+
+**Confirmado:** capacidade de manutenção e suporte contínuo é muito baixa.
+
+**Lacuna:** não há métrica de horas/mês, número de intervenções ou outro critério operacional mensurável.
+
+**Tratamento:** preservado como restrição contextual para fases posteriores; não foi criado NFR quantitativo.
+
+---
+
+## GAP-REQ-007 — Faixa econômica deliberadamente aproximada
+
+**Confirmado:** aproximadamente R$50/mês é desejado; aproximadamente R$200/mês é incompatível.
+
+**Lacuna:** não existe hard cap entre esses valores.
+
+**Tratamento:** CON-004 preserva a formulação humana sem inventar `R$X` como limite exato.
+
+---
+
+# 6. Conflitos encontrados
+
+## Conflitos ativos
+
+**Nenhum conflito substantivo ativo foi encontrado entre as fontes canônicas prioritárias para o escopo convertido.**
+
+Os antigos conflitos estão tratados como `SUPERSEDED`, e a rastreabilidade vigente registra o Gate B final aprovado e as formulações substituídas.
+
+## Tensões que não são conflitos
+
+1. **Automação × autoridade humana:** resolvida semanticamente:
+
+   * D-5 é determinístico e automático;
+   * perda de quórum depois da confirmação exige decisão humana.
+
+2. **PWA × offline:** não é conflito:
+
+   * PWA está decidida;
+   * estratégia de offline/sincronização permanece não decidida.
+
+3. **Papéis autenticados × método de autenticação:** não é conflito:
+
+   * necessidade de distinguir autoridade está decidida;
+   * mecanismo técnico permanece `OPEN-TECH-003`.
+
+4. **Comunicação obrigatória × tecnologia de notificação:** não é conflito:
+
+   * resultado deve ser comunicado;
+   * canal e mecanismo permanecem `OPEN-TECH-005`.
+
+---
+
+# 7. Questões que precisam retornar à autoridade humana
+
+Não identifiquei nova regra de domínio aberta comparável às antigas Q-001..013; `ELICITATION-OPEN = NONE` continua coerente. Entretanto, antes de uma futura avaliação de prontidão para Drivers, lacunas podem exigir decisão humana **se forem consideradas necessárias para tornar os NFRs suficientemente verificáveis**:
+
+### AUTH-REQ-001 — Conectividade mínima aceitável
+
+**Status: RESPONDIDA QUANTO AO COMPORTAMENTO (DEC-019/020/021 e DEC-021-SUBGAP-001); residual técnico em `OPEN-TECH-004`.**
+
+DEC-019, DEC-020, DEC-021 e DEC-021-SUBGAP-001 decidiram quais comportamentos são obrigatórios sem conexão no que tange à agenda, estado/ação, intenção de disponibilidade e expiração da tentativa pendente em D-5. Esses comportamentos estão formalizados em FR-023, FR-024 e FR-025.
+
+Pergunta residual (estratégia técnica de implementação offline/sincronização): permanece `OPEN-TECH-004`, não é questão de produto nesta fase.
+
+### AUTH-REQ-002 — Critério de usabilidade móvel
+
+Qual evidência será suficiente para considerar as ações principais “rápidas, legíveis e de baixa fricção” no piloto?
+
+Esta questão **não é respondida nesta proposta**.
+
+### AUTH-REQ-003 — Política mínima de lembrete
+
+**Status: RESPONDIDA (DEC-018, 2026-09-04).**
+
+DEC-018 decide a política completa: máximo um lembrete ordinário por atleta/sessão, às 19:00 do segundo dia civil anterior ao D-5 (`America/Sao_Paulo`) para atletas `NÃO RESPONDEU`, sem segundo lembrete. Incorporado a FR-020. Tecnologia de notificação permanece `OPEN-TECH-005`.
+
+---
+
+# 8. Avaliação de cobertura
+
+## OBJ-001
+
+**Cobertura:** forte.
+
+A proposta cobre geração da agenda, resolução automática, métricas e, principalmente, `NFR-001 = 0 ações administrativas obrigatórias no fluxo normal`.
+
+**Risco restante:** HYP-003 — isso realmente devolverá horas materiais — continua dependente de medição real.
+
+## OBJ-002
+
+**Cobertura:** forte.
+
+Todo o fluxo agenda → disponibilidade → quórum → D-5 → ocorrência → exceção está formalizado.
+
+## OBJ-003
+
+**Cobertura:** forte.
+
+Histórico, separação semântica, auditabilidade e retificação possuem requisitos específicos e transversais.
+
+## OBJ-004
+
+**Cobertura:** boa, com risco empírico.
+
+As ações sob autoridade das atletas estão cobertas. HYP-001 continua aberta empiricamente; GAP-REQ-004 afeta adoção/fricção (critério mensurável ausente); GAP-REQ-001 fechado por DEC-018.
+
+## OBJ-005
+
+**Cobertura:** forte.
+
+Quórum pode ser calculado; exceção pós-confirmação permanece humana; projeção não vira fato ou decisão.
+
+### Resultado global de cobertura
+
+**Cobertura funcional da primeira entrega:** alta.
+**Cobertura de regras críticas do domínio:** alta.
+**Cobertura de NFRs mensuráveis:** parcial, por lacunas explicitadas de conectividade, usabilidade, desempenho e operabilidade.
+
+Isso é uma **avaliação de cobertura**, não uma execução do Gate C.
+
+---
+
+# 9. Auditoria dos Requirements
+
+## 9.1 Requisitos sem origem
+
+**Resultado:** `0 detectados`.
+
+Todos os itens propostos possuem referência a Q/DEC/RULE/FLOW/CONST/SUCCESS canônico.
+
+---
+
+## 9.2 Objetivos sem requisito quando deveriam possuir cobertura
+
+**Resultado:** `0 detectados`.
+
+OBJ-001..005 possuem cobertura proposta.
+
+---
+
+## 9.3 FUTURE promovido indevidamente
+
+**Resultado:** `0 detectados`.
+
+`FUTURE-001..011` permanecem fora.
+
+Também não foram promovidos:
+
+* gamificação;
+* rankings;
+* disciplina;
+* geração automática de materiais públicos;
+* automação de substituições.
+
+---
+
+## 9.4 Duplicidades
+
+Alguma redundância intencional existe entre FRs específicos e NFRs transversais, por exemplo:
+
+* FR-018 especifica retificação; NFR-004 exige auditabilidade transversal;
+* FR-010/013/017 especificam fatos; NFR-002 protege a separação semântica.
+
+Isso não foi classificado como duplicidade substantiva porque um item define comportamento e o outro propriedade transversal verificável.
+
+---
+
+## 9.5 Contradições
+
+**Resultado:** nenhuma contradição ativa detectada.
+
+---
+
+## 9.6 Requisitos não verificáveis
+
+Itens vagos identificados foram **retidos como GAP**, em vez de formalizados como NFR:
+
+* “leve”;
+* “rápido”;
+* “poucos passos”;
+* “tolerância razoável a conectividade instável”;
+* “baixa manutenção”.
+
+CON-004 conserva deliberadamente a linguagem econômica aproximada da autoridade humana e está marcado com essa limitação.
+
+---
+
+## 9.7 Inferências tratadas como decisões
+
+**Resultado:** nenhuma detectada.
+
+`INF-TECH-001` NÃO foi transformado em obrigação de idempotência/reprocessamento.
+
+HYP-001..003 NÃO foram transformadas em fatos.
+
+---
+
+## 9.8 Decisões técnicas prematuras
+
+**Resultado:** nenhuma detectada.
+
+Não foram escolhidos:
+
+* banco;
+* hosting;
+* provedor;
+* serverless;
+* API;
+* schema;
+* scheduler/job/cron;
+* método de autenticação;
+* login social/magic link;
+* estratégia offline;
+* sincronização;
+* tecnologia de notificações;
+* cache/provedor de feriados.
+
+Os limites técnicos futuros do contrato permanecem explicitamente fora de seu escopo lógico.
+
+---
+
+## 9.9 Requisitos que violam invariantes de domínio
+
+**Resultado:** nenhum detectado.
+
+Especialmente preservados:
+
+* `Disponibilidade ≠ Presença ≠ Participação`;
+* estado ≠ condição/projeção;
+* declaração ≠ ocorrência posterior ≠ fato consolidado;
+* perfil esportivo ≠ alocação contextual;
+* `CANCELADO` terminal;
+* remarcação cria outra sessão;
+* retificação não sobrescreve história.
+
+---
+
+## 9.10 Trabalho administrativo incompatível com SUCCESS-001
+
+**Resultado:** nenhum requisito do fluxo normal exige ação semanal entre publicação e D-5.
+
+Ações humanas preservadas são justificadas pelas fontes:
+
+* revisão/publicação mensal;
+* alteração real;
+* criação tardia;
+* remarcação;
+* decisão pós-confirmação;
+* consolidação factual após a sessão;
+* retificação de erro factual.
+
+Essas ações não substituem silenciosamente a automação determinística do fluxo normal.
+
+---
+
+# 10. Questões técnicas preservadas
+
+| ID                                                        | Estado após Requirements      |
+| --------------------------------------------------------- | ----------------------------- |
+| INF-TECH-001 — idempotência/reprocessamento do checkpoint | Continua `INF`; não promovido |
+| OPEN-TECH-002 — persistência/hospedagem/execução          | Continua aberto               |
+| OPEN-TECH-003 — mecanismo de autenticação                 | Continua aberto               |
+| OPEN-TECH-004 — offline/conectividade/sincronização       | Continua aberto               |
+| OPEN-TECH-005 — tecnologia de comunicação/notificações    | Continua aberto               |
+
+O requisito fala sobre **o que deve acontecer**; não foi criado serviço, job, endpoint ou componente para representar o “executor lógico”.
+
+---
+
+# 11. Proposta de atualização de `04-REQUIREMENTS`
+
+O arquivo atual é um template ainda vazio para FR/NFR/CON e possui checklist posterior para Drivers.
+
+## Atualizações propostas
+
+### Metadados
+
+```text
+Projeto: CEPRAEA BEACH PRO
+Status: PROPOSTO — AGUARDA APROVAÇÃO HUMANA
+Requirements: NOT_YET_CANONICAL
+Gate C: NOT_EXECUTED
+Drivers: NOT_YET_AUTHORIZED
+Última atualização proposta: 2026-09-04
+```
+
+### Seção 1 — Requisitos funcionais
+
+Adicionar `FR-001..FR-025` desta proposta. FR-023/024/025 formalizam comportamento offline decidido por DEC-019/020/021.
+
+### Seção 2 — Requisitos não funcionais
+
+Adicionar `NFR-001..NFR-006`. NFR-006 formaliza REQ-ELIC-002-TRANSVERSAL (confirmação obrigatória antes de considerar modificação de estado oficial concluída).
+
+Registrar explicitamente que qualidade móvel, desempenho, conectividade e manutenção possuem lacunas de mensuração e não foram convertidos em métricas inventadas.
+
+### Seção 3 — Regras de negócio
+
+Não duplicar todas as `RULE-*` como um terceiro catálogo concorrente.
+
+As `RULE-*` permanecem origem canônica e aparecem na rastreabilidade de cada FR/NFR. Caso o template exija a seção, registrar referências às regras já consolidadas, sem redefini-las.
+
+### Seção 4 — Restrições
+
+Adicionar `CON-001..CON-010`.
+
+### Seção 5 — Requisitos rejeitados/adiados
+
+Registrar:
+
+* `FUTURE-001..011` — adiados por decisão de escopo;
+* gamificação — não requisito fechado;
+* rankings — não requisito fechado;
+* pontuação de disciplina — não requisito fechado;
+* geração automática pública — não requisito fechado;
+* automação de substituições — não requisito fechado;
+* comportamento offline semântico — formalizado em FR-023/024/025 (DEC-019/020/021); implementação técnica permanece `OPEN-TECH-004`;
+* requisito numérico de desempenho — não formalizado; critério ausente;
+* idempotência/reprocessamento — `INF-TECH-001`, não promovido.
+
+### Seção 6 — Matriz de qualidade
+
+Preencher todos os requisitos com:
+
+* objetivo;
+* origem confirmada;
+* critério de aceitação;
+* ambiguidade/lacuna, quando existir.
+
+### Seção 8 — Gate para Drivers
+
+**Não marcar nem executar.**
+
+Manter:
+
+```text
+GATE-C = NOT_EXECUTED
+Drivers = NOT_YET_AUTHORIZED
+```
+
+---
+
+# 12. Proposta de atualização de `07-TRACEABILITY`
+
+O artefato atual termina corretamente em `FACT/RULE/FLOW/CONST/HYP` e registra `FR/NFR/CON` como autorizados mas ainda vazios.
+
+## 12.1 Atualizar a cadeia principal
+
+De:
+
+```text
+OBJ
+ ↓
+FACT / RULE / FLOW / CONST / HYP
+ ↓
+FR / NFR / CON ← AUTHORIZED; AINDA NÃO FORMALIZADOS
+ ↓
+DRV
+```
+
+Para, **somente após aprovação desta proposta**:
+
+```text
+OBJ
+ ↓
+FACT / RULE / FLOW / CONST / HYP
+ ↓
+FR / NFR / CON ← FORMALIZADOS E APROVADOS
+ ↓
+DRV             ← NOT_YET_AUTHORIZED
+```
+
+## 12.2 Substituir a matriz Objetivo → Requisito
+
+| Objetivo | Requisitos propostos                                 | Cobertura                                    |
+| -------- | ---------------------------------------------------- | -------------------------------------------- |
+| OBJ-001  | FR-003/004/011/012/020/022; NFR-001; CON-001/003–009                 | Boa; impacto real de horas permanece HYP-003 |
+| OBJ-002  | FR-002–015/019/020/022–025; NFR-001; CON-010                         | Forte                                        |
+| OBJ-003  | FR-001/006–010/013/016–018/021/022; NFR-002/003/004/006              | Forte                                        |
+| OBJ-004  | FR-001/010/013/019/020/023–025; NFR-003/005/006; CON-002             | Boa; adoção permanece HYP-001                |
+| OBJ-005  | FR-001/002/009/011/014/015/017/019; NFR-002/005/006                  | Forte                                        |
+
+## 12.3 Adicionar matriz Origem → Requisito
+
+Usar a matriz da seção 4.2 desta proposta.
+
+## 12.4 Manter Requisito → Driver vazio
+
+```text
+Estado: NOT_YET_AUTHORIZED
+
+Nenhuma classificação de requisito como driver é realizada nesta fase.
+```
+
+## 12.5 Preservar questões técnicas
+
+Manter `INF-TECH-001` e `OPEN-TECH-002..005` sem solução.
+
+## 12.6 Adicionar lacunas de Requirements
+
+Registrar `GAP-REQ-001..007`, distinguindo-as de questões de produto anteriormente fechadas.
+
+---
+
+# 13. Proposta de atualização canônica
+
+**IMPORTANTE:** esta seção contém somente alterações candidatas. Nada abaixo passa a ser canônico antes de aprovação explícita.
+
+| ID          | Artefato        | Alteração proposta                                             | Origem                                           | Status             | Rastreabilidade                     |
+| ----------- | --------------- | -------------------------------------------------------------- | ------------------------------------------------ | ------------------ | ----------------------------------- |
+| CAN-REQ-001 | 04-REQUIREMENTS | Adicionar FR-001..FR-025                                       | Q-008..013, DEC/RULE/FLOW correlatos             | `PENDING_APPROVAL` | OBJ → RULE/FLOW/DEC → FR            |
+| CAN-REQ-002 | 04-REQUIREMENTS | Adicionar NFR-001..NFR-006                                     | SUCCESS/QA/RULE/invariantes                      | `PENDING_APPROVAL` | OBJ → SUCCESS/QA/RULE → NFR         |
+| CAN-REQ-003 | 04-REQUIREMENTS | Adicionar CON-001..CON-010                                     | Q-006/Q-007/DEC-002/010/CONST                    | `PENDING_APPROVAL` | OBJ/CONST/DEC → CON                 |
+| CAN-REQ-004 | 04-REQUIREMENTS | Registrar GAP-REQ-001..007 sem inventar métricas               | QA/CONST/OPEN-TECH e análise de verificabilidade | `PENDING_APPROVAL` | fonte → GAP                         |
+| CAN-REQ-005 | 04-REQUIREMENTS | Preservar FUTURE e itens não fechados fora da primeira entrega | DEC-002; FUTURE-001..011                         | `PENDING_APPROVAL` | DEC/FUTURE → adiados                |
+| CAN-TRC-001 | 07-TRACEABILITY | Preencher OBJ → FR/NFR/CON                                     | requisitos desta proposta                        | `PENDING_APPROVAL` | OBJ → entendimento → REQ            |
+| CAN-TRC-002 | 07-TRACEABILITY | Adicionar origem canônica → requisito                          | Q/FACT/RULE/FLOW/CONST/DEC                       | `PENDING_APPROVAL` | origem → REQ                        |
+| CAN-TRC-003 | 07-TRACEABILITY | Manter Req → Driver vazio e `NOT_YET_AUTHORIZED`               | estado processual vigente                        | `PENDING_APPROVAL` | cadeia deliberadamente interrompida |
+| CAN-TRC-004 | 07-TRACEABILITY | Preservar INF-TECH-001 e OPEN-TECH-002..005                    | assurance/artefatos canônicos                    | `PENDING_APPROVAL` | técnico aberto → fase posterior     |
+
+---
+
+# 14. Estado proposto ao término desta fase de trabalho
+
+Enquanto não houver sua aprovação:
+
+```text
+REQUIREMENTS-PROPOSAL = PRODUCED
+REQUIREMENTS-CANONICAL = NO
+GATE-C = NOT_EXECUTED
+
+Drivers = NOT_YET_AUTHORIZED
+Alternatives/Options = NOT_YET_AUTHORIZED
+ADRs = NOT_YET_AUTHORIZED
+Architecture = NOT_YET_AUTHORIZED
+```
+
+Nenhuma conclusão desta proposta altera sozinha os artefatos canônicos.

@@ -1,0 +1,65 @@
+schema_version: "1.1"
+document:
+  id: "SEMANTIC_REGISTRY"
+  artifact_kind: "SEMANTIC_REGISTRY"
+  title: "Registro semântico e catálogo de regras"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "SOURCE_MANIFEST"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+concepts:
+  - id: "CONCEPT_ID"
+    preferred_term: "TERMO_PREFERENCIAL"
+    canonical_name: "NOME_CANONICO"
+    classification: "ENTITY|ATTRIBUTE|EVENT|ROLE|ASSOCIATION|VALUE_OBJECT|STATE|CATALOG|RULE|INDICATOR|SNAPSHOT"
+    definition: "DEFINICAO_OPERACIONAL"
+    valid_context: []
+    invalid_context: []
+    inclusions: []
+    exclusions: []
+    synonyms: []
+    related_concept_ids: []
+    allowed_values: []
+    temporality: "TEMPORALIDADE"
+    privacy_classification: "PUBLICO|INTERNO|PESSOAL|SENSIVEL|RESTRITO"
+    STATUS: RASCUNHO
+    evidence_ref_ids: []
+
+rules:
+  - id: "RULE_DOMAIN_001"
+    name: "NOME_DA_REGRA"
+    rule_type: "DEFINITION|OBLIGATION|PROHIBITION|PERMISSION|CONDITION|EXCEPTION|CLASSIFICATION|CALCULATION|TEMPORAL"
+    subject_ids: []
+    statement: "REGRA_NORMALIZADA"
+    conditions: []
+    exceptions: []
+    valid_from: null
+    valid_to: null
+    valid_context: []
+    invalid_context: []
+    implementation_targets: []
+    verification_test_ids: []
+    STATUS: RASCUNHO
+    evidence_ref_ids: []
+
+decisions:
+  - id: "DEC_DOMAIN_001"
+    question: "DECISAO_NECESSARIA"
+    alternatives: []
+    selected_alternative: null
+    rationale: null
+    affected_ids: []
+    risk: "BAIXO|MEDIO|ALTO"
+    status: "EM_REVISAO"
+    evidence_ref_ids: []
+
+open_issues: []

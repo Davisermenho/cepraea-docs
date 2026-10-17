@@ -1,0 +1,16 @@
+{
+  "test_id": "T04-ACTUAL",
+  "name": "Preservação do corpus real",
+  "status": "PASS",
+  "expected": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "actual": {
+    "added": [],
+    "removed": [],
+    "changed": [],
+    "unchanged_count": 115
+  }
+}

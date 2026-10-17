@@ -1,0 +1,53 @@
+schema_version: "1.1"
+document:
+  id: "TRACEABILITY_MATRIX"
+  artifact_kind: "TRACEABILITY_MATRIX"
+  title: "Matriz de rastreabilidade"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "DATA_DICTIONARY"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+phase: "PLANNED|AS_BUILT"
+
+traces:
+  - id: "TRACE_001"
+    evidence_ref_ids: []
+    concept_ids: []
+    rule_ids: []
+    conceptual_entity_ids: []
+    relationship_ids: []
+    logical_relation_ids: []
+    attribute_ids: []
+    physical_object_ids: []
+    permission_requirement_ids: []
+    test_ids: []
+    implementation_status: "NAO_INICIADO|CANDIDATO|IMPLEMENTADO|BLOQUEADO|NAO_APLICAVEL"
+    verification_status: "NAO_EXECUTADO|PASS|FAIL|BLOQUEADO|NAO_APLICAVEL"
+    verification_evidence_ids: []
+
+coverage_summary:
+  source_rules_total: 0
+  rules_with_logical_mapping: 0
+  rules_with_physical_mapping: 0
+  material_constraints_total: 0
+  material_constraints_with_tests: 0
+  unresolved_trace_ids: []
+
+orphan_checks:
+  sources_without_use: []
+  rules_without_source: []
+  entities_without_rules: []
+  attributes_without_definition: []
+  physical_objects_without_logical_origin: []
+  tests_without_rule: []
+
+open_issues: []

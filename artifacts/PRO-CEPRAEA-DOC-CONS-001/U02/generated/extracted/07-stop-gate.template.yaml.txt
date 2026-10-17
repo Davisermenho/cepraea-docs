@@ -1,0 +1,61 @@
+schema_version: "1.1"
+document:
+  id: "STOP_GATE_DOMAIN"
+  artifact_kind: "STOP_GATE_RECOMMENDATION"
+  title: "Recomendação do STOP GATE físico"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "TRACEABILITY_MATRIX"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+criteria:
+  - id: "GATE_SCOPE"
+    description: "Escopo, fontes, autoridade e vigência delimitados"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_SEMANTICS"
+    description: "Conceitos, regras, relações, cardinalidades e temporalidade validados"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_DICTIONARY"
+    description: "Atributos, domínios, ausência, unidades, proveniência e acesso documentados"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_CONFLICTS"
+    description: "Conflitos materiais resolvidos ou isolados"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_TRACEABILITY"
+    description: "Rastreabilidade planejada sem órfãos materiais"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_PHYSICAL_PLAN"
+    description: "Transformação PostgreSQL, migration, rollback e testes definidos"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+  - id: "GATE_ACCESS"
+    description: "Requisitos de acesso e cenários RLS delimitados"
+    result: "PASS|FAIL|BLOCKED|NAO_APLICAVEL"
+    evidence_ref_ids: []
+    blocking_issue_ids: []
+
+recommendation: "READY|READY_WITH_RESTRICTIONS|BLOCKED"
+recommended_scope: []
+excluded_scope: []
+restrictions: []
+required_human_decisions: []
+open_issues: []

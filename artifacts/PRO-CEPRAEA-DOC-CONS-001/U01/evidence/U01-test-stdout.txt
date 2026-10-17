@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U01",
+  "plan": "tests/u01/test_cases.json",
+  "all_passed": true,
+  "results": [
+    {
+      "id": "T01",
+      "name": "Inventario",
+      "status": "PASS",
+      "expected": {
+        "file_count": 2,
+        "relative_paths": [
+          "alpha.txt",
+          "nested/beta.bin"
+        ],
+        "read_error_count": 0
+      },
+      "actual": {
+        "file_count": 2,
+        "relative_paths": [
+          "alpha.txt",
+          "nested/beta.bin"
+        ],
+        "read_error_count": 0
+      }
+    },
+    {
+      "id": "T02",
+      "name": "Integridade",
+      "status": "PASS",
+      "expected": {
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+      },
+      "actual": {
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+      }
+    },
+    {
+      "id": "T03",
+      "name": "Duplicatas",
+      "status": "PASS",
+      "expected": {
+        "duplicate_group_count": 1,
+        "duplicate_paths": [
+          "dup-a.bin",
+          "nested/dup-b.bin"
+        ]
+      },
+      "actual": {
+        "duplicate_group_count": 1,
+        "duplicate_paths": [
+          "dup-a.bin",
+          "nested/dup-b.bin"
+        ]
+      }
+    },
+    {
+      "id": "T04",
+      "name": "Preservacao",
+      "status": "PASS",
+      "expected": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "unchanged_count": 2
+      },
+      "actual": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "unchanged_count": 2
+      }
+    },
+    {
+      "id": "T13",
+      "name": "Reexecucao",
+      "status": "PASS",
+      "expected": {
+        "content_equivalent": true,
+        "output_file_count_first": 4,
+        "output_file_count_second": 4,
+        "unexpected_additional_files": []
+      },
+      "actual": {
+        "content_equivalent": true,
+        "output_file_count_first": 4,
+        "output_file_count_second": 4,
+        "unexpected_additional_files": []
+      }
+    },
+    {
+      "id": "T14",
+      "name": "Interrupcao",
+      "status": "PASS",
+      "expected": {
+        "manifest_valid_json": true,
+        "manifest_file_count": 2,
+        "complete_output_file_count": 4,
+        "partial_content_retained": false
+      },
+      "actual": {
+        "manifest_valid_json": true,
+        "manifest_file_count": 2,
+        "complete_output_file_count": 4,
+        "partial_content_retained": false
+      }
+    }
+  ]
+}

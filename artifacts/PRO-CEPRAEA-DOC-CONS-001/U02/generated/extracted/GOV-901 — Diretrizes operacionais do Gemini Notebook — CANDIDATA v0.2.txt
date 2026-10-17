@@ -1,0 +1,135 @@
+[BLOCO DE METADADOS - GOVERNANÇA]
+ID_FONTE: GOV-901
+TÍTULO_CANÔNICO: Diretrizes operacionais de fontes e reconciliação — Gemini Notebook CEPRAEA
+AUTORIDADE: REGRA_INTERNA
+ESCOPO_DE_LEITURA: Procedimentos propostos para preparação, auditoria e navegação das fontes. Documento candidato; não valida mecanismos internos do Google nem aprova decisões de produto.
+STATUS: RASCUNHO
+VERSAO: 0.2
+ATUALIZADO_EM: 2026-10-10
+ATUALIZADO_POR: OpenAI ChatGPT (elaboração assistida por IA; revisão humana pendente)
+---
+
+# Diretrizes operacionais de fontes e reconciliação — Gemini Notebook CEPRAEA
+
+## 1. Finalidade e precedência
+
+Convenção editorial desta fonte: o termo `ponto-md` significa a extensão composta por um ponto seguido das letras `m` e `d`; o token literal foi evitado no conteúdo para reduzir o risco de mascaramento de referências. Essa substituição descritiva é exclusiva desta diretriz e não altera arquivos de código, fontes oficiais ou IDs.
+
+
+Esta fonte reúne regras operacionais **propostas** para preparação, indexação e reconciliação das fontes no notebook CEPRAEA BEACH PRO. Não se torna instrução ativa por estar adicionada ao acervo: o CONTROLADOR nas instruções personalizadas governa a conduta do assistente; este documento fornece referência de procedimento. Qualquer regra divergente de uma decisão vigente deve ser marcada como CONFLITO e submetida à autoridade humana.
+
+O corpus original nunca deve ser sobrescrito ou renomeado em massa por causa desta proposta. As diretrizes abaixo aplicam-se inicialmente a **novas fontes candidatas** e a cópias de teste autorizadas. Fontes legadas não conformes são classificadas, não alteradas silenciosamente.
+
+## 2. Bloco de metadados proposto
+
+O cabeçalho de uma nova fonte contém os campos obrigatórios `ID_FONTE`, `TÍTULO_CANÔNICO`, `AUTORIDADE`, `ESCOPO_DE_LEITURA`, `STATUS`, `VERSAO`, `ATUALIZADO_EM` e `ATUALIZADO_POR`, seguidos de separador `---` e de um `H1` idêntico ao título canônico. Não inferir valores faltantes. O schema ainda depende de aprovação e reconciliação com ADR-001 e DRTZ-0001.
+
+`ID_FONTE`: candidato à sintaxe `AAA-000`, com prefixos propostos `GOV`, `ARQ`, `ADR`, `ING`, `PRM`, `TST`, `REF`; **não aprovado para substituir a nomenclatura AAAA-xxxx_Nome_Descritivo** utilizada anteriormente. Os IDs empregados neste pacote (`GOV-901`, `REF-901`, `TST-901`) são provisórios até verificação de unicidade no índice integral.
+
+`AUTORIDADE`: proposta de tipos `REGRA_INTERNA`, `FATO_EMPIRICO_VALIDADO`, `DOCUMENTACAO_OFICIAL` e `HIPOTESE`. A classificação declara a natureza alegada, não garante sua veracidade nem concede autoridade automaticamente.
+
+`STATUS`: `EM_REVISAO`, `VALIDO` ou `OBSOLETO`. Somente decisão humana identificável autoriza a promoção a `VALIDO`.
+
+`VERSAO`: `0.1` para primeira candidata; a primeira versão aprovada poderá ser `1.0` **após decisão expressa**. Em alterações seguintes, o incremento maior deve indicar incompatibilidade estrutural, e o menor, mudanças compatíveis/editoriais. Esta formulação corrige a ambiguidade da minuta anexada e permanece PROPOSTA.
+
+`ATUALIZADO_POR`: registrar autor humano com nome completo quando comprovado. Para material gerado por assistente, identificar explicitamente a geração assistida e a revisão humana pendente, sem atribuir falsamente autoria.
+
+## 3. Hierarquia e semântica do Markdown
+
+Nas novas fontes: exatamente um `H1` após metadados; `H2` para seções; `H3` para subseções; nenhuma hierarquia saltada; linha em branco de separação consistente. Documento legado com múltiplos `H1` não deve ser reestruturado automaticamente: mudanças estruturais exigem diff e análise de preservação semântica.
+
+Em referências a nomes de arquivos **dentro do conteúdo**, usar código inline quando a intenção for preservar literalidade editorial, e não criar link. No caso CEPRAEA, referências a `04-REQUIREMENTS` e `07-TRACEABILITY` **sem a extensão `ponto-md`** evitaram a máscara nos dois títulos testados após edição do documento. Isso é uma eficácia local observada, não uma proibição universal de extensões nem garantia de RAG. A representação física do arquivo e a identidade estável do Google Drive devem permanecer no índice de fontes. Não remover links oficiais necessários à rastreabilidade.
+
+Preservar `America/Sao_Paulo` e intervalos como `FUTURE-001..011` como literais técnicos. Não substituir um fuso IANA por linguagem natural quando isso perder precisão normativa.
+
+## 4. Sanitização de nomes e limites de evidência
+
+**OBSERVADO:** em teste de reprodução no chat, referências terminadas em `ponto-md` foram substituídas por `[link suspeito removido]`, enquanto exemplos sem extensão e com `.txt` foram preservados. O teste foi realizado **no chat**, e não sobre o efeito da marcação inline no corpo de uma fonte. O modelo declarou incorretamente ter reproduzido tudo sem alterações.
+
+**DOCUMENTADO PELO GOOGLE (escopo Gemini):** há mecanismo de sanitização Markdown e redação de URLs suspeitas, inclusive com Google Safe Browsing: https://blog.google/security/mitigating-prompt-injection-attacks/ (13/06/2025).
+
+**TST-901 — ENSAIO CONCLUÍDO:** a fonte real continha, na versão inicial, referências `ponto-md` entre crases dentro das seções 11/12. Na resposta, o modelo exibiu `[link suspeito removido]`, trocou o nível de título `#` por `###` e omitiu as crases. Após remoção da extensão `ponto-md` das referências internas, a resposta deixou de exibir o marcador nesses dois títulos; entretanto, os níveis `#` continuaram reproduzidos como `###` e as crases continuaram omitidas. **Resultado:** PASS apenas do critério estrito 'marcador ausente nos dois títulos'; FAIL de fidelidade literal integral.
+
+**NÃO VERIFICADO NO NOTEBOOK:** qual componente substituiu nomes `ponto-md`; se a associação decorre do TLD `ponto-md`; se toda URL é consultada a Web Risk API; se conteúdo sem URL permanece integralmente intocado. A formatação inline por si só NÃO impediu a substituição na primeira versão testada.
+
+NÃO afirmar que crases desativam filtros. NÃO remover parâmetros de todas as URLs, converter automaticamente `http` em `https` ou modificar nomes/caminhos originais apenas com base nessas hipóteses.
+
+## 5. Identidade da fonte atual e acesso ao Python
+
+Fonte vigente dos requisitos: `Proposta de Requirements` — Google Drive ID `1rm-sMXD0A2DSnnKZu6XMIO_3YbNflug5`, URL https://drive.google.com/file/d/1rm-sMXD0A2DSnnKZu6XMIO_3YbNflug5/view . A cópia anterior com ID `1WUUtcgUb67UeB5vWT2-QeoT3k1ABvxIk` foi declarada pelo usuário como estando na lixeira e **não** deve ser consultada como oráculo vigente. Não inferir identidade a partir do título apenas; conferir ID e revisão da fonte sincronizada.
+
+A operação de geração/validação de candidata a requisitos declarou `BLOCKED`: ausência de arquivo bruto no caminho inspecionado `/workspace/knowledge/`. Recuperação pelo modelo de fragmentos da fonte **não prova** disponibilidade de arquivo integral ao Python. Também não autoriza concluir que a arquitetura do Notebook nunca possa transferir arquivos. Não simular hashes, tamanhos de bytes nem execuções; inspecionar entrada real, stdout/stderr, exit code, outputs e diff com oráculo externo.
+
+**TST-REQ-001:** das quatro formulações normativas transcritas, três coincidiram e FR-025 divergira literalmente ao confrontar com cópia anterior. Isso demonstra risco de reconstrução textual; não atribuir o resultado como checksum da revisão atual da fonte. O acesso a trechos não equivale a verificação dos 41 requisitos.
+
+## 6. Entrada de fontes: preflight
+
+1. Identificar a fonte pelo título exibido no notebook e, se existir, por ID estável do Drive.
+2. Consultar diretamente a fonte e recuperar metadados, seção e trecho relevante com citação nativa.
+3. Distinguir `FONTES_PREVISTAS`, `SELECIONADAS`, `CONSULTADAS`, `INTEGRAIS_ACESSIVEIS` e `PENDENTES`.
+4. Não confundir um índice que menciona a fonte com o conteúdo integral dessa fonte.
+5. Nunca presumir que uma fonte anexada esteja acessível como arquivo local no Python; verificar por leitura observável.
+6. Quando o operador autorizar uma renomeação, identificar explicitamente nome anterior, novo nome e evidência da operação. Uma fonte de diretrizes, sozinha, não comprova capacidade de renomear a interface.
+7. Se faltar uma fonte indispensável à tarefa, bloquear somente a operação dependente, sem reconstruí-la a partir de resumos.
+
+## 7. Navegação pelo índice e reconciliação
+
+O índice `REF-901` é um catálogo de **rotas candidatas**, não uma certificação de recuperação ou de leitura integral de todas as fontes.
+
+Antes de responder a uma questão: localizar seu tema/IDs no índice; selecionar o **menor conjunto suficiente** de fontes primárias; buscar os cabeçalhos exatos; comparar trechos; registrar pendências e fontes efetivamente consultadas. Quando a primeira rota não bastar, ampliar seleção justificadamente.
+
+Para cada fonte, registrar: `ID_INDICE`, `TITULO_EXIBIDO`, `DRIVE_ID`, `FINALIDADE`, `ROTAS_EXATAS`, `PREENCHIMENTO_DE_LACUNAS`, `CONFLITOS`, `LACUNAS_PROPRIAS`, `DECISOES_PENDENTES`, `EVIDENCIA` e `ESTADO_DE_COBERTURA`. NÃO inventar relações: usar `NÃO_VERIFICADO` quando necessário.
+
+Uma referência de índice não é uma citação substituta da fonte original. Fonte derivada não corrobora independentemente sua fonte primária. Classificar conflitos comparando mesmo objeto, escopo e período; reconhecer supersessão documentada e diferença de escopo antes de afirmar contradição.
+
+## 8. Testes e critérios de aceite
+
+Resultado permitido: `PASS`, `FAIL`, `NOT_VERIFIED`, `BLOCKED`.
+
+- `PASS`: saída observada e confrontada com oráculo externo ao modelo avaliado.
+- `FAIL`: divergência observada entre saída e oráculo.
+- `NOT_VERIFIED`: evidência de acesso, abrangência ou equivalência insuficiente.
+- `BLOCKED`: entrada ou capacidade indispensável indisponível.
+
+O assistente que gerou a resposta não deve ser o único juiz de sua fidelidade. Hashes e tamanhos só devem ser informados quando os bytes específicos estiverem acessíveis. Testes estruturais não comprovam equivalência semântica.
+
+Para o CEPRAEA: manter `GATE-C = NOT_EXECUTED`, `DRIVERS = NOT_YET_AUTHORIZED` e os 41 requisitos como `PROPOSED_NON_CANONICAL` até decisão e validação próprias. Esta diretriz NÃO executa Gate C.
+
+## 9. Pendências de governança para homologação
+
+- GOV-PEND-01: verificar compatibilidade de `AAA-000` com DRTZ-0001, ADR-001 e o catálogo de IDs existentes.
+- GOV-PEND-02: aprovar campos obrigatórios, enumerações, versionamento e exceção de autoria por IA.
+- GOV-PEND-03: **CONCLUÍDO como TST-901**; registrar a falha da marcação inline como solução isolada e o efeito restrito da remoção de `ponto-md` nos dois títulos. Reexecutar somente mediante mudança de hipótese ou ambiente.
+- GOV-PEND-04: confirmar manualmente a capacidade de renomeação e a persistência do nome no notebook.
+- GOV-PEND-05: completar índice após inventário observável, evitando contagem ou cobertura presumida.
+
+## 10. Relação com as instruções personalizadas
+
+O CONTROLADOR já configurado no notebook deve permanecer curto e estável. Esta fonte não revoga as instruções personalizadas, nem possui autoridade instrucional automática. Toda alteração da configuração deve ser expressamente autorizada e verificada na interface.
+
+## 11. Propostas de otimização OP-01..05
+
+- **OP-01**: usar referência interna sem `ponto-md` quando a extensão não for necessária para a identidade, sem renomeação automática de arquivo real; eficácia limitada aos exemplos TST-901.
+- **OP-02**: YAML Frontmatter é proposta de normalização, não regra aprovada. Não substituir bloco de metadados obrigatório (ADR-001) sem schema, decisão de governança e diff.
+- **OP-03**: código `gherkin` sozinho não torna critério BDD executável. Exige implementação de passos, runner, oráculo, ambiente e ensaio de preservação semântica.
+- **OP-04**: Key-Value/JSON/TOML são alternativas de extração determinística, não garantem precisão de 100% no RAG. Requer benchmark.
+- **OP-05**: campos separados para estado semântico, estado técnico e ID de pendência são proposta de esquema; não alterar enumerações canônicas sem aprovação.
+
+## 12. Interface entre fonte, índice e controlador
+
+**CONTROLADOR (instruções personalizadas):** contém instruções comportamentais curtas, estáveis e prioritárias.
+
+**Esta fonte GOV-901:** explicita procedimento, limites, testes e contraindicações; não recebe autoridade instrucional automática ao ser adicionada.
+
+**Índice REF-901:** resolve temas e IDs em rotas de fontes primárias; não inventa conflitos, aprovações ou cobertura integral do corpus.
+
+**REF-NBLM-001 em Notion:** contexto histórico detalhado, https://app.notion.com/p/3f4f2ae06fc8816b897cd26f2a6977b3 ; é uma referência externa e não entra automaticamente nas consultas ao Notebook.
+
+O usuário deve importar a versão candidata como fonte e atualizar o CONTROLADOR pela interface do notebook após leitura das instruções existentes. Operação só pode ser marcada IMPLEMENTADA após leitura de confirmação do nome da fonte, seleção e regras efetivas, acompanhada de teste de comportamento.
+
+## Changelog
+
+| Versão | Data | Autor | Descrição |
+| --- | --- | --- | --- |
+| 0.1 | 2026-10-09 | OpenAI ChatGPT (rascunho) | Organizou regras candidatas, segregou evidência de hipótese e incluiu procedimentos de índice, teste e governança. |
+| 0.2 | 2026-10-10 | OpenAI ChatGPT (rascunho) | Atualizou TST-901, fonte vigente e limites de recuperação; classificou OP-01..05 e o processo de implantação. |

@@ -1,0 +1,13 @@
+--- artifacts/PRO-CEPRAEA-DOC-CONS-001/U02/evidence/corpus-before.json	2026-10-16 23:45:23.912329803 -0300
++++ artifacts/PRO-CEPRAEA-DOC-CONS-001/U02/evidence/corpus-after.json	2026-10-16 23:46:52.534351632 -0300
+@@ -652,8 +652,8 @@
+     },
+     {
+       "relative_path": "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+-      "size_bytes": 6422,
+-      "sha256": "491d2defb50a33c6b247807b6538978ff1e669c6b2ab3ecc930497d6845d9e9b",
++      "size_bytes": 6427,
++      "sha256": "d60af1d9eacc1c75ef2191732677d312ee72ef7599d72b28d09a60f6aeae4349",
+       "read_status": "READABLE"
+     },
+     {

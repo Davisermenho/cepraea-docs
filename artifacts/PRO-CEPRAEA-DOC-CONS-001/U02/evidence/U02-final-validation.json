@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U02",
+  "status": "PASS",
+  "checks": {
+    "u01_sources": 115,
+    "u02_sources": 115,
+    "current_source_hashes_verified": 115,
+    "extracted_content_hashes_verified": 115,
+    "segments_validated": 7409,
+    "invalid_segments": [],
+    "duplicate_segment_ids": [],
+    "references_validated": 774,
+    "sqlite_segment_rows": 7409,
+    "sqlite_fts_rows": 7409,
+    "sqlite_reference_rows": 774,
+    "status_counts": {
+      "COMPLETE": 95,
+      "PARTIAL": 20
+    },
+    "limitation_codes": {
+      "JSON_SYNTAX_ERROR": 5,
+      "PDF_PAGES_WITHOUT_TEXT": 1,
+      "PDF_TEXT_LAYER_ONLY": 6,
+      "PPTX_VISUAL_CONTENT_NOT_INTERPRETED": 1,
+      "YAML_STRUCTURE_NOT_PARSED": 8
+    }
+  },
+  "errors": []
+}

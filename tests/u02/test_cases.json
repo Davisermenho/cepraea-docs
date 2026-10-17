@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "defined_before_execution": true,
+  "unit": "U02",
+  "tests": [
+    {
+      "id": "T05",
+      "name": "Evidencia valida",
+      "input": {"path": "valid.md", "text": "# Titulo\n\nTexto verificavel.\n"},
+      "expected": {"valid": true, "diagnostics": []}
+    },
+    {
+      "id": "T06",
+      "name": "Evidencia invalida",
+      "input": {"path": "invalid.md", "text": "# Titulo\n\nTexto original.\n", "tamper": "Substituir o texto do segmento apos a extracao"},
+      "expected": {"valid": false, "diagnostics": ["SEGMENT_TEXT_SHA256_MISMATCH"]}
+    },
+    {
+      "id": "T07",
+      "name": "Extracao parcial",
+      "input": {"path": "malformed.json", "text": "{\"ok\": true"},
+      "expected": {"status": "PARTIAL", "raw_text_preserved": true, "limitation_code": "JSON_SYNTAX_ERROR"}
+    },
+    {
+      "id": "T08",
+      "name": "Autoridade",
+      "input": {"path": "[ATIVO] FINAL APROVADO.md", "text": "# Documento\n"},
+      "expected": {"authority_status": "NOT_ASSESSED_U02"}
+    },
+    {
+      "id": "T10",
+      "name": "Rastreabilidade",
+      "input": {"path": "trace.md", "text": "# Secao\n\nConteudo rastreavel.\n"},
+      "expected": {"all_segments_traceable": true, "required_fields_missing": []}
+    },
+    {
+      "id": "T13",
+      "name": "Reexecucao",
+      "input": {"files": {"a.md": "# A\n\nAlpha.\n", "b.json": "{\"b\": 2}\n"}},
+      "expected": {"logical_outputs_equivalent": true, "duplicate_segment_ids": []}
+    },
+    {
+      "id": "T14",
+      "name": "Interrupcao",
+      "input": {"files": {"a.txt": "Alpha.\n"}, "partial_state": "Indice SQLite ausente e JSONL de segmentos incompleto"},
+      "expected": {"rerun_complete": true, "partial_record_retained": false}
+    },
+    {
+      "id": "T17",
+      "name": "Segmentacao, recuperacao e contexto",
+      "input": {
+        "files": {
+          "main.md": "# Politica\n\nO sistema funciona normalmente. Consulte [excecoes](exceptions.md).\n\n## Condicao\n\nAplica-se quando o modo esta ativo.\n",
+          "exceptions.md": "# Excecoes\n\nExceto quando houver manutencao.\n"
+        },
+        "query": "sistema funciona normalmente"
+      },
+      "expected": {
+        "source_locations_preserved": true,
+        "explicit_reference_target": "exceptions.md",
+        "related_exception_retrieved": true,
+        "absence_is_not_proof_of_absence": true,
+        "inventoried_sources": 2,
+        "processed_sources": 2
+      }
+    },
+    {
+      "id": "T19",
+      "name": "Extracao por formato",
+      "input": {
+        "formats": ["Markdown", "Plain text", "Plain text (detected)", "SQL", "JSON", "YAML", "PDF", "PowerPoint Open XML"],
+        "known_markers": {
+          "Markdown": "MARKDOWN_CONTROL",
+          "Plain text": "TEXT_CONTROL",
+          "Plain text (detected)": "NOEXT_CONTROL",
+          "SQL": "SQL_CONTROL",
+          "JSON": "JSON_CONTROL",
+          "YAML": "YAML_CONTROL",
+          "PDF": "PDF_CONTROL",
+          "PowerPoint Open XML": "PPTX_CONTROL"
+        }
+      },
+      "expected": {"all_formats_exercised": true, "markers_recovered": true, "locations_present": true, "losses_or_limitations_explicit": true}
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+**CEPRAEA - PREPARAÇÃO COMPETITIVA 2026**
+
+# **Treinar melhor para chegar mais fortes**
+
+Calendário e cenários de preparação | 13/08 a 27/09
+
+**Não precisamos apenas de mais treinos. Precisamos de treinos com o grupo necessário para jogar como queremos.**
+
+Nossa preparação entra em uma fase decisiva. Entre 13/08 e a Fase Final do Circuito Brasileiro, teremos etapas importantes, incluindo o Desafio Internacional. Por isso, queremos ampliar as oportunidades de treino sem perder qualidade.
+
+O calendário-base reúne 8 treinos regulares possíveis. O primeiro reforço selecionado é sábado, 29/08, das 7h30 às 9h. Se a composição for reconfirmada, chegaremos a 9 treinos antes da Fase Final.
+
+A escolha não depende apenas do número total de atletas. Para trabalhar nosso jogo completo, cada sessão precisa reunir pelo menos 3 defensoras, 1 goleira e 4 atacantes.
+
+**13/08 início · 3 competições antes da Final · 23–27/09 Fase Final**
+
+**PÁGINA 2 - CALENDÁRIO**
+
+# **Quando treinaremos?**
+
+**Quintas e domingos continuam. O treino extra de 29/08 foi selecionado e ainda precisa de reconfirmação.**
+
+| **Data** | **Horário** | **Atividade** | **Status** |
+| --- | --- | --- | --- |
+| **13/08** | 20h–21h30 | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **16/08** | 7h–9h | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **20/08** | 20h–21h30 | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **23/08** | Conforme tabela | 4ª Etapa Carioca | **COMPETIÇÃO** |
+| --- | --- | --- | --- |
+| **27/08** | 20h–21h30 | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **29/08** | 7h30–9h | Treino extra selecionado | **A CONFIRMAR** |
+| --- | --- | --- | --- |
+| **30/08** | 7h–9h | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **03/09** | 20h–21h30 | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **06/09** | 7h–9h | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **10–13/09** | Conforme tabela | Desafio Internacional | **COMPETIÇÃO** |
+| --- | --- | --- | --- |
+| **17/09** | 20h–21h30 | Treino regular | **CONFIRMADO** |
+| --- | --- | --- | --- |
+| **20/09** | Conforme tabela | 5ª Etapa Carioca | **COMPETIÇÃO** |
+| --- | --- | --- | --- |
+| **23–27/09** | Conforme tabela | Fase Final do Brasileiro | **ALVO** |
+| --- | --- | --- | --- |
+
+A 4ª Etapa do Circuito Brasileiro, de 27 a 30/08, não entra neste calendário porque o CEPRAEA não participará. Quando uma competição coincide com quinta-feira ou domingo, ela substitui o treino regular.
+
+**PÁGINA 3 - ESCOLHA DO TREINO EXTRA**
+
+# **Por que 29/08?**
+
+**Foi o único horário pesquisado que reuniu todas as posições necessárias para um treino completo.**
+
+A pesquisa reuniu 13 respostas de disponibilidade. No sábado, 29/08, das 7h30 às 9h, 10 atletas indicaram que poderiam participar. A distribuição atende e supera o mínimo necessário.
+
+| **Defensoras** | **Goleira** | **Atacantes** | **Total** |
+| --- | --- | --- | --- |
+| **3** | **1** | **6** | **10** |
+| --- | --- | --- | --- |
+
+Nosso critério é 3 defensoras, 1 goleira e 4 atacantes. Em 29/08, teremos duas atacantes além do mínimo, criando margem para trabalhar o jogo coletivo sem depender de uma composição incompleta.
+
+A data está 12 dias antes do início do Desafio Internacional. É uma oportunidade importante para repetir ações coletivas e ajustar detalhes antes da competição.
+
+O horário permanece A CONFIRMAR. Antes de registrá-lo como treino oficial, precisamos reconfirmar a presença do grupo e organizar a carga de sábado e domingo com atenção à recuperação.
+
+**A CONFIRMAR · Reconfirmar presença para 29/08, das 7h30 às 9h.**
+
+**PÁGINA 4 - CENÁRIOS DE TREINO**
+
+# **Quanto podemos treinar?**
+
+**Aumentar o volume só funciona se cada novo horário reunir o grupo mínimo.**
+
+![Quatro cartões comparativos: calendário-base com 8 treinos e 13h30; base mais 29/08 com 9 treinos e 15h, a confirmar; um extra por semana com 14 treinos e 22h30, projetado; dois extras por semana com 20 treinos e 31h30, projetado.](./Prepara%C3%A7%C3%A3o%20competitiva%20CEPRAEA%202026%20%E2%80%94%20vers%C3%A3o%20corrigida_images/image-001.png)
+
+Alternativa textual: base — 8 treinos e 13h30; com 29/08 — 9 treinos e 15h; 1 extra por semana — 14 treinos e 22h30; 2 extras por semana — 20 treinos e 31h30.
+
+Na pesquisa, 8 das 13 atletas indicaram pelo menos um treino extra em uma semana normal; dentro desse grupo, 3 indicaram dois ou mais. Outras 5 responderam que depende dos dias e da semana.
+
+Por isso, 1 treino extra por semana é a referência mais realista para a próxima decisão. Os cenários de 14 e 20 treinos continuam PROJETADOS: cada nova data depende das posições, dos jogos e da recuperação.
+
+**PÁGINA 5 - CAMINHO COMPETITIVO**
+
+# **O que vem antes da Fase Final?**
+
+**Há 3 competições antes da Fase Final. Hoje, 3 jogos estão definidos; o total final depende das próximas tabelas.**
+
+![Linha do tempo vertical: 23/08, 4ª Etapa Carioca, 3 jogos definidos; 10 a 13/09, Desafio Internacional, jogos a confirmar e maior destaque visual; 20/09, 5ª Etapa Carioca, jogos a confirmar; 23 a 27/09, Fase Final do Brasileiro, tabela pendente.](./Prepara%C3%A7%C3%A3o%20competitiva%20CEPRAEA%202026%20%E2%80%94%20vers%C3%A3o%20corrigida_images/image-002.png)
+
+Sequência textual: 23/08 — 4ª Etapa Carioca — 3 jogos definidos; 10–13/09 — Desafio Internacional — A CONFIRMAR; 20/09 — 5ª Etapa Carioca — A CONFIRMAR; 23–27/09 — Fase Final — TABELA PENDENTE.
+
+Partidas de fases seguintes da 4ª Etapa não entram na contagem porque dependem dos resultados. O calendário de treinos será ajustado quando as tabelas do Desafio Internacional e da 5ª Etapa forem publicadas.
+
+**PÁGINA 6 - DECISÃO E PRÓXIMOS PASSOS**
+
+# **Qual é a decisão agora?**
+
+**O primeiro passo é consolidar 29/08. Depois, uma nova confirmação definirá quantos extras realmente cabem no calendário.**
+
+-   Manter o calendário-base de quintas-feiras e domingos, respeitando as competições.
+-   Reconfirmar o grupo de 29/08 antes de transformar o horário em treino oficial.
+-   Usar 1 treino extra por semana como referência, sem tratar 14 treinos como fechado.
+-   Considerar 2 extras por semana apenas como projeção, com atenção à recuperação.
+-   Aprovar novos horários somente com 3 defensoras, 1 goleira e 4 atacantes.
+
+| **Estado** | **O que significa** |
+| --- | --- |
+| **CONFIRMADO** | Calendário-base: 8 treinos regulares possíveis até a Fase Final. |
+| --- | --- |
+| **A CONFIRMAR** | Treino de 29/08 e total de jogos do Desafio e da 5ª Etapa. |
+| --- | --- |
+| **PROJETADO** | Cenários de 14 e 20 treinos; dependem de novas datas e recuperação. |
+| --- | --- |
+
+Nossa prioridade é chegar ao Desafio Internacional mais organizadas e continuar evoluindo até a Fase Final. Mais treinos só fazem sentido quando aumentam a qualidade do trabalho coletivo.
+
+Próxima ação das atletas: responder à reconfirmação de 29/08 e à nova consulta de horários. Com essas respostas e as tabelas de jogos, o calendário definitivo dos extras será fechado.
+
+*Dados consolidados em 10/08/2026. Relatório interno às atletas do CEPRAEA.*

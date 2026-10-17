@@ -1,0 +1,18 @@
+{
+  "test_id": "T04-ACTUAL",
+  "name": "Preservação do corpus real",
+  "status": "FAIL",
+  "expected": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "actual": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      "[ATIVO] 20-CURRENT-STATE-INDEX.md"
+    ],
+    "unchanged_count": 114
+  }
+}

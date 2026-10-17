@@ -1,0 +1,68 @@
+schema_version: "1.1"
+document:
+  id: "DATA_DICTIONARY"
+  artifact_kind: "DATA_DICTIONARY"
+  title: "Dicionário de dados"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "LOGICAL_MODEL"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+tables:
+  - relation_id: "RELATION_ID"
+    schema_candidate: "public"
+    table_candidate: "lower_snake_case"
+    description: "DESCRICAO"
+    grain: "UMA_LINHA_REPRESENTA"
+    ownership_domain: "DOMINIO_DELIMITADO"
+    access_classification: "PUBLICO|INTERNO|PESSOAL|SENSIVEL|RESTRITO"
+    columns:
+      - attribute_id: "ATTRIBUTE_ID"
+        column_candidate: "lower_snake_case"
+        description: "DEFINICAO_OPERACIONAL"
+        postgresql_type_candidate: "TIPO_POSTGRESQL"
+        nullable: false
+        null_meaning: null
+        default_candidate: null
+        unit: null
+        format: null
+        allowed_values: []
+        min_value: null
+        max_value: null
+        pii: false
+        sensitive: false
+        generated: false
+        derivation_rule_id: null
+        rule_ids: []
+        evidence_ref_ids: []
+    primary_key_attribute_ids: []
+    foreign_key_ids: []
+    unique_constraint_ids: []
+    check_constraint_ids: []
+    index_candidates:
+      - id: "INDEX_ID"
+        attribute_ids: []
+        purpose: "FK|QUERY|UNIQUENESS|RLS"
+        rationale: "JUSTIFICATIVA"
+    retention_rule_ids: []
+
+catalogs:
+  - id: "CATALOG_ID"
+    name: "NOME_DO_CATALOGO"
+    versioned: true
+    values:
+      - code: "VALUE_CODE"
+        label: "ROTULO"
+        valid_from: null
+        valid_to: null
+        evidence_ref_ids: []
+
+open_issues: []

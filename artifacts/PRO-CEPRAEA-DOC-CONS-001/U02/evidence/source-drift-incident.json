@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U02",
+  "status": "RESOLVED_BY_USER_RESTORE_AND_FINAL_RERUN",
+  "cause": "USER_CONFIRMED_CONCURRENT_EDIT",
+  "source_path": "[ATIVO] 20-CURRENT-STATE-INDEX.md",
+  "initial_window": {
+    "before": {
+      "size_bytes": 6422,
+      "sha256": "491d2defb50a33c6b247807b6538978ff1e669c6b2ab3ecc930497d6845d9e9b"
+    },
+    "after": {
+      "size_bytes": 6427,
+      "sha256": "d60af1d9eacc1c75ef2191732677d312ee72ef7599d72b28d09a60f6aeae4349"
+    },
+    "preservation_test": "FAIL",
+    "consequence": "Initial extraction run invalidated because its U01 input manifest no longer represented the current corpus."
+  },
+  "observations": [
+    "The file continued changing during short stability checks.",
+    "The extraction code opens corpus files for reading and writes only below the U02 artifact directory.",
+    "The user subsequently confirmed making the edit and undoing it."
+  ],
+  "response": {
+    "original_restored_or_modified": false,
+    "u01_manifest_overwritten": false,
+    "action": "An intermediate U01 rebaseline was generated for diagnosis. After the user restored the source, the corpus matched the original U01 manifest and U02 was rerun from the approved original manifest.",
+    "rebaseline_before": {
+      "size_bytes": 6891,
+      "sha256": "d8f757807373186d228bb958660c111ec881b406c66e948c52f7069dc3282bec"
+    },
+    "rebaseline_after": {
+      "size_bytes": 6891,
+      "sha256": "d8f757807373186d228bb958660c111ec881b406c66e948c52f7069dc3282bec"
+    },
+    "rebaseline_preservation_test": "PASS",
+    "final_restored_input": {
+      "size_bytes": 6422,
+      "sha256": "491d2defb50a33c6b247807b6538978ff1e669c6b2ab3ecc930497d6845d9e9b",
+      "matches_original_u01_manifest": true
+    },
+    "final_preservation_test": "PASS"
+  }
+}

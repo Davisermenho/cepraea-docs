@@ -1,0 +1,567 @@
+[
+  {
+    "id": "c9faa198-10f9-42d2-8590-b4e5d9fa2713",
+    "ids": [
+      "c9faa198-10f9-42d2-8590-b4e5d9fa2713"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "nn| # Chat 03 — Modelagem do domínio                                                                                    |n| ------------------------------------------------------------------------------------------------------------------- |n|                                                                                                                     |n| ## Prompt                                                                                                           |n|                                                                                                                     |n| Atue como analista de domínio.                                                                                      |n|                                                                                                                     |n| Use apenas o entendimento confirmado e mantenha hipóteses separadas.                                                |n|                                                                                                                     |n| Seu objetivo é construir um modelo conceitual do domínio do handebol de praia e do produto:                         |n|                                                                                                                     |n| - entidades/conceitos;                                                                                              |n| - definições;                                                                                                       |n| - relações;                                                                                                         |n| - invariantes;                                                                                                      |n| - estados;                                                                                                          |n| - eventos relevantes;                                                                                               |n| - regras;                                                                                                           |n| - limites de contexto quando fizer sentido;                                                                         |n| - termos que ainda não possuem definição estável.                                                                   |n|                                                                                                                     |n| Não escolha tabelas de banco, classes de código, APIs ou frameworks.                                                |n|                                                                                                                     |n| Quando houver mais de uma modelagem plausível, apresente as alternativas e a diferença sem decidir silenciosamente. |n|                                                                                                                     |n| Mapeie cada conceito importante para sua origem no SHARED-UNDERSTANDING.                                            |"
+      }
+    ],
+    "created_at": "2026-09-01 09:15:51",
+    "updated_at": 1788264998.151011
+  },
+  {
+    "id": "277fce20-7a3f-4ec3-ba5a-32ce60308794",
+    "ids": [
+      "8d1caff0-3873-48d0-aa9f-685521a98351",
+      "0172c08a-fd09-4eef-b941-624941bd5b7a",
+      "15d2f4c6-ad29-4ef5-84e5-957c668b8a39",
+      "25fe17ab-0639-4b73-961f-ecf18ceb841a",
+      "1fed5de8-9952-4e77-9f4a-d94a904a9cc6",
+      "94af68cb-0ee4-4f54-ad1f-7e2d77c54a76",
+      "35d7e171-3368-4c7b-8ac6-43ca7075348e",
+      "9187d03b-c04b-4651-a4b9-7d4bec08f250",
+      "17e524c1-e502-4f47-9e0a-1b5d121c3824",
+      "beaf059d-3d88-4a58-8a8c-8f5c0db040d1",
+      "6e17e042-95f5-40f0-9a3f-3a86e5b47b94",
+      "a6640315-7817-485e-bc86-2b60adfb20ed",
+      "7b38a965-5a0e-4ffd-83ca-f70540a66042",
+      "8b05b65a-5994-41d8-abe9-1b8d89b39c69",
+      "ab20fa7d-395e-4af2-91bd-ff48da46c961",
+      "503a09df-857e-4fb2-81b9-d9036416b208",
+      "277fce20-7a3f-4ec3-ba5a-32ce60308794"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Vou tratar o `SHARED-UNDERSTANDING` como fonte canônica e só usar o `PROJECT-CHARTER` para contexto de intenção/escopo. Como o protocolo exige separar confirmação de hipótese, não vou preencher lacunas com conhecimento geral de handebol de praia."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "### Estado atual da modelagemnnNeste momento, **não há entendimento confirmado suficiente para construir um modelo conceitual do domínio sem inventar conteúdo**.nnO `SHARED-UNDERSTANDING` contém a estrutura destinada a atores, conceitos, regras, fluxos, fatos, decisões, hipóteses e ambiguidades, mas todos esses elementos permanecem vazios ou marcados como `[A confirmar]`.  O `PROJECT-CHARTER` também continua em estado de descoberta: visão, problema, objetivos, escopo, stakeholders, restrições e premissas ainda não foram preenchidos. nnIsso é relevante porque o protocolo do projeto determina que hipóteses não sejam promovidas a fatos e que os artefatos canônicos confirmados tenham precedência sobre inferências. nn## Modelo conceitual confirmado — baselinenn| Dimensão | Estado | Origem |n|---|---|---|n| Domínio sendo analisado | **handebol de praia e o produto associado** | declaração atual do usuário |n| Projeto | **Beach Handball PWA** | `PROJECT-CHARTER` |n| Entidades/conceitos confirmados | **nenhum registrado** | `SHARED-UNDERSTANDING §3` |n| Atores confirmados | **nenhum registrado** | `SHARED-UNDERSTANDING §2` |n| Relações confirmadas | **nenhuma registrada** | ausência de conceitos definidos |n| Invariantes confirmados | **nenhum registrado** | ausência de regras confirmadas |n| Estados confirmados | **nenhum registrado** | ausência de conceitos/fluxos definidos |n| Eventos de domínio confirmados | **nenhum registrado** | ausência de fluxos/fatos definidos |n| Regras confirmadas | **nenhuma registrada** | `SHARED-UNDERSTANDING §4` |n| Fluxos confirmados | **nenhum registrado** | `SHARED-UNDERSTANDING §5` |n| Limites de contexto confirmados | **nenhum** | entendimento insuficiente |n| Termos com definição estável | **nenhum registrado** | `SHARED-UNDERSTANDING §3` |nnO próprio gate do entendimento exige que conceitos críticos, atores, fluxos e regras sejam explorados antes da passagem para requisitos; atualmente esses critérios continuam desmarcados. nn### HipótesesnnNão vou introduzir neste ponto conceitos como **Partida**, **Equipe**, **Atleta**, **Set**, **Gol**, **Árbitro**, **Placar** ou semelhantes como se fossem parte do modelo confirmado. Eles seriam conhecimento externo/inferência, e ainda não há origem no `SHARED-UNDERSTANDING` para justificar sua inclusão.nnTambém não vou inferir regras esportivas a partir do nome “handebol de praia”.nn### Questões de maior valor para iniciar a modelagemnnA primeira rodada deve estabelecer o vocabulário central, não detalhes periféricos:nn1. **Qual é a unidade central que o produto representa ou acompanha?** Por exemplo, uma partida, competição, torneio, equipe, temporada ou alguma combinação — sem presumir que qualquer uma dessas opções esteja correta.n2. **Quais atores interagem diretamente com essa unidade e qual responsabilidade cada um tem?** Isso separa participantes do domínio esportivo de usuários/atores do produto.n3. **Qual é o ciclo de vida dessa unidade central?** Precisamos dos estados relevantes, do que provoca cada transição e de quais transições são proibidas.n4. **Quais acontecimentos precisam ser registrados durante esse ciclo de vida?** Isso identifica os eventos de domínio sem confundi-los antecipadamente com ações de interface ou persistência.n5. **Quais regras precisam permanecer verdadeiras independentemente de como o produto for implementado?** Essas serão candidatas a invariantes do domínio.nnEssas respostas têm alto valor porque permitem começar simultaneamente o vocabulário, as relações, os estados, eventos e invariantes — e expõem rapidamente onde existem modelagens alternativas.nnAté que essas bases apareçam no entendimento confirmado, o estado apropriado desta fase é **modelagem iniciada, mas sem modelo conceitual substantivo confirmado**, e não “modelo concluído”."
+      }
+    ],
+    "created_at": "2026-09-01 09:16:06",
+    "updated_at": 1788405839.463996
+  },
+  {
+    "id": "655cbbee-9ea3-4fd8-ba71-4aeead66b4a4",
+    "ids": [
+      "655cbbee-9ea3-4fd8-ba71-4aeead66b4a4"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Quero iniciar o Chat 03 — Modelagem do domínio do CEPRAEA BEACH PRO.rnrnESTADO DO PROCESSOrnrnGATE-B-KNOWLEDGE = READY_WITH_RISKSrnGATE-B-CANONICALIZATION = APPROVEDrnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSrnGATE-B-DOMAIN-MODEL = PENDINGrnGATE-B-FINAL = NOT_YET_APPROVEDrnrnRequirements permanece bloqueado.rnrnFONTES DE AUTORIDADErnrnUse prioritariamente os artefatos canônicos vigentes:rnrn- 02-PROJECT-CHARTER.mdrn- 03-SHARED-UNDERSTANDING.mdrn- 07-TRACEABILITY.mdrnrnConsidere também o resultado da auditoria independente,rninclusive AUD-023..AUD-027, exclusivamente nos destinosrnatribuídos a cada achado.rnrnOBJETIVO DA FASErnrnConstruir e validar o modelo conceitual do domínio necessáriornpara representar o entendimento confirmado da primeira entrega.rnrnNÃO produza:rnrn- FR ou NFR;rn- arquitetura;rn- banco de dados;rn- schemas;rn- tabelas;rn- classes de software;rn- APIs;rn- componentes;rn- serviços;rn- Bounded Contexts arquiteturais;rn- eventos técnicos;rn- tecnologias.rnrnNão transforme automaticamente substantivos dos documentosrnem entidades.rnrnNão transforme decisões de produto em leis do domínio.rnrnNão complete lacunas por suposição.rnrnTRABALHO PRINCIPALrnrn1. Identifique os conceitos realmente necessários para explicarrn   o domínio da primeira entrega.rnrn2. Para cada conceito determine:rn   - definição;rn   - identidade, se houver;rn   - propriedades conceituais relevantes;rn   - relações com outros conceitos;rn   - ciclo de vida, quando existir;rn   - estados conceituais;rn   - invariantes;rn   - autoridade sobre mudanças;rn   - fatos históricos que precisam permanecer distinguíveis.rnrn3. Separe explicitamente:rn   A. fatos do domínio;rn   B. regras do domínio;rn   C. políticas/decisões de produto;rn   D. projeções ou informações derivadas;rn   E. mecanismos de apresentação;rn   F. decisões técnicas ainda abertas.rnrn4. Teste especialmente:rnrn   - Sessão;rn   - Agenda;rn   - Disponibilidade;rn   - Ocorrência pós-D-5;rn   - Presença;rn   - Participação;rn   - Posição/capacidade esportiva;rn   - Quórum;rn   - D-5;rn   - Retificação;rn   - estados da sessão;rn   - condições/projeções de quórum.rnrn5. Verifique se:rnrn   Disponibilidade ≠ Presença ≠ Participaçãornrn   continua semanticamente preservado.rnrn6. Formalize as combinações válidas e inválidas dern   Presença × Participação já confirmadas durante a elicitação.rnrn7. Formalize a terminalidade de CANCELADO e a regra de remarcaçãorn   sem inventar novos estados.rnrn8. Formalize conceitualmente os efeitos positivos e negativosrn   pós-D-5 conforme as decisões já confirmadas.rnrn9. Diferencie claramente:rnrn   estado da sessãorn   ≠rn   condição/projeção operacional.rnrn10. Não recrie participante convidada na primeira entrega:rn    ela foi removida e encontra-se em SUPERSEDED-014.rnrnACHADOS DA AUDITORIA A TRATARrnrnAUD-024 — “feriado aplicável no Rio de Janeiro”rnrnTente determinar se o conceito pode ser modelado sem inventarrnuma política nova.rnrnSe a fonte não disser quais categorias de feriado contam,rnNÃO escolha nacional/estadual/municipal/ponto facultativo por conta própria.rnrnRegistre uma lacuna e recomende retorno ao Chat 01 apenas sernessa definição for necessária para tornar o modelo coerente.rnrnAUD-025 — “situação operacional”rnrnTrate o termo como INF.rnrnVerifique se existe sustentação canônica para um conceito real.rnrnSe não existir, remova-o do modelo conceitual.rnNão invente estados como ATIVA, INATIVA ou SUSPENSA.rnrnAUD-026 — reprocessamento de D-5rnrnNÃO trate essa propriedade como regra confirmada do domínio.rnrnRegistre-a somente como candidata INF para avaliação futurarnem Requirements/Drivers relacionada à confiabilidade,rndeterminismo ou idempotência.rnrnAUD-023 e AUD-027 são correções editoriais/processuais e nãorndevem gerar novos conceitos de domínio.rnrnTESTES ADVERSARIAIS DO MODELOrnrnDepois de produzir uma primeira versão, tente quebrá-la comrncenários como:rnrn- atleta muda de DISPONÍVEL para indisponível após D-5;rn- atleta passa de indisponível para disponível após D-5;rn- sessão confirmada perde quórum;rn- sessão cancelada recebe posteriormente novas disponibilidades;rn- sessão publicada é remarcada;rn- atleta está PRESENTE mas NÃO PARTICIPOU;rn- atleta está PRESENTE com participação PARCIAL;rn- registro consolidado contém erro factual;rn- sessão é criada depois de seu D-5 calculado;rn- mesma atleta possui capacidades diferentes para ataque e defesa;rn- projeção de quórum muda sem mudar o estado oficial da sessão.rnrnPara cada cenário informe se o modelo:rn- representa sem ambiguidade;rn- viola algum invariante;rn- exige uma decisão humana ainda ausente.rnrnSAÍDA ESPERADArnrnProduza:rnrn1. Modelo conceitual textual.rn2. Glossário canônico dos conceitos.rn3. Relações entre conceitos.rn4. Estados e transições conceituais.rn5. Invariantes.rn6. Matriz:rn   conceito → origem → regra relacionada → status.rn7. Separação:rn   domínio / decisão de produto / projeção / apresentação /rn   decisão técnica futura.rn8. Lista de conceitos candidatos rejeitados por falta de sustentação.rn9. Achados novos, se existirem.rn10. Proposta de atualização canônica necessária.rnrnNão declare o Gate B final aprovado.rnrnAo final emita somente uma avaliação da modelagem:rnrnDOMAIN-MODEL = PASSrnDOMAIN-MODEL = PASS_WITH_RISKSrnournDOMAIN-MODEL = FAILrnrnSe houver lacuna que exija nova decisão de produto,rnindique retorno ao Chat 01.rnrnSe não houver bloqueador, indique que o próximo passo é arnavaliação formal final do Gate B — e NÃO Requirements diretamente."
+      }
+    ],
+    "created_at": "2026-09-02 17:29:15",
+    "updated_at": 1788381304.997195
+  },
+  {
+    "id": "645c11da-f17d-4fae-b327-21539d906dec",
+    "ids": [
+      "7e4910e1-9667-45f3-b7a3-e7a1a4557386",
+      "1a82286e-924a-4e01-a9bf-a4c2313736f6",
+      "569fa701-3658-4d95-bbe8-9eaadba085e6",
+      "6e4d96f4-d1f7-40d5-b332-a179f7fd5798",
+      "0d1df842-38ec-4814-bf13-c8ac9470c15e",
+      "d1f7e412-3d97-4d09-bf72-995a6a2d3319",
+      "de18a9ae-c832-4e6a-a2e6-e45da7df9ceb",
+      "d7d0f749-7e15-464e-81c1-b667316d87be",
+      "95f4d562-4603-4864-beae-966298335545",
+      "b9bd12bd-b428-4b68-a325-3b2fccb02f07",
+      "d49cc07f-224b-484e-bee3-ab2d13f3156b",
+      "fb93e4e9-54e2-4f91-8572-6aeef92a9c0d",
+      "67d824dd-1825-4524-9543-41ab9c81545a",
+      "f64aa4e0-5077-480f-81b3-2ffab58e90bc",
+      "0dfeb0cf-a451-4c4d-aac9-3275ae58acc0",
+      "20e6b96c-3fae-43c8-99a6-e85d00b88ae9",
+      "6ad62bb6-9811-4c26-9c48-56ac7580f45c",
+      "645c11da-f17d-4fae-b327-21539d906dec"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Vou construir a primeira versão do modelo exclusivamente sobre os três artefatos canônicos vigentes e testar os achados `AUD-024..026` contra eles. Depois submeto o próprio modelo aos cenários adversariais pedidos, sem promover inferências a regra confirmada."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A primeira versão fecha a separação central: `Sessão` tem ciclo próprio; `Quórum` é condição calculada; `Disponibilidade`, `Presença` e `Participação` são fatos semanticamente independentes. O ponto de maior incerteza continua sendo apenas a delimitação de “feriado aplicável”, mas ele pode permanecer como predicado aberto sem tornar o modelo incoerente. "
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "nnA modelagem abaixo trata como autoridade `02-PROJECT-CHARTER`, `03-SHARED-UNDERSTANDING` e `07-TRACEABILITY`. A separação entre regras de domínio e decisões de produto já existe explicitamente no entendimento canônico e foi preservada. nn**Document Title: **nn# Chat 03 — Modelo conceitual do domínio da primeira entregann**Projeto:** CEPRAEA BEACH PRO  n**Escopo:** primeira entrega  n**Status deste conteúdo:** proposta de modelagem; não canônico até consolidação explícita  n**Requirements:** bloqueado  n**Arquitetura/implementação:** fora do escoponn---nn# 1. Modelo conceitual textualnn## 1.1 Visão centralnnO modelo necessário para a primeira entrega pode ser explicado por quatro conjuntos semânticos que **não devem ser fundidos**:nn1. **planejamento e compromisso da sessão**;n2. **declarações da atleta antes da sessão e fatos posteriores**;n3. **capacidade esportiva e verificação de quórum**;n4. **fatos observados da realização e suas correções**.nnA principal unidade com identidade e ciclo de vida próprio é a **Sessão de treino**.nnA **Agenda** organiza sessões, mas a fonte canônica não demonstra necessidade de identidade ou ciclo de vida independente para uma “Agenda”. Portanto, nesta modelagem, Agenda é uma **coleção conceitual de sessões planejadas/publicadas**, não uma entidade adicional introduzida por inferência.nnUma Sessão relaciona-se com:nn- atletas;n- declarações de disponibilidade;n- instante D-5;n- ocorrências posteriores a D-5;n- perfil/posições esportivas das atletas;n- uma projeção de quórum;n- posteriormente, fatos de presença e participação;n- eventualmente, retificações.nnIsso preserva o entendimento canônico de que Agenda, disponibilidade, ocorrência, presença, participação e projeções representam fatos/ciclos diferentes. nn---nn## 1.2 Atletann**Natureza:** ator do domínio e participante dos fatos esportivos.nn**Identidade conceitual:** necessária. É preciso distinguir uma atleta das demais ao longo das sessões e do histórico; nenhum mecanismo técnico de identificação é inferido.nn**Propriedades relevantes nesta primeira entrega:**nn- pertencimento ao elenco atual;n- posição principal;n- posição secundária opcional.nn**Relações:**nn- possui um perfil esportivo;n- pode declarar disponibilidade para uma sessão;n- pode registrar ocorrência pós-D-5;n- pode ter presença e participação apuradas;n- pode ser considerada numa alocação de quórum.nn**Autoridade:**nn- a atleta é autoridade sobre sua declaração de disponibilidade;n- pode informar mudança posterior por ocorrência;n- não é autoridade final sobre presença e participação consolidadas.nn---nn## 1.3 Treinador/Administradornn**Natureza:** ator com autoridade esportiva e factual específica.nnNão é necessário introduzi-lo como entidade de negócio distinta para explicar o modelo, mas sua autoridade precisa ser representada.nn**Autoridade confirmada relevante ao modelo:**nn- publicar, remarcar e cancelar sessões;n- confirmar excepcionalmente sessão criada após seu D-5;n- decidir entre manter ou cancelar uma sessão confirmada cujo quórum esteja comprometido;n- registrar ocorrência recebida de atleta preservando autoria real;n- definir posição principal/secundária;n- consolidar presença e participação;n- retificar fatos consolidados.nnAs decisões esportivas permanecem sob autoridade humana; projeções e automações não substituem essa autoridade. nn---nn## 1.4 Agendann**Definição:** conjunto conceitual das sessões planejadas, revisadas e publicadas para a equipe.nn**Identidade independente:** **não sustentada pelas fontes**.nn**Ciclo de vida independente:** **não sustentado**. O ciclo confirmado pertence às sessões.nn**Função conceitual:** organizar a programação e permitir a revisão/publicação das sessões.nn**Classificação:** mistura uma realidade operacional — existem sessões programadas — com uma **política de produto** segundo a qual a proposta mensal é gerada e revisada por exceção.nnPortanto:nn> Agenda é necessária como conceito organizador, mas não deve ser automaticamente transformada em entidade independente.nn---nn## 1.5 Sessão de treinonn**Definição:** atividade esportiva individualizada com data, horário, local e ciclo de compromisso próprio.nn**Identidade:** **essencial**.nnA identidade deve sobreviver às mudanças históricas. Isso é particularmente necessário porque uma remarcação não modifica a identidade temporal da sessão original: ela cancela a original e cria **outra sessão**.nn### Propriedades conceituais relevantesnn- data;n- horário;n- local;n- estado atual do ciclo;n- instante D-5 derivado;n- motivo de cancelamento, quando houver;n- relação de origem por remarcação, quando aplicável.nn### Ciclo confirmadonn- `PLANEJADO`n- `PUBLICADO`n- `CONFIRMADO`n- `CANCELADO`n- `REALIZADO`nnA fonte canônica afirma explicitamente que condições de quórum não são estados da Sessão. nn### Fatos históricos que precisam permanecer distinguíveisnn- sessão originalmente publicada;n- cancelamento e seu motivo;n- cancelamento por `REMARCADO`;n- nova sessão originada pela remarcação;n- cancelamento automático por falta de quórum;n- cancelamento posterior por decisão humana;n- confirmação automática versus confirmação excepcional;n- realização da sessão.nn---nn## 1.6 Disponibilidadenn**Definição:** declaração feita antes da sessão sobre possibilidade/intenção de participação.nn**Natureza:** declaração, não fato posterior da realização.nn**Relação conceitual:** existe para uma combinação **Atleta × Sessão**.nn**Valores:**nn- `DISPONÍVEL`n- `INDISPONÍVEL`n- `TALVEZ`n- ausência de declaração = `NÃO RESPONDEU`nn`NÃO RESPONDEU` não é um quarto tipo de declaração positiva/negativa: representa precisamente a ausência de declaração.nn### AutoridadennA atleta é autoridade sobre sua declaração ordinária durante a janela permitida.nn### Limite temporalnnAté D-5, a declaração pode mudar.nnDepois de D-5, a declaração ordinária deixa de ser reescrita. Uma mudança passa a ser representada por **Ocorrência pós-D-5**.nn### História mínima confirmadannO modelo precisa preservar:nn- a disponibilidade existente no fechamento;n- sua distinção das ocorrências posteriores.nn**Não está confirmado** que cada edição intermediária da disponibilidade antes de D-5 precise constituir um fato histórico permanente. Não introduzo essa obrigação.nn---nn## 1.7 D-5nn**Definição:**nn`D-5 = início da sessão − 120 horas`nn**Natureza conceitual:** instante temporal derivado da Sessão.nn**Não possui identidade independente.**nn**Classificação importante:** a existência desse instante como regra de fechamento e resolução é uma **decisão/política de produto confirmada**, não uma lei universal do domínio esportivo.nnEm D-5:nn- encerra-se a declaração ordinária;n- avalia-se o quórum;n- uma Sessão `PUBLICADO` segue a resolução confirmada do produto.nnO Charter registra D-5 e sua resolução automática como decisão explícita do usuário. nn---nn## 1.8 Ocorrência pós-D-5nn**Definição:** novo fato temporal que registra mudança da situação da atleta depois do fechamento sem alterar retroativamente sua declaração anterior.nn**Tipos confirmados:**nn- `NÃO PODEREI COMPARECER`n- `AGORA POSSO PARTICIPAR`nn### Identidade conceitualnnCada ocorrência precisa permanecer historicamente distinguível da disponibilidade e de outras ocorrências. Isso não implica qualquer forma técnica de ID.nn### Propriedades conceituais confirmadasnn- atleta afetada;n- sessão;n- tipo da ocorrência;n- momento;n- autor real;n- motivo curto quando aplicável.nn### Efeito atual confirmadonn`NÃO PODEREI COMPARECER`:nn- remove a atleta da composição atual;n- provoca nova projeção de quórum.nn`AGORA POSSO PARTICIPAR`:nn- torna a atleta novamente candidata à composição;n- provoca nova projeção de quórum.nnA declaração original continua intacta. nn### AutoridadennPode ser registrada:nn- pela própria atleta;n- pelo treinador em nome dela, quando possui informação confiável, preservando quem efetivamente realizou o registro.nn---nn## 1.9 Posição esportiva, perfil esportivo e capacidadennO conceito canônico `CONCEPT-008 — Capacidade tática e posição` contém três ideias que vale separar conceitualmente sem criar novas regras.nn### Posição esportivannÉ uma posição dentro da taxonomia:nn`Fase → Sistema → Posição`nnA posição não deve ser reduzida a rótulos genéricos como simplesmente “atacante” ou “defensora”.nn### Perfil esportivo da atletannÉ a relação entre uma atleta e:nn- uma posição principal obrigatória;n- uma posição secundária opcional.nnA posição principal é preferência, e a secundária também pode satisfazer uma necessidade da composição.nn### Capacidade esportivannNesta primeira entrega, **não há sustentação para uma entidade autônoma “Capacidade” nem para níveis de proficiência**.nnA capacidade relevante para o quórum é representável como:nn> “esta atleta pode ocupar esta posição segundo seu perfil esportivo”.nnAssim, uma atleta pode ter capacidades diferentes para Ataque e Defesa se suas posições principal/secundária expressarem essa diferença.nnNão se deve inferir:nn- número ilimitado de posições;n- níveis numéricos de proficiência;n- capacidade temporária;n- preferência adicional;n- especializações não presentes na taxonomia confirmada.nn---nn## 1.10 Alocação da sessãonn**Natureza:** composição contextual usada para testar se existe uma distribuição válida das atletas.nnNão altera o perfil esportivo da atleta.nnUma alocação deve respeitar:nn- 4 vagas de Ataque;n- 4 vagas de Defesa;n- 8 atletas distintas;n- pelo menos uma Goleira entre as quatro posições defensivas;n- uma mesma atleta não pode preencher duas vagas simultaneamente.nnA alocação é necessária conceitualmente para explicar por que “8 pessoas” não é sinônimo de “quórum válido”.nn---nn## 1.11 Quórum operacionalnn**Definição:** existência de pelo menos uma alocação que satisfaça as condições confirmadas.nnO entendimento vigente define 4 Ataque + 4 Defesa + 8 atletas distintas + ≥1 Goleira na Defesa e proíbe dupla contagem. nn**Natureza:** condição do domínio esportivo adotada para determinar se a composição mínima é executável.nn**Não é:**nn- estado da Sessão;n- decisão humana;n- simples contagem de pessoas.nn---nn## 1.12 Projeção de quórumnn**Definição:** informação derivada das declarações/ocorrências atuais e dos perfis esportivos para determinar se existe uma alocação válida e, quando não existe, qual é o déficit.nn**Natureza:** projeção derivada.nn**Não possui autoridade própria sobre os fatos de entrada.**nnUma alteração de disponibilidade ou ocorrência pode mudar a projeção sem mudar o estado oficial da Sessão. Essa independência é intencional.nn---nn## 1.13 Presençann**Definição:** fato de a atleta ter comparecido fisicamente à sessão.nn**Relação:** Atleta × Sessão.nn**Estados conceituais:**nn- `NÃO APURADO`n- `PRESENTE`n- `AUSENTE`nn**Autoridade final sobre consolidação:** Treinador/Administrador.nn`NÃO APURADO` não significa `AUSENTE`.nn---nn## 1.14 Participaçãonn**Definição:** fato sobre quanto da atividade esportiva a atleta efetivamente realizou.nn**Relação:** Atleta × Sessão.nn**Estados conceituais:**nn- `NÃO APURADA`n- `COMPLETA`n- `PARCIAL`n- `NÃO PARTICIPOU`nn**Autoridade final sobre consolidação:** Treinador/Administrador.nnParticipação não é consequência automática da presença.nn---nn## 1.15 Presença × ParticipaçãonnAs cinco combinações confirmadas são: nn| Presença | Participação | Validade | Significado |n|---|---|---|---|n| `PRESENTE` | `COMPLETA` | válida | compareceu e participou integralmente |n| `PRESENTE` | `PARCIAL` | válida | compareceu e participou parcialmente |n| `PRESENTE` | `NÃO PARTICIPOU` | válida | compareceu, mas não realizou a atividade |n| `AUSENTE` | `NÃO PARTICIPOU` | válida | não compareceu e não participou |n| `NÃO APURADO` | `NÃO APURADA` | válida | fato ainda não consolidado |nnTodas as demais combinações são inválidas.nnEm especial:nn- `AUSENTE + COMPLETA` — inválida;n- `AUSENTE + PARCIAL` — inválida;n- `PRESENTE + NÃO APURADA` — inválida como consolidação;n- `NÃO APURADO + COMPLETA/PARCIAL/NÃO PARTICIPOU` — inválidas;n- `AUSENTE + NÃO APURADA` — inválida.nnIsso formaliza `Disponibilidade ≠ Presença ≠ Participação` sem criar inferências entre os três.nn---nn## 1.16 Retificaçãonn**Definição:** fato histórico posterior que corrige presença ou participação já consolidada.nn**Não é sobrescrita.**nn### Informações que permanecem distinguíveisnn- valor anterior;n- valor novo;n- motivo;n- autor;n- momento da retificação.nnSe a correção de um eixo gerar combinação Presença × Participação inválida, ambos devem ser retificados conjuntamente até que o novo estado seja válido.nnA autoridade é exclusivamente do Treinador/Administrador. nn---nn# 2. Glossário conceitual propostonn| Termo | Definição consolidada para o modelo | Natureza | Status |n|---|---|---|---|n| Atleta | Integrante do elenco que realiza declarações e possui fatos esportivos associados às sessões | ator/conceito | confirmado |n| Treinador/Administrador | Autoridade esportiva e factual para as decisões e consolidações confirmadas | ator | confirmado |n| Agenda | conjunto conceitual de sessões planejadas/publicadas | organização do domínio | confirmado; sem identidade própria inferida |n| Sessão | compromisso esportivo individualizado com ciclo próprio | conceito com identidade | confirmado |n| Disponibilidade | declaração prévia da atleta para uma sessão | declaração | confirmado |n| D-5 | instante `início − 120h` | valor temporal derivado / política de produto | confirmado |n| Ocorrência pós-D-5 | fato posterior que complementa a disponibilidade sem reescrevê-la | fato histórico | confirmado |n| Posição esportiva | posição da taxonomia Fase → Sistema → Posição | conceito esportivo | confirmado |n| Perfil esportivo | posição principal + posição secundária opcional de uma atleta | relação conceitual | interpretação estruturante `INF`, diretamente sustentada por CONCEPT-008/RULE-007 |n| Alocação da sessão | distribuição contextual de atletas nas vagas do quórum | relação/composição derivada | `INF` sustentada por RULE-006–008 |n| Quórum operacional | existência de alocação válida mínima | regra/condição do domínio | confirmado |n| Projeção de quórum | cálculo atual de composição e déficit | projeção derivada | confirmado |n| Presença | fato de comparecimento físico | fato | confirmado |n| Participação | fato de realização integral, parcial ou nula da atividade | fato | confirmado |n| Retificação | correção histórica auditável de fato consolidado | fato histórico corretivo | confirmado |n| Feriado aplicável no Rio de Janeiro | ocorrência de calendário reconhecida como aplicável à operação | termo aberto | confirmado parcialmente; delimitação não definida |n| Participação Esportiva | rótulo organizador que agrupa conceitos relacionados | organização conceitual | confirmado; não é entidade nem Bounded Context |nn---nn# 3. Relações entre conceitosnn```textnAgendan  contém conceitualmenten      ↓nSessão ───────────── calcula ───────────→ D-5n  │n  ├── recebe → Disponibilidade ← declarada por ── Atletan  │n  ├── recebe → Ocorrência pós-D-5 ← atleta/treinadorn  │n  ├── possui → Estado da Sessãon  │n  ├── possui → Projeção de Quórumn  │                    ↑n  │                    │ deriva den  │        Disponibilidades/Ocorrênciasn  │                    +n  │             Perfis esportivosn  │                    ↓n  │              Alocação válida?n  │                    ↓n  │             Quórum operacionaln  │n  └── após realizaçãon          ├── Atleta × Sessão → Presençan          ├── Atleta × Sessão → Participaçãon          └── fatos consolidados → Retificação*n```nn`*` somente quando existe erro factual posterior.nn### Relação de remarcaçãonn```textnSessão originaln   └── CANCELADO / motivo REMARCADOn                ↓ originan           Nova Sessãon```nnA nova Sessão possui identidade própria e não herda disponibilidades da original.nn---nn# 4. Estados e transições conceituaisnn## 4.1 Sessãonn### Transições confirmadas relevantesnn```textnPLANEJADOn   │n   ├─ publicação ─────────────→ PUBLICADOn   │n   └─ confirmação excepcionaln      quando D-5 já passou ───→ CONFIRMADOnnPUBLICADOn   │n   ├─ D-5 + quórum válido ────→ CONFIRMADOn   ├─ D-5 + quórum inválido ──→ CANCELADO [FALTA_DE_QUÓRUM]n   ├─ cancelamento humano ─────→ CANCELADOn   └─ remarcação ──────────────→ CANCELADO [REMARCADO]n                                  + nova SessãonnCONFIRMADOn   │n   ├─ realização ──────────────→ REALIZADOn   ├─ cancelamento humano ─────→ CANCELADOn   └─ remarcação ──────────────→ CANCELADO [REMARCADO]n                                  + nova SessãonnCANCELADOn   └─ nenhuma transição permitidannREALIZADOn   └─ nenhuma transição posterior confirmadan```nn### Terminalidade de `CANCELADO`nnÉ regra confirmada da **primeira entrega/produto**:nn- não reativa;n- não recebe novas ocorrências;n- disponibilidades posteriores não a restauram;n- nova atividade exige nova Sessão.nnIsso está explicitamente registrado em `DEC-012` e em `SUPERSEDED-015/DEC-013`. nn---nn## 4.2 Estado da Sessão ≠ condição/projeção operacionalnn### Estados do ciclonn- `PLANEJADO`n- `PUBLICADO`n- `CONFIRMADO`n- `CANCELADO`n- `REALIZADO`nn### Condições/projeçõesnn- `DISPONIBILIDADE_ABERTA`n- `QUÓRUM_EM_FORMAÇÃO`n- `QUÓRUM_GARANTIDO`n- `FALTA_DE_QUÓRUM`n- `QUÓRUM_COMPROMETIDO`nnA segunda lista **não forma outro ciclo de estados**.nnExemplos:nn- `PUBLICADO + QUÓRUM_GARANTIDO` é possível;n- o quórum pode cair e a Sessão continuar `PUBLICADO`;n- `CONFIRMADO + QUÓRUM_COMPROMETIDO` é possível;n- o quórum pode ser restaurado e a Sessão continuar `CONFIRMADO`.nnEssa separação é requerida explicitamente pelo entendimento canônico. nn---nn# 5. Invariantesnn## 5.1 Invariantes semânticos do domínionn**DM-INV-001**  n`Disponibilidade ≠ Presença ≠ Participação`.nn**DM-INV-002**  n`NÃO RESPONDEU ≠ INDISPONÍVEL`.nn**DM-INV-003**  n`NÃO APURADO/NÃO APURADA` não equivale a ausência nem não participação.nn**DM-INV-004**  nSomente as cinco combinações Presença × Participação explicitadas em §1.15 são válidas.nn**DM-INV-005**  nQuórum operacional exige uma alocação com:nn- 4 Ataque;n- 4 Defesa;n- 8 atletas distintas;n- pelo menos uma Goleira na Defesa.nn**DM-INV-006**  nUma atleta não pode satisfazer duas vagas simultaneamente na mesma alocação.nn**DM-INV-007**  nPerfil esportivo e alocação contextual são fatos diferentes: ocupar uma vaga numa sessão não altera a posição principal/secundária da atleta.nn**DM-INV-008**  nUma ocorrência pós-D-5 não reescreve a disponibilidade anteriormente declarada.nn**DM-INV-009**  nUma projeção de quórum não substitui nenhum dos fatos que a originaram nem a decisão humana.nn**DM-INV-010**  nA realização da Sessão não implica automaticamente presença ou participação de cada atleta.nn---nn## 5.2 Invariantes de integridade históricann**DM-INV-011**  nRemarcação preserva a sessão original e cria outra sessão.nn**DM-INV-012**  nDisponibilidades da sessão original não são transportadas para a nova sessão remarcada.nn**DM-INV-013**  nPresença/participação consolidada com erro é corrigida por retificação; o fato anterior continua distinguível.nn**DM-INV-014**  nToda retificação preserva valor anterior, novo valor, motivo, autor e momento.nn**DM-INV-015**  nSe uma retificação de um eixo tornar Presença × Participação inválida, a correção deve resultar numa nova combinação válida.nn---nn## 5.3 Políticas de produto que funcionam como invariantes da primeira entregannEstas regras são obrigatórias **neste produto**, mas não são declaradas como leis universais do handebol de praia:nn**DM-POL-001** — D-5 = início −120h.nn**DM-POL-002** — sessão `PUBLICADO` com D-5 futuro é resolvida automaticamente em D-5.nn**DM-POL-003** — quórum suficiente em D-5 → `CONFIRMADO`.nn**DM-POL-004** — quórum insuficiente em D-5 → `CANCELADO / FALTA_DE_QUÓRUM`.nn**DM-POL-005** — `QUÓRUM_GARANTIDO` antes de D-5 não confirma a sessão.nn**DM-POL-006** — perda posterior de quórum nunca cancela automaticamente uma sessão já `CONFIRMADO`.nn**DM-POL-007** — `CANCELADO` é terminal.nn**DM-POL-008** — sessão criada quando D-5 já passou não simula resolução automática; confirmação exige decisão explícita do treinador.nn**DM-POL-009** — diante de `QUÓRUM_COMPROMETIDO`, as decisões previstas são somente `MANTER TREINO` ou `CANCELAR TREINO`.nn**DM-POL-010** — participante convidada não integra o modelo da primeira entrega.nnA origem decisória dessas políticas está explicitada no Charter e na rastreabilidade. nn---nn# 6. Matriz conceito → origem → regra relacionada → statusnn| Conceito | Origem canônica principal | Regras/decisões relacionadas | Status no modelo |n|---|---|---|---|n| Atleta | ACT-002 | RULE-002/005/012/023/024 | confirmado |n| Treinador/Administrador | ACT-001 | RULE-016–018/030; DEC-003 | confirmado |n| Agenda | CONCEPT-001 | RULE-020/021 | confirmado como coleção conceitual |n| Sessão | CONCEPT-002 | RULE-009/010/015/022/028/029 | confirmado |n| Disponibilidade | CONCEPT-003 | RULE-001/002/005/012 | confirmado |n| Presença | CONCEPT-004 | RULE-001/003/018/019/030 | confirmado |n| Participação | CONCEPT-005 | RULE-001/003/018/019/030 | confirmado |n| Ocorrência pós-D-5 | CONCEPT-006 | RULE-012–017 | confirmado |n| Quórum operacional | CONCEPT-007 | RULE-005–008 | confirmado |n| Posição esportiva | CONCEPT-008 | RULE-006–008 | confirmado |n| Perfil esportivo | CONCEPT-008 | RULE-007 | `INF` estrutural sustentada |n| Alocação da sessão | CONCEPT-007/008 | RULE-006–008 | `INF` estrutural sustentada |n| D-5 | CONCEPT-009 | RULE-004/009–012 | confirmado; política temporal |n| Retificação | CONCEPT-011 | RULE-018/019/030 | confirmado |n| Condição/projeção | CONCEPT-012 | RULE-011/013–016/027 | confirmado |n| Participação Esportiva | CONCEPT-013 | RULE-027 | rótulo organizacional, não entidade |n| Feriado aplicável no Rio | OPEN-DOMAIN-001 | RULE-021 / FACT-005 | parcialmente definido; risco aceito |n| Participante convidada | SUPERSEDED-014 | RULE-031 / DEC-010 | **excluído** |n| “Situação operacional” | AUD-025 | — | **rejeitado** |n| Reprocessamento D-5 | AUD-026 / INF-TECH-001 | — | **fora do domínio; futuro técnico** |nnA reauditoria registra explicitamente os destinos de `AUD-024`, `AUD-025` e `AUD-026`. nn---nn# 7. Separação semânticann| Categoria | Elementos |n|---|---|n| **A. Fatos/regras do domínio** | atleta; sessão como atividade individualizada; disponibilidade como declaração; presença; participação; ocorrência posterior como fato distinto; posição/perfil esportivo; regra de alocação/quórum; combinações válidas Presença × Participação |n| **B. Políticas/decisões de produto** | proposta mensal; D-5 −120h; confirmação/cancelamento automático; cancelamento terminal; remarcação criando nova sessão; confirmação excepcional; apenas manter/cancelar diante de quórum comprometido; exclusão de convidada |n| **C. Projeções/informações derivadas** | quórum atual; composição possível; déficit; `QUÓRUM_EM_FORMAÇÃO`; `QUÓRUM_GARANTIDO`; `QUÓRUM_COMPROMETIDO`; próxima ação |n| **D. Apresentação** | estado simples mostrado à atleta; esconder matemática detalhada do quórum; diagnóstico detalhado ao treinador; mensagens/comunicações |n| **E. Decisões técnicas futuras** | persistência; autenticação; offline/sincronização; mecanismo de comunicação; processamento temporal; idempotência/reprocessamento D-5; fonte/cache de feriados |nnO próprio artefato de rastreabilidade mantém Requirements e todas as camadas subsequentes deliberadamente vazias nesta etapa. nn---nn# 8. Conceitos candidatos rejeitados ou não promovidosnn## REJECT-DM-001 — Participante convidadann**Decisão:** não pertence ao modelo da primeira entrega.nn**Motivo:** `SUPERSEDED-014` e `DEC-010`.nnNão é ator, participante, capacidade externa nem fonte de quórum deste modelo.nn---nn## REJECT-DM-002 — “Situação operacional” do membronn**Proveniência:** `INF`, proveniente de formulação anterior.nn**Resultado:** rejeitado.nn`AUD-025` concluiu que não existe sustentação canônica suficiente para esse conceito. Não são criados estados como:nn- `ATIVA`;n- `INATIVA`;n- `SUSPENSA`;n- equivalentes.nnnn---nn## REJECT-DM-003 — Reprocessamento/idempotência de D-5 como regra de domínionn**Resultado:** rejeitado como conceito/invariante do domínio.nn`AUD-026` determina que isso permaneça `INF-TECH-001`, candidato técnico futuro relacionado a confiabilidade/determinismo, não regra confirmada. nn---nn## REJECT-DM-004 — Quórum como estado da Sessãonn**Resultado:** rejeitado.nn`QUÓRUM_GARANTIDO`, `FALTA_DE_QUÓRUM` e `QUÓRUM_COMPROMETIDO` não pertencem ao ciclo da Sessão.nn---nn## REJECT-DM-005 — Ausência de Goleira como estado separadonn**Resultado:** rejeitado.nnÉ diagnóstico do déficit da composição, não outro estado nem outra condição pós-confirmação.nn---nn## REJECT-DM-006 — “Capacidade esportiva” como entidade genéricann**Resultado:** não promovida.nnNo escopo confirmado, o que existe é perfil por posições principal/secundária e alocação contextual. Uma entidade abstrata adicional não possui necessidade demonstrada.nn---nn## REJECT-DM-007 — Agenda como entidade com ciclo próprionn**Resultado:** não promovida.nnAs fontes sustentam Agenda como conjunto/proposta de sessões. Os estados confirmados pertencem à Sessão.nn---nn# 9. Tratamento dos achados e testes adversariaisnn## 9.1 AUD-024 — feriado aplicável no Rio de JaneironnÉ possível modelar o conceito **sem criar política nova**.nnModelo adotado:nn> “Feriado aplicável no Rio de Janeiro” é uma ocorrência de calendário que, quando reconhecida como aplicável à operação, influencia a proposta de horário de uma sessão recorrente.nnO modelo **não define** se isso inclui ou exclui:nn- feriado nacional;n- estadual;n- municipal;n- ponto facultativo;n- outras categorias.nnA revisão humana antes da publicação permite que a categoria continue aberta sem tornar o modelo conceitualmente contraditório.nn`OPEN-DOMAIN-001` permanece risco explícito, exatamente como determinado pela auditoria. nn**Retorno ao Chat 01 agora:** **não necessário**.nn**Gatilho para retorno:** somente se for necessário estabelecer uma política de produto sobre quais categorias contam.nn---nn## 9.2 AUD-025 — situação operacionalnnNenhum conceito correspondente foi encontrado nas fontes canônicas.nn**Resultado:** removido da modelagem.nn---nn## 9.3 AUD-026 — reprocessamento D-5nnNão é domínio.nn**Resultado:** permanece candidato técnico `INF-TECH-001`.nn---nn## 9.4 AUD-023 e AUD-027nnNenhum novo conceito produzido.nn- `AUD-023` permanece correção de proveniência de métricas;n- `AUD-027` permanece correção da ordem do processo.nn---nn# 10. Testes adversariais do modelonn| Cenário | Representação | Invariante violado? | Decisão humana ainda ausente? |n|---|---|---|---|n| Atleta muda de `DISPONÍVEL` para indisponível após D-5 numa sessão confirmada | disponibilidade original permanece; cria `NÃO PODEREI COMPARECER`; atleta sai da composição e quórum é recalculado | não | somente se surgir `QUÓRUM_COMPROMETIDO`; decisão já definida: manter/cancelar |n| Atleta passa de indisponível para disponível após D-5 numa sessão confirmada | cria `AGORA POSSO PARTICIPAR`; disponibilidade original permanece; atleta torna-se candidata | não | não, salvo decisão esportiva já prevista |n| Sessão confirmada perde quórum | estado continua `CONFIRMADO`; condição torna-se `QUÓRUM_COMPROMETIDO` | não | sim, mas **já existe** decisão humana definida: manter/cancelar |n| Sessão cancelada recebe novas disponibilidades | operação deve ser rejeitada semanticamente; `CANCELADO` é terminal | tentativa violaria DM-POL-007 | não |n| Sessão publicada é remarcada | original → `CANCELADO/REMARCADO`; nova sessão possui identidade própria e disponibilidades vazias | não | remarcação é ação humana já definida |n| Atleta está `PRESENTE` mas `NÃO PARTICIPOU` | combinação válida | não | não |n| Atleta está `PRESENTE` com participação `PARCIAL` | combinação válida | não | não |n| Registro consolidado contém erro factual | cria retificação; preserva anterior, novo, motivo, autor e tempo; dois eixos corrigidos se necessário | não | treinador já é autoridade definida |n| Sessão é criada depois de seu D-5 calculado | não executa fechamento retroativo; confirmação excepcional explícita pode produzir `CONFIRMADO` | não | decisão humana necessária e já definida |n| Mesma atleta possui capacidades diferentes para Ataque e Defesa | perfil principal/secundário pode representar posições diferentes; alocação escolhe uma única vaga por vez | não, dentro do modelo confirmado de até duas posições | se “capacidades” exigir algo além de principal + secundária, surge nova necessidade de elicitação |n| Projeção de quórum muda sem mudar estado oficial da Sessão | comportamento esperado; projeção recalcula independentemente do ciclo | não | não |nn### Resultado adversarialnnNenhum cenário fornecido revela contradição interna do modelo.nnOs testes confirmam especialmente:nn```textnDisponibilidade ≠ Presença ≠ ParticipaçãonEstado da Sessão ≠ condição/projeção operacionalnPerfil esportivo ≠ alocação contextualnProjeção ≠ decisão humananCancelamento ≠ suspensão temporárianRemarcação ≠ edição temporal da mesma sessãonRetificação ≠ sobrescritan```nn---nn# 11. Achados novos da modelagemnn## DM-FIND-001 — Agenda não necessita identidade própriann**Proveniência:** `INF` derivada da análise do modelo.nn**Evidência:** o ciclo confirmado e a preservação histórica estão definidos para Sessão, não para Agenda.nn**Impacto:** evita criar uma entidade conceitual adicional sem necessidade.nn**Status:** não bloqueador.nn---nn## DM-FIND-002 — CONCEPT-008 contém três conceitos distintosnnO atual “Capacidade tática e posição” pode ser explicado mais precisamente como:nn1. posição esportiva;n2. perfil esportivo da atleta;n3. alocação contextual da sessão.nn**Proveniência:** `INF` estrutural baseada diretamente em CONCEPT-008 e RULE-006–008.nn**Nenhuma nova regra de produto é criada.**nn**Impacto:** remove ambiguidade no cenário em que a mesma atleta possui capacidades distintas para ataque e defesa.nn**Status:** recomendação de refinamento canônico.nn---nn## DM-FIND-003 — Histórico mínimo da disponibilidade está delimitado, mas histórico de todas as edições pré-D-5 não estánnÉ confirmado que:nn- a declaração existente no fechamento deve continuar distinguível;n- ocorrências posteriores não a reescrevem.nnNão está confirmado que cada edição anterior à declaração final precise ser preservada permanentemente.nn**Impacto no modelo:** nenhum; o modelo não exige essa decisão.nn**Destino:** se precisar ser decidido, fase posterior de Requirements, salvo se o usuário desejar explicitamente transformar isso em política de produto.nn**Status:** risco baixo/não bloqueador.nn---nn## DM-FIND-004 — `REALIZADO` não implica fatos individuais consolidadosnnUma Sessão pode conceitualmente já ser `REALIZADO` enquanto Presença/Participação ainda estão `NÃO APURADO/NÃO APURADA`.nnIsso decorre da separação entre ciclo da sessão e apuração individual.nn**Proveniência:** `INF` necessária para preservar RULE-003/RULE-018 sem fundir os ciclos.nn**Status:** coerente com entendimento vigente; não exige nova decisão.nn---nn## DM-FIND-005 — “Feriado aplicável” pode permanecer predicado abertonnA lacuna de categorias não impede representar:nn```textnSessão recorrenten+ feriado reconhecido como aplicáveln→ proposta 07h30–09h00n→ revisão humana antes da publicaçãon```nn**Status:** risco conhecido `OPEN-DOMAIN-001`; não bloqueador para o modelo.nn---nn# 12. Avaliação de coerênciann### Disponibilidade ≠ Presença ≠ Participaçãonn**PASS**nnOs três conceitos possuem:nn- momentos diferentes;n- autoridades diferentes;n- valores diferentes;n- finalidades diferentes;n- ciclos diferentes.nnNenhuma transformação automática é necessária ou permitida entre eles.nn### Terminalidade de CANCELADOnn**PASS**nnÉ possível representar cancelamento automático, humano e por remarcação sem criar novo estado e sem permitir reativação.nn### Remarcaçãonn**PASS**nnÉ representável como relação histórica entre duas identidades de Sessão, não como mutação temporal da original.nn### Ocorrências positivas e negativas pós-D-5nn**PASS**nnAmbas são fatos históricos posteriores e modificam somente a composição/projeção atual, preservando a declaração original.nn### Estado da Sessão vs. projeçãonn**PASS**nnSão dimensões ortogonais. Alterações de quórum não precisam alterar estado oficial.nn### Presença × Participaçãonn**PASS**nnAs cinco combinações válidas formam um conjunto fechado e verificável.nn### Perfil/capacidade esportivann**PASS WITH RISK**nnO modelo confirmado suporta posição principal + posição secundária opcional e alocação contextual. Conceitos mais ricos de competência/proficiência não devem ser introduzidos sem nova evidência.nn### Feriado aplicávelnn**PASS WITH RISK**nnO predicado é suficiente para coerência conceitual, mas sua delimitação operacional permanece aberta.nn---nn# 13. Prontidão resultante da modelagemnnNão foi encontrada questão de **alto impacto + alta incerteza** que impeça representar coerentemente a primeira entrega.nnPermanece um risco semântico explícito:nn`OPEN-DOMAIN-001 — categorias de feriado aplicável`nnEle não exige retorno imediato ao Chat 01 porque pode permanecer como predicado aberto e existe revisão humana antes da publicação.nn`AUD-025` e `AUD-026` não contaminam o domínio:nn- “situação operacional” foi rejeitada;n- reprocessamento/idempotência permanece técnico/futuro.nnParticipante convidada não aparece no modelo.nnNenhum FR, NFR, driver, ADR, componente, serviço, API, schema, tabela ou decisão de arquitetura foi produzido.nn---nn# 14. Proposta de atualização canônicannEstas alterações **não estão aplicadas**; são somente proposta de consolidação.nn| ID proposto | Artefato | Alteração | Origem | Status proposto | Rastreabilidade |n|---|---|---|---|---|---|n| CAN-DM-001 | `03-SHARED-UNDERSTANDING.md` | registrar resultado formal da modelagem e os invariantes `DM-INV-001..015` | Chat 03 + CONCEPT/RULE vigentes | proposto | CONCEPT-002–012; RULE-001–030 |n| CAN-DM-002 | `03-SHARED-UNDERSTANDING.md` | refinar CONCEPT-008 distinguindo Posição, Perfil esportivo e Alocação contextual sem alterar as regras existentes | DM-FIND-002 | proposto | CONCEPT-007/008; RULE-006–008 |n| CAN-DM-003 | `03-SHARED-UNDERSTANDING.md` | registrar explicitamente o conjunto fechado das cinco combinações Presença × Participação como invariante do modelo | RULE-019 | proposto | CONCEPT-004/005; RULE-019/030 |n| CAN-DM-004 | `03-SHARED-UNDERSTANDING.md` | registrar que Agenda é coleção conceitual e que não foi encontrada necessidade de identidade/ciclo independente | DM-FIND-001 | proposto | CONCEPT-001/002; FLOW-001 |n| CAN-DM-005 | `03-SHARED-UNDERSTANDING.md` | manter `OPEN-DOMAIN-001` como risco não bloqueador, sem criar categorias de feriado | AUD-024 / DM-FIND-005 | proposto | RULE-021; FACT-005; RISK-011 |n| CAN-DM-006 | `07-TRACEABILITY.md` | registrar `AUD-025` como rejeição explícita de conceito de domínio e `AUD-026` como destino técnico futuro | auditoria + Chat 03 | proposto | AUD-025/026; INF-TECH-001 |n| CAN-DM-007 | `07-TRACEABILITY.md` | incorporar a matriz conceito → regras e registrar a avaliação da modelagem | Chat 03 | proposto | OBJ-002/003/005; FLOW-001/002 |n| CAN-DM-008 | estado processual canônico | substituir `GATE-B-DOMAIN-MODEL = PENDING` por `GATE-B-DOMAIN-MODEL = PASS_WITH_RISKS`, mantendo `GATE-B-FINAL = NOT_YET_APPROVED` | resultado deste Chat 03, após aprovação humana da consolidação | proposto | Gate B |n| CAN-DM-009 | `02-PROJECT-CHARTER.md` | nenhuma mudança substantiva de produto; somente sincronização do estado processual, caso CAN-DM-008 seja aprovada | processo | proposto | §12 Pendências |nnNenhuma atualização proposta autoriza Requirements.nn---nn# Próximo passonnNão identifico necessidade de retorno ao Chat 01 neste momento.nnApós a eventual aprovação/canonicalização desta modelagem, o próximo passo é **a avaliação formal final do Gate B**.nnRequirements continua bloqueado e não é o próximo passo direto.nn**DOMAIN-MODEL = PASS_WITH_RISKS**nnA razão do `WITH_RISKS` é delimitada: `OPEN-DOMAIN-001` continua aberto e o refinamento “posição → perfil → alocação” é uma interpretação estrutural `INF`, embora sustentada pelas regras existentes. Não há bloqueador identificado para submeter o Gate B à avaliação formal final. nn**DOMAIN-MODEL = PASS_WITH_RISKS**"
+      }
+    ],
+    "created_at": "2026-09-02 17:32:14",
+    "updated_at": 1788406585.486186
+  },
+  {
+    "id": "4a14181e-efe6-40d6-b656-4d079c972b8d",
+    "ids": [
+      "4a14181e-efe6-40d6-b656-4d079c972b8d"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Aprovo a modelagem conceitual com resultado:nnDOMAIN-MODEL = PASS_WITH_RISKSnne aprovo a incorporação de CAN-DM-001..009 aos artefatosncanônicos, com uma precisão de proveniência:nnInvariantes que resultam logicamente da combinação de regrasnconfirmadas, mas que não constituem nova declaração humananindependente, devem permanecer identificados como derivadosn(`INF-DERIVED`) e manter rastreabilidade para as regras/conceitosnque os sustentam.nnEm particular, preserve essa distinção em DM-INV-015 e emnqualquer outro invariante introduzido exclusivamente pelanformalização do modelo.nnNão altere o conteúdo substantivo das decisões confirmadas.nnApós esta aprovação, atualize o estado processual para:nnGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnGATE-B-DOMAIN-MODEL = PASS_WITH_RISKSnGATE-B-FINAL = NOT_YET_APPROVEDnnRequirements permanece bloqueado.nnPropague exclusivamente as atualizações aprovadas para:nn- 03-SHARED-UNDERSTANDING.md;n- 07-TRACEABILITY.md;n- 02-PROJECT-CHARTER.md somente para sincronização do estadon  processual, conforme CAN-DM-009.nnPreserve:nn- OPEN-DOMAIN-001 como risco não bloqueador;n- AUD-025 como conceito rejeitado;n- AUD-026 / INF-TECH-001 como candidato técnico futuro;n- AUD-023 e AUD-027 como correções editoriais/processuais;n- Requirements, Drivers, ADRs e Architecture ainda vazios/nãon  autorizados.nnNão execute a avaliação final do Gate B neste Chat 03.nnApós consolidar os artefatos, encerre sua responsabilidadenindicando como próxima ação:nn02 — Auditoria do entendimentonpara a revisão formal final do Gate B."
+      }
+    ],
+    "created_at": "2026-09-02 20:52:54",
+    "updated_at": 1788393332.619474
+  },
+  {
+    "id": "dabf5026-fa55-45e9-a3c9-d74e4432472d",
+    "ids": [
+      "7b2b78d4-fc0c-409f-a88e-1a1f1c47db2d",
+      "65ae4d99-0e55-40fa-ab74-46166548a450",
+      "48c3da9c-2522-4f81-91b1-9806721e680b",
+      "9cfdd889-066c-40cd-b54f-f500e0da9aba",
+      "b58c35d0-13c5-4dd6-ab0b-54b4408f7188",
+      "f0c1fd31-503e-4cab-ac45-23da7836a1dc",
+      "94b5d036-a86e-45b8-a27e-9b49cd75d6ac",
+      "064d893b-8cc3-4243-9add-b3c470323eef",
+      "51497e99-4493-476b-bf5d-e274c351d456",
+      "ce23a54d-04d8-4d72-b2cf-fafdfa927296",
+      "229d3527-30b8-4b37-822b-70ac202ac86e",
+      "60804627-913a-4199-8f0d-a91f57bc819e",
+      "a6bdcbb5-c148-48f0-a206-8363f7970829",
+      "f4e1eef8-22c2-4a8a-991d-c80417e0477b",
+      "7f1f0ef9-3ce6-4742-8346-abd80a7e2188",
+      "b53f29e0-46ee-4998-82ba-9cc59d83a0b9",
+      "b55530a6-3ab9-445b-a35e-265df234761d",
+      "c85b5c06-fe9a-447a-8776-d82b2e62cbec",
+      "b409bbab-470a-4a6d-9a9b-86aed780631e",
+      "9560822b-ac5c-4cbb-89f3-58fd1670f604",
+      "6c761924-7b45-4a4c-b887-59196ece2631",
+      "9cee4495-1c19-4f24-bff2-f4adba87a7a9",
+      "00ad7253-9690-4e2e-bafd-b56813f83b66",
+      "41e41caf-7cc4-4637-8bf0-93031157c5e5",
+      "57ea683e-7a45-42b7-bf46-cbf7d3e92315",
+      "dabf5026-fa55-45e9-a3c9-d74e4432472d"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Vou aplicar somente CAN-DM-001..009, com `INF-DERIVED` nos invariantes que surgem da formalização lógica do modelo. Não vou alterar decisões substantivas nem tocar em Requirements, Drivers, ADRs ou Architecture."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A consolidação exige duas classes de proveniência no `SHARED-UNDERSTANDING`: conteúdo humano confirmado continua como `confirmado`; conclusões estruturais da modelagem entram como `INF-DERIVED`. Isso evita elevar formalização lógica a nova decisão humana."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A checagem de impacto está quase fechada: `02-PROJECT-CHARTER.md` recebeu apenas sincronização processual; a substância da modelagem foi consolidada somente em `03-SHARED-UNDERSTANDING.md` e `07-TRACEABILITY.md`. Requirements continua explicitamente bloqueado."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Consolidação aprovada aplicada aos três artefatos canônicos, agora em versão `0.5`. A distinção de proveniência `INF-DERIVED` foi preservada, inclusive em `DM-INV-015` e nos demais invariantes/refinamentos derivados exclusivamente da formalização conceitual.nnForam preservados `OPEN-DOMAIN-001` como risco não bloqueador, `AUD-025` como conceito rejeitado, `AUD-026 / INF-TECH-001` como candidato técnico futuro e `AUD-023/AUD-027` como correções editorial/processual. Nenhuma alteração foi feita em Requirements, Drivers, ADRs ou Architecture.nn```textnGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnGATE-B-DOMAIN-MODEL = PASS_WITH_RISKSnGATE-B-FINAL = NOT_YET_APPROVEDn```nnRequirements permanece bloqueado. A avaliação final do Gate B **não foi executada neste Chat 03**.nnArtefatos consolidados: [03-SHARED-UNDERSTANDING.md](sandbox:/mnt/data/03-SHARED-UNDERSTANDING.md), [07-TRACEABILITY.md](sandbox:/mnt/data/07-TRACEABILITY.md) e [02-PROJECT-CHARTER.md](sandbox:/mnt/data/02-PROJECT-CHARTER.md).nn**Próxima ação: `02 — Auditoria do entendimento`**, para a revisão formal final do Gate B."
+      }
+    ],
+    "created_at": "2026-09-02 20:55:22",
+    "updated_at": 1788393331.25654
+  },
+  {
+    "id": "6a519f6b-b326-42c5-926e-2f0044739f90",
+    "ids": [
+      "6a519f6b-b326-42c5-926e-2f0044739f90"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Execute exclusivamente uma **VALIDAÇÃO DE REGRESSÃO**  do modelo de domínio njá produzido neste Chat 03. n nNão refaça a modelagem do zero. nNão faça nova elicitação. nNão produza Requirements. nNão proponha arquitetura ou implementação. n nNOVAS FONTES CANÔNICAS n n- PRODUCT-DOMAIN-SPEC.md v2.10 n- TRAINING_FLOW_CONTRACT.md v1.6 n- 02-PROJECT-CHARTER.md v0.7 n- 03-SHARED-UNDERSTANDING.md v0.7 n- 07-TRACEABILITY.md v0.7 n nMUDANÇAS RELEVANTES DESDE A MODELAGEM ANTERIOR n n1. Product-Architecture.md foi substituído pelo nome canônico n   PRODUCT-DOMAIN-SPEC.md. n n2. “Decisões de produto abertas = NONE” agora significa somente n   que nenhuma decisão atualmente conhecida permanece aberta. n   Uma nova lacuna material encontrada posteriormente deve retornar n   à elicitação, e não ser preenchida por inferência. n n3. TRAINING_FLOW_CONTRACT.md agora possui status CANONICAL_DERIVED. n n   Decisões substantivas sustentadas pela fonte são DECIDED. n   Estruturas formais introduzidas pelo contrato são DERIVED. n n   Uma derivação não pode ampliar sua fonte. n   Em conflito, PRODUCT-DOMAIN-SPEC.md prevalece. n n4. OPEN-001 foi fechado. n n   “Feriado aplicável no Rio de Janeiro” agora significa: n   - feriado nacional; n   - feriado oficial estadual aplicável à cidade do Rio; n   - feriado oficial municipal aplicável à cidade do Rio. n n   Não inclui: n   - ponto facultativo; n   - feriado exclusivamente bancário; n   - data comemorativa sem condição de feriado oficial aplicável. n n5. As mudanças acima não autorizam Requirements ou arquitetura. n nOBJETIVO n nCompare o modelo conceitual anteriormente produzido neste Chat 03 ncom as fontes canônicas atuais e determine se alguma conclusão, nconceito, relação, estado, transição, invariante, rejeição ou nclassificação anterior foi invalidada. n nAudite especialmente: n n- Sessão; n- Agenda; n- Disponibilidade; n- Ocorrência pós-D-5; n- Perfil esportivo; n- Alocação contextual; n- Quórum; n- D-5; n- Presença; n- Participação; n- Retificação; n- estado da Sessão × projeção; n- terminalidade de CANCELADO; n- remarcação; n- feriado aplicável; n- conceitos rejeitados; n- INF-TECH-001. n nPROVENIÊNCIA n nMantenha a distinção: n nDECIDED n= decisão substantiva sustentada pela autoridade humana/canônica. n nDERIVED / INF-DERIVED n= consequência ou formalização logicamente derivada. n nNão promova DERIVED a decisão humana. n nEm especial, revise os DM-INV introduzidos pela modelagem. nQuando um invariante não tiver sido declarado diretamente pelo nusuário, mas resultar logicamente das regras confirmadas, nclassifique-o como INF-DERIVED e preserve suas origens. n nTRATAMENTO DO ANTIGO OPEN-DOMAIN-001 n nA modelagem anterior tratou “feriado aplicável” como predicado aberto. n nIsso não é mais vigente. n nVerifique o impacto de DEC-017 e determine se: n n- OPEN-DOMAIN-001 deve ser encerrado/superado; n- a classificação anterior PASS WITH RISK para feriado passa a PASS; n- DM-FIND-005 precisa ser atualizado ou encerrado; n- CAN-DM-005 precisa ser substituído. n nNão mantenha como risco uma decisão que já foi fechada. n nSAÍDA n nProduza: n n1. REGRESSION MATRIX n nElemento anterior n→ fonte nova relevante n→ permanece válido? n→ mudança necessária n→ proveniência n n2. INVARIANT PROVENANCE AUDIT n nPara cada DM-INV: n- DECIDED-supported; n- INF-DERIVED; n- inválido/substituído. n n3. ITENS INVALIDADOS nListe somente se existirem. n n4. ITENS QUE EXIGEM ATUALIZAÇÃO EDITORIAL/CANÔNICA. n n5. NOVAS QUESTÕES DE PRODUTO nSomente se alguma lacuna realmente exigir nova intenção/regra humana. n n6. RESULTADO n nEmita exatamente um: n nDOMAIN-MODEL-REGRESSION = PASS nDOMAIN-MODEL-REGRESSION = PASS_WITH_RISKS nDOMAIN-MODEL-REGRESSION = FAIL n nSe nenhuma semântica central tiver sido invalidada, preserve o nresultado anterior da modelagem, ajustando apenas o risco de feriado ne a proveniência DERIVED/INF-DERIVED conforme necessário. n nSe PASS ou PASS_WITH_RISKS, produza uma proposta de canonicalização natualizada para: n n- 03-SHARED-UNDERSTANDING.md; n- 07-TRACEABILITY.md; n- 02-PROJECT-CHARTER.md apenas para sincronização processual. n nO estado pretendido após aprovação humana será: n nGATE-B-DOMAIN-MODEL = PASS_WITH_RISKS nou PASS, conforme o resultado formal permitido pelo protocolo; n nGATE-B-FINAL = NOT_YET_APPROVED. n nNão execute a avaliação final do Gate B. nA próxima etapa após aprovação humana continua sendo a revisão nformal final do Gate B no Chat 02."
+      }
+    ],
+    "created_at": "2026-09-03 00:20:23",
+    "updated_at": 1788405798.798445
+  },
+  {
+    "id": "f3e11a4a-f32a-4042-996e-50ef88813440",
+    "ids": [
+      "f5a6b098-c135-4bd7-973f-026acc482774",
+      "fe561bf1-3af2-41eb-8ee9-b19e086bb3c3",
+      "f6711d8f-3cd1-4046-a8bc-292f5ea7be8e",
+      "d51f5e4e-c032-425b-8690-462a54386e27",
+      "9b07cff7-c8d2-4637-88bb-040dd19977f8",
+      "738a646c-aab5-4ee7-8bc3-9dd4dca0ac3d",
+      "740938ac-ec9e-40cd-9591-e4fec76f531f",
+      "c701db19-dad3-403e-b9d9-6562890db08a",
+      "34e4b71d-8b30-4b51-a8bd-498a0205efb4",
+      "e231e9ed-9dde-44df-98cf-c34acded1481",
+      "a9344ae0-f61a-48e1-8472-037dea4e624e",
+      "aa6cbb79-97ce-4b64-af15-3d7ad2d01adf",
+      "fc906a50-04c2-4bb1-a9e7-c3b1fdbc901f",
+      "5562e407-02a9-41c8-a456-d4fff4e63ad4",
+      "2648a31c-fee7-477b-9d9c-bff6af3fee69",
+      "91f581ac-7f6e-4afc-a7f2-9894f0a9ee5f",
+      "92312861-4eb8-4f42-9da5-98263bc79eb3",
+      "c70869e8-f2b0-4de5-9bbb-bdb19377f909",
+      "bba5f20c-6a8a-4f75-8ac6-decabf40c5b8",
+      "390934ca-56cb-408d-baef-6222bb108f12",
+      "d43dc5a7-ae56-468e-b1c7-dc2ed45870a5",
+      "936f3e69-24de-42fc-ae50-e281cdc4f20f",
+      "945eedb8-65e0-4167-9901-192eeb2a87ba",
+      "504250e3-9d0b-4c8e-92dd-300d18c681b2",
+      "f3e11a4a-f32a-4042-996e-50ef88813440"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A regressão não encontrou mudança que quebre o núcleo do modelo. A alteração substantiva é concentrada em feriados: o antigo predicado aberto foi fechado por `DEC-017`; os demais conceitos centrais continuam alinhados às fontes atuais. "
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A regressão encontrou **uma substituição semântica deliberada** — o antigo tratamento aberto de feriados — e alguns ajustes de proveniência. Nenhum conceito ou invariante central do fluxo foi quebrado pelas fontes v2.10/v1.6.nn**Document Title: **nn# VALIDAÇÃO DE REGRESSÃO — Modelo de Domínionn**Base anterior:** modelo conceitual aprovado neste Chat 03  n**Fontes atuais:** `PRODUCT-DOMAIN-SPEC.md` v2.10, `TRAINING_FLOW_CONTRACT.md` v1.6, `02-PROJECT-CHARTER.md` v0.7, `03-SHARED-UNDERSTANDING.md` v0.7 e `07-TRACEABILITY.md` v0.7.nn## 1. REGRESSION MATRIXnnA fonte de autoridade semântica agora é inequivocamente `PRODUCT-DOMAIN-SPEC.md`. O contrato v1.6 é `CANONICAL_DERIVED`: pode formalizar gatilhos, guardas, transições e invariantes, mas uma derivação não pode ampliar a decisão de origem; em conflito, prevalece `PRODUCT-DOMAIN-SPEC.md`.  nn| Elemento anterior | Fonte nova relevante | Permanece válido? | Mudança necessária | Proveniência após regressão |n|---|---|---:|---|---|n| **Agenda como conceito organizador, sem ciclo próprio demonstrado** | Glossário `Agenda Esportiva`; CONCEPT-001 | **Sim** | Usar preferencialmente o termo canônico `Agenda Esportiva`. A ausência de identidade/ciclo independente continua sendo formalização do modelo, não nova decisão humana | conceito `DECIDED`; ausência de identidade/ciclo = `INF-DERIVED` |n| **Sessão de treino com identidade/ciclo próprio** | Glossário `Sessão de treino`; CONCEPT-002 | **Sim** | Nenhuma substantiva | `DECIDED-supported` |n| **Estados `PLANEJADO`, `PUBLICADO`, `CONFIRMADO`, `CANCELADO`, `REALIZADO`** | PRODUCT-DOMAIN-SPEC + contrato de estados | **Sim** | Nenhuma | `DECIDED-supported` |n| **Disponibilidade como declaração distinta de fato ocorrido** | Glossário + RULE-001/002/005/012 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Ocorrência pós-D-5 complementa sem reescrever disponibilidade** | Glossário + Q-013 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Perfil esportivo** | Novo glossário canônico define posição principal obrigatória + secundária opcional | **Sim, fortalecido** | Deixa de precisar ser tratado como conceito apenas descoberto por `INF-DERIVED`; agora possui definição canônica direta | `DECIDED-supported` |n| **Alocação contextual da sessão** | Novo glossário define explicitamente `Alocação da sessão` | **Sim, fortalecido** | Mesma mudança: conceito agora é explicitamente canônico, embora formalizações adicionais sobre sua estrutura continuem derivadas | `DECIDED-supported` |n| **Perfil esportivo ≠ alocação contextual** | Glossário diz que alocação não altera perfil e perfil não implica alocação simultânea | **Sim, fortalecido** | Atualizar proveniência do núcleo dessa distinção | `DECIDED-supported` |n| **Quórum = existência de alocação válida, não contagem bruta** | Glossário `Quórum operacional`; Q-010/Q-011 | **Sim** | Nenhuma | `DECIDED-supported` |n| **4 Ataque + 4 Defesa + 8 distintas + ≥1 Goleira defensiva** | Glossário + RULE-006 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Uma atleta não ocupa duas vagas simultaneamente** | Glossário de Perfil/Alocação + RULE-008 | **Sim** | Nenhuma | `DECIDED-supported` |n| **D-5 = início −120h** | Glossário + DEC-005 | **Sim** | Nenhuma | `DECIDED-supported`, política de produto |n| **Sessão criada depois de D-5 exige confirmação excepcional** | Glossário `Confirmação excepcional` + DEC-014 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Presença ≠ Participação ≠ Disponibilidade** | Glossário + RULE-001 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Cinco combinações válidas Presença × Participação** | Q-010 + RULE-019 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Retificação auditável, sem sobrescrita** | Glossário + DEC-007/RULE-030 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Estado da Sessão ≠ condição/projeção** | Glossário `Estado da sessão`, `Condição`, `Projeção de quórum` | **Sim, fortalecido** | Nenhuma substantiva | `DECIDED-supported` |n| **Projeção não substitui fatos nem decisão humana** | Novo glossário diz explicitamente que projeção não é fonte de verdade, estado ou decisão humana | **Sim, fortalecido** | Proveniência deixa de precisar ser exclusivamente derivada | `DECIDED-supported` |n| **`CANCELADO` terminal** | Glossário `Cancelamento terminal`, DEC-012, RULE-028 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Remarcação cancela original e cria outra sessão sem disponibilidades** | Glossário `Remarcação`, DEC-013/RULE-022 | **Sim** | Nenhuma | `DECIDED-supported` |n| **Feriado aplicável como predicado aberto** | DEC-017 + glossário v2.10 | **Não** | **Substituir integralmente** pela enumeração decidida: nacional + oficial estadual aplicável + oficial municipal aplicável; excluir ponto facultativo, exclusivamente bancário e mera data comemorativa | antiga formulação = `SUPERSEDED`; nova = `DECIDED` |n| **OPEN-DOMAIN-001 como risco não bloqueador** | OPEN-001 fechado por DEC-017; RISK-011 tratado | **Não** | Encerrar/superar; não manter como risco corrente | `SUPERSEDED/RESOLVED` |n| **DM-FIND-005 — feriado pode permanecer predicado aberto** | DEC-017 | **Não** | Encerrar como achado histórico substituído | `SUPERSEDED` |n| **CAN-DM-005 — preservar OPEN-DOMAIN-001** | DEC-017 | **Não** | Substituir por canonicalização do fechamento e da definição atual | `SUPERSEDED` |n| **Participante convidada rejeitada** | RULE-031 / DEC-010 | **Sim** | Nenhuma | `DECIDED-supported` |n| **“Situação operacional” rejeitada** | AUD-025 continua sem conceito correspondente | **Sim** | Nenhuma; não criar `ATIVA/INATIVA/SUSPENSA` | rejeição preservada |n| **Quórum como estado da Sessão rejeitado** | Glossário separa explicitamente Estado e Condição | **Sim** | Nenhuma | rejeição `DECIDED-supported` |n| **Ausência de Goleira como estado separado rejeitada** | Q-013 mantém capacidade ausente como diagnóstico | **Sim** | Nenhuma | rejeição `DECIDED-supported` |n| **“Capacidade esportiva” como entidade genérica autônoma rejeitada** | Fonte agora define Perfil esportivo + Alocação, não entidade genérica Capacidade | **Sim** | Manter rejeição; usar os termos canônicos existentes | `INF-DERIVED`, sustentada pela ausência de necessidade adicional |n| **Agenda como entidade autônoma com lifecycle próprio rejeitada** | `Agenda Esportiva` é explicitamente “agrupamento conceitual” | **Sim, fortalecido** | Nenhuma substantiva | agrupamento = `DECIDED`; rejeição de identidade extra = `INF-DERIVED` |n| **INF-TECH-001 fora do domínio** | contrato v1.6 mantém idempotência/reprocessamento nos limites técnicos futuros | **Sim** | Nenhuma; continua sem promoção a invariante de domínio | `INF` técnico futuro |nnO fechamento de `OPEN-001` e `DEC-017` está explicitamente registrado nos artefatos v0.7; `RISK-011` já aparece como tratado, restando apenas a futura escolha técnica da fonte de calendário.  nn### Efeito específico de DEC-017nnA definição agora é fechada:nn**Inclui**n- feriado nacional;n- feriado oficial estadual cujo âmbito seja aplicável à cidade do Rio de Janeiro;n- feriado oficial municipal aplicável à cidade do Rio de Janeiro.nn**Não inclui**n- ponto facultativo;n- feriado exclusivamente bancário;n- data comemorativa que não seja também feriado oficial aplicável.nnQuando coincidir com recorrência normal, existe uma única sugestão na data, no horário de feriado; a publicação permanece sujeita à revisão humana. nnConsequentemente:nn- `OPEN-DOMAIN-001` → **encerrado/superado**;n- avaliação anterior do feriado `PASS_WITH_RISK` → **PASS**;n- `DM-FIND-005` → **encerrado/superado**;n- `CAN-DM-005` → **deve ser substituído**;n- nenhum novo risco semântico de feriado deve ser mantido.nn---nn# 2. INVARIANT PROVENANCE AUDITnnCritério aplicado:nn- **DECIDED-supported** — o conteúdo do invariante está diretamente sustentado por decisão/regra/definição canônica substantiva.n- **INF-DERIVED** — formalização lógica necessária ou útil, mas não declaração humana independente.n- **inválido/substituído** — deixou de corresponder à autoridade atual.nnO contrato v1.6 confirma que invariantes introduzidas pela formalização contratual são `DERIVED` e não podem ampliar a fonte. nn| DM-INV | Conteúdo resumido | Resultado de proveniência | Origem preservada |n|---|---|---|---|n| **DM-INV-001** | Disponibilidade ≠ Presença ≠ Participação | **DECIDED-supported** | RULE-001; glossário dos três conceitos |n| **DM-INV-002** | `NÃO RESPONDEU ≠ INDISPONÍVEL` | **DECIDED-supported** | RULE-002; Disponibilidade |n| **DM-INV-003** | Não apurado não equivale a ausência/não participação | **DECIDED-supported** | RULE-003; Presença; Participação |n| **DM-INV-004** | somente cinco combinações Presença × Participação são válidas | **DECIDED-supported** | RULE-019; Q-010 |n| **DM-INV-005** | quórum = 4 Ataque + 4 Defesa + 8 distintas + ≥1 Goleira defensiva | **DECIDED-supported** | RULE-006; Quórum operacional |n| **DM-INV-006** | uma atleta não satisfaz duas vagas simultaneamente | **DECIDED-supported** | RULE-008; glossário Perfil/Alocação |n| **DM-INV-007** | Perfil esportivo ≠ alocação contextual; alocação não altera perfil | **DECIDED-supported** | glossário v2.10 `Perfil esportivo` + `Alocação da sessão`; RULE-007/008 |n| **DM-INV-008** | ocorrência pós-D-5 não reescreve disponibilidade | **DECIDED-supported** | RULE-012; glossário de Ocorrência |n| **DM-INV-009** | projeção não substitui fatos nem decisão humana | **DECIDED-supported** | glossário `Projeção de quórum`; OBJ-005/DEC-003 |n| **DM-INV-010** | realização da Sessão não implica automaticamente presença/participação individuais | **INF-DERIVED** | separação Sessão × fatos individuais; RULE-003/018/027; contrato derivado explicita a consequência |n| **DM-INV-011** | remarcação preserva a sessão original e cria outra | **DECIDED-supported** | DEC-013; RULE-022; glossário Remarcação |n| **DM-INV-012** | disponibilidades da original não passam à remarcada | **DECIDED-supported** | DEC-013; RULE-022; glossário Remarcação |n| **DM-INV-013** | fato consolidado errado é corrigido por retificação, não sobrescrita | **DECIDED-supported** | DEC-007; RULE-030; Retificação |n| **DM-INV-014** | retificação preserva anterior, novo, motivo, autor e momento | **DECIDED-supported** | glossário Retificação auditável |n| **DM-INV-015** | correção deve resultar numa combinação Presença × Participação válida | **INF-DERIVED** | RULE-019 + RULE-030 + CONCEPT-011 |nn### Alterações de proveniência em relação à modelagem anteriornn`DM-INV-007` e `DM-INV-009` podem agora ser classificados como **DECIDED-supported**, porque v2.10 passou a definir diretamente `Perfil esportivo`, `Alocação da sessão` e `Projeção de quórum`, incluindo as respectivas negações semânticas.nn`DM-INV-010` permanece **INF-DERIVED**: a independência entre ciclo da sessão e fatos individuais é decidida, mas a formulação específica “REALIZADO não implica automaticamente presença/participação” é consequência lógica/formal.nn`DM-INV-015` permanece **INF-DERIVED**, conforme a regra de proveniência já aprovada neste Chat 03. Ele não deve ser apresentado como nova declaração humana independente.nn**Nenhum DM-INV-001..015 foi semanticamente invalidado.**nn---nn# 3. ITENS INVALIDADOSnnExistem quatro itens anteriores que não podem permanecer vigentes:nn### REG-INVALID-001 — Feriado como predicado abertonn**Anterior:** categorias deliberadamente não definidas.nn**Atual:** substituído por DEC-017 e definição normativa v2.10.nn### REG-INVALID-002 — OPEN-DOMAIN-001 como risco correntennO risco foi materializado como questão humana `OPEN-001`, decidido e fechado. Mantê-lo aberto agora contradiz os artefatos atuais.nn### REG-INVALID-003 — DM-FIND-005nnA conclusão “feriado aplicável pode permanecer predicado aberto” cumpriu sua função na modelagem anterior, mas foi superada por decisão humana posterior.nn### REG-INVALID-004 — CAN-DM-005nnA proposta de canonicalização que preservava `OPEN-DOMAIN-001` como risco não bloqueador tornou-se obsoleta.nnNenhuma outra conclusão, relação, estado, transição, invariante ou rejeição do núcleo anterior foi invalidada.nn---nn# 4. ITENS QUE EXIGEM ATUALIZAÇÃO EDITORIAL/CANÔNICAnn## 4.1 `03-SHARED-UNDERSTANDING.md`nn### REG-CAN-001 — Incorporar novamente o resultado validado da modelagemnnRegistrar:nn```textnDOMAIN-MODEL = PASSnDOMAIN-MODEL-REGRESSION = PASSn```nne sincronizar:nn```textnGATE-B-DOMAIN-MODEL = PASSnGATE-B-FINAL = NOT_YET_APPROVEDn```nnSomente após aprovação humana desta proposta.nn### REG-CAN-002 — Incorporar o glossário/modelo conceitual com terminologia v2.10nnPreservar:nn- Agenda Esportiva;n- Sessão;n- Disponibilidade;n- Ocorrência pós-fechamento;n- Perfil esportivo;n- Alocação da sessão;n- Quórum operacional;n- Projeção de quórum;n- D-5;n- Presença;n- Participação;n- Retificação auditável;n- Estado da sessão × condição/projeção.nnAlteração relevante de proveniência:nn- `Perfil esportivo` → `DECIDED-supported`;n- `Alocação da sessão` → `DECIDED-supported`;n- separação Perfil × Alocação → diretamente sustentada pelo glossário;n- Agenda sem identidade/ciclo adicional continua `INF-DERIVED`.nn### REG-CAN-003 — Atualizar a tabela DM-INVnnUsar a classificação da seção 2 desta regressão.nnEspecialmente:nn- `DM-INV-007`: `DECIDED-supported`;n- `DM-INV-009`: `DECIDED-supported`;n- `DM-INV-010`: `INF-DERIVED`;n- `DM-INV-015`: `INF-DERIVED`.nn### REG-CAN-004 — Substituir a linha de feriado da modelagemnnRemover como estado vigente:nn> predicado aberto / `OPEN-DOMAIN-001` / risco não bloqueador.nnSubstituir pela definição de `Feriado aplicável no Rio de Janeiro` de `PRODUCT-DOMAIN-SPEC.md` v2.10, com origem `DEC-017 / RULE-021`.nnO próprio `03-SHARED-UNDERSTANDING.md` v0.7 já registra `OPEN-001` fechado, `RISK-011` resolvido e a enumeração aplicável; a atualização do bloco da modelagem deve apenas ficar consistente com essa base. nn### REG-CAN-005 — Registrar DM-FIND-005 como superadonnPreservar historicamente, mas não como achado atual:nn```textnDM-FIND-005 = SUPERSEDED_BY_DEC-017n```nn### REG-CAN-006 — Preservar rejeiçõesnnManter:nn- participante convidada excluída;n- “situação operacional” rejeitada;n- quórum como estado rejeitado;n- capacidade obrigatória ausente como diagnóstico, não estado;n- entidade genérica “Capacidade esportiva” não introduzida;n- Agenda como entidade autônoma adicional não introduzida.nn### REG-CAN-007 — Preservar `INF-TECH-001`nnSem mudança substantiva:nn> tratamento idempotente/reprocessamento de D-5 permanece candidato técnico `INF`, destinado a Requirements/Drivers quando essas fases forem autorizadas.nnO contrato atual explicitamente mantém idempotência/reprocessamento nos “limites técnicos futuros”, sem promoção a regra de domínio. nn---nn## 4.2 `07-TRACEABILITY.md`nn### REG-CAN-008 — Atualizar a matriz de modelagemnnRegistrar as origens atuais, incluindo:nn- `Perfil esportivo` → glossário v2.10 / Q-011;n- `Alocação da sessão` → glossário v2.10 / Q-011;n- feriado → DEC-017/RULE-021;n- `OPEN-DOMAIN-001` → histórico, não item aberto.nn### REG-CAN-009 — Atualizar matriz de invariantesnnUsar exatamente a classificação da seção 2.nnNão usar simplesmente `confirmado` para formalizações que continuam exclusivamente derivadas.nn### REG-CAN-010 — Substituir o resultado antigo da modelagem como estado correntennHistórico:nn```textnDOMAIN-MODEL = PASS_WITH_RISKSn```nnpode permanecer registrado como resultado da rodada anterior.nnEstado vigente após aprovação da regressão:nn```textnDOMAIN-MODEL = PASSnDOMAIN-MODEL-REGRESSION = PASSn```nn### REG-CAN-011 — Fechar a cadeia AUD-024nnRegistrar explicitamente:nn```textnAUD-024n→ OPEN-DOMAIN-001n→ OPEN-001n→ DEC-017n→ RULE-021n→ RESOLVEDn```nnNão deixar `OPEN-DOMAIN-001` listado entre decisões/questões abertas atuais.nnA rastreabilidade v0.7 já registra que `OPEN-DOMAIN-001` foi substituído por `OPEN-001` e que este posteriormente foi fechado por `DEC-017`; a canonicalização da regressão deve levar essa resolução também para a seção específica do modelo. nn### REG-CAN-012 — Preservar AUD-025/AUD-026/AUD-023/AUD-027nn- `AUD-025` → conceito rejeitado;n- `AUD-026` → `INF-TECH-001`;n- `AUD-023` → correção editorial/proveniência;n- `AUD-027` → correção processual.nnNenhum deles gera conceito novo.nn---nn## 4.3 `02-PROJECT-CHARTER.md`nn**Somente sincronização processual.**nnApós aprovação humana:nn```textnGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnELICITATION-OPEN = NONEnGATE-B-DOMAIN-MODEL = PASSnGATE-B-FINAL = NOT_YET_APPROVEDn```nnNão alterar objetivos, regras, escopo, decisões ou riscos substantivos.nnO Charter v0.7 já contém `DEC-017` e registra `OPEN-001` como fechado; atualmente apenas ainda marca a modelagem como `PENDING`. nn---nn# 5. NOVAS QUESTÕES DE PRODUTOnn**NONE.**nnA regressão não encontrou lacuna nova que exija intenção ou regra humana adicional.nnIsso não deve ser interpretado como “nenhuma nova lacuna poderá surgir no futuro”. A governança v2.10 determina explicitamente que `NONE` significa apenas ausência de decisões de produto **atualmente conhecidas**; nova lacuna material futura deve retornar à elicitação, não ser preenchida por inferência. nn---nn# 6. RESULTADOnnA semântica central do modelo anterior permanece válida.nnAlém de não haver regressão estrutural:nn- o fechamento de `DEC-017` remove o único risco semântico aberto de feriado;n- `Perfil esportivo` e `Alocação da sessão`, anteriormente refinados durante a modelagem, agora possuem definição explícita na fonte canônica;n- `TRAINING_FLOW_CONTRACT.md` v1.6 esclarece corretamente que estruturas formais adicionais são `DERIVED`;n- `INF-TECH-001` permanece fora do domínio;n- nenhum novo bloqueador conceitual foi encontrado.nnOs riscos de piloto `HYP-001..003` e demais riscos do projeto continuam existindo, mas **não representam incoerência ou incompletude do modelo conceitual** e, portanto, não justificam manter `PASS_WITH_RISKS` para a modelagem após o fechamento de feriados.nnApós aprovação humana da canonicalização proposta:nn```textnGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnELICITATION-OPEN = NONEnGATE-B-DOMAIN-MODEL = PASSnGATE-B-FINAL = NOT_YET_APPROVEDn```nnRequirements permanece bloqueado.nnA avaliação final do Gate B não foi executada.nnA próxima etapa, após aprovação humana desta regressão e sua canonicalização, continua sendo:nn**Chat 02 — Auditoria do entendimento — revisão formal final do Gate B.**nn**DOMAIN-MODEL-REGRESSION = PASS**nnA regressão, portanto, permite elevar **o resultado específico da modelagem** de `PASS_WITH_RISKS` para `PASS`; isso não altera `GATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKS` nem antecipa a decisão formal do Gate B."
+      }
+    ],
+    "created_at": "2026-09-03 00:22:06",
+    "updated_at": 1788406180.506521
+  },
+  {
+    "id": "01178a71-b701-4cd4-9d76-64ba5b3d830f",
+    "ids": [
+      "01178a71-b701-4cd4-9d76-64ba5b3d830f"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "user",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Aprovo a validação de regressão e sua proposta de canonicalização.nnConsidere aprovado:nn`DOMAIN-MODEL = PASS`nn`DOMAIN-MODEL-REGRESSION = PASS`nne a atualização do estado processual para:nn```n```nn```nGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnELICITATION-OPEN = NONEnGATE-B-DOMAIN-MODEL = PASSnGATE-B-FINAL = NOT_YET_APPROVEDn```nnRequirements permanece bloqueado.nnAplique somente as atualizações canônicas aprovadas pela regressão em:nn- `03-SHARED-UNDERSTANDING.md`; n- `07-TRACEABILITY.md`; n- `02-PROJECT-CHARTER.md`, apenas para sincronização processual. nnPreserve como histórico, sem estado vigente:nn- `OPEN-DOMAIN-001`; n- `DM-FIND-005`; n- `CAN-DM-005`; n-  o antigo `DOMAIN-MODEL = PASS_WITH_RISKS`. nnPreserve:nn- `AUD-025` como conceito rejeitado; n- `AUD-026 → INF-TECH-001`; n- `AUD-023` como correção de proveniência; n- `AUD-027` como correção processual; n- `DM-INV-010` e `DM-INV-015` como `INF-DERIVED`; n- `DM-INV-007` e `DM-INV-009` como `DECIDED-supported`. nnNão altere `PRODUCT-DOMAIN-SPEC.md` v2.10 nem `TRAINING_FLOW_CONTRACT.md` v1.6, salvo se identificar uma inconsistência puramente referencial necessária para aplicar a canonicalização.nnNão execute a avaliação final do Gate B.nnNão produza Requirements.nnNão produza Drivers, ADRs ou arquitetura.nnAo final, entregue as versões atualizadas de:nn- `02-PROJECT-CHARTER.md`; n- `03-SHARED-UNDERSTANDING.md`; n- `07-TRACEABILITY.md`; nne encerre indicando como próxima ação:nn`Chat 02 — Auditoria do entendimento — revisão formal final do Gate B`."
+      }
+    ],
+    "created_at": "2026-09-03 00:31:58",
+    "updated_at": 1788406483.264722
+  },
+  {
+    "id": "18e89221-3e21-459b-9174-3abd1b062832",
+    "ids": [
+      "c1dee191-f317-4302-82fe-03ccaf2d6cbb",
+      "cbbc3b06-e36c-4035-9cbc-7f97122b7745",
+      "3731ee9b-0000-4e36-8273-2bfc4cdee8c5",
+      "31538697-e834-45ed-9456-df93e67161ec",
+      "cf70daa2-293a-426a-b206-cf7943b7349e",
+      "65056a9a-27f5-429f-86c6-66a81f8c35fe",
+      "27a6e6fc-bc66-483d-8b36-a4695759e8cf",
+      "ee81b77f-d86a-40ec-917f-f5150a54194b",
+      "f0dfebcd-1f1c-4fbd-888d-e0dacda87e15",
+      "3884f359-81b7-445e-b1da-b0a65024f12f",
+      "f9d862ab-c193-4dd2-befb-9c5090a12646",
+      "c509fdc9-366c-4ca3-b1d8-dd89dc67e05c",
+      "f223d352-e261-44bf-aa69-0f1c53725da6",
+      "08ceda9a-de8c-47ad-9d3e-46189f3a1110",
+      "7658cc3e-e7a1-4c25-af37-ef7e2ba8e425",
+      "372dc3ac-6037-4ca1-84ec-7765ec50e104",
+      "a6d42346-230a-4969-9c47-aeb92df371ef",
+      "0583e451-7bd2-43db-aae6-e0327b894d2c",
+      "0b07e953-b172-4272-81c0-39419bb13806",
+      "ede861c1-3fc9-4603-95b5-d45dbbde315e",
+      "a7bd8950-ec9d-45ce-9e13-07738e7f242b",
+      "3dd64e98-77e7-4cee-b247-bb728b29baa7",
+      "5254ab98-09f3-4695-82cd-f22164a250ed",
+      "877c1eb9-3011-43be-9139-c6900398b82c",
+      "c93360d1-a4ce-44c8-ba35-6117e1a2ad3d",
+      "e7467ba0-172f-4ad2-973e-9535c885f23d",
+      "bb83d004-92bd-4647-a236-b064b843023f",
+      "8cdedc1e-138c-4f0b-94fe-b32944736c0b",
+      "b41c9a2f-0923-417d-b59b-58199acbf11d",
+      "18e89221-3e21-459b-9174-3abd1b062832"
+    ],
+    "chatGroupId": "6a96c1d0-99ec-83e9-8d0d-067b0ea9edbf",
+    "role": "assistant",
+    "model": "chatgpt",
+    "displayModel": "ChatGPT",
+    "modelId": "gpt-5-6-thinking",
+    "contents": [
+      {
+        "type": "text",
+        "content": "Vou aplicar exatamente a canonicalização aprovada: atualizar o estado da modelagem para `PASS`, registrar a regressão, ajustar proveniências dos DM-INV e mover os itens de feriado antigos para histórico. `PRODUCT-DOMAIN-SPEC.md` e `TRAINING_FLOW_CONTRACT.md` permanecerão intocados."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "As fontes v0.7 ainda refletem `GATE-B-DOMAIN-MODEL = PENDING`, portanto a atualização não é apenas cosmética em `03`/`07`: é necessário incorporar o resultado aprovado da modelagem/regressão e sua matriz de proveniência. No Charter, manterei a mudança restrita a metadados e estado processual."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "A verificação de consistência passou: `DM-INV-010` e `DM-INV-015` estão `INF-DERIVED`; `DM-INV-007` e `DM-INV-009` estão `DECIDED-supported`. As referências antigas a modelagem pendente que restam em `07` estão somente dentro do histórico de mudanças anteriores, não como estado vigente."
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": ""
+      },
+      {
+        "type": "text",
+        "content": "Canonicalização aplicada conforme aprovado.nnForam atualizados somente os três artefatos autorizados, agora em versão `0.8`:nn- [02-PROJECT-CHARTER.md](sandbox:/mnt/data/02-PROJECT-CHARTER.md)n- [03-SHARED-UNDERSTANDING.md](sandbox:/mnt/data/03-SHARED-UNDERSTANDING.md)n- [07-TRACEABILITY.md](sandbox:/mnt/data/07-TRACEABILITY.md)nnO estado vigente ficou:nn```textnGATE-B-KNOWLEDGE = READY_WITH_RISKSnGATE-B-CANONICALIZATION = APPROVEDnGATE-B-INDEPENDENT-AUDIT = PASS_WITH_RISKSnELICITATION-OPEN = NONEnGATE-B-DOMAIN-MODEL = PASSnGATE-B-FINAL = NOT_YET_APPROVEDn```nn`DOMAIN-MODEL = PASS` e `DOMAIN-MODEL-REGRESSION = PASS` foram consolidados. `OPEN-DOMAIN-001`, `DM-FIND-005`, `CAN-DM-005` e o antigo `DOMAIN-MODEL = PASS_WITH_RISKS` permanecem exclusivamente como histórico. As proveniências dos `DM-INV` foram preservadas conforme aprovado.nn`PRODUCT-DOMAIN-SPEC.md` v2.10 e `TRAINING_FLOW_CONTRACT.md` v1.6 não foram alterados. Requirements, Drivers, ADRs e Architecture também permaneceram intocados.nnA avaliação final do Gate B **não foi executada**.nn**Próxima ação:** `Chat 02 — Auditoria do entendimento — revisão formal final do Gate B`."
+      }
+    ],
+    "created_at": "2026-09-03 00:34:36",
+    "updated_at": 1788406482.603573
+  }
+]

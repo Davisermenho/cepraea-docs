@@ -1,0 +1,59 @@
+schema_version: "1.1"
+document:
+  id: "ACCESS_REQUIREMENTS"
+  artifact_kind: "ACCESS_REQUIREMENTS"
+  title: "Requisitos de acesso e matriz de permissões"
+  version: "0.1.0"
+  STATUS: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts:
+    - document_id: "DATA_DICTIONARY"
+      version: "0.1.0"
+      sha256: "SHA256"
+      promoted_source_id: "NOTEBOOK_SOURCE_ID"
+
+roles:
+  - id: "ROLE_ID"
+    name: "NOME_DO_PAPEL"
+    description: "RESPONSABILIDADE"
+    authentication_required: true
+    assignment_scope: "GLOBAL|TEAM|COMPETITION|MATCH|SELF"
+    authorization_claim_source: "APP_METADATA|DATABASE_MEMBERSHIP|NONE"
+    evidence_ref_ids: []
+
+resources:
+  - id: "RESOURCE_ID"
+    resource_kind: "TABLE|VIEW|FUNCTION|STORAGE_OBJECT"
+    logical_relation_ids: []
+    classification: "PUBLICO|INTERNO|PESSOAL|SENSIVEL|RESTRITO"
+    exposed_via_data_api: true
+    owner_rule: "REGRA_DE_TITULARIDADE"
+    view_security_mode: "SECURITY_INVOKER|NOT_APPLICABLE"
+
+permissions:
+  - id: "PERMISSION_001"
+    role_id: "ROLE_ID"
+    resource_id: "RESOURCE_ID"
+    operation: "SELECT|INSERT|UPDATE|DELETE|EXECUTE"
+    effect: "ALLOW|DENY"
+    grant_required: true
+    row_scope: "EXPRESSAO_SEMANTICA_DO_ESCOPO"
+    column_scope: []
+    conditions: []
+    rule_ids: []
+    evidence_ref_ids: []
+    negative_test_ids: []
+    positive_test_ids: []
+
+default_policy:
+  anonymous: "DENY"
+  authenticated_without_role: "DENY"
+  cross_tenant: "DENY"
+  privileged_service_role: "SERVER_ONLY"
+  client_authorization_from_user_metadata: "DENY"
+
+open_issues: []

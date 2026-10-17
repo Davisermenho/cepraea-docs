@@ -1,0 +1,23 @@
+cat << 'EOF' > /home/davis/cepraea-docs/.aiignore
+# Dependências e Ambientes Virtuais
+node_modules/
+.venv/
+venv/
+target/
+dist/
+build/
+
+# Logs e Dados Locais
+*.log
+logs/
+data/
+*.sqlite
+*.db
+
+# Artefatos de Build e Cache
+.cache/
+.turbo/
+.next/
+__pycache__/
+.pytest_cache/
+EOF

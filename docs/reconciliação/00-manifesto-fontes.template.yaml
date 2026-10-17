@@ -1,0 +1,75 @@
+schema_version: "1.1"
+document:
+  id: "SOURCE_MANIFEST"
+  artifact_kind: "SOURCE_MANIFEST"
+  title: "Manifesto de fontes"
+  version: "0.1.0"
+  status: RASCUNHO
+  run_id: "RUN_AAAAMMDD_DOMINIO_NNN"
+  domain_id: "DOMINIO_DELIMITADO"
+  notebook_id: "93446a17-55bf-4cd8-b9f9-18c52c8f4c1d"
+  generated_at: null
+  supersedes: null
+  input_artifacts: []
+
+scope:
+  included:
+    - "ESCOPO_INCLUIDO"
+  excluded:
+    - "ESCOPO_EXCLUIDO"
+  reference_date: "AAAA-MM-DD"
+
+sources:
+  - id: "SOURCE_ID"
+    canonical_title: "TITULO_CANONICO"
+    notebook_source_id: "NOTEBOOK_SOURCE_UUID"
+    drive_file_id: null
+    source_type: "PDF|GOOGLE_DOC|SPREADSHEET|WEB|MARKDOWN|SQL|OTHER"
+    publisher: "RESPONSAVEL_OU_ENTIDADE"
+    source_revision: null
+    publication_date: null
+    retrieved_at: null
+    content_sha256: null
+    language: "pt-BR"
+    authority_class: "AUTORITATIVA|OPERACIONAL_PRIMARIA|DECISAO_HUMANA|SUPORTE|HISTORICA|INDETERMINADA"
+    lifecycle_status: "VIGENTE|COMPLEMENTAR|SUBSTITUIDA|HISTORICA|EM_VERIFICACAO|QUARENTENA"
+    notebook_status: "READY|PROCESSING|FAILED"
+    valid_from: null
+    valid_to: null
+    supersedes_source_id: null
+    duplicate_of_source_id: null
+    supported_domain_ids:
+      - "DOMINIO_DELIMITADO"
+    limitations:
+      - "LIMITACAO"
+
+evidence_refs:
+  - id: "EVID_SOURCE_001"
+    source_id: "SOURCE_ID"
+    locator: "PAGINA_REGRA_SECAO_ABA_CELULA_OU_TIMECODE"
+    evidence_type: "FATO|REGRA|DECISAO|DERIVACAO|SUPORTE"
+    excerpt: null
+    interpretation: "INTERPRETACAO_APLICADA"
+
+precedence_rules:
+  - id: "PRECEDENCE_001"
+    higher_authority_source_id: "SOURCE_ID_A"
+    lower_authority_source_id: "SOURCE_ID_B"
+    scope: "ESCOPO_EXATO"
+    rationale: "JUSTIFICATIVA"
+    evidence_ref_ids: []
+
+conflicts:
+  - id: "CONFLICT_001"
+    status: "COMPATIVEL|COMPLEMENTAR|SUBSTITUICAO_DEMONSTRADA|CONTRADICAO|INDETERMINADO|DECISAO_HUMANA_PENDENTE"
+    subject_id: "CONCEITO_REGRA_OU_ATRIBUTO"
+    source_ids:
+      - "SOURCE_ID_A"
+      - "SOURCE_ID_B"
+    description: "DIVERGENCIA_OBJETIVA"
+    impact: "IMPACTO_NO_MODELO"
+    resolution: null
+    decision_id: null
+    evidence_ref_ids: []
+
+open_issues: []

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "U02",
+  "assessment": [
+    {"id": "T01", "status": "NAO_APLICAVEL", "reason": "Inventário foi satisfeito na U01 e o manifesto aprovado foi usado como entrada final; um rebaseline intermediário serviu apenas ao diagnóstico de mudança concorrente."},
+    {"id": "T02", "status": "NAO_APLICAVEL", "reason": "Cálculo primário de hashes pertence à U01; a U02 verificou os hashes de entrada contra o manifesto."},
+    {"id": "T03", "status": "NAO_APLICAVEL", "reason": "Detecção de duplicatas pertence à U01."},
+    {"id": "T04", "status": "PASS", "reason": "O intervalo intermediário detectou a edição concorrente confirmada pelo usuário; após o desfazer, o snapshot final coincidiu com o snapshot inicial em 115 de 115 fontes."},
+    {"id": "T05", "status": "PASS", "reason": "Segmento válido foi confirmado contra fonte, extração, localização e hash."},
+    {"id": "T06", "status": "PASS", "reason": "Segmento adulterado foi rejeitado com diagnóstico determinístico."},
+    {"id": "T07", "status": "PASS", "reason": "JSON malformado usou fallback textual parcial com limitação explícita."},
+    {"id": "T08", "status": "PASS", "reason": "Rótulos ATIVO, FINAL e APROVADO não alteraram NOT_ASSESSED_U02."},
+    {"id": "T09", "status": "NAO_APLICAVEL", "reason": "Reconciliação de contradições pertence à U03."},
+    {"id": "T10", "status": "PASS", "reason": "Todos os segmentos controlados preservaram fonte, hash, extração e localização."},
+    {"id": "T11", "status": "NAO_APLICAVEL", "reason": "Publicação não integra a U02."},
+    {"id": "T12", "status": "NAO_APLICAVEL", "reason": "Publicação não integra a U02."},
+    {"id": "T13", "status": "PASS", "reason": "Reexecução controlada produziu saídas lógicas equivalentes e IDs sem duplicação."},
+    {"id": "T14", "status": "PASS", "reason": "Saída parcial foi substituída por execução completa sem falso PASS."},
+    {"id": "T15", "status": "NAO_APLICAVEL", "reason": "O contrato de afirmações da U03 não é produzido na U02; o esquema próprio de segmentos foi validado por T05, T06 e T10."},
+    {"id": "T16", "status": "NAO_APLICAVEL", "reason": "A U02 não realiza correspondência de evidências por normalização textual."},
+    {"id": "T17", "status": "PASS", "reason": "Segmentação, busca, referência explícita, expansão contextual e métricas de cobertura foram exercitadas em caso controlado."},
+    {"id": "T18", "status": "NAO_APLICAVEL", "reason": "Agrupamento de divergências pertence à U03."},
+    {"id": "T19", "status": "PASS", "reason": "Os oito formatos efetivamente encontrados foram exercitados com marcadores e localizações conhecidos."}
+  ]
+}

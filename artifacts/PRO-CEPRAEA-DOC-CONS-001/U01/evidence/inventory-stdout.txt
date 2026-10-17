@@ -1,0 +1,13 @@
+U01 INVENTORY COMPLETE
+source_root=/home/davis/cepraea-docs/docs/reconciliação
+directory_count=1
+file_entry_count=115
+readable_file_count=115
+read_error_count=0
+format_error_count=5
+pending_format_count=0
+excluded_entry_count=0
+duplicate_group_count=0
+duplicate_file_count=0
+total_readable_bytes=50566245
+formats={"JSON": 8, "Markdown": 79, "PDF": 6, "Plain text": 2, "Plain text (detected)": 5, "PowerPoint Open XML": 1, "SQL": 6, "YAML": 8}

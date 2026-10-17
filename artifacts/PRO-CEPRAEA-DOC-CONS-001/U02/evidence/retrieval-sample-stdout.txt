@@ -1,0 +1,142 @@
+{
+  "query": "documentos originais",
+  "results": [
+    {
+      "segment_id": "SEG-00001484",
+      "source_path": "CEPRAEA BEACH PRO.md",
+      "source_sha256": "890486dd25421fb8ac5b762cd1dfbf5c6a584117b0a0c8be0d07fdb7093609f7",
+      "extraction_id": "EXT-23def8a6b22ba5b4c3b6",
+      "location": {
+        "kind": "line_range",
+        "unit_id": "unit-1",
+        "unit_kind": "document",
+        "unit_ordinal": 1,
+        "line_start": 1128,
+        "column_start": 1,
+        "line_end": 1139,
+        "column_end": 1,
+        "unit_char_start": 44739,
+        "unit_char_end": 45293
+      },
+      "heading_path": [
+        "Bloco 3: Ciclo de Vida de Verificação (Backup e Preparação)"
+      ],
+      "context_markers": [
+        "CONDITION_CANDIDATE"
+      ],
+      "text": "# Bloco 3: Ciclo de Vida de Verificação (Backup e Preparação)\n\nEste bloco garante que o script seja \"não destrutivo\". Ele preserva o estado atual antes de começar a trabalhar.  \n\n// ... cópia dos arquivos originais ...\n\nfs.copyFileSync(DECISION_LOG_PATH, DECISION_LOG_PATH + '.bak');\n\nfs.copyFileSync(AGENT_JOURNAL_PATH, AGENT_JOURNAL_PATH + '.bak');\n\n**Função:** Antes de regenerar os documentos para testar o sistema, ele cria cópias .bak. Isso é crucial: se o script falhar ou for interrompido, os arquivos originais do usuário não serão perdidos.\n\n",
+      "score": -12.608143982805053
+    },
+    {
+      "segment_id": "SEG-00005478",
+      "source_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "source_sha256": "5b4cf819f8bafb2203e2cb1a1b456213dea57eb750ce30e01557b1d17b10d7a9",
+      "extraction_id": "EXT-97e2f27e4a6491f23217",
+      "location": {
+        "kind": "line_range",
+        "unit_id": "unit-1",
+        "unit_kind": "document",
+        "unit_ordinal": 1,
+        "line_start": 34,
+        "column_start": 1,
+        "line_end": 43,
+        "column_end": 1,
+        "unit_char_start": 3407,
+        "unit_char_end": 5319
+      },
+      "heading_path": [
+        "0. Convenções, método e alcance",
+        "0.2 Fontes examinadas e limitações"
+      ],
+      "context_markers": [],
+      "text": "## 0.2 Fontes examinadas e limitações\n\nHistórico: 12 arquivos conversations-000.json a conversations-011.json foram abertos e parseados na íntegra como estruturas JSON; 1.178 conversas e 90.131 mensagens constam da auditoria do export. O levantamento textual automatizado encontrou 197 conversas com menção direta do usuário ou no título e 183 com palavras de contexto potencialmente relacionado. Ambas as classes foram triadas como candidatas, NÃO como prova de 380 conversas materialmente relacionadas ao produto. A extração abreviou mensagens longas no índice de trabalho; os JSON originais continuam a fonte íntegra.\n\nGoogle Drive: foi percorrida a pasta CEPRAEA BEACH PRO, com 113 itens diretos, subpastas pertinentes (inclusive as 12 peças AESDS e hierarquia PWA-SOFTWARE) e buscas globais que localizaram documentos fora da pasta. Foi lido o conteúdo de fontes centrais, propostas técnicas e registros operacionais pertinentes, com referências individuais em §A. Outras fontes apareceram somente como metadados ou referências, sem inspeção integral de binários e conteúdo multimídia. O espaço total do Drive e todas as revisões históricas não foram exaustivamente provados completos.\n\nA análise não auditou código, repositório Git, banco de dados em execução, autenticação, endpoints, deploy, comentários não recuperados, planilhas célula a célula ou comportamento de software. Relatos históricos dessas atividades NÃO alteram a premissa de software não desenvolvido. A análise de texto de documentos vinculados é documental, não homologação técnica.\n\nCritério de inclusão: manter afirmações que esclareçam motivação, intenção, escopo, dados, regras, UX, decisões/alternativas e dependências do futuro produto; usar operação atual apenas como evidência do problema ou restrição comprovável. Conteúdo de gestão esportiva sem vínculo demonstrável com o futuro produto fica indexado mas não vira requisito.\n\n",
+      "score": -8.55803691074394
+    },
+    {
+      "segment_id": "SEG-00005517",
+      "source_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "source_sha256": "5b4cf819f8bafb2203e2cb1a1b456213dea57eb750ce30e01557b1d17b10d7a9",
+      "extraction_id": "EXT-97e2f27e4a6491f23217",
+      "location": {
+        "kind": "line_range",
+        "unit_id": "unit-1",
+        "unit_kind": "document",
+        "unit_ordinal": 1,
+        "line_start": 1384,
+        "column_start": 1,
+        "line_end": 1393,
+        "column_end": 1,
+        "unit_char_start": 118576,
+        "unit_char_end": 120488
+      },
+      "heading_path": [
+        "0. Convenções, método e alcance",
+        "0.2 Fontes examinadas e limitações"
+      ],
+      "context_markers": [],
+      "text": "## 0.2 Fontes examinadas e limitações\n\nHistórico: 12 arquivos conversations-000.json a conversations-011.json foram abertos e parseados na íntegra como estruturas JSON; 1.178 conversas e 90.131 mensagens constam da auditoria do export. O levantamento textual automatizado encontrou 197 conversas com menção direta do usuário ou no título e 183 com palavras de contexto potencialmente relacionado. Ambas as classes foram triadas como candidatas, NÃO como prova de 380 conversas materialmente relacionadas ao produto. A extração abreviou mensagens longas no índice de trabalho; os JSON originais continuam a fonte íntegra.\n\nGoogle Drive: foi percorrida a pasta CEPRAEA BEACH PRO, com 113 itens diretos, subpastas pertinentes (inclusive as 12 peças AESDS e hierarquia PWA-SOFTWARE) e buscas globais que localizaram documentos fora da pasta. Foi lido o conteúdo de fontes centrais, propostas técnicas e registros operacionais pertinentes, com referências individuais em §A. Outras fontes apareceram somente como metadados ou referências, sem inspeção integral de binários e conteúdo multimídia. O espaço total do Drive e todas as revisões históricas não foram exaustivamente provados completos.\n\nA análise não auditou código, repositório Git, banco de dados em execução, autenticação, endpoints, deploy, comentários não recuperados, planilhas célula a célula ou comportamento de software. Relatos históricos dessas atividades NÃO alteram a premissa de software não desenvolvido. A análise de texto de documentos vinculados é documental, não homologação técnica.\n\nCritério de inclusão: manter afirmações que esclareçam motivação, intenção, escopo, dados, regras, UX, decisões/alternativas e dependências do futuro produto; usar operação atual apenas como evidência do problema ou restrição comprovável. Conteúdo de gestão esportiva sem vínculo demonstrável com o futuro produto fica indexado mas não vira requisito.\n\n",
+      "score": -8.55803691074394
+    },
+    {
+      "segment_id": "SEG-00005502",
+      "source_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "source_sha256": "5b4cf819f8bafb2203e2cb1a1b456213dea57eb750ce30e01557b1d17b10d7a9",
+      "extraction_id": "EXT-97e2f27e4a6491f23217",
+      "location": {
+        "kind": "line_range",
+        "unit_id": "unit-1",
+        "unit_kind": "document",
+        "unit_ordinal": 1,
+        "line_start": 373,
+        "column_start": 1,
+        "line_end": 395,
+        "column_end": 1,
+        "unit_char_start": 41232,
+        "unit_char_end": 43121
+      },
+      "heading_path": [
+        "12. Resultado, critérios DONE e limitações"
+      ],
+      "context_markers": [],
+      "text": "# 12. Resultado, critérios DONE e limitações\n\n| DONE | Evidência de conclusão | Juízo |\n| --- | --- | --- |\n| 1 | 12 arquivos JSON examinados estruturalmente; varredura das mensagens textuais | SUSTENTADO INTEGRALMENTE para exame automatizado dos 12; não equivalente a leitura humana profunda de cada frase. |\n| --- | --- | --- |\n| 2 | Drive: pasta raiz, subpastas pertinentes e busca global; fontes substantivas lidas | SUSTENTADO PARCIALMENTE para todas as fontes acessíveis, em face de binários/versões não exaustivamente examinados. |\n| --- | --- | --- |\n| 3 | Conhecimento relevante identificado integrado ou apontado por referência | SUSTENTADO PARCIALMENTE; inventário de conversas e fontes permite reencontrar, mas ausência absoluta de omissões não é demonstrável. |\n| --- | --- | --- |\n| 4 | Redundâncias semânticas consolidadas; exceções documentadas | SUSTENTADO PARCIALMENTE; principais duplicidades S01/S02/S03/S04/S05 consolidadas. |\n| --- | --- | --- |\n| 5 | Decisão, proposta, hipótese, divergência e aberto diferenciados | SUSTENTADO INTEGRALMENTE no corpo do documento; limites particulares explicitados. |\n| --- | --- | --- |\n| 6 | Fontes originais rastreáveis por ID/link, mensagem e seção | SUSTENTADO PARCIALMENTE para afirmações centrais; anexos indexam conversas candidatas sem afirmar validação de cada enunciado. |\n| --- | --- | --- |\n| 7 | Software não desenvolvido preservado em todo o documento | SUSTENTADO INTEGRALMENTE como premissa e convenção de leitura. |\n| --- | --- | --- |\n| 8 | Documento único disponível para consulta | SUSTENTADO INTEGRALMENTE após criação/validação local deste DOCX. |\n| --- | --- | --- |\n\nO presente arquivo é um registro de consolidação nesta data, sujeito aos limites de cobertura declarados. Não altera documentos de origem, não homologa arquitetura/produto, não autoriza implementação e não afirma qualquer PASS de runtime.\n\n",
+      "score": -8.164452328237793
+    },
+    {
+      "segment_id": "SEG-00005541",
+      "source_path": "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md",
+      "source_sha256": "5b4cf819f8bafb2203e2cb1a1b456213dea57eb750ce30e01557b1d17b10d7a9",
+      "extraction_id": "EXT-97e2f27e4a6491f23217",
+      "location": {
+        "kind": "line_range",
+        "unit_id": "unit-1",
+        "unit_kind": "document",
+        "unit_ordinal": 1,
+        "line_start": 1723,
+        "column_start": 1,
+        "line_end": 1745,
+        "column_end": 1,
+        "unit_char_start": 156789,
+        "unit_char_end": 158722
+      },
+      "heading_path": [
+        "12. Resultado, critérios DONE e limitações"
+      ],
+      "context_markers": [],
+      "text": "# 12. Resultado, critérios DONE e limitações\n\n| **DONE** | **Evidência de conclusão** | **Juízo** |\n| --- | --- | --- |\n| **1** | 12 arquivos JSON examinados estruturalmente; varredura das mensagens textuais | SUSTENTADO INTEGRALMENTE para exame automatizado dos 12; não equivalente a leitura humana profunda de cada frase. |\n| --- | --- | --- |\n| **2** | Drive: pasta raiz, subpastas pertinentes e busca global; fontes substantivas lidas | SUSTENTADO PARCIALMENTE para todas as fontes acessíveis, em face de binários/versões não exaustivamente examinados. |\n| --- | --- | --- |\n| **3** | Conhecimento relevante identificado integrado ou apontado por referência | SUSTENTADO PARCIALMENTE; inventário de conversas e fontes permite reencontrar, mas ausência absoluta de omissões não é demonstrável. |\n| --- | --- | --- |\n| **4** | Redundâncias semânticas consolidadas; exceções documentadas | SUSTENTADO PARCIALMENTE; principais duplicidades S01/S02/S03/S04/S05 consolidadas. |\n| --- | --- | --- |\n| **5** | Decisão, proposta, hipótese, divergência e aberto diferenciados | SUSTENTADO INTEGRALMENTE no corpo do documento; limites particulares explicitados. |\n| --- | --- | --- |\n| **6** | Fontes originais rastreáveis por ID/link, mensagem e seção | SUSTENTADO PARCIALMENTE para afirmações centrais; anexos indexam conversas candidatas sem afirmar validação de cada enunciado. |\n| --- | --- | --- |\n| **7** | Software não desenvolvido preservado em todo o documento | SUSTENTADO INTEGRALMENTE como premissa e convenção de leitura. |\n| --- | --- | --- |\n| **8** | Documento único disponível para consulta | SUSTENTADO INTEGRALMENTE após criação/validação local deste DOCX. |\n| --- | --- | --- |\n\nO presente arquivo é um registro de consolidação nesta data, sujeito aos limites de cobertura declarados. Não altera documentos de origem, não homologa arquitetura/produto, não autoriza implementação e não afirma qualquer PASS de runtime.\n\n",
+      "score": -8.164452328237793
+    }
+  ],
+  "related_results": [],
+  "coverage": {
+    "inventoried_sources": 115,
+    "processed_sources": 115,
+    "retrieved_sources": 2,
+    "retrieved_source_paths": [
+      "CEPRAEA BEACH PRO.md",
+      "CEPRAEA_BEACH_PRO_Conhecimento_Consolidado_do_Projeto.md"
+    ],
+    "retrieved_segments": 5,
+    "absence_is_not_proof_of_absence": true,
+    "sufficiency_context": "NOT_ASSESSED_BY_RETRIEVAL"
+  }
+}
