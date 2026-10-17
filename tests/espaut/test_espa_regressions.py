@@ -313,5 +313,15 @@ class Contracts(unittest.TestCase):
                     self.assertIn("opt-in",out["reason"])
                     runner.assert_not_called()
 
+    def test_untracked_directories_resolve_to_eligible_file_paths(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);run("git","init",cwd=p)
+            run("git","config","user.email","test@example.org",cwd=p)
+            run("git","config","user.name","Test",cwd=p)
+            (p/"src").mkdir()
+            (p/"src"/"hello.txt").write_text("test")
+            paths=[x["path"] for x in worktree_status(str(p))]
+            self.assertEqual(paths,["src/hello.txt"])
+
 if __name__=="__main__":
     unittest.main(verbosity=2)

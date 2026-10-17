@@ -61,7 +61,7 @@ def worktree_status(cwd: str | None = None) -> list[dict[str, str]]:
 
     Each entry has keys ``index``, ``worktree``, and ``path``.
     """
-    r = run_git("status", "--porcelain=v1", "-z", cwd=cwd)
+    r = run_git("status", "--porcelain=v1", "-z", "--untracked-files=all", cwd=cwd)
     if r.returncode != 0:
         raise RuntimeError(f"git status failed: {r.stderr[:300]}")
     entries: list[dict[str, str]] = []
