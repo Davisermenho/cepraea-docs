@@ -189,6 +189,11 @@ def test_c3_not_configured() -> dict[str, str]:
     return {"pass_no_ci": "PASS" if result["status"] == "PASS" else "FAIL"}
 
 
+def test_c3_not_configured_ci_required() -> dict[str, str]:
+    result = check_c3_verification({"aggregate": "NAO_CONFIGURADO"}, ci_required=True)
+    return {"fail_ci_required": "PASS" if result["status"] == "FAIL" else "FAIL"}
+
+
 def test_c4_approved() -> dict[str, str]:
     result = check_c4_review({"reviews": [{"state": "APPROVED"}]})
     return {"pass": "PASS" if result["status"] == "PASS" else "FAIL"}
@@ -232,6 +237,18 @@ def test_c8_stale() -> dict[str, str]:
     report = {"checks": [{"evaluated_revision": "old123"}]}
     result = check_c8_currency(report, "new456")
     return {"fail": "PASS" if result["status"] == "FAIL" else "FAIL"}
+
+
+def test_c8_no_revision() -> dict[str, str]:
+    report = {"checks": [{"name": "ci/build"}]}
+    result = check_c8_currency(report, "abc123")
+    return {"fail_no_rev": "PASS" if result["status"] == "FAIL" else "FAIL"}
+
+
+def test_c8_no_head() -> dict[str, str]:
+    report = {"checks": [{"evaluated_revision": "abc123"}]}
+    result = check_c8_currency(report, None)
+    return {"fail_no_head": "PASS" if result["status"] == "FAIL" else "FAIL"}
 
 
 def test_full_eligibility_pass() -> dict[str, str]:
@@ -281,6 +298,7 @@ ALL_TESTS = [
     ("c3_pass", test_c3_pass),
     ("c3_fail", test_c3_fail),
     ("c3_not_configured", test_c3_not_configured),
+    ("c3_not_configured_ci_required", test_c3_not_configured_ci_required),
     ("c4_approved", test_c4_approved),
     ("c4_no_approval", test_c4_no_approval),
     ("c5_clear", test_c5_clear),
@@ -289,6 +307,8 @@ ALL_TESTS = [
     ("c7_no_auth", test_c7_no_auth),
     ("c8_current", test_c8_current),
     ("c8_stale", test_c8_stale),
+    ("c8_no_revision", test_c8_no_revision),
+    ("c8_no_head", test_c8_no_head),
     ("full_eligibility", test_full_eligibility_pass),
 ]
 

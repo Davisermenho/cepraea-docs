@@ -23,9 +23,9 @@ from espaut.store import init_store
 
 def test_normalize_success() -> dict[str, str]:
     cases = [
-        ({"state": "SUCCESS", "conclusion": ""}, CheckState.APROVADO),
-        ({"state": "", "conclusion": "success"}, CheckState.APROVADO),
-        ({"state": "NEUTRAL", "conclusion": ""}, CheckState.APROVADO),
+        ({"state": "SUCCESS", "bucket": ""}, CheckState.APROVADO),
+        ({"state": "", "bucket": "pass"}, CheckState.APROVADO),
+        ({"state": "NEUTRAL", "bucket": ""}, CheckState.APROVADO),
     ]
     checks: dict[str, str] = {}
     for i, (raw, expected) in enumerate(cases):
@@ -36,9 +36,9 @@ def test_normalize_success() -> dict[str, str]:
 
 def test_normalize_failure() -> dict[str, str]:
     cases = [
-        ({"state": "FAILURE", "conclusion": ""}, CheckState.REPROVADO),
-        ({"state": "", "conclusion": "failure"}, CheckState.REPROVADO),
-        ({"state": "TIMED_OUT", "conclusion": ""}, CheckState.REPROVADO),
+        ({"state": "FAILURE", "bucket": ""}, CheckState.REPROVADO),
+        ({"state": "", "bucket": "fail"}, CheckState.REPROVADO),
+        ({"state": "TIMED_OUT", "bucket": ""}, CheckState.REPROVADO),
     ]
     checks: dict[str, str] = {}
     for i, (raw, expected) in enumerate(cases):
@@ -48,17 +48,17 @@ def test_normalize_failure() -> dict[str, str]:
 
 
 def test_normalize_pending() -> dict[str, str]:
-    result = normalize_check_state({"state": "PENDING", "conclusion": ""})
+    result = normalize_check_state({"state": "PENDING", "bucket": ""})
     return {"pending": "PASS" if result == CheckState.PENDENTE else "FAIL"}
 
 
 def test_normalize_cancelled() -> dict[str, str]:
-    result = normalize_check_state({"state": "CANCELLED", "conclusion": ""})
+    result = normalize_check_state({"state": "CANCELLED", "bucket": ""})
     return {"cancelled": "PASS" if result == CheckState.CANCELADO else "FAIL"}
 
 
 def test_normalize_unknown() -> dict[str, str]:
-    result = normalize_check_state({"state": "WEIRD", "conclusion": "bizarre"})
+    result = normalize_check_state({"state": "WEIRD", "bucket": "bizarre"})
     return {"unknown": "PASS" if result == CheckState.INDETERMINADO else "FAIL"}
 
 
@@ -66,8 +66,8 @@ def test_make_check_record() -> dict[str, str]:
     raw = {
         "name": "ci/build",
         "state": "SUCCESS",
-        "conclusion": "",
-        "detailsUrl": "https://ci.example.com/1",
+        "bucket": "pass",
+        "link": "https://ci.example.com/1",
         "startedAt": "2026-10-17T10:00:00Z",
         "completedAt": "2026-10-17T10:05:00Z",
     }
@@ -125,8 +125,8 @@ def test_query_no_checks() -> dict[str, str]:
 
 def test_query_with_checks() -> dict[str, str]:
     raw = [
-        {"name": "build", "state": "SUCCESS", "conclusion": "", "detailsUrl": "", "startedAt": None, "completedAt": None},
-        {"name": "lint", "state": "FAILURE", "conclusion": "", "detailsUrl": "", "startedAt": None, "completedAt": None},
+        {"name": "build", "state": "SUCCESS", "bucket": "pass", "link": "", "startedAt": None, "completedAt": None},
+        {"name": "lint", "state": "FAILURE", "bucket": "fail", "link": "", "startedAt": None, "completedAt": None},
     ]
     with tempfile.TemporaryDirectory() as tmp:
         store = init_store(Path(tmp))

@@ -6,7 +6,7 @@ from __future__ import annotations
 import re
 
 
-SHELL_META = re.compile(r"[;&|`$(){}!\n\r]")
+SHELL_META = re.compile(r"[;&|`$()!\n\r]")
 
 SECRET_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,255}"),

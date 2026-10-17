@@ -79,20 +79,25 @@ def pr_create(
     head: str | None = None,
     cwd: str | None = None,
 ) -> dict[str, Any] | None:
-    """Create a PR and return its JSON representation."""
+    """Create a PR and return its data (via pr view after creation).
+
+    ``gh pr create`` outputs the new PR's URL to stdout; ``--json`` is not
+    supported.  After a successful create we call ``pr_view_json`` to
+    retrieve the structured representation.
+    """
     args = ["pr", "create", "--title", title, "--body", body]
     if base:
         args.extend(["--base", base])
     if head:
         args.extend(["--head", head])
-    args.extend(["--json", "number,title,url,headRefName,baseRefName,state"])
     r = run_gh(*args, cwd=cwd)
     if r.returncode != 0:
         return None
-    try:
-        return json.loads(r.stdout)
-    except json.JSONDecodeError:
-        return None
+    url = r.stdout.strip()
+    view = pr_view_json(url, cwd=cwd) if url else None
+    if view:
+        return view
+    return {"url": url}
 
 
 def pr_checks_json(
@@ -102,7 +107,7 @@ def pr_checks_json(
     """Query check/status results for a PR."""
     r = run_gh(
         "pr", "checks", str(pr_ref),
-        "--json", "name,state,conclusion,startedAt,completedAt,detailsUrl",
+        "--json", "name,state,bucket,description,startedAt,completedAt,link,workflow",
         cwd=cwd,
     )
     if r.returncode != 0:
@@ -175,10 +180,14 @@ def pr_merge(
     method: str = "merge",
     cwd: str | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    """Merge a PR. method: merge, squash, or rebase."""
+    """Merge a PR. method: merge, squash, or rebase.
+
+    ``gh pr merge`` does not support ``--json``; success is indicated by
+    a zero return code.
+    """
     return run_gh(
         "pr", "merge", str(pr_ref),
         f"--{method}",
-        "--json", "state,mergeCommit",
+        "--yes",
         cwd=cwd,
     )

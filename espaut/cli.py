@@ -11,7 +11,7 @@ from typing import Any
 
 from espaut import __version__
 from espaut.checks import compute_aggregate, query_checks
-from espaut.correction import make_diagnosis, run_correction_check
+from espaut.correction import make_attempt, make_diagnosis, record_attempt_result, run_correction_check
 from espaut.git_ops import (
     current_branch,
     has_changes,
@@ -367,7 +367,13 @@ def cmd_correct(args: argparse.Namespace) -> int:
     if not task:
         return 1
 
+    attempts_path = store / "cache" / f"attempts-{args.pendency}.json"
     previous_attempts: list[dict[str, Any]] = []
+    if attempts_path.exists():
+        loaded = read_json(attempts_path)
+        if isinstance(loaded, list):
+            previous_attempts = loaded
+
     check = run_correction_check(store, task["task_id"], args.pendency, previous_attempts)
 
     if check["status"] == "blocked":
@@ -378,10 +384,18 @@ def cmd_correct(args: argparse.Namespace) -> int:
         print(f"[dry-run] task={task['task_id']}  pendency={args.pendency}  status=allowed")
         return 0
 
+    attempt = make_attempt(args.pendency, len(previous_attempts) + 1)
     message = f"espaut: correction for {args.pendency} on task {task['task_id']}"
     report = run_preservation(store, task["task_id"], message, dry_run=False)
-    print(f"task={task['task_id']}  pendency={args.pendency}  outcome={report['outcome']}")
-    return 0 if report.get("outcome") not in ("staging_failed", "commit_failed") else 1
+
+    outcome = report.get("outcome", "unknown")
+    state = "CONCLUIDA" if outcome not in ("staging_failed", "commit_failed") else "FALHA"
+    record_attempt_result(attempt, applied_changes=[], state=state)
+    previous_attempts.append(attempt)
+    write_json(attempts_path, previous_attempts)
+
+    print(f"task={task['task_id']}  pendency={args.pendency}  outcome={outcome}")
+    return 0 if state == "CONCLUIDA" else 1
 
 
 # -- Verify-correction subcommand ---------------------------------------------

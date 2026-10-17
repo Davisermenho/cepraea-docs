@@ -78,12 +78,21 @@ def check_c2_sync(task: dict[str, Any], cwd: str | None = None) -> dict[str, Any
     return evaluate_criterion("C2_sync", False, f"diverged: local={local[:8]} remote={remote[:8]}")
 
 
-def check_c3_verification(checks_report: dict[str, Any]) -> dict[str, Any]:
+def check_c3_verification(
+    checks_report: dict[str, Any],
+    *,
+    ci_required: bool = False,
+) -> dict[str, Any]:
     """C3: All required CI checks pass."""
     aggregate = checks_report.get("aggregate", "")
     if aggregate == CheckState.APROVADO.value:
         return evaluate_criterion("C3_verification", True, "all checks passed")
     if aggregate == CheckState.NAO_CONFIGURADO.value:
+        if ci_required:
+            return evaluate_criterion(
+                "C3_verification", False,
+                "CI required but no checks configured",
+            )
         return evaluate_criterion("C3_verification", True, "no checks configured (non-blocking)")
     return evaluate_criterion("C3_verification", False, f"checks aggregate: {aggregate}")
 
@@ -138,13 +147,23 @@ def check_c8_currency(
     current_head: str | None,
 ) -> dict[str, Any]:
     """C8: Evidence is current (evaluated revision matches current head)."""
-    for check in checks_report.get("checks", []):
+    checks = checks_report.get("checks", [])
+    if not checks:
+        return evaluate_criterion("C8_currency", True, "no checks to evaluate")
+    if not current_head:
+        return evaluate_criterion("C8_currency", False, "cannot determine current HEAD")
+    has_revision = False
+    for check in checks:
         evaluated = check.get("evaluated_revision")
-        if evaluated and current_head and evaluated != current_head:
-            return evaluate_criterion(
-                "C8_currency", False,
-                f"stale check: evaluated={evaluated[:8]} current={current_head[:8]}",
-            )
+        if evaluated:
+            has_revision = True
+            if evaluated != current_head:
+                return evaluate_criterion(
+                    "C8_currency", False,
+                    f"stale check: evaluated={evaluated[:8]} current={current_head[:8]}",
+                )
+    if not has_revision:
+        return evaluate_criterion("C8_currency", False, "no check has evaluated_revision")
     return evaluate_criterion("C8_currency", True, "all evidence current")
 
 
@@ -162,11 +181,12 @@ def evaluate_merge_eligibility(
     Returns a report with per-criterion results and overall verdict.
     """
     current_head = head_sha(cwd)
+    config = load_config(store)
 
     criteria = [
         check_c1_preservation(task, cwd),
         check_c2_sync(task, cwd),
-        check_c3_verification(checks_report),
+        check_c3_verification(checks_report, ci_required=config.get("ci_required", False)),
         check_c4_review(reviews_report),
         check_c5_pendencies(pendencies),
         check_c6_acceptance(task),

@@ -25,44 +25,56 @@ class CheckState(enum.StrEnum):
 
 
 GH_STATE_MAP: dict[tuple[str, str], CheckState] = {
+    # (state, bucket) — ``gh pr checks --json`` provides ``state`` and ``bucket``.
+    # Primary: match on state (case-preserved as returned by gh).
     ("SUCCESS", ""): CheckState.APROVADO,
-    ("", "success"): CheckState.APROVADO,
-    ("", "SUCCESS"): CheckState.APROVADO,
+    ("SUCCESS", "pass"): CheckState.APROVADO,
     ("FAILURE", ""): CheckState.REPROVADO,
-    ("", "failure"): CheckState.REPROVADO,
-    ("", "FAILURE"): CheckState.REPROVADO,
+    ("FAILURE", "fail"): CheckState.REPROVADO,
     ("PENDING", ""): CheckState.PENDENTE,
-    ("", "pending"): CheckState.PENDENTE,
-    ("", "PENDING"): CheckState.PENDENTE,
+    ("PENDING", "pending"): CheckState.PENDENTE,
     ("CANCELLED", ""): CheckState.CANCELADO,
-    ("", "cancelled"): CheckState.CANCELADO,
-    ("", "CANCELLED"): CheckState.CANCELADO,
+    ("CANCELLED", "fail"): CheckState.CANCELADO,
     ("NEUTRAL", ""): CheckState.APROVADO,
-    ("", "neutral"): CheckState.APROVADO,
+    ("NEUTRAL", "pass"): CheckState.APROVADO,
     ("SKIPPED", ""): CheckState.IGNORADO,
-    ("", "skipped"): CheckState.IGNORADO,
+    ("SKIPPED", "skipping"): CheckState.IGNORADO,
     ("STALE", ""): CheckState.INDETERMINADO,
-    ("", "stale"): CheckState.INDETERMINADO,
     ("STARTUP_FAILURE", ""): CheckState.REPROVADO,
-    ("", "startup_failure"): CheckState.REPROVADO,
+    ("STARTUP_FAILURE", "fail"): CheckState.REPROVADO,
     ("ACTION_REQUIRED", ""): CheckState.PENDENTE,
-    ("", "action_required"): CheckState.PENDENTE,
+    ("ACTION_REQUIRED", "pending"): CheckState.PENDENTE,
     ("TIMED_OUT", ""): CheckState.REPROVADO,
-    ("", "timed_out"): CheckState.REPROVADO,
+    ("TIMED_OUT", "fail"): CheckState.REPROVADO,
+    # Fallback: match on bucket alone when state is absent/unknown.
+    ("", "pass"): CheckState.APROVADO,
+    ("", "fail"): CheckState.REPROVADO,
+    ("", "pending"): CheckState.PENDENTE,
+    ("", "skipping"): CheckState.IGNORADO,
 }
 
 
 def normalize_check_state(raw: dict[str, Any]) -> CheckState:
-    """Map a raw gh check/status record to a normalized CheckState."""
+    """Map a raw gh check/status record to a normalized CheckState.
+
+    Uses ``state`` as primary and ``bucket`` as fallback — the fields
+    returned by ``gh pr checks --json``.
+    """
     state = raw.get("state", "")
-    conclusion = raw.get("conclusion", "")
-    key = (state, conclusion)
+    bucket = raw.get("bucket", "")
+    key = (state, bucket)
     if key in GH_STATE_MAP:
         return GH_STATE_MAP[key]
+    key_state = (state, "")
+    if key_state in GH_STATE_MAP:
+        return GH_STATE_MAP[key_state]
+    key_bucket = ("", bucket)
+    if key_bucket in GH_STATE_MAP:
+        return GH_STATE_MAP[key_bucket]
     for k, v in GH_STATE_MAP.items():
         if k[0] and k[0].lower() == state.lower():
             return v
-        if k[1] and k[1].lower() == conclusion.lower():
+        if k[1] and k[1].lower() == bucket.lower():
             return v
     return CheckState.INDETERMINADO
 
@@ -80,9 +92,9 @@ def make_check_record(
         "pr_number": pr_number,
         "evaluated_revision": evaluated_revision,
         "raw_state": raw.get("state", ""),
-        "raw_conclusion": raw.get("conclusion", ""),
+        "raw_bucket": raw.get("bucket", ""),
         "normalized_result": normalized.value,
-        "execution_url": raw.get("detailsUrl", ""),
+        "execution_url": raw.get("link", ""),
         "started_at": raw.get("startedAt"),
         "completed_at": raw.get("completedAt"),
     }
