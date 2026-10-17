@@ -70,7 +70,17 @@ def check_c1_preservation(task: dict[str, Any], cwd: str | None = None) -> dict[
 def check_c2_sync(task: dict[str, Any], cwd: str | None = None) -> dict[str, Any]:
     """C2: Branch is up-to-date with remote."""
     local = head_sha(cwd)
-    remote = remote_head_sha(cwd=cwd)
+    if task.get("pr_number"):
+        # The PR may originate from a fork: origin may not contain the head branch.
+        # Query the actual GitHub PR head instead of assuming origin/<branch>.
+        from espaut.pullrequest import query_pr_state
+        try:
+            state = query_pr_state(int(task["pr_number"]), cwd=cwd)
+        except Exception as exc:
+            return evaluate_criterion("C2_sync", False, f"PR head could not be queried: {type(exc).__name__}")
+        remote = state.get("head_sha") if state.get("status") == "available" else None
+    else:
+        remote = remote_head_sha(cwd=cwd)
     if not local or not remote:
         return evaluate_criterion("C2_sync", False, f"cannot verify: local={local} remote={remote}")
     if local == remote:

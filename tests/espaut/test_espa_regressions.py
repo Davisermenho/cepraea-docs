@@ -287,5 +287,15 @@ class Contracts(unittest.TestCase):
         decision=check_c4_review({"is_draft":True,"reviews":[{"state":"APPROVED"}]})
         self.assertEqual(decision["status"],"FAIL")
 
+    def test_c2_sync_uses_actual_fork_pr_head(self):
+        from espaut.governance import check_c2_sync
+        task={"task_id":"T1","pr_number":1}
+        with patch("espaut.governance.head_sha",return_value="abc"),patch("espaut.pullrequest.query_pr_state",return_value={"status":"available","head_sha":"abc"}):
+            self.assertEqual(check_c2_sync(task)["status"],"PASS")
+        with patch("espaut.governance.head_sha",return_value="abc"),patch("espaut.pullrequest.query_pr_state",return_value={"status":"available","head_sha":"def"}):
+            self.assertEqual(check_c2_sync(task)["status"],"FAIL")
+        with patch("espaut.governance.head_sha",return_value="abc"),patch("espaut.pullrequest.query_pr_state",side_effect=RuntimeError("network")):
+            self.assertEqual(check_c2_sync(task)["status"],"FAIL")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
