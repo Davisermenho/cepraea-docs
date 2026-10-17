@@ -129,6 +129,16 @@ def pr_checks_json(
     # gh pr checks can exit non-zero for checks that failed or are pending;
     # valid JSON is still authoritative data and must not be discarded.
     if r.returncode != 0 and not r.stdout.strip():
+        # gh exits 1 when a PR has no checks. Distinguish a verified empty
+        # rollup from transport/auth failures and avoid a false "no CI".
+        if "no checks reported" in (r.stderr or "").lower():
+            first = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd)
+            second = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd)
+            if (first and second and first.get("headRefOid")
+                    and first.get("headRefOid") == second.get("headRefOid")
+                    and first.get("statusCheckRollup") == []
+                    and second.get("statusCheckRollup") == []):
+                return []
         raise GitHubQueryError(f"gh pr checks failed (exit={r.returncode}): {r.stderr[:300]}")
     result = _parse_json_response(r, "gh pr checks", allow_nonzero=True)
     if not isinstance(result, list):
@@ -188,7 +198,6 @@ def pr_reviews_json(
     r = run_gh(
         "api", "--paginate", "--slurp",
         f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/reviews",
-        "--jq", ".",
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")
@@ -202,7 +211,6 @@ def pr_comments_json(
     r = run_gh(
         "api", "--paginate", "--slurp",
         f"repos/{{owner}}/{{repo}}/issues/{pr_number}/comments",
-        "--jq", ".",
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")
@@ -216,7 +224,6 @@ def pr_review_comments_json(
     r = run_gh(
         "api", "--paginate", "--slurp",
         f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/comments",
-        "--jq", ".",
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")

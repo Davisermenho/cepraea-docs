@@ -265,5 +265,27 @@ class Contracts(unittest.TestCase):
             self.assertEqual(out["status"],"blocked")
             agent.assert_not_called()
 
+    def test_gh_api_paginated_query_supports_live_cli(self):
+        from espaut.gh_ops import pr_reviews_json, pr_comments_json, pr_review_comments_json
+        for wrapper in (pr_reviews_json, pr_comments_json, pr_review_comments_json):
+            with self.subTest(wrapper=wrapper.__name__), patch("espaut.gh_ops.run_gh", return_value=cp(0,"[[]]")) as call:
+                self.assertEqual(wrapper(1), [])
+                args=call.call_args.args
+                self.assertIn("--paginate",args)
+                self.assertIn("--slurp",args)
+                self.assertNotIn("--jq",args)
+
+    def test_gh_no_checks_requires_two_stable_remote_snapshots(self):
+        with patch("espaut.gh_ops.run_gh", return_value=cp(1,"","no checks reported on this branch")), patch("espaut.gh_ops.pr_view_json",side_effect=[{"headRefOid":"abc","statusCheckRollup":[]},{"headRefOid":"abc","statusCheckRollup":[]}]):
+            self.assertEqual(pr_checks_json(1), [])
+        with patch("espaut.gh_ops.run_gh", return_value=cp(1,"","no checks reported")), patch("espaut.gh_ops.pr_view_json",side_effect=[{"headRefOid":"abc","statusCheckRollup":[]},{"headRefOid":"def","statusCheckRollup":[]}]):
+            with self.assertRaises(GitHubQueryError):
+                pr_checks_json(1)
+
+    def test_draft_pr_is_ineligible_for_approval(self):
+        from espaut.governance import check_c4_review
+        decision=check_c4_review({"is_draft":True,"reviews":[{"state":"APPROVED"}]})
+        self.assertEqual(decision["status"],"FAIL")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)

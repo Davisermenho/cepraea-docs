@@ -99,6 +99,8 @@ def check_c3_verification(
 
 def check_c4_review(reviews_report: dict[str, Any]) -> dict[str, Any]:
     """C4: At least one approving review."""
+    if reviews_report.get("is_draft") is True:
+        return evaluate_criterion("C4_review", False, "draft PR cannot be approved for integration")
     reviews = reviews_report.get("reviews", [])
     approvals = [r for r in reviews if r.get("state") in ("APPROVED", "approved")]
     if reviews_report.get("review_decision") == "CHANGES_REQUESTED":

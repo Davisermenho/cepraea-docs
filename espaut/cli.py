@@ -342,6 +342,7 @@ def cmd_merge_check(args: argparse.Namespace) -> int:
         )
         reviews_report = collect_reviews(store, task["task_id"], pr_number)
         reviews_report["review_decision"] = remote_pr.get("review_decision")
+        reviews_report["is_draft"] = remote_pr.get("is_draft")
         pendencies = extract_pendencies(reviews_report, task_id=task["task_id"], store=store)
         # Recheck the remote head in case a new push invalidated the evidence.
         if query_pr_state(pr_number).get("head_sha") != pr_head:
