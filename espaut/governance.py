@@ -101,6 +101,8 @@ def check_c4_review(reviews_report: dict[str, Any]) -> dict[str, Any]:
     """C4: At least one approving review."""
     reviews = reviews_report.get("reviews", [])
     approvals = [r for r in reviews if r.get("state") in ("APPROVED", "approved")]
+    if reviews_report.get("review_decision") == "CHANGES_REQUESTED":
+        return evaluate_criterion("C4_review", False, "current PR review decision requests changes")
     if approvals:
         return evaluate_criterion("C4_review", True, f"{len(approvals)} approval(s)")
     return evaluate_criterion("C4_review", False, "no approving review")
@@ -112,7 +114,10 @@ def check_c5_pendencies(pendencies: list[dict[str, Any]]) -> dict[str, Any]:
         blocking = [
             p["pendency_id"] for p in pendencies
             if p.get("blocking_effect")
-            and p.get("resolution_state") not in ("RESOLVIDA", "JUSTIFICADA")
+            and (
+                p.get("thread_resolved_remote") is False
+                or p.get("resolution_state") not in ("RESOLVIDA", "JUSTIFICADA")
+            )
         ]
         return evaluate_criterion("C5_pendencies", False, f"blocking: {blocking}")
     return evaluate_criterion("C5_pendencies", True, "no blocking pendencies")
@@ -122,8 +127,19 @@ def check_c6_acceptance(task: dict[str, Any]) -> dict[str, Any]:
     """C6: Acceptance criteria comprovados."""
     criteria = task.get("acceptance_criteria", [])
     if not criteria:
-        return evaluate_criterion("C6_acceptance", True, "no criteria defined")
-    return evaluate_criterion("C6_acceptance", False, "acceptance criteria not verified")
+        return evaluate_criterion("C6_acceptance", False, "acceptance criteria absent")
+    results = task.get("acceptance_results", {})
+    current_sha = task.get("acceptance_revision")
+    if not isinstance(results, dict) or not current_sha:
+        return evaluate_criterion("C6_acceptance", False, "acceptance evidence missing")
+    for criterion in criteria:
+        key = str(criterion)
+        record = results.get(key)
+        if not isinstance(record, dict) or record.get("status") != "PASS":
+            return evaluate_criterion("C6_acceptance", False, f"criterion not passed: {key}")
+        if not record.get("evidence_reference") or record.get("revision") != current_sha:
+            return evaluate_criterion("C6_acceptance", False, f"invalid evidence: {key}")
+    return evaluate_criterion("C6_acceptance", True, "all criteria supported by evidence")
 
 
 def check_c7_authority(
@@ -149,7 +165,13 @@ def check_c8_currency(
     """C8: Evidence is current (evaluated revision matches current head)."""
     checks = checks_report.get("checks", [])
     if not checks:
-        return evaluate_criterion("C8_currency", True, "no checks to evaluate")
+        if (
+            checks_report.get("status") == "not_configured"
+            and current_head
+            and checks_report.get("evaluated_revision") == current_head
+        ):
+            return evaluate_criterion("C8_currency", True, "no CI; confirmed PR head revision")
+        return evaluate_criterion("C8_currency", False, "no revision-bound check evidence")
     if not current_head:
         return evaluate_criterion("C8_currency", False, "cannot determine current HEAD")
     has_revision = False
@@ -162,8 +184,8 @@ def check_c8_currency(
                     "C8_currency", False,
                     f"stale check: evaluated={evaluated[:8]} current={current_head[:8]}",
                 )
-    if not has_revision:
-        return evaluate_criterion("C8_currency", False, "no check has evaluated_revision")
+    if not has_revision or any(not c.get("evaluated_revision") for c in checks):
+        return evaluate_criterion("C8_currency", False, "some checks lack evaluated_revision")
     return evaluate_criterion("C8_currency", True, "all evidence current")
 
 
@@ -182,6 +204,9 @@ def evaluate_merge_eligibility(
     """
     current_head = head_sha(cwd)
     config = load_config(store)
+    # Do not trust acceptance evidence belonging to a different revision.
+    if task.get("acceptance_revision") != current_head:
+        task = {**task, "acceptance_results": {}}
 
     criteria = [
         check_c1_preservation(task, cwd),

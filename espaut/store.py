@@ -22,6 +22,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "resolver_roles": ["author", "assigned_reviewers"],
     "merge_policy": "manual",
     "correction_max_attempts": 3,
+    "correction_test_command": [],
     "retention_policy": "retain_all",
     "ci_required": False,
 }
