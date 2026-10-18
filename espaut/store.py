@@ -28,6 +28,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "pr_base_branch": "main",
     "review_required": True,
     "auto_followup": True,
+    "auto_async": True,
     "followup_interval_seconds": 30,
     "followup_timeout_seconds": 3600,
     "acceptance_commands": {},
