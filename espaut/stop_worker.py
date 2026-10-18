@@ -24,7 +24,7 @@ def launch_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = 
     if os.environ.get("ESPAUT_STOP_WORKER") == "1":
         return False
     cfg = load_config(store)
-    if cfg.get("auto_merge") is not True or cfg.get("auto_followup", True) is False:
+    if cfg.get("auto_commit") is not True or cfg.get("auto_followup", True) is False:
         return False
     cache = store / "cache"
     cache.mkdir(exist_ok=True, parents=True)
