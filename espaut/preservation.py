@@ -279,6 +279,7 @@ def run_preservation(
     *,
     dry_run: bool = True,
     cwd: str | None = None,
+    remote: str = "origin",
 ) -> dict[str, Any]:
     """Execute the full preservation flow: detect → stage → commit → push.
 
@@ -329,7 +330,7 @@ def run_preservation(
         return report
 
     # 4. Push
-    push_result = push_and_verify(store, task_id, cwd=cwd)
+    push_result = push_and_verify(store, task_id, remote=remote, cwd=cwd)
     report["steps"].append({"step": "push", "result": push_result})
     report["outcome"] = push_result["status"]
 
