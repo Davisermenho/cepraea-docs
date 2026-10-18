@@ -66,7 +66,8 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
             if not preserve_changes:
                 return checkpoint(store, task_id, "blocked", reason="no verified pre-task snapshot")
             result = run_preservation(store, task_id, f"espaut: post-reply {task_id}",
-                                      cwd=cwd, dry_run=False)
+                                      cwd=cwd, dry_run=False,
+                                      remote=cfg.get("push_remote", "origin"))
             if result.get("outcome") != "synchronized":
                 return checkpoint(store, task_id, "preservation_pending",
                                   reason=result.get("outcome", "unverified"))
@@ -81,7 +82,8 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
             pr = create_or_reuse_pr(
                 store, task, task.get("title") or task_id,
                 f"Task: {task_id}\n\n{task.get('objective', '')}",
-                base=cfg.get("pr_base_branch") or "main", cwd=cwd)
+                base=cfg.get("pr_base_branch") or "main", cwd=cwd,
+                head_owner=cfg.get("pr_head_owner"))
             pr_number = pr.get("pr_number")
             if pr.get("status") not in ("created", "reused") or not pr_number:
                 return checkpoint(store, task_id, "pr_pending",
