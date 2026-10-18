@@ -24,18 +24,6 @@ def checkpoint(store, task_id, status, **details):
     write_json(store / "cache" / f"stop-cycle-{task_id}.json", report)
     log_event(store, "stop_cycle", task_id=task_id, outcome=status,
               detail=str(details.get("reason", ""))[:200])
-    if status in {"review_pending", "merge_pending", "pr_pending"}:
-        # Detached continuation is activated only by a project's auto_merge
-        # policy; the worker checks a per-task lock before doing any work.
-        try:
-            from espaut.stop_worker import launch_worker
-            launched = launch_worker(store, task_id, str(store.parent))
-            if launched:
-                report["followup_spawned"] = True
-                write_json(store / "cache" / f"stop-cycle-{task_id}.json", report)
-        except (OSError, ValueError, RuntimeError) as exc:
-            report["followup_error"] = type(exc).__name__
-            write_json(store / "cache" / f"stop-cycle-{task_id}.json", report)
     return report
 
 
