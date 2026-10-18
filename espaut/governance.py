@@ -107,7 +107,7 @@ def check_c3_verification(
     return evaluate_criterion("C3_verification", False, f"checks aggregate: {aggregate}")
 
 
-def check_c4_review(reviews_report: dict[str, Any]) -> dict[str, Any]:
+def check_c4_review(reviews_report: dict[str, Any], *, review_required: bool = True) -> dict[str, Any]:
     """C4: At least one approving review."""
     if reviews_report.get("is_draft") is True:
         return evaluate_criterion("C4_review", False, "draft PR cannot be approved for integration")
@@ -117,6 +117,8 @@ def check_c4_review(reviews_report: dict[str, Any]) -> dict[str, Any]:
         return evaluate_criterion("C4_review", False, "current PR review decision requests changes")
     if approvals:
         return evaluate_criterion("C4_review", True, f"{len(approvals)} approval(s)")
+    if not review_required:
+        return evaluate_criterion("C4_review", True, "review optional under explicit automatic policy; no requested changes")
     return evaluate_criterion("C4_review", False, "no approving review")
 
 
@@ -157,8 +159,12 @@ def check_c6_acceptance(task: dict[str, Any]) -> dict[str, Any]:
 def check_c7_authority(
     task: dict[str, Any],
     decisions: list[dict[str, Any]],
+    *,
+    automatic_policy: bool = False,
 ) -> dict[str, Any]:
     """C7: Merge authorization from human authority."""
+    if automatic_policy:
+        return evaluate_criterion("C7_authority", True, "pre-authorized by explicit project automatic merge policy")
     merge_decisions = [
         d for d in decisions
         if d.get("task_id") == task["task_id"]
@@ -224,10 +230,12 @@ def evaluate_merge_eligibility(
         check_c1_preservation(task, cwd),
         check_c2_sync(task, cwd),
         check_c3_verification(checks_report, ci_required=config.get("ci_required", False)),
-        check_c4_review(reviews_report),
+        check_c4_review(reviews_report, review_required=config.get("review_required", True) is not False),
         check_c5_pendencies(pendencies),
         check_c6_acceptance(task),
-        check_c7_authority(task, decisions),
+        check_c7_authority(task, decisions, automatic_policy=(
+            config.get("auto_merge") is True and config.get("merge_policy") == "automatic"
+        )),
         check_c8_currency(checks_report, current_head),
     ]
 
