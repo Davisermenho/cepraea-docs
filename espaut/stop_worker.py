@@ -19,7 +19,7 @@ from espaut.store import load_config, read_json
 from espaut.stop_cycle import checkpoint, run_stop_cycle
 
 
-def launch_worker(store: Path, task_id: str, cwd: str) -> bool:
+def launch_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = False) -> bool:
     """Detach one follow-up process; the worker owns the per-task lock."""
     if os.environ.get("ESPAUT_STOP_WORKER") == "1":
         return False
@@ -34,6 +34,8 @@ def launch_worker(store: Path, task_id: str, cwd: str) -> bool:
     env["PYTHONPATH"] = package_root + os.pathsep + env.get("PYTHONPATH", "")
     command = [sys.executable, "-m", "espaut.stop_worker",
                "--store", str(store), "--task", task_id, "--cwd", cwd]
+    if preserve_changes:
+        command.append("--preserve-changes")
     with (cache / f"stop-worker-{task_id}.log").open("a", encoding="utf-8") as output:
         subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.DEVNULL,
                          stdout=output, stderr=subprocess.STDOUT,
@@ -41,7 +43,7 @@ def launch_worker(store: Path, task_id: str, cwd: str) -> bool:
     return True
 
 
-def run_worker(store: Path, task_id: str, cwd: str) -> str:
+def run_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = False) -> str:
     """Poll until merge, nonrecoverable block, or an explicit time budget."""
     cfg = load_config(store)
     seconds = cfg.get("followup_interval_seconds", 30)
@@ -63,7 +65,8 @@ def run_worker(store: Path, task_id: str, cwd: str) -> str:
             if not task_file.is_file():
                 return "missing_task"
             task = read_json(task_file)
-            result = run_stop_cycle(store, task, cwd=cwd, preserve_changes=False)
+            result = run_stop_cycle(store, task, cwd=cwd, preserve_changes=preserve_changes)
+            preserve_changes = False
             status = result.get("status", "unknown")
             if status in {"merged", "blocked", "operational_failure",
                           "merge_unverified", "preservation_pending",
@@ -83,9 +86,11 @@ def main() -> int:
     parser.add_argument("--store", type=Path, required=True)
     parser.add_argument("--task", required=True)
     parser.add_argument("--cwd", required=True)
+    parser.add_argument("--preserve-changes", action="store_true")
     args = parser.parse_args()
     try:
-        status = run_worker(args.store, args.task, args.cwd)
+        status = run_worker(args.store, args.task, args.cwd,
+                            preserve_changes=args.preserve_changes)
     except Exception as exc:
         checkpoint(args.store, args.task, "operational_failure",
                    reason=f"worker {type(exc).__name__}: {str(exc)[:160]}")
