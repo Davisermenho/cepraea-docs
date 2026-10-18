@@ -85,8 +85,9 @@ def run_hook(phase: str, payload: dict) -> str:
     if status is None:
         return "ESPAUT: cannot verify working tree; automatic actions blocked."
     session = str(payload.get("session_id") or "session-unknown")
-    turn = str(payload.get("turn_id") or "")
-    key = hashlib.sha256((session + "|" + turn).encode()).hexdigest()[:32]
+    # Codex Stop includes turn_id, but UserPromptSubmit may not.
+    # A session-level key pairs the two events reliably.
+    key = hashlib.sha256((str(ROOT) + "|" + session).encode()).hexdigest()[:32]
     snapshot = store / "cache" / "ide-hooks" / (key + ".json")
     snapshot.parent.mkdir(parents=True, exist_ok=True)
     if phase == "pre":
