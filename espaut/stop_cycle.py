@@ -90,6 +90,19 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         if remote.get("github_state") != "OPEN" or remote.get("head_sha") != sha:
             return checkpoint(store, task_id, "blocked", pr_number=pr_number,
                               revision=sha, reason="PR closed or remote head mismatch")
+        if remote.get("is_draft"):
+            if cfg.get("auto_ready") is not True:
+                return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
+                                  revision=sha, reason="PR is Draft; auto_ready is disabled")
+            ready = run_gh("pr", "ready", str(pr_number), cwd=cwd)
+            if ready.returncode != 0:
+                return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
+                                  revision=sha, reason=f"GitHub rejected ready-for-review: exit={ready.returncode}")
+            remote = query_pr_state(pr_number, cwd=cwd)
+            if (remote.get("status") != "available" or remote.get("is_draft")
+                    or remote.get("head_sha") != sha or remote.get("github_state") != "OPEN"):
+                return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
+                                  revision=sha, reason="ready-for-review could not be verified")
         checks = query_checks(store, task_id, pr_number, evaluated_revision=sha, cwd=cwd)
         reviews = collect_reviews(store, task_id, pr_number, cwd=cwd)
         reviews.update(is_draft=bool(remote.get("is_draft")),
@@ -99,15 +112,18 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         gate = evaluate_merge_eligibility(store, task, checks, reviews, pending,
                                            decisions, cwd=cwd)
         gates = {c["criterion"]: c["status"] for c in gate["criteria"]}
-        if gate["verdict"] != "APTA_PARA_INTEGRACAO" or remote.get("review_decision") != "APPROVED":
+        required_review = cfg.get("review_required", True) is not False
+        if gate["verdict"] != "APTA_PARA_INTEGRACAO" or (required_review and remote.get("review_decision") != "APPROVED"):
             return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
                               revision=sha, checks=checks.get("aggregate"),
                               pendencies=len(pending), gates=gates,
                               reason="review/CI/acceptance/merge gate pending")
-        if cfg.get("auto_merge") is not True or not human_approved(task, decisions, sha):
+        policy_approved = cfg.get("auto_merge") is True and cfg.get("merge_policy") == "automatic"
+        revision_approved = cfg.get("auto_merge") is True and human_approved(task, decisions, sha)
+        if not (policy_approved or revision_approved):
             return checkpoint(store, task_id, "merge_pending_authorization",
                               pr_number=pr_number, revision=sha, gates=gates,
-                              reason="per-revision human approval and auto_merge required")
+                              reason="auto_merge requires a preauthorized project policy or an explicit revision decision")
         # GitHub HEAD must remain exactly the reviewed revision.
         current = pr_view_json(pr_number, ["state", "isDraft", "headRefOid", "mergeStateStatus"], cwd=cwd)
         if (not current or current.get("state") != "OPEN"
