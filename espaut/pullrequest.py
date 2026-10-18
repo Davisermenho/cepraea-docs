@@ -15,6 +15,7 @@ from espaut.store import load_config, read_json, write_json
 def find_existing_pr(
     task: dict[str, Any],
     cwd: str | None = None,
+    head_owner: str | None = None,
 ) -> dict[str, Any] | None:
     """Find an existing open PR matching the task's branch."""
     branch = task.get("branch_name")
@@ -26,9 +27,13 @@ def find_existing_pr(
         if pr and pr.get("state") in ("OPEN", "open"):
             return pr
 
-    prs = pr_list_json(cwd=cwd)
+    fields = ["number", "title", "headRefName", "state", "url"]
+    if head_owner:
+        fields.append("headRepositoryOwner")
+    prs = pr_list_json(fields=fields, cwd=cwd)
     for pr in prs:
-        if pr.get("headRefName") == branch:
+        owner = (pr.get("headRepositoryOwner") or {}).get("login") if head_owner else None
+        if pr.get("headRefName") == branch and (not head_owner or owner == head_owner):
             return pr
     return None
 
@@ -40,11 +45,12 @@ def create_or_reuse_pr(
     body: str,
     base: str | None = None,
     cwd: str | None = None,
+    head_owner: str | None = None,
 ) -> dict[str, Any]:
     """Create a new PR or reuse an existing one. Returns a result dict."""
     task_id = task["task_id"]
 
-    existing = find_existing_pr(task, cwd)
+    existing = find_existing_pr(task, cwd, head_owner=head_owner)
     if existing:
         log_event(
             store,
@@ -61,7 +67,8 @@ def create_or_reuse_pr(
         }
 
     head = task.get("branch_name") or current_branch(cwd)
-    pr = pr_create(title, body, base=base, head=head, cwd=cwd)
+    pr_head = f"{head_owner}:{head}" if head_owner else head
+    pr = pr_create(title, body, base=base, head=pr_head, cwd=cwd)
     if pr is None:
         log_event(
             store,
@@ -160,7 +167,7 @@ def reconcile_pr_state(
         else:
             changes.append("pr_closed_externally")
 
-    local_sha = task.get("base_commit_sha")
+    local_sha = task.get("head_commit_sha")
     remote_sha = remote.get("head_sha")
     if local_sha and remote_sha and local_sha != remote_sha:
         changes.append("head_sha_diverged")
@@ -194,5 +201,5 @@ def update_task_pr(
     if url:
         task["pr_url"] = url
     if head_sha:
-        task["base_commit_sha"] = head_sha
+        task["head_commit_sha"] = head_sha
     return task

@@ -137,6 +137,12 @@ def stage_eligible(
     if not eligible_paths:
         return {"status": "nothing_to_stage", "staged": []}
 
+    # git commit otherwise includes unrelated files staged before ESPAUT runs.
+    pre_staged = set(staged_files(cwd))
+    unrelated = sorted(pre_staged - set(eligible_paths))
+    if unrelated:
+        return {"status": "unsafe_staging", "unrelated": unrelated}
+
     result = stage_files(eligible_paths, cwd=cwd)
     if result.returncode != 0:
         log_event(
@@ -149,7 +155,13 @@ def stage_eligible(
         return {"status": "error", "error": result.stderr.strip()}
 
     files = staged_files(cwd)
+    if set(files) - set(eligible_paths):
+        return {"status": "unsafe_staging", "unrelated": sorted(set(files) - set(eligible_paths))}
     diff = staged_diff(cwd)
+    from espaut.security import contains_secret
+    if contains_secret(diff):
+        log_event(store, "secret_in_staged_diff", task_id=task_id, outcome="FALHA")
+        return {"status": "secret_detected", "error": "staged diff contains a recognized secret"}
 
     log_event(
         store,
@@ -267,12 +279,21 @@ def run_preservation(
     *,
     dry_run: bool = True,
     cwd: str | None = None,
+    remote: str = "origin",
 ) -> dict[str, Any]:
     """Execute the full preservation flow: detect → stage → commit → push.
 
     With ``dry_run=True`` (default), only reports what would happen.
     """
     report: dict[str, Any] = {"task_id": task_id, "dry_run": dry_run, "steps": []}
+
+    # Fail closed during unfinished merge/rebase/cherry-pick operations.
+    from espaut.git_ops import has_incomplete_operation
+    operation = has_incomplete_operation(cwd)
+    if operation:
+        report["outcome"] = "incomplete_git_operation"
+        report["operation"] = operation
+        return report
 
     # 1. Detect
     detection = detect_changes(store, task_id, cwd)
@@ -285,6 +306,13 @@ def run_preservation(
         report["outcome"] = "dry_run_complete"
         report["would_stage"] = detection["eligible"]
         report["would_exclude"] = detection["excluded"]
+        return report
+
+    from espaut.git_ops import current_branch
+    branch = current_branch(cwd)
+    if branch in (None, "main", "master"):
+        report["outcome"] = "protected_branch"
+        report["branch"] = branch
         return report
 
     # 2. Stage
@@ -302,7 +330,7 @@ def run_preservation(
         return report
 
     # 4. Push
-    push_result = push_and_verify(store, task_id, cwd=cwd)
+    push_result = push_and_verify(store, task_id, remote=remote, cwd=cwd)
     report["steps"].append({"step": "push", "result": push_result})
     report["outcome"] = push_result["status"]
 
