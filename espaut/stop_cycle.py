@@ -10,9 +10,9 @@ from espaut.acceptance import verify_acceptance
 from espaut.checks import query_checks
 from espaut.events import log_event
 from espaut.gh_ops import pr_view_json, run_gh
-from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, worktree_status
+from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, remote_head_sha, worktree_status
 from espaut.governance import evaluate_merge_eligibility
-from espaut.preservation import run_preservation
+from espaut.preservation import push_and_verify, run_preservation
 from espaut.pullrequest import create_or_reuse_pr, query_pr_state, update_task_pr
 from espaut.review import collect_reviews, extract_pendencies
 from espaut.store import load_config, read_json, write_json
@@ -75,6 +75,13 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         sha = head_sha(cwd)
         if not sha:
             return checkpoint(store, task_id, "blocked", reason="HEAD unavailable")
+        push_remote = cfg.get("push_remote", "origin")
+        if remote_head_sha(push_remote, branch, cwd) != sha:
+            synced = push_and_verify(store, task_id, remote=push_remote,
+                                     branch=branch, cwd=cwd)
+            if synced.get("status") != "synchronized":
+                return checkpoint(store, task_id, "preservation_pending",
+                                  revision=sha, reason="existing local commit not verified on remote")
         pr_number = task.get("pr_number")
         if not pr_number:
             if cfg.get("auto_pr") is not True:
