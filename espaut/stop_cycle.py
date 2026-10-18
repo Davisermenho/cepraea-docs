@@ -4,6 +4,7 @@
 Each Stop is a single reconciliation tick. Pending checks/reviews are retried at
 the next Stop; they are never interpreted as approval.
 """
+import os
 from pathlib import Path
 
 from espaut.acceptance import verify_acceptance
@@ -61,6 +62,16 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
     patterns = cfg.get("eligible_patterns")
     if cfg.get("auto_commit") is not True or not isinstance(patterns, list) or not patterns:
         return checkpoint(store, task_id, "monitor_only", reason="explicit project opt-in required")
+    if cfg.get("auto_async", True) is not False and os.environ.get("ESPAUT_STOP_WORKER") != "1":
+        # The IDE hook must not wait for acceptance tests, CI, or review polling.
+        # A detached worker owns the per-task lock and the full lifecycle.
+        try:
+            from espaut.stop_worker import launch_worker
+            if launch_worker(store, task_id, cwd, preserve_changes=preserve_changes):
+                return checkpoint(store, task_id, "running", reason="post-reply lifecycle started")
+        except (OSError, ValueError, RuntimeError) as exc:
+            return checkpoint(store, task_id, "operational_failure",
+                              reason=f"worker launch: {type(exc).__name__}")
     try:
         changes = worktree_status(cwd)
         if changes:
