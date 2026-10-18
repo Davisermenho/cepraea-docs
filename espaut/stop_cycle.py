@@ -6,6 +6,7 @@ the next Stop; they are never interpreted as approval.
 """
 from pathlib import Path
 
+from espaut.acceptance import verify_acceptance
 from espaut.checks import query_checks
 from espaut.events import log_event
 from espaut.gh_ops import pr_view_json, run_gh
@@ -117,6 +118,10 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
                     or remote.get("head_sha") != sha or remote.get("github_state") != "OPEN"):
                 return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
                                   revision=sha, reason="ready-for-review could not be verified")
+        acceptance = verify_acceptance(store, task, sha, cwd=cwd)
+        if acceptance.get("status") != "passed":
+            return checkpoint(store, task_id, "acceptance_pending", pr_number=pr_number,
+                              revision=sha, reason=acceptance.get("reason", "acceptance not verified"))
         checks = query_checks(store, task_id, pr_number, evaluated_revision=sha, cwd=cwd)
         reviews = collect_reviews(store, task_id, pr_number, cwd=cwd)
         reviews.update(is_draft=bool(remote.get("is_draft")),
