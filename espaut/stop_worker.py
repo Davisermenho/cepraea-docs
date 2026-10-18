@@ -68,12 +68,13 @@ def run_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = Fal
             result = run_stop_cycle(store, task, cwd=cwd, preserve_changes=preserve_changes)
             preserve_changes = False
             status = result.get("status", "unknown")
-            if status in {"merged", "blocked", "operational_failure",
+            if status in {"merged", "blocked",
                           "merge_unverified", "preservation_pending",
                           "monitor_only", "pr_pending_authorization",
                           "merge_pending_authorization"}:
                 return status
-            if status not in {"review_pending", "merge_pending", "pr_pending"}:
+            if status not in {"review_pending", "merge_pending", "pr_pending",
+                              "operational_failure"}:
                 return status
             time.sleep(seconds)
         checkpoint(store, task_id, "followup_timeout",
