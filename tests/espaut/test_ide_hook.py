@@ -67,14 +67,25 @@ class IdeHookTests(unittest.TestCase):
             launch.assert_called_once_with(self.store, "TASK-001", str(self.root),
                                            preserve_changes=True)
 
-    def test_excluded_files_alone_do_not_trigger_a_commit(self):
+    def test_excluded_files_alone_reconcile_existing_pr_without_commit(self):
         excluded = {"espaut/__pycache__/cli.cpython-312.pyc"}
         with patch.object(ide_hook, "dirty_paths", side_effect=[excluded, excluded]), \
-             patch("espaut.stop_worker.launch_worker") as launch:
+             patch.object(ide_hook, "git", return_value="feature/chat"), \
+             patch("espaut.stop_worker.launch_worker", return_value=True) as launch:
             ide_hook.run_hook("pre", self.session)
             message = ide_hook.run_hook("post", self.session)
-            self.assertIn("no new eligible", message)
-            launch.assert_not_called()
+            self.assertIn("queued", message)
+            launch.assert_called_once_with(self.store, "TASK-001", str(self.root),
+                                           preserve_changes=False)
+
+    def test_clean_stop_without_snapshot_reconciles_existing_pr(self):
+        with patch.object(ide_hook, "dirty_paths", return_value=set()), \
+             patch.object(ide_hook, "git", return_value="feature/chat"), \
+             patch("espaut.stop_worker.launch_worker", return_value=True) as launch:
+            msg = ide_hook.run_hook("post", self.session)
+            self.assertIn("queued", msg)
+            launch.assert_called_once_with(self.store, "TASK-001", str(self.root),
+                                           preserve_changes=False)
 
     def test_duplicate_active_tasks_are_not_arbitrarily_selected(self):
         write_json(self.store / "tasks" / "TASK-002.json", {
