@@ -93,6 +93,7 @@ class RuntimeDeploymentTests(unittest.TestCase):
         self.assertNotIn("ESPAUT-GLOBAL-HOOKS", rendered)
         self.assertIn(hook_command(self.runtime, "claude", "pre"), commands)
         self.assertIn(hook_command(self.runtime, "claude", "post"), commands)
+        self.assertIn("/usr/bin/python3 -B", hook_command(self.runtime, "claude", "pre"))
         self.assertTrue(Path(report["backup"]).is_file())
 
     def test_source_revision_verification_rejects_mismatch_and_dirty_tree(self):

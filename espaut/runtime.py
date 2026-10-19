@@ -292,7 +292,7 @@ def rollback_runtime(runtime_root: Path) -> dict[str, Any]:
 
 def hook_command(runtime_root: Path, provider: str, phase: str) -> str:
     script = runtime_root.resolve() / "current" / "espaut" / "runtime_hook.py"
-    return f'/usr/bin/python3 "{script}" --provider {provider} --phase {phase}'
+    return f'/usr/bin/python3 -B "{script}" --provider {provider} --phase {phase}'
 
 
 def _is_espaut_handler(handler: dict[str, Any]) -> bool:
