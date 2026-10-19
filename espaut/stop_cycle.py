@@ -13,7 +13,7 @@ from espaut.events import log_event
 from espaut.gh_ops import pr_view_json, run_gh
 from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, remote_head_sha, worktree_status
 from espaut.governance import evaluate_merge_eligibility
-from espaut.preservation import push_and_verify, run_preservation
+from espaut.preservation import classify_changes, push_and_verify, run_preservation
 from espaut.pullrequest import create_or_reuse_pr, query_pr_state, update_task_pr
 from espaut.review import collect_reviews, extract_pendencies
 from espaut.store import load_config, read_json, write_json
@@ -62,15 +62,22 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
                               reason=f"worker launch: {type(exc).__name__}")
     try:
         changes = worktree_status(cwd)
-        if changes:
+        eligible, excluded = classify_changes(changes, patterns)
+        # Only task-authorized changes require an original pre-task snapshot.
+        # Excluded artifacts (e.g. tracked __pycache__/*.pyc) are never staged
+        # by ESPAUT and must not block PR/check/acceptance reconciliation.
+        if eligible:
             if not preserve_changes:
-                return checkpoint(store, task_id, "blocked", reason="no verified pre-task snapshot")
+                return checkpoint(store, task_id, "blocked",
+                                  reason="eligible changes without verified pre-task snapshot",
+                                  eligible=eligible)
             result = run_preservation(store, task_id, f"espaut: post-reply {task_id}",
                                       cwd=cwd, dry_run=False,
                                       remote=cfg.get("push_remote", "origin"))
             if result.get("outcome") != "synchronized":
                 return checkpoint(store, task_id, "preservation_pending",
                                   reason=result.get("outcome", "unverified"))
+
         sha = head_sha(cwd)
         if not sha:
             return checkpoint(store, task_id, "blocked", reason="HEAD unavailable")
