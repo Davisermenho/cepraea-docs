@@ -59,11 +59,32 @@ def evaluate_criterion(name: str, passed: bool, detail: str) -> dict[str, Any]:
     }
 
 
-def check_c1_preservation(task: dict[str, Any], cwd: str | None = None) -> dict[str, Any]:
-    """C1: All local changes committed and pushed (or dispensed)."""
-    from espaut.git_ops import has_changes
-    if has_changes(cwd):
-        return evaluate_criterion("C1_preservation", False, "uncommitted local changes exist")
+def check_c1_preservation(
+    task: dict[str, Any],
+    cwd: str | None = None,
+    *,
+    eligible_patterns: list[str] | None = None,
+) -> dict[str, Any]:
+    """C1: No uncommitted *eligible* changes; excluded paths are dispensed by policy.
+
+    An unset/empty pattern list retains the original strict all-paths behavior.
+    Synchronization of the actual PR revision is verified separately by C2.
+    """
+    from espaut.git_ops import worktree_status
+    from espaut.preservation import classify_changes
+
+    entries = worktree_status(cwd)
+    eligible, excluded = classify_changes(entries, eligible_patterns or [])
+    if eligible:
+        return evaluate_criterion(
+            "C1_preservation", False,
+            f"uncommitted eligible local changes: {len(eligible)}"
+        )
+    if excluded:
+        return evaluate_criterion(
+            "C1_preservation", True,
+            f"no eligible uncommitted changes; {len(excluded)} excluded by project policy"
+        )
     return evaluate_criterion("C1_preservation", True, "no uncommitted changes")
 
 
@@ -227,7 +248,7 @@ def evaluate_merge_eligibility(
         task = {**task, "acceptance_results": {}}
 
     criteria = [
-        check_c1_preservation(task, cwd),
+        check_c1_preservation(task, cwd, eligible_patterns=config.get("eligible_patterns")),
         check_c2_sync(task, cwd),
         check_c3_verification(checks_report, ci_required=config.get("ci_required", False)),
         check_c4_review(reviews_report, review_required=config.get("review_required", True) is not False),
