@@ -23,8 +23,10 @@ from espaut.git_ops import (
     head_sha,
     is_git_repo,
     repo_root,
+    repository_slug,
     worktree_status,
 )
+from espaut.gh_ops import repository_info
 from espaut.governance import evaluate_merge_eligibility, make_decision, record_decision
 from espaut.preservation import detect_changes, run_preservation
 from espaut.pullrequest import create_or_reuse_pr, query_pr_state, update_task_pr
@@ -80,6 +82,15 @@ def _require_pr(task: dict[str, Any]) -> int | None:
     if not pr_number:
         print(f"error: task {task['task_id']} has no associated PR", file=sys.stderr)
     return pr_number
+
+
+def _github_repository(store: Path) -> str | None:
+    """Resolve the explicit target without depending on a gh default repo."""
+    configured = load_config(store).get("github_repository")
+    derived = repository_slug()
+    if configured and configured != derived:
+        raise RuntimeError("configured GitHub repository differs from origin")
+    return configured or derived
 
 
 # -- Core subcommands (init, status, task, preserve, pr) ----------------------
@@ -215,7 +226,11 @@ def cmd_pr_create(args: argparse.Namespace) -> int:
 
     title = args.title or task.get("title", "PR")
     body = args.body or f"Task: {task['task_id']}\n\n{task.get('objective', '')}"
-    result = create_or_reuse_pr(store, task, title, body, base=args.base)
+    config = load_config(store)
+    result = create_or_reuse_pr(
+        store, task, title, body, base=args.base,
+        head_owner=config.get("pr_head_owner"), repository=_github_repository(store),
+    )
 
     if result["status"] == "error":
         print(f"error: {result.get('error', 'unknown')}", file=sys.stderr)
@@ -238,7 +253,7 @@ def cmd_pr_status(args: argparse.Namespace) -> int:
     if not pr_number:
         return 1
 
-    state = query_pr_state(pr_number)
+    state = query_pr_state(pr_number, repository=_github_repository(store))
     print(f"task={task['task_id']}  pr={pr_number}")
     print(f"  github_state={state.get('github_state', '?')}")
     print(f"  head_sha={state.get('head_sha', '?')}")
@@ -259,7 +274,8 @@ def cmd_checks(args: argparse.Namespace) -> int:
     if not pr_number:
         return 1
 
-    report = query_checks(store, task["task_id"], pr_number)
+    report = query_checks(store, task["task_id"], pr_number,
+                          repository=_github_repository(store))
     checks = report.get("checks", [])
     aggregate = report.get("aggregate", compute_aggregate(checks))
 
@@ -282,7 +298,8 @@ def cmd_reviews(args: argparse.Namespace) -> int:
     if not pr_number:
         return 1
 
-    report = collect_reviews(store, task["task_id"], pr_number)
+    report = collect_reviews(store, task["task_id"], pr_number,
+                             repository=_github_repository(store))
     reviews = report.get("reviews", [])
     comments = report.get("comments", [])
     code_comments = [c for c in comments if c.get("comment_type") == "code"]
@@ -306,7 +323,8 @@ def cmd_pendencies(args: argparse.Namespace) -> int:
     if not pr_number:
         return 1
 
-    report = collect_reviews(store, task["task_id"], pr_number)
+    report = collect_reviews(store, task["task_id"], pr_number,
+                             repository=_github_repository(store))
     pendencies = extract_pendencies(report, task_id=task["task_id"], store=store)
     blocking = has_blocking_pendencies(pendencies)
 
@@ -332,20 +350,23 @@ def cmd_merge_check(args: argparse.Namespace) -> int:
     pendencies: list[dict[str, Any]] = []
 
     if pr_number:
-        remote_pr = query_pr_state(pr_number)
+        repository = _github_repository(store)
+        remote_pr = query_pr_state(pr_number, repository=repository)
         pr_head = remote_pr.get("head_sha")
         if remote_pr.get("status") != "available" or not pr_head:
             print("error: PR head not verifiable", file=sys.stderr)
             return 1
         checks_report = query_checks(
             store, task["task_id"], pr_number, evaluated_revision=pr_head,
+            repository=repository,
         )
-        reviews_report = collect_reviews(store, task["task_id"], pr_number)
+        reviews_report = collect_reviews(store, task["task_id"], pr_number,
+                                         repository=repository)
         reviews_report["review_decision"] = remote_pr.get("review_decision")
         reviews_report["is_draft"] = remote_pr.get("is_draft")
         pendencies = extract_pendencies(reviews_report, task_id=task["task_id"], store=store)
         # Recheck the remote head in case a new push invalidated the evidence.
-        if query_pr_state(pr_number).get("head_sha") != pr_head:
+        if query_pr_state(pr_number, repository=repository).get("head_sha") != pr_head:
             print("error: PR head changed during verification", file=sys.stderr)
             return 1
 
@@ -357,8 +378,15 @@ def cmd_merge_check(args: argparse.Namespace) -> int:
             if dec.get("task_id") == task["task_id"]:
                 decisions.append(dec)
 
+    repository = _github_repository(store)
+    permission = None
+    if repository:
+        permission = repository_info(repository).get("viewerPermission")
+    allowed = load_config(store).get("authorized_merge_repositories")
     result = evaluate_merge_eligibility(
         store, task, checks_report, reviews_report, pendencies, decisions,
+        repository=repository, technical_permission=permission,
+        repository_authorized=isinstance(allowed, list) and repository in allowed,
     )
 
     verdict = result.get("verdict", "?")
@@ -503,8 +531,11 @@ def cmd_verify_correction(args: argparse.Namespace) -> int:
     if not pr_number:
         return 1
 
-    checks_report = query_checks(store, task["task_id"], pr_number)
-    reviews_report = collect_reviews(store, task["task_id"], pr_number)
+    repository = _github_repository(store)
+    checks_report = query_checks(store, task["task_id"], pr_number,
+                                 repository=repository)
+    reviews_report = collect_reviews(store, task["task_id"], pr_number,
+                                     repository=repository)
     pendencies = extract_pendencies(reviews_report, task_id=task["task_id"], store=store)
     blocking = has_blocking_pendencies(pendencies)
 

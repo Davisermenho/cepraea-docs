@@ -16,6 +16,7 @@ def find_existing_pr(
     task: dict[str, Any],
     cwd: str | None = None,
     head_owner: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any] | None:
     """Find an existing open PR matching the task's branch."""
     branch = task.get("branch_name")
@@ -23,14 +24,16 @@ def find_existing_pr(
         return None
 
     if task.get("pr_number"):
-        pr = pr_view_json(task["pr_number"], cwd=cwd)
+        pr = (pr_view_json(task["pr_number"], cwd=cwd, repository=repository)
+              if repository else pr_view_json(task["pr_number"], cwd=cwd))
         if pr and pr.get("state") in ("OPEN", "open"):
             return pr
 
     fields = ["number", "title", "headRefName", "state", "url"]
     if head_owner:
         fields.append("headRepositoryOwner")
-    prs = pr_list_json(fields=fields, cwd=cwd)
+    prs = (pr_list_json(fields=fields, cwd=cwd, repository=repository)
+           if repository else pr_list_json(fields=fields, cwd=cwd))
     for pr in prs:
         owner = (pr.get("headRepositoryOwner") or {}).get("login") if head_owner else None
         if pr.get("headRefName") == branch and (not head_owner or owner == head_owner):
@@ -46,11 +49,12 @@ def create_or_reuse_pr(
     base: str | None = None,
     cwd: str | None = None,
     head_owner: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any]:
     """Create a new PR or reuse an existing one. Returns a result dict."""
     task_id = task["task_id"]
 
-    existing = find_existing_pr(task, cwd, head_owner=head_owner)
+    existing = find_existing_pr(task, cwd, head_owner=head_owner, repository=repository)
     if existing:
         log_event(
             store,
@@ -68,7 +72,9 @@ def create_or_reuse_pr(
 
     head = task.get("branch_name") or current_branch(cwd)
     pr_head = f"{head_owner}:{head}" if head_owner else head
-    pr = pr_create(title, body, base=base, head=pr_head, cwd=cwd)
+    pr = (pr_create(title, body, base=base, head=pr_head, cwd=cwd,
+                    repository=repository)
+          if repository else pr_create(title, body, base=base, head=pr_head, cwd=cwd))
     if pr is None:
         log_event(
             store,
@@ -105,18 +111,17 @@ def create_or_reuse_pr(
 def query_pr_state(
     pr_number: int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any]:
     """Query the current state of a PR from GitHub."""
-    pr = pr_view_json(
-        pr_number,
-        fields=[
+    fields = [
             "number", "title", "headRefName", "baseRefName",
             "state", "url", "headRefOid", "mergeCommit",
             "mergedAt", "isDraft", "reviewDecision",
-            "statusCheckRollup",
-        ],
-        cwd=cwd,
-    )
+            "statusCheckRollup", "headRepositoryOwner",
+        ]
+    pr = (pr_view_json(pr_number, fields=fields, cwd=cwd, repository=repository)
+          if repository else pr_view_json(pr_number, fields=fields, cwd=cwd))
     if pr is None:
         return {"status": "unavailable", "pr_number": pr_number}
 
@@ -126,6 +131,7 @@ def query_pr_state(
         "github_state": pr.get("state"),
         "head_sha": pr.get("headRefOid"),
         "head_branch": pr.get("headRefName"),
+        "head_owner": (pr.get("headRepositoryOwner") or {}).get("login"),
         "base_branch": pr.get("baseRefName"),
         "url": pr.get("url"),
         "is_draft": pr.get("isDraft", False),
@@ -139,6 +145,7 @@ def reconcile_pr_state(
     store: Path,
     task: dict[str, Any],
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any]:
     """Reconcile local task state with remote PR state.
 
@@ -149,7 +156,7 @@ def reconcile_pr_state(
     if not pr_number:
         return {"status": "no_pr", "task_id": task_id}
 
-    remote = query_pr_state(pr_number, cwd)
+    remote = query_pr_state(pr_number, cwd, repository=repository)
     if remote["status"] == "unavailable":
         log_event(
             store,

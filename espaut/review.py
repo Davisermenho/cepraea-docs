@@ -159,12 +159,13 @@ def collect_reviews(
     task_id: str,
     pr_number: int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any]:
     """Collect all reviews, comments, and threads for a PR. Returns a report."""
-    reviews = pr_reviews_json(pr_number, cwd=cwd)
-    general_comments = pr_comments_json(pr_number, cwd=cwd)
-    code_comments = pr_review_comments_json(pr_number, cwd=cwd)
-    threads = pr_review_threads_json(pr_number, cwd=cwd)
+    reviews = pr_reviews_json(pr_number, cwd=cwd, repository=repository)
+    general_comments = pr_comments_json(pr_number, cwd=cwd, repository=repository)
+    code_comments = pr_review_comments_json(pr_number, cwd=cwd, repository=repository)
+    threads = pr_review_threads_json(pr_number, cwd=cwd, repository=repository)
     thread_map: dict[int, dict[str, Any]] = {}
     for thread in threads:
         for comment in thread.get("comments", {}).get("nodes", []):

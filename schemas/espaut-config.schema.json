@@ -45,9 +45,44 @@
     "ai_enabled": {
       "type": "boolean"
     },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "github_repository": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "authorized_merge_repositories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+      },
+      "uniqueItems": true
+    },
     "auto_commit": {
       "type": "boolean"
     },
+    "auto_task": {"type": "boolean"},
+    "auto_pr": {"type": "boolean"},
+    "auto_ready": {"type": "boolean"},
+    "auto_merge": {"type": "boolean"},
+    "auto_followup": {"type": "boolean"},
+    "auto_async": {"type": "boolean"},
+    "push_remote": {"type": "string", "minLength": 1},
+    "pr_head_owner": {"type": ["string", "null"]},
+    "pr_base_branch": {"type": "string", "minLength": 1},
+    "review_required": {"type": "boolean"},
+    "followup_interval_seconds": {"type": "integer", "minimum": 5, "maximum": 300},
+    "followup_timeout_seconds": {"type": "integer", "minimum": 60, "maximum": 86400},
+    "acceptance_commands": {"type": "object"},
+    "default_acceptance_criteria": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "acceptance_timeout_seconds": {"type": "integer", "minimum": 1},
     "resolver_roles": {
       "type": "array",
       "items": {
@@ -59,7 +94,8 @@
       "enum": [
         "manual",
         "semi_auto",
-        "auto"
+        "auto",
+        "automatic"
       ]
     },
     "correction_max_attempts": {

@@ -37,6 +37,7 @@ class ExcludedArtifactsTests(unittest.TestCase):
             "status": "available",
             "github_state": "OPEN",
             "head_sha": self.sha,
+            "base_branch": "main",
             "is_draft": False,
             "review_decision": None,
         }
@@ -47,6 +48,8 @@ class ExcludedArtifactsTests(unittest.TestCase):
              patch.object(stop_cycle, "worktree_status", return_value=status_entries), \
              patch.object(stop_cycle, "head_sha", return_value=self.sha), \
              patch.object(stop_cycle, "remote_head_sha", return_value=self.sha), \
+             patch.object(stop_cycle, "repository_slug", return_value="Davisermenho/cepraea-docs"), \
+             patch.object(stop_cycle, "repository_info", return_value={"nameWithOwner": "Davisermenho/cepraea-docs", "viewerPermission": "READ"}), \
              patch.object(stop_cycle, "query_pr_state", return_value=self.clean_remote), \
              patch.object(stop_cycle, "verify_acceptance", return_value={"status": "passed"}) as acceptance, \
              patch.object(stop_cycle, "run_preservation") as preservation, \

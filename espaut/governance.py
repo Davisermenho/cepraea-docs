@@ -88,7 +88,9 @@ def check_c1_preservation(
     return evaluate_criterion("C1_preservation", True, "no uncommitted changes")
 
 
-def check_c2_sync(task: dict[str, Any], cwd: str | None = None) -> dict[str, Any]:
+def check_c2_sync(
+    task: dict[str, Any], cwd: str | None = None, *, repository: str | None = None,
+) -> dict[str, Any]:
     """C2: Branch is up-to-date with remote."""
     local = head_sha(cwd)
     if task.get("pr_number"):
@@ -96,7 +98,7 @@ def check_c2_sync(task: dict[str, Any], cwd: str | None = None) -> dict[str, Any
         # Query the actual GitHub PR head instead of assuming origin/<branch>.
         from espaut.pullrequest import query_pr_state
         try:
-            state = query_pr_state(int(task["pr_number"]), cwd=cwd)
+            state = query_pr_state(int(task["pr_number"]), cwd=cwd, repository=repository)
         except Exception as exc:
             return evaluate_criterion("C2_sync", False, f"PR head could not be queried: {type(exc).__name__}")
         remote = state.get("head_sha") if state.get("status") == "available" else None
@@ -182,8 +184,17 @@ def check_c7_authority(
     decisions: list[dict[str, Any]],
     *,
     automatic_policy: bool = False,
+    technical_permission: str | None = None,
+    repository_authorized: bool | None = None,
 ) -> dict[str, Any]:
     """C7: Merge authorization from human authority."""
+    if repository_authorized is False:
+        return evaluate_criterion("C7_authority", False, "target repository is outside the authorized merge policy")
+    if technical_permission is not None and technical_permission not in {"WRITE", "MAINTAIN", "ADMIN"}:
+        return evaluate_criterion(
+            "C7_authority", False,
+            f"authenticated GitHub permission cannot merge: {technical_permission}",
+        )
     if automatic_policy:
         return evaluate_criterion("C7_authority", True, "pre-authorized by explicit project automatic merge policy")
     merge_decisions = [
@@ -236,6 +247,10 @@ def evaluate_merge_eligibility(
     pendencies: list[dict[str, Any]],
     decisions: list[dict[str, Any]],
     cwd: str | None = None,
+    *,
+    repository: str | None = None,
+    technical_permission: str | None = None,
+    repository_authorized: bool | None = None,
 ) -> dict[str, Any]:
     """Evaluate all 8 merge eligibility criteria.
 
@@ -249,14 +264,15 @@ def evaluate_merge_eligibility(
 
     criteria = [
         check_c1_preservation(task, cwd, eligible_patterns=config.get("eligible_patterns")),
-        check_c2_sync(task, cwd),
+        check_c2_sync(task, cwd, repository=repository),
         check_c3_verification(checks_report, ci_required=config.get("ci_required", False)),
         check_c4_review(reviews_report, review_required=config.get("review_required", True) is not False),
         check_c5_pendencies(pendencies),
         check_c6_acceptance(task),
         check_c7_authority(task, decisions, automatic_policy=(
             config.get("auto_merge") is True and config.get("merge_policy") == "automatic"
-        )),
+        ), technical_permission=technical_permission,
+           repository_authorized=repository_authorized),
         check_c8_currency(checks_report, current_head),
     ]
 

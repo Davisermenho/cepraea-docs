@@ -20,6 +20,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "ai_enabled": False,
     "ai_sharing_authorized": False,
     "auto_commit": False,
+    "auto_task": False,
     "auto_pr": False,
     "auto_ready": False,
     "auto_merge": False,
@@ -39,6 +40,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "correction_test_command": [],
     "retention_policy": "retain_all",
     "ci_required": False,
+    "policy_version": "0.2.0",
+    "github_repository": None,
+    "authorized_merge_repositories": [],
+    "default_acceptance_criteria": [],
 }
 
 

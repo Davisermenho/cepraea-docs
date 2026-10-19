@@ -28,6 +28,17 @@ def make_event(
     outcome: str | None = None,
     evidence_id: str | None = None,
     detail: str | None = None,
+    session_id: str | None = None,
+    repository: str | None = None,
+    worktree: str | None = None,
+    policy_version: str | None = None,
+    implementation_sha: str | None = None,
+    triggering_hook: str | None = None,
+    run_id: str | None = None,
+    input_sha: str | None = None,
+    output_sha: str | None = None,
+    pr_number: int | None = None,
+    cause: str | None = None,
 ) -> dict[str, Any]:
     """Build an event record without persisting it."""
     record: dict[str, Any] = {
@@ -52,6 +63,20 @@ def make_event(
         record["evidence_id"] = evidence_id
     if detail is not None:
         record["detail"] = detail
+    optional = {
+        "session_id": session_id,
+        "repository": repository,
+        "worktree": worktree,
+        "policy_version": policy_version,
+        "implementation_sha": implementation_sha,
+        "triggering_hook": triggering_hook,
+        "run_id": run_id,
+        "input_sha": input_sha,
+        "output_sha": output_sha,
+        "pr_number": pr_number,
+        "cause": cause,
+    }
+    record.update({key: value for key, value in optional.items() if value is not None})
     return record
 
 

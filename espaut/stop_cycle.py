@@ -10,8 +10,8 @@ from pathlib import Path
 from espaut.acceptance import verify_acceptance
 from espaut.checks import query_checks
 from espaut.events import log_event
-from espaut.gh_ops import pr_view_json, run_gh
-from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, remote_head_sha, worktree_status
+from espaut.gh_ops import pr_view_json, repository_info, run_gh
+from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, remote_head_sha, repository_slug, worktree_status
 from espaut.governance import evaluate_merge_eligibility
 from espaut.preservation import classify_changes, push_and_verify, run_preservation
 from espaut.pullrequest import create_or_reuse_pr, query_pr_state, update_task_pr
@@ -88,6 +88,17 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
             if synced.get("status") != "synchronized":
                 return checkpoint(store, task_id, "preservation_pending",
                                   revision=sha, reason="existing local commit not verified on remote")
+        derived_repository = repository_slug(cwd, "origin")
+        configured_repository = cfg.get("github_repository")
+        if configured_repository and configured_repository != derived_repository:
+            return checkpoint(
+                store, task_id, "blocked", revision=sha,
+                reason="configured GitHub repository differs from explicit origin remote",
+            )
+        repository = configured_repository or derived_repository
+        if not repository:
+            return checkpoint(store, task_id, "blocked", revision=sha,
+                              reason="GitHub repository identity unavailable")
         pr_number = task.get("pr_number")
         if not pr_number:
             if cfg.get("auto_pr") is not True:
@@ -97,7 +108,7 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
                 store, task, task.get("title") or task_id,
                 f"Task: {task_id}\n\n{task.get('objective', '')}",
                 base=cfg.get("pr_base_branch") or "main", cwd=cwd,
-                head_owner=cfg.get("pr_head_owner"))
+                head_owner=cfg.get("pr_head_owner"), repository=repository)
             pr_number = pr.get("pr_number")
             if pr.get("status") not in ("created", "reused") or not pr_number:
                 return checkpoint(store, task_id, "pr_pending",
@@ -105,7 +116,7 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
             update_task_pr(task, int(pr_number), pr.get("url"), head_sha=sha)
             write_json(store / "tasks" / f"{task_id}.json", task)
         pr_number = int(pr_number)
-        remote = query_pr_state(pr_number, cwd=cwd)
+        remote = query_pr_state(pr_number, cwd=cwd, repository=repository)
         if remote.get("status") != "available":
             return checkpoint(store, task_id, "pr_pending", pr_number=pr_number,
                               reason="PR query unavailable")
@@ -118,6 +129,10 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         if remote.get("github_state") != "OPEN" or remote.get("head_sha") != sha:
             return checkpoint(store, task_id, "blocked", pr_number=pr_number,
                               revision=sha, reason="PR closed or remote head mismatch")
+        if (remote.get("base_branch") != (cfg.get("pr_base_branch") or "main")
+                or (cfg.get("pr_head_owner") and remote.get("head_owner") != cfg.get("pr_head_owner"))):
+            return checkpoint(store, task_id, "blocked", pr_number=pr_number,
+                              revision=sha, reason="PR owner/head/base identity mismatch")
         if remote.get("is_draft"):
             if cfg.get("auto_ready") is not True:
                 return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
@@ -126,7 +141,7 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
             if ready.returncode != 0:
                 return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
                                   revision=sha, reason=f"GitHub rejected ready-for-review: exit={ready.returncode}")
-            remote = query_pr_state(pr_number, cwd=cwd)
+            remote = query_pr_state(pr_number, cwd=cwd, repository=repository)
             if (remote.get("status") != "available" or remote.get("is_draft")
                     or remote.get("head_sha") != sha or remote.get("github_state") != "OPEN"):
                 return checkpoint(store, task_id, "review_pending", pr_number=pr_number,
@@ -135,14 +150,26 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         if acceptance.get("status") != "passed":
             return checkpoint(store, task_id, "acceptance_pending", pr_number=pr_number,
                               revision=sha, reason=acceptance.get("reason", "acceptance not verified"))
-        checks = query_checks(store, task_id, pr_number, evaluated_revision=sha, cwd=cwd)
-        reviews = collect_reviews(store, task_id, pr_number, cwd=cwd)
+        checks = query_checks(store, task_id, pr_number, evaluated_revision=sha, cwd=cwd,
+                              repository=repository)
+        reviews = collect_reviews(store, task_id, pr_number, cwd=cwd,
+                                  repository=repository)
         reviews.update(is_draft=bool(remote.get("is_draft")),
                        review_decision=remote.get("review_decision"))
         pending = extract_pendencies(reviews, task_id=task_id, store=store)
         decisions = [read_json(p) for p in sorted((store / "decisions").glob("*.json"))]
-        gate = evaluate_merge_eligibility(store, task, checks, reviews, pending,
-                                           decisions, cwd=cwd)
+        repo = repository_info(repository, cwd=cwd)
+        permission = repo.get("viewerPermission")
+        allowed_repositories = cfg.get("authorized_merge_repositories")
+        repository_authorized = (
+            isinstance(allowed_repositories, list)
+            and repository in allowed_repositories
+        )
+        gate = evaluate_merge_eligibility(
+            store, task, checks, reviews, pending, decisions, cwd=cwd,
+            repository=repository, technical_permission=permission,
+            repository_authorized=repository_authorized,
+        )
         gates = {c["criterion"]: c["status"] for c in gate["criteria"]}
         required_review = cfg.get("review_required", True) is not False
         if gate["verdict"] != "APTA_PARA_INTEGRACAO" or (required_review and remote.get("review_decision") != "APPROVED"):
@@ -157,7 +184,10 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
                               pr_number=pr_number, revision=sha, gates=gates,
                               reason="auto_merge requires a preauthorized project policy or an explicit revision decision")
         # GitHub HEAD must remain exactly the reviewed revision.
-        current = pr_view_json(pr_number, ["state", "isDraft", "headRefOid", "mergeStateStatus"], cwd=cwd)
+        current = pr_view_json(
+            pr_number, ["state", "isDraft", "headRefOid", "mergeStateStatus"],
+            cwd=cwd, repository=repository,
+        )
         if (not current or current.get("state") != "OPEN"
                 or current.get("isDraft") is not False
                 or current.get("headRefOid") != sha
@@ -167,12 +197,14 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         method = cfg.get("merge_method", "merge")
         if method not in ("merge", "squash", "rebase"):
             return checkpoint(store, task_id, "blocked", reason="unsupported merge method")
-        response = run_gh("pr", "merge", str(pr_number), f"--{method}",
-                          "--match-head-commit", sha, cwd=cwd)
+        response = run_gh(
+            "pr", "merge", str(pr_number), f"--{method}",
+            "--match-head-commit", sha, "--repo", repository, cwd=cwd,
+        )
         if response.returncode != 0:
             return checkpoint(store, task_id, "merge_pending", pr_number=pr_number,
                               revision=sha, reason=f"GitHub rejected merge: exit={response.returncode}")
-        verified = query_pr_state(pr_number, cwd=cwd)
+        verified = query_pr_state(pr_number, cwd=cwd, repository=repository)
         if not verified.get("merged_at") or not verified.get("merge_commit"):
             return checkpoint(store, task_id, "merge_unverified", pr_number=pr_number,
                               revision=sha, reason="GitHub did not confirm merge")
