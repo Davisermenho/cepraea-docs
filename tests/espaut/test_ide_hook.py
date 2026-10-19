@@ -49,6 +49,46 @@ class IdeHookTests(unittest.TestCase):
             self.assertIn("pre-existing", msg)
             launch.assert_not_called()
 
+    def test_excluded_preexisting_bytecode_does_not_block_new_eligible_file(self):
+        write_json(self.store / "config.json", {
+            "auto_commit": True,
+            "eligible_patterns": ["new.py"],
+            "auto_pr": False,
+            "auto_merge": False,
+        })
+        excluded = {"espaut/__pycache__/cli.cpython-312.pyc", "old-untracked.txt"}
+        with patch.object(ide_hook, "dirty_paths",
+                          side_effect=[excluded, excluded | {"new.py"}]), \
+             patch.object(ide_hook, "git", return_value="feature/chat"), \
+             patch("espaut.stop_worker.launch_worker", return_value=True) as launch:
+            self.assertEqual(ide_hook.run_hook("pre", self.session), "")
+            message = ide_hook.run_hook("post", self.session)
+            self.assertIn("queued", message)
+            launch.assert_called_once_with(self.store, "TASK-001", str(self.root),
+                                           preserve_changes=True)
+
+    def test_excluded_files_alone_do_not_trigger_a_commit(self):
+        excluded = {"espaut/__pycache__/cli.cpython-312.pyc"}
+        with patch.object(ide_hook, "dirty_paths", side_effect=[excluded, excluded]), \
+             patch("espaut.stop_worker.launch_worker") as launch:
+            ide_hook.run_hook("pre", self.session)
+            message = ide_hook.run_hook("post", self.session)
+            self.assertIn("no new eligible", message)
+            launch.assert_not_called()
+
+    def test_duplicate_active_tasks_are_not_arbitrarily_selected(self):
+        write_json(self.store / "tasks" / "TASK-002.json", {
+            "task_id": "TASK-002", "branch_name": "feature/chat",
+            "state": "EM_EXECUCAO",
+        })
+        with patch.object(ide_hook, "dirty_paths", side_effect=[set(), {"new.py"}]), \
+             patch.object(ide_hook, "git", return_value="feature/chat"), \
+             patch("espaut.stop_worker.launch_worker") as launch:
+            ide_hook.run_hook("pre", self.session)
+            message = ide_hook.run_hook("post", self.session)
+            self.assertIn("one active task", message)
+            launch.assert_not_called()
+
     def test_project_mismatch_is_not_processed(self):
         with patch.object(ide_hook, "dirty_paths") as dirty:
             message = ide_hook.run_hook("post", {"cwd": str(self.root.parent),
