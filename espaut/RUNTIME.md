@@ -34,3 +34,8 @@ python3 -B -m espaut.runtime --runtime-root CAMINHO rollback
 Cada evento registra provedor, sessão, worktree, hook, versão, SHA da
 implementação, política e resultado em `state/events.jsonl`, sem armazenar o
 texto do prompt ou credenciais.
+
+Depois de comprovar o dispatcher global, a função Python
+`decommission_project_hook_config` remove somente handlers ESPAUT locais e
+guarda a configuração original em `backups/project-hook-configs/`. Hooks de
+terceiros e demais chaves permanecem intactos.

@@ -300,6 +300,30 @@ def _is_espaut_handler(handler: dict[str, Any]) -> bool:
     return any(marker in command for marker in ESPAUT_MARKERS)
 
 
+def _remove_espaut_handlers(config: dict[str, Any]) -> int:
+    hooks = config.setdefault("hooks", {})
+    if not isinstance(hooks, dict):
+        raise RuntimeDeploymentError("hooks must be an object")
+    removed = 0
+    for event, groups in list(hooks.items()):
+        if not isinstance(groups, list):
+            continue
+        retained_groups = []
+        for group in groups:
+            if not isinstance(group, dict) or not isinstance(group.get("hooks"), list):
+                retained_groups.append(group)
+                continue
+            retained_handlers = [
+                handler for handler in group["hooks"]
+                if not (isinstance(handler, dict) and _is_espaut_handler(handler))
+            ]
+            removed += len(group["hooks"]) - len(retained_handlers)
+            if retained_handlers:
+                retained_groups.append({**group, "hooks": retained_handlers})
+        hooks[event] = retained_groups
+    return removed
+
+
 def install_hook_config(path: Path, runtime_root: Path, provider: str) -> dict[str, Any]:
     """Replace only ESPAUT handlers, preserving every third-party setting."""
     path = path.resolve()
@@ -310,23 +334,8 @@ def install_hook_config(path: Path, runtime_root: Path, provider: str) -> dict[s
         raise RuntimeDeploymentError(f"invalid hook config: {path}") from exc
     if not isinstance(config, dict):
         raise RuntimeDeploymentError(f"hook config must be an object: {path}")
-    hooks = config.setdefault("hooks", {})
-    if not isinstance(hooks, dict):
-        raise RuntimeDeploymentError(f"hooks must be an object: {path}")
-    removed = 0
-    for event, groups in list(hooks.items()):
-        if not isinstance(groups, list):
-            continue
-        retained_groups = []
-        for group in groups:
-            if not isinstance(group, dict) or not isinstance(group.get("hooks"), list):
-                retained_groups.append(group)
-                continue
-            retained_handlers = [h for h in group["hooks"] if not (isinstance(h, dict) and _is_espaut_handler(h))]
-            removed += len(group["hooks"]) - len(retained_handlers)
-            if retained_handlers:
-                retained_groups.append({**group, "hooks": retained_handlers})
-        hooks[event] = retained_groups
+    removed = _remove_espaut_handlers(config)
+    hooks = config["hooks"]
     for event, phase in (("UserPromptSubmit", "pre"), ("Stop", "post")):
         hooks.setdefault(event, []).append({
             "hooks": [{
@@ -346,6 +355,35 @@ def install_hook_config(path: Path, runtime_root: Path, provider: str) -> dict[s
     mode = path.stat().st_mode & 0o777 if path.exists() else 0o600
     _atomic_json(path, config, mode)
     return {"status": "installed", "path": str(path), "backup": str(backup), "removed": removed}
+
+
+def decommission_project_hook_config(
+    path: Path, runtime_root: Path, provider: str,
+) -> dict[str, Any]:
+    """Remove only project-local ESPAUT handlers after global migration."""
+    path = path.resolve()
+    if not path.is_file():
+        return {"status": "absent", "path": str(path), "removed": 0}
+    original = path.read_bytes()
+    try:
+        config = json.loads(original.decode("utf-8"))
+    except (UnicodeDecodeError, ValueError) as exc:
+        raise RuntimeDeploymentError(f"invalid hook config: {path}") from exc
+    if not isinstance(config, dict):
+        raise RuntimeDeploymentError(f"hook config must be an object: {path}")
+    removed = _remove_espaut_handlers(config)
+    backup_dir = runtime_root.resolve() / "backups" / "project-hook-configs"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    identity = hashlib.sha256(str(path).encode()).hexdigest()[:10]
+    backup = backup_dir / f"{provider}-{identity}-{stamp}-{hashlib.sha256(original).hexdigest()[:12]}.json"
+    backup.write_bytes(original)
+    os.chmod(backup, 0o600)
+    _atomic_json(path, config, path.stat().st_mode & 0o777)
+    return {
+        "status": "decommissioned" if removed else "unchanged",
+        "path": str(path), "backup": str(backup), "removed": removed,
+    }
 
 
 def deploy_and_install(

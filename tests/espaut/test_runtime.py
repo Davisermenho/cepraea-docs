@@ -15,6 +15,7 @@ sys.path.insert(0, str(REPO))
 from espaut.runtime import (
     RuntimeDeploymentError,
     _run_validation,
+    decommission_project_hook_config,
     deploy_and_install,
     _verify_source_revision,
     deploy_runtime,
@@ -168,6 +169,24 @@ class RuntimeDeploymentTests(unittest.TestCase):
         status = runtime_status(self.runtime, {"codex": config})
         self.assertEqual(status["status"], "active")
         self.assertTrue(status["hooks"]["codex"])
+
+    def test_project_decommission_is_reversible_and_preserves_third_party(self):
+        config = self.root / "project-hooks.json"
+        vendor = "/opt/vendor/hook"
+        config.write_text(json.dumps({
+            "setting": "keep",
+            "hooks": {"Stop": [{"hooks": [
+                {"type": "command", "command": "python espaut/ide_hook.py post"},
+                {"type": "command", "command": vendor},
+            ]}]},
+        }), encoding="utf-8")
+        report = decommission_project_hook_config(config, self.runtime, "codex")
+        current = json.loads(config.read_text(encoding="utf-8"))
+        backup = json.loads(Path(report["backup"]).read_text(encoding="utf-8"))
+        self.assertEqual(report["removed"], 1)
+        self.assertEqual(current["setting"], "keep")
+        self.assertIn(vendor, json.dumps(current))
+        self.assertIn("espaut/ide_hook.py", json.dumps(backup))
 
 
 class RuntimeHookTests(unittest.TestCase):
