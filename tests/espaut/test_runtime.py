@@ -157,6 +157,17 @@ class RuntimeDeploymentTests(unittest.TestCase):
         self.assertEqual((self.runtime / "current").resolve(), old_target)
         self.assertEqual(first["release"], runtime_status(self.runtime)["release"])
 
+    def test_runtime_status_parses_escaped_json_hook_commands(self):
+        deploy_runtime(
+            REPO, self.runtime, implementation_sha="f" * 40,
+            validation_command=self.validation,
+        )
+        config = self.root / "hooks.json"
+        install_hook_config(config, self.runtime, "codex")
+        status = runtime_status(self.runtime, {"codex": config})
+        self.assertEqual(status["status"], "active")
+        self.assertTrue(status["hooks"]["codex"])
+
 
 class RuntimeHookTests(unittest.TestCase):
     def setUp(self):

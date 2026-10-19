@@ -419,8 +419,21 @@ def runtime_status(runtime_root: Path, hook_configs: dict[str, Path] | None = No
     if hook_configs:
         installed = {}
         for provider, path in hook_configs.items():
-            text = path.read_text(encoding="utf-8") if path.is_file() else ""
-            installed[provider] = all(hook_command(runtime_root, provider, phase) in text for phase in ("pre", "post"))
+            commands: set[str] = set()
+            if path.is_file():
+                try:
+                    config = json.loads(path.read_text(encoding="utf-8"))
+                    for groups in config.get("hooks", {}).values():
+                        for group in groups if isinstance(groups, list) else []:
+                            for handler in group.get("hooks", []) if isinstance(group, dict) else []:
+                                if isinstance(handler, dict) and isinstance(handler.get("command"), str):
+                                    commands.add(handler["command"])
+                except (OSError, ValueError, AttributeError):
+                    commands = set()
+            installed[provider] = all(
+                hook_command(runtime_root, provider, phase) in commands
+                for phase in ("pre", "post")
+            )
         result["hooks"] = installed
         if not all(installed.values()):
             result["status"] = "invalid"
