@@ -143,6 +143,7 @@ def test_cmd_merge_check() -> dict[str, str]:
              patch("espaut.cli.query_checks", return_value={}), \
              patch("espaut.cli.collect_reviews", return_value={"reviews": [], "comments": [], "code_comments": []}), \
              patch("espaut.cli.extract_pendencies", return_value=[]), \
+             patch("espaut.cli.repository_info", return_value={"viewerPermission": "WRITE"}), \
              patch("espaut.cli.evaluate_merge_eligibility", return_value=mock_result):
             sys.argv = ["espaut", "merge-check", "--task", task_id]
             rc = main()

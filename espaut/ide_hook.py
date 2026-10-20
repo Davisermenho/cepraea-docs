@@ -7,6 +7,7 @@ performed by the Python worker after Stop, never by the coding agent.
 """
 from __future__ import annotations
 
+import fnmatch
 import hashlib
 import json
 import os
@@ -96,18 +97,32 @@ def run_hook(phase: str, payload: dict) -> str:
         return ""
     if phase != "post":
         return ""
-    if cfg.get("auto_commit") is not True or not cfg.get("eligible_patterns"):
+    patterns = cfg.get("eligible_patterns")
+    if cfg.get("auto_commit") is not True or not isinstance(patterns, list) or not patterns:
         return "ESPAUT: automatic preservation is not enabled by project policy."
+    if not all(isinstance(pattern, str) and pattern for pattern in patterns):
+        return "ESPAUT: invalid eligible_patterns in project policy."
     previous: dict = {}
     if snapshot.exists():
         try:
             previous = json.loads(snapshot.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             return "ESPAUT: invalid pre-task snapshot; no action."
-    if status and (not previous or previous.get("root") != str(ROOT)):
+    # Preserve only eligible work created after the pre-task snapshot.
+    # A Stop with no new eligible files may still reconcile an existing PR.
+    preexisting = set(previous.get("dirty", []))
+    preexisting_eligible = sorted(
+        path for path in preexisting
+        if any(fnmatch.fnmatch(path, pattern) for pattern in patterns)
+    )
+    newly_eligible = sorted(
+        path for path in status - preexisting
+        if any(fnmatch.fnmatch(path, pattern) for pattern in patterns)
+    )
+    if newly_eligible and (not previous or previous.get("root") != str(ROOT)):
         return "ESPAUT: missing pre-task snapshot; unsafe to commit."
-    if status and set(previous.get("dirty", [])):
-        return "ESPAUT: pre-existing uncommitted work; automatic commit blocked."
+    if preexisting_eligible:
+        return "ESPAUT: pre-existing eligible files; automatic commit blocked."
     branch = git("branch", "--show-current")
     if not branch or branch in ("main", "master"):
         return "ESPAUT: protected/default branch; no Git changes."
@@ -115,7 +130,7 @@ def run_hook(phase: str, payload: dict) -> str:
     if task is None:
         return "ESPAUT: one active task associated with this branch is required."
     from espaut.stop_worker import launch_worker
-    if not launch_worker(store, task["task_id"], str(ROOT), preserve_changes=bool(status)):
+    if not launch_worker(store, task["task_id"], str(ROOT), preserve_changes=bool(newly_eligible)):
         return "ESPAUT: worker not started; inspect project policy."
     return "ESPAUT: automatic Git/GitHub lifecycle queued."
 

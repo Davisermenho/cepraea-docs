@@ -106,9 +106,10 @@ def query_checks(
     pr_number: int,
     evaluated_revision: str | None = None,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any]:
     """Query checks for a PR and return a normalized report."""
-    raw_checks = pr_checks_json(pr_number, cwd=cwd)
+    raw_checks = pr_checks_json(pr_number, cwd=cwd, repository=repository)
 
     if not raw_checks:
         config = load_config(store)

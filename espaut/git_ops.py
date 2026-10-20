@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import subprocess
+import re
 from typing import Any
 
 from espaut.security import validate_subprocess_args
@@ -146,6 +147,31 @@ def remote_head_sha(
     if r.returncode != 0 or not r.stdout.strip():
         return None
     return r.stdout.split()[0]
+
+
+def repository_slug(cwd: str | None = None, remote: str = "origin") -> str | None:
+    """Resolve ``owner/repository`` from an explicit Git remote URL.
+
+    Credentials embedded in a URL are discarded and never returned.
+    """
+    result = run_git("remote", "get-url", remote, cwd=cwd)
+    if result.returncode != 0:
+        return None
+    url = result.stdout.strip()
+    path = ""
+    if url.startswith("git@") and ":" in url:
+        path = url.split(":", 1)[1]
+    elif "://" in url:
+        from urllib.parse import urlsplit
+        path = urlsplit(url).path.lstrip("/")
+    elif url.startswith("ssh://"):
+        from urllib.parse import urlsplit
+        path = urlsplit(url).path.lstrip("/")
+    if path.endswith(".git"):
+        path = path[:-4]
+    if re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", path):
+        return path
+    return None
 
 
 def branch_exists(name: str, cwd: str | None = None) -> bool:

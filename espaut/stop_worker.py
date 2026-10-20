@@ -30,9 +30,10 @@ def launch_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = 
     cache.mkdir(exist_ok=True, parents=True)
     env = os.environ.copy()
     env["ESPAUT_STOP_WORKER"] = "1"
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
     package_root = str(Path(__file__).resolve().parents[1])
     env["PYTHONPATH"] = package_root + os.pathsep + env.get("PYTHONPATH", "")
-    command = [sys.executable, "-m", "espaut.stop_worker",
+    command = [sys.executable, "-B", "-m", "espaut.stop_worker",
                "--store", str(store), "--task", task_id, "--cwd", cwd]
     if preserve_changes:
         command.append("--preserve-changes")

@@ -48,19 +48,42 @@ def gh_available() -> bool:
     return r.returncode == 0
 
 
+def _validate_repository(repository: str | None) -> str | None:
+    if repository is None:
+        return None
+    import re
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+        raise ValueError("invalid GitHub repository identity")
+    return repository
+
+
+def repository_info(repository: str, cwd: str | None = None) -> dict[str, Any]:
+    """Return explicit repository identity and the authenticated viewer permission."""
+    repository = _validate_repository(repository) or ""
+    response = run_gh(
+        "repo", "view", repository,
+        "--json", "nameWithOwner,viewerPermission,defaultBranchRef",
+        cwd=cwd,
+    )
+    result = _parse_json_response(response, "gh repo view")
+    if not isinstance(result, dict) or result.get("nameWithOwner") != repository:
+        raise GitHubQueryError("repository identity mismatch")
+    return result
+
+
 def pr_list_json(
     fields: list[str] | None = None,
     state: str = "open",
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> list[dict[str, Any]]:
     """List PRs as parsed JSON."""
     field_list = fields or ["number", "title", "headRefName", "state", "url"]
-    r = run_gh(
-        "pr", "list",
-        "--state", state,
-        "--json", ",".join(field_list),
-        cwd=cwd,
-    )
+    args = ["pr", "list", "--state", state, "--json", ",".join(field_list)]
+    repository = _validate_repository(repository)
+    if repository:
+        args.extend(["--repo", repository])
+    r = run_gh(*args, cwd=cwd)
     result = _parse_json_response(r, "gh pr list")
     if not isinstance(result, list):
         raise GitHubQueryError("gh pr list: expected JSON array")
@@ -71,17 +94,18 @@ def pr_view_json(
     pr_ref: str | int,
     fields: list[str] | None = None,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any] | None:
     """Query a PR's fields as JSON."""
     field_list = fields or [
         "number", "title", "headRefName", "baseRefName",
         "state", "url", "headRefOid", "mergeCommit", "mergedAt",
     ]
-    r = run_gh(
-        "pr", "view", str(pr_ref),
-        "--json", ",".join(field_list),
-        cwd=cwd,
-    )
+    args = ["pr", "view", str(pr_ref), "--json", ",".join(field_list)]
+    repository = _validate_repository(repository)
+    if repository:
+        args.extend(["--repo", repository])
+    r = run_gh(*args, cwd=cwd)
     result = _parse_json_response(r, "gh pr view")
     if not isinstance(result, dict):
         raise GitHubQueryError("gh pr view: expected JSON object")
@@ -94,6 +118,7 @@ def pr_create(
     base: str | None = None,
     head: str | None = None,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> dict[str, Any] | None:
     """Create a PR and return its data (via pr view after creation).
 
@@ -106,11 +131,14 @@ def pr_create(
         args.extend(["--base", base])
     if head:
         args.extend(["--head", head])
+    repository = _validate_repository(repository)
+    if repository:
+        args.extend(["--repo", repository])
     r = run_gh(*args, cwd=cwd)
     if r.returncode != 0:
         return None
     url = r.stdout.strip()
-    view = pr_view_json(url, cwd=cwd) if url else None
+    view = pr_view_json(url, cwd=cwd, repository=repository) if url else None
     if view and view.get("number") and view.get("url"):
         return view
     raise GitHubQueryError("PR created but its identity could not be verified")
@@ -119,21 +147,25 @@ def pr_create(
 def pr_checks_json(
     pr_ref: str | int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> list[dict[str, Any]]:
     """Query check/status results for a PR."""
-    r = run_gh(
-        "pr", "checks", str(pr_ref),
-        "--json", "name,state,bucket,description,startedAt,completedAt,link,workflow",
-        cwd=cwd,
-    )
+    args = ["pr", "checks", str(pr_ref),
+            "--json", "name,state,bucket,description,startedAt,completedAt,link,workflow"]
+    repository = _validate_repository(repository)
+    if repository:
+        args.extend(["--repo", repository])
+    r = run_gh(*args, cwd=cwd)
     # gh pr checks can exit non-zero for checks that failed or are pending;
     # valid JSON is still authoritative data and must not be discarded.
     if r.returncode != 0 and not r.stdout.strip():
         # gh exits 1 when a PR has no checks. Distinguish a verified empty
         # rollup from transport/auth failures and avoid a false "no CI".
         if "no checks reported" in (r.stderr or "").lower():
-            first = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd)
-            second = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd)
+            first = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd,
+                                 repository=repository)
+            second = pr_view_json(pr_ref, ["headRefOid", "statusCheckRollup"], cwd=cwd,
+                                  repository=repository)
             if (first and second and first.get("headRefOid")
                     and first.get("headRefOid") == second.get("headRefOid")
                     and first.get("statusCheckRollup") == []
@@ -155,11 +187,17 @@ def _paginated_list(response, label: str) -> list[dict[str, Any]]:
     return data
 
 
-def pr_review_threads_json(pr_number: int, cwd: str | None = None) -> list[dict[str, Any]]:
+def pr_review_threads_json(
+    pr_number: int, cwd: str | None = None, repository: str | None = None,
+) -> list[dict[str, Any]]:
     """Retrieve GitHub review-thread resolution, refusing incomplete pagination."""
-    repo_response = run_gh("repo", "view", "--json", "nameWithOwner", cwd=cwd)
-    repo_json = _parse_json_response(repo_response, "gh repo view")
-    name_with_owner = repo_json.get("nameWithOwner", "")
+    repository = _validate_repository(repository)
+    if repository:
+        name_with_owner = repository
+    else:
+        repo_response = run_gh("repo", "view", "--json", "nameWithOwner", cwd=cwd)
+        repo_json = _parse_json_response(repo_response, "gh repo view")
+        name_with_owner = repo_json.get("nameWithOwner", "")
     if "/" not in name_with_owner:
         raise GitHubQueryError("repository identity unavailable")
     owner, repo = name_with_owner.split("/", 1)
@@ -193,11 +231,14 @@ def pr_review_threads_json(pr_number: int, cwd: str | None = None) -> list[dict[
 def pr_reviews_json(
     pr_number: int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> list[dict[str, Any]]:
     """Query reviews for a PR via the REST API."""
+    repository = _validate_repository(repository)
+    endpoint = f"repos/{repository}/pulls/{pr_number}/reviews" if repository else f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/reviews"
     r = run_gh(
         "api", "--paginate", "--slurp",
-        f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/reviews",
+        endpoint,
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")
@@ -206,11 +247,14 @@ def pr_reviews_json(
 def pr_comments_json(
     pr_number: int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> list[dict[str, Any]]:
     """Query issue-level comments on a PR."""
+    repository = _validate_repository(repository)
+    endpoint = f"repos/{repository}/issues/{pr_number}/comments" if repository else f"repos/{{owner}}/{{repo}}/issues/{pr_number}/comments"
     r = run_gh(
         "api", "--paginate", "--slurp",
-        f"repos/{{owner}}/{{repo}}/issues/{pr_number}/comments",
+        endpoint,
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")
@@ -219,11 +263,14 @@ def pr_comments_json(
 def pr_review_comments_json(
     pr_number: int,
     cwd: str | None = None,
+    repository: str | None = None,
 ) -> list[dict[str, Any]]:
     """Query code-level review comments on a PR."""
+    repository = _validate_repository(repository)
+    endpoint = f"repos/{repository}/pulls/{pr_number}/comments" if repository else f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/comments"
     r = run_gh(
         "api", "--paginate", "--slurp",
-        f"repos/{{owner}}/{{repo}}/pulls/{pr_number}/comments",
+        endpoint,
         cwd=cwd,
     )
     return _paginated_list(r, "gh api")
@@ -233,6 +280,8 @@ def pr_merge(
     pr_ref: str | int,
     method: str = "merge",
     cwd: str | None = None,
+    repository: str | None = None,
+    match_head_commit: str | None = None,
 ) -> subprocess.CompletedProcess[str]:
     """Merge a PR. method: merge, squash, or rebase.
 
@@ -241,8 +290,10 @@ def pr_merge(
     """
     if method not in ("merge", "squash", "rebase"):
         raise ValueError("invalid merge method")
-    return run_gh(
-        "pr", "merge", str(pr_ref),
-        f"--{method}",
-        cwd=cwd,
-    )
+    args = ["pr", "merge", str(pr_ref), f"--{method}"]
+    repository = _validate_repository(repository)
+    if repository:
+        args.extend(["--repo", repository])
+    if match_head_commit:
+        args.extend(["--match-head-commit", match_head_commit])
+    return run_gh(*args, cwd=cwd)
