@@ -72,7 +72,8 @@ def run_worker(store: Path, task_id: str, cwd: str, preserve_changes: bool = Fal
             if status in {"merged", "blocked",
                           "merge_unverified", "preservation_pending",
                           "monitor_only", "pr_pending_authorization",
-                          "merge_pending_authorization"}:
+                          "merge_pending_authorization", "merge_rejected",
+                          "merge_rejected_unchanged", "merge_timeout"}:
                 return status
             if status not in {"review_pending", "merge_pending", "pr_pending",
                               "operational_failure"}:

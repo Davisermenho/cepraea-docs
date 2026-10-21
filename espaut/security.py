@@ -64,3 +64,26 @@ def sanitize_external_text(text: str) -> str:
         else:
             cleaned.append(ch)
     return "".join(cleaned)
+
+
+def redact_sensitive_text(text: str, *, limit: int = 4000) -> str:
+    """Return bounded diagnostic text with known credential forms removed.
+
+    GitHub CLI diagnostics are untrusted external text.  They are useful for
+    explaining a rejected operation, but must never turn worker checkpoints
+    into a credential sink.
+    """
+    value = sanitize_external_text(str(text or ""))
+    for pattern in SECRET_PATTERNS:
+        value = pattern.sub("[REDACTED]", value)
+    value = re.sub(
+        r"(?i)(authorization\s*:\s*(?:bearer|token)\s+)[^\s]+",
+        r"\1[REDACTED]",
+        value,
+    )
+    value = re.sub(
+        r"(?i)(https?://)[^/@\s:]+:[^/@\s]+@",
+        r"\1[REDACTED]@",
+        value,
+    )
+    return value[:limit]
