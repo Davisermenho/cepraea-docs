@@ -4,13 +4,16 @@
 Each Stop is a single reconciliation tick. Pending checks/reviews are retried at
 the next Stop; they are never interpreted as approval.
 """
+import hashlib
+import json
 import os
 from pathlib import Path
+import subprocess
 
 from espaut.acceptance import verify_acceptance
 from espaut.checks import query_checks
 from espaut.events import log_event
-from espaut.gh_ops import pr_view_json, repository_info, run_gh
+from espaut.gh_ops import gh_command_diagnostic, pr_view_json, repository_info, run_gh
 from espaut.git_ops import current_branch, has_incomplete_operation, head_sha, remote_head_sha, repository_slug, worktree_status
 from espaut.governance import evaluate_merge_eligibility
 from espaut.preservation import classify_changes, push_and_verify, run_preservation
@@ -35,6 +38,109 @@ def human_approved(task, decisions, sha):
         and bool(d.get("authority"))
         and (d.get("scope") == sha or d.get("revision") == sha)
         for d in decisions
+    )
+
+
+def _merge_condition_fingerprint(conditions: dict) -> str:
+    canonical = json.dumps(conditions, ensure_ascii=True, sort_keys=True)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _confirmed_merge(remote: dict) -> bool:
+    return bool(remote.get("merged_at") and remote.get("merge_commit"))
+
+
+def execute_merge(
+    store: Path,
+    task_id: str,
+    *,
+    pr_number: int,
+    revision: str,
+    method: str,
+    repository: str,
+    cwd: str,
+    conditions: dict,
+):
+    """Attempt one merge, preserving diagnostics and requiring remote proof.
+
+    A rejected attempt is terminal for an unchanged condition fingerprint.
+    A later Stop can resume once the revision, authorization or observed remote
+    state changes.  A transport timeout is also terminal for this worker: the
+    remote is queried before any result is reported so a completed merge is not
+    mistaken for failure.
+    """
+    fingerprint = _merge_condition_fingerprint(conditions)
+    checkpoint_path = store / "cache" / f"stop-cycle-{task_id}.json"
+    previous = read_json(checkpoint_path) if checkpoint_path.is_file() else {}
+    previous_attempt = previous.get("merge_attempt") or {}
+    if (
+        previous.get("status") in {"merge_rejected", "merge_rejected_unchanged"}
+        and previous_attempt.get("condition_fingerprint") == fingerprint
+    ):
+        return checkpoint(
+            store, task_id, "merge_rejected_unchanged",
+            pr_number=pr_number, revision=revision,
+            reason="equivalent GitHub merge rejection already recorded; conditions unchanged",
+            merge_attempt=previous_attempt,
+        )
+
+    args = [
+        "pr", "merge", str(pr_number), f"--{method}",
+        "--match-head-commit", revision, "--repo", repository,
+    ]
+    try:
+        response = run_gh(*args, cwd=cwd)
+        diagnostic = gh_command_diagnostic(
+            args, repository=repository, returncode=response.returncode,
+            stdout=response.stdout, stderr=response.stderr,
+        )
+    except subprocess.TimeoutExpired as exc:
+        diagnostic = gh_command_diagnostic(
+            args, repository=repository, returncode=None,
+            stdout=exc.stdout, stderr=exc.stderr, timed_out=True,
+        )
+        diagnostic["condition_fingerprint"] = fingerprint
+        try:
+            verified = query_pr_state(pr_number, cwd=cwd, repository=repository)
+        except Exception as confirm_exc:
+            diagnostic["confirmation_error"] = type(confirm_exc).__name__
+            verified = {}
+        if _confirmed_merge(verified):
+            return checkpoint(
+                store, task_id, "merged", pr_number=pr_number,
+                revision=revision, merge_commit=verified["merge_commit"],
+                merged_at=verified["merged_at"], merge_attempt=diagnostic,
+                reason="merge transport timed out but GitHub confirmed integration",
+            )
+        return checkpoint(
+            store, task_id, "merge_timeout", pr_number=pr_number,
+            revision=revision, merge_attempt=diagnostic,
+            reason="GitHub merge command timed out; remote merge not confirmed",
+        )
+
+    diagnostic["condition_fingerprint"] = fingerprint
+    try:
+        verified = query_pr_state(pr_number, cwd=cwd, repository=repository)
+    except Exception as confirm_exc:
+        diagnostic["confirmation_error"] = type(confirm_exc).__name__
+        verified = {}
+    if _confirmed_merge(verified):
+        return checkpoint(
+            store, task_id, "merged", pr_number=pr_number,
+            revision=revision, merge_commit=verified["merge_commit"],
+            merged_at=verified["merged_at"], merge_attempt=diagnostic,
+        )
+    if response.returncode != 0:
+        return checkpoint(
+            store, task_id, "merge_rejected", pr_number=pr_number,
+            revision=revision, merge_attempt=diagnostic,
+            reason=(f"GitHub rejected merge: exit={response.returncode} "
+                    f"class={diagnostic['failure_class']}"),
+        )
+    return checkpoint(
+        store, task_id, "merge_unverified", pr_number=pr_number,
+        revision=revision, merge_attempt=diagnostic,
+        reason="merge command exited successfully but GitHub did not confirm integration",
     )
 
 
@@ -197,19 +303,22 @@ def run_stop_cycle(store: Path, task: dict, *, cwd: str, preserve_changes=True):
         method = cfg.get("merge_method", "merge")
         if method not in ("merge", "squash", "rebase"):
             return checkpoint(store, task_id, "blocked", reason="unsupported merge method")
-        response = run_gh(
-            "pr", "merge", str(pr_number), f"--{method}",
-            "--match-head-commit", sha, "--repo", repository, cwd=cwd,
+        return execute_merge(
+            store, task_id, pr_number=pr_number, revision=sha,
+            method=method, repository=repository, cwd=cwd,
+            conditions={
+                "repository": repository,
+                "pr_number": pr_number,
+                "revision": sha,
+                "method": method,
+                "permission": permission,
+                "repository_authorized": repository_authorized,
+                "review_decision": remote.get("review_decision"),
+                "checks": checks.get("aggregate"),
+                "gates": gates,
+                "merge_state": current.get("mergeStateStatus"),
+            },
         )
-        if response.returncode != 0:
-            return checkpoint(store, task_id, "merge_pending", pr_number=pr_number,
-                              revision=sha, reason=f"GitHub rejected merge: exit={response.returncode}")
-        verified = query_pr_state(pr_number, cwd=cwd, repository=repository)
-        if not verified.get("merged_at") or not verified.get("merge_commit"):
-            return checkpoint(store, task_id, "merge_unverified", pr_number=pr_number,
-                              revision=sha, reason="GitHub did not confirm merge")
-        return checkpoint(store, task_id, "merged", pr_number=pr_number,
-                          revision=sha, merge_commit=verified["merge_commit"])
     except Exception as exc:
         return checkpoint(store, task_id, "operational_failure",
                           reason=f"{type(exc).__name__}: {str(exc)[:160]}")

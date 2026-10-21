@@ -4,14 +4,88 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import subprocess
 from typing import Any
 
-from espaut.security import validate_subprocess_args
+from espaut.security import redact_sensitive_text, validate_subprocess_args
 
 
 class GitHubQueryError(RuntimeError):
     """A failed remote query is not evidence of an empty result."""
+
+
+def classify_gh_failure(stdout: str, stderr: str) -> str:
+    """Classify a CLI failure from its sanitized, user-visible response."""
+    text = f"{stdout}\n{stderr}".lower()
+    if any(term in text for term in (
+        "resource not accessible", "permission denied", "forbidden",
+        "does not have permission", "must have", "http 403",
+    )):
+        return "permission_denied"
+    if any(term in text for term in (
+        "authentication failed", "bad credentials", "http 401",
+        "not logged into", "requires authentication",
+    )):
+        return "authentication_failed"
+    if any(term in text for term in (
+        "head branch was modified", "head sha", "expected head oid",
+        "does not match the expected",
+    )):
+        return "head_changed"
+    if any(term in text for term in (
+        "not mergeable", "merge conflict", "cannot be merged",
+        "pull request is not mergeable",
+    )):
+        return "not_mergeable"
+    if any(term in text for term in (
+        "required status check", "review is required", "protected branch",
+        "branch protection", "merge queue",
+    )):
+        return "policy_rejected"
+    if any(term in text for term in (
+        "rate limit", "secondary rate limit", "abuse detection",
+    )):
+        return "rate_limited"
+    if any(term in text for term in (
+        "timed out", "timeout", "deadline exceeded",
+    )):
+        return "timeout"
+    return "unclassified"
+
+
+def gh_command_diagnostic(
+    args: list[str],
+    *,
+    repository: str,
+    returncode: int | None,
+    stdout: str | bytes | None = "",
+    stderr: str | bytes | None = "",
+    timed_out: bool = False,
+) -> dict[str, Any]:
+    """Build a bounded, secret-safe record of a parameterized gh command."""
+    command = validate_subprocess_args(["gh", *args])
+
+    def text(value: str | bytes | None) -> str:
+        if isinstance(value, bytes):
+            value = value.decode("utf-8", errors="replace")
+        return redact_sensitive_text(value or "")
+
+    safe_stdout = text(stdout)
+    safe_stderr = text(stderr)
+    safe_command = [redact_sensitive_text(value, limit=512) for value in command]
+    record: dict[str, Any] = {
+        "command": safe_command,
+        "repository": repository,
+        "exit_code": returncode,
+        "timed_out": bool(timed_out),
+        "stdout": safe_stdout,
+        "stderr": safe_stderr,
+        "failure_class": "timeout" if timed_out else classify_gh_failure(safe_stdout, safe_stderr),
+    }
+    canonical = json.dumps(record, ensure_ascii=True, sort_keys=True)
+    record["diagnostic_sha256"] = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return record
 
 
 def _parse_json_response(response, operation: str, *, allow_nonzero: bool = False):
